@@ -1,0 +1,33 @@
+@startuml
+' Primer acercamiento al diagrama de secuencia de la
+' primer entrega.
+
+'Problema que se nos presento:
+'Todo anda bien porque es el caso feliz...
+' - ¿Que pasa si hay un obstaculo/sorpresa?
+' - ¿Quien se entera?
+' Los obstaculos y la sorpresa modifican los movimientos o vehiculo
+'del jugador dependiendo del vehiculo o sorpresa que toque.
+
+autonumber
+actor Juego
+
+create Jugador
+'¿Hace falta, para este diagrama en particular, comunicar
+' como se inicializa el jugador?
+Juego -> Jugador: inicializarJugador( "NombreJugador" )
+
+create "moto : Moto"
+'¿De donde sacamos que vehiculo usar?
+Jugador -> "moto : Moto": usarVehiculo( moto )
+
+'Para cada movimiento hecho por el jugador...
+group "X movimientos"
+Jugador -> "moto : Moto": avanzar( movimiento )
+"moto : Moto" -> Escenario: avanzar( movimiento )
+Escenario -> "moto : Moto": celda
+"moto : Moto" --> Jugador: celda
+Jugador -> "posicionActual: Posicion": setPosicion( posicion )
+Jugador -> "puntaje: Movimientos": sumarMovimiento( unMovimiento )
+end
+@enduml
