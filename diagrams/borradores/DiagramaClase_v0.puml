@@ -1,0 +1,87 @@
+@startuml
+' Esto es un primer panorama de todos los clases/interfaces que
+'se nos ocurrieron al principio.
+
+' Luego pasamos al diagramas de secuencia, para pensar la interacción
+'de cada clase con otras, se nos ocurrieron nuevas ideas, por lo que
+'este diagrama de clases puede que no sea 100% congruente con los
+'DSecuencia. Principalmente las relaciones, quien tiene a quien.
+
+interface Obstaculo
+Pozo .up.|> Obstaculo
+Piquete .up.|> Obstaculo
+ControlPolicial .up.|> Obstaculo
+
+interface Sorpresa
+Favorable .up.|> Sorpresa
+Desfavorable .up.|> Sorpresa
+CambioVehiculo .up.|> Sorpresa
+
+interface Vehiculo
+Moto .up.|> Vehiculo
+Auto .up.|> Vehiculo
+CuatroPorCuatro .up.|> Vehiculo
+
+'Clase que representa el estado del jugador.
+class Jugador{
+'Nombre, Puntaje, Vehiculo...
+}
+Jugador -down-> Vehiculo
+Jugador -> Posicion
+Jugador --> Movimientos: - puntaje
+'Clase que encargada de la lógica del juego
+class Juego
+Juego *-right- Jugador
+Juego *-up- Escenario
+Juego --> PuntajesAltos
+
+'Clase que representa cada manzana del mapa.
+class Celda
+
+'Clase que encapsula el lugar donde se mueve el jugador/vehículo.
+class Escenario{
+'Podemos pensar al mapa como
+'1. Una matriz dinámica de celdas
+'2. un grafo ya que no tiene un tamaño fijo,
+'por lo que la celda tendría conocimiento de sus adyacentes
+}
+'¿Quien tiene el obstaculo/sorpresa? ¿Escenario o cada celda?
+Escenario -->  Obstaculo
+Escenario --> Sorpresa
+Escenario -down-> Meta
+Escenario -> "*" Celda
+Vehiculo -- Escenario
+'Clase/interfaz/Flag que identifique a una celda como el lugar
+'a llegar.
+class Meta
+
+'Clase encargada de tener puntajes de partidas anteriores
+'ordenadas por cantidad de movimientos.
+class PuntajesAltos
+PuntajesAltos -> "*" Movimiento: - resultados
+
+
+'Clase encargada de tener la información sobre la ubicación
+'del jugador.
+class Posicion
+Posicion --> Celda
+
+'Clase que encapsula la logica de movimientos.
+class Movimiento{
+'Se nos ocurrio para que que el jugador tenga un
+'puntaje: Movimiento, para poder delegar la suma, resta,
+'descuento o aumento de movimientos.
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
