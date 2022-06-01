@@ -6,7 +6,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 ## Grupo {N}
 
-* **Integrante 1** - [integrante1](https://github.com/integrante1)
+* **Integrante 1** - [Aguirre, Juan](https://github.com/jab227)
 * **Integrante 2** - [Escuti, Eduardo](https://github.com/eduardoescuti)
 * **Integrante 3** - [Vazquez, Rodrigo](https://github.com/rodrigovzq)
 * **Integrante 4** - [Fraga, Fernando](https://github.com/ffraga98)
