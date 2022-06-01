@@ -28,7 +28,7 @@ class Jugador{
 }
 Jugador -down-> Vehiculo
 Jugador -> Posicion
-Jugador --> Movimientos: - puntaje
+Jugador --> Movimiento: - puntaje
 'Clase que encargada de la lógica del juego
 class Juego
 Juego *-right- Jugador
