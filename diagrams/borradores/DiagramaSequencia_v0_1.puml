@@ -1,0 +1,35 @@
+@startuml
+autonumber
+actor Juego
+
+create Jugador
+Juego -> Jugador: inicializarJugador( "NombreJugador" )
+
+create "moto : Moto"
+Jugador -> "moto : Moto": usarVehiculo( moto )
+
+' Esta solución alternativa, donde el escenario tiene
+'la celda con la posición del jugador (que al ser un grafo es
+'suficiente para movernos)
+
+group "X movimientos"
+Jugador -> "moto : Moto": avanzar( dirMovimiento )
+"moto : Moto" -> Escenario: avanzar( dirMovimiento )
+Escenario -> "posicionJugador : Celda" : moverParaLaDireccion( dirMovimiento )
+"posicionJugador : Celda" --> Escenario: Celda
+Escenario -> Escenario : setPosicionJugador( Celda )
+Escenario --> "moto : Moto": ????
+
+' El problema acá es que de alguna forma, el vehiculo
+' tiene que saber que tiene la celda para saber la cantidad
+' de movimientos.
+' O al reves, la celda saber con que vehiculo queremos avanzar.
+
+'Por ejemplo, ¿Que pasa si nos encontramos un piquete
+'y no puedo avanzar?
+
+"moto : Moto" --> Jugador: movimientos
+Jugador -> "puntajeFinal: Movimientos": sumarMovimiento( movimientos )
+end
+
+@enduml

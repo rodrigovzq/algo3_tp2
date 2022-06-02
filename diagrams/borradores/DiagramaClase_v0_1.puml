@@ -1,0 +1,59 @@
+@startuml
+' Diagrama que representa lo necesario para
+'visualizar el diagrama secuencia Version 0.1
+
+'Clase que encargada de la lógica del juego
+class Juego
+Juego *-right- Jugador
+
+interface Obstaculo
+
+interface Sorpresa
+
+interface Vehiculo{
+    + {abstract} avanzar( dirMovimiento ): Movimiento
+}
+
+Vehiculo -> Escenario
+Moto .up.|> Vehiculo
+
+class Moto{
+    + {abstract} avanzar( dirMovimiento ): Movimiento
+}
+
+'Clase que representa el estado del jugador.
+class Jugador{
+    - nombre
+    + avanzar( dirMovimiento )
+}
+
+Jugador -down-> Vehiculo
+Jugador --> Movimiento: - puntaje
+
+
+'Clase que representa cada manzana del mapa.
+class Celda{
+    + moverParaLaDireccion( dirMovimiento ): Celda
+}
+'Cada celda tiene a sus adyacentes.
+Celda -> "4" Celda
+Celda -->  "0,1" Obstaculo
+Celda --> "0,1" Sorpresa
+
+
+'Clase que encapsula el lugar donde se mueve el jugador/vehículo.
+class Escenario{
+    + setPosicionJugador( Celda )
+    + avanzar( dirMovimiento ): ??
+}
+
+Escenario -> Celda: - posicionJugador
+
+
+'Clase que encapsula la logica de movimientos.
+class Movimiento{
+    - puntaje: Integer
+    + sumarMovimiento( movimientos )
+}
+
+@enduml
