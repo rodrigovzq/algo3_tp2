@@ -7,36 +7,26 @@
 'este diagrama de clases puede que no sea 100% congruente con los
 'DSecuencia. Principalmente las relaciones, quien tiene a quien.
 
-interface Obstaculo
-Pozo .up.|> Obstaculo
-Piquete .up.|> Obstaculo
-ControlPolicial .up.|> Obstaculo
 
-interface Sorpresa
-Favorable .up.|> Sorpresa
-Desfavorable .up.|> Sorpresa
-CambioVehiculo .up.|> Sorpresa
+interface Obstaculo{}
+interface Sorpresa{}
+interface Vehiculo{}
 
-interface Vehiculo
-Moto .up.|> Vehiculo
-Auto .up.|> Vehiculo
-CuatroPorCuatro .up.|> Vehiculo
+'Clase/interfaz/Flag que identifique a una celda como el lugar
+'a llegar.
+class Meta{}
 
 'Clase que representa el estado del jugador.
 class Jugador{
+    -nombre: string
+
 'Nombre, Puntaje, Vehiculo...
 }
-Jugador -down-> Vehiculo
-Jugador -> Posicion
-Jugador --> Movimiento: - puntaje
-'Clase que encargada de la lógica del juego
-class Juego
-Juego *-right- Jugador
-Juego *-up- Escenario
-Juego --> PuntajesAltos
+class Juego{}
 
+'Clase que encargada de la lógica del juego
 'Clase que representa cada manzana del mapa.
-class Celda
+class Celda{}
 
 'Clase que encapsula el lugar donde se mueve el jugador/vehículo.
 class Escenario{
@@ -45,26 +35,13 @@ class Escenario{
 '2. un grafo ya que no tiene un tamaño fijo,
 'por lo que la celda tendría conocimiento de sus adyacentes
 }
-'¿Quien tiene el obstaculo/sorpresa? ¿Escenario o cada celda?
-Escenario -->  Obstaculo
-Escenario --> Sorpresa
-Escenario -down-> Meta
-Escenario -> "*" Celda
-Vehiculo -- Escenario
-'Clase/interfaz/Flag que identifique a una celda como el lugar
-'a llegar.
-class Meta
-
 'Clase encargada de tener puntajes de partidas anteriores
 'ordenadas por cantidad de movimientos.
-class PuntajesAltos
-PuntajesAltos -> "*" Movimiento: - resultados
 
-
+class PuntajesAltos{}
 'Clase encargada de tener la información sobre la ubicación
 'del jugador.
-class Posicion
-Posicion --> Celda
+class Posicion{}
 
 'Clase que encapsula la logica de movimientos.
 class Movimiento{
@@ -73,15 +50,37 @@ class Movimiento{
 'descuento o aumento de movimientos.
 }
 
+Obstaculo <|.. Pozo
+Obstaculo <|.. Piquete
+Obstaculo <|.. ControlPolicial
 
 
+Favorable .up.|> Sorpresa
+Desfavorable .up.|> Sorpresa
+CambioVehiculo .up.|> Sorpresa
 
 
+Vehiculo <|.. Moto
+Vehiculo <|.. Auto
+Vehiculo <|.. CuatroPorCuatro
 
 
+Jugador <--up* Juego: tiene
+Escenario <-right-* Juego: tiene
+Juego -left-> PuntajesAltos:usa
+Jugador -down-> Posicion
+Jugador -down-> Vehiculo
 
 
+Movimiento <-- Jugador: - puntaje
+Movimiento"*"<- PuntajesAltos : - resultados
 
+Celda --> Obstaculo
+Celda -> Meta
+Celda --> Sorpresa
 
+Vehiculo -> Escenario: usa
+Posicion --> Celda
+Escenario "1"---->"*" Celda
 
 @enduml
