@@ -7,7 +7,6 @@
 'este diagrama de clases puede que no sea 100% congruente con los
 'DSecuencia. Principalmente las relaciones, quien tiene a quien.
 
-
 interface Obstaculo{}
 interface Sorpresa{}
 interface Vehiculo{}
@@ -54,23 +53,19 @@ Obstaculo <|.. Pozo
 Obstaculo <|.. Piquete
 Obstaculo <|.. ControlPolicial
 
-
 Favorable .up.|> Sorpresa
 Desfavorable .up.|> Sorpresa
 CambioVehiculo .up.|> Sorpresa
 
-
 Vehiculo <|.. Moto
 Vehiculo <|.. Auto
 Vehiculo <|.. CuatroPorCuatro
-
 
 Jugador <--up* Juego: tiene
 Escenario <-right-* Juego: tiene
 Juego -left-> PuntajesAltos:usa
 Jugador -down-> Posicion
 Jugador -down-> Vehiculo
-
 
 Movimiento <-- Jugador: - puntaje
 Movimiento"*"<- PuntajesAltos : - resultados
