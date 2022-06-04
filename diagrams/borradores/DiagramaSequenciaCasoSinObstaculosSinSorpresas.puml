@@ -8,8 +8,9 @@
 ' - ¿Quien se entera?
 ' Los obstaculos y la sorpresa modifican los movimientos o vehiculo
 'del jugador dependiendo del vehiculo o sorpresa que toque.
-
+title Diagrama Secuencia Moto Avanza Sin Obstaculos Y Sin Sorpresas
 autonumber
+
 actor Juego
 
 create Jugador

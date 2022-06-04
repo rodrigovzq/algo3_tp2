@@ -1,4 +1,5 @@
 @startuml
+title Diagrama Secuencia Moto Avanza Sin Obstaculos Y Sin Sorpresas Vol. 2
 autonumber
 actor Jugador
 
