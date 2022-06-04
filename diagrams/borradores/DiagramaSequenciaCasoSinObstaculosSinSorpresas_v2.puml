@@ -5,25 +5,36 @@ actor Jugador
 
 group "X movimientos"
 Jugador -> "posicion : Posicion": avanzarHaciaLaDireccion( este, moto )
+
+activate Jugador
 "posicion : Posicion" -> "posicion : Posicion": avanzarHaciaElEsteEn( moto )
-"posicion : Posicion" -> "celdaEste : Celda" : avanzarEn( moto )
-"celdaEste : Celda" -> Comun: avanzarEn( moto )
-Comun -> "moto : Moto": avanzarComun()
 
+deactivate "posicion : Posicion"
+"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( moto )
+
+activate "posicion : Posicion"
+"celdaEste : Celda" -> Comun++: avanzarEn( moto )
+Comun -> "moto : Moto"++: avanzarComun()
 "moto : Moto" --> Comun: movimientos
+deactivate "moto : Moto"
 Comun --> "celdaEste : Celda": movimientos
-"celdaEste : Celda "--> "posicion : Posicion": movimientos
-
+deactivate Comun
+"celdaEste : Celda" --> "posicion : Posicion": movimientos
+deactivate "celdaEste : Celda"
+deactivate "posicion : Posicion"
 'Viola el TellDontAsk, pero no es la solucion final.
 'Es para chequear que el movimiento es posible, por ejemplo,
 'cuando queres pasar por un piquete con un auto. No debemos actualizar
 'la posicion, ya que no podemos avanzar.
-"posicion : Posicion" -> "movimientos : Movimiento": esPosible()
+
+"movimientos : Movimiento" <- "posicion : Posicion"++: esPosible()
 "movimientos : Movimiento" --> "posicion : Posicion": true
+deactivate "movimientos : Movimiento"
 "posicion : Posicion" -> "posicion : Posicion": setPosicion( celdaEste )
 
 "posicion : Posicion" --> Jugador: movimientos
 
+deactivate Jugador
 Jugador -> "puntaje : Movimiento": sumarMovimientos( movimientos )
 end
 
