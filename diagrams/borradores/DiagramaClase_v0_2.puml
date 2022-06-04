@@ -1,0 +1,77 @@
+@startuml
+' Diagrama que representa lo necesario para
+'visualizar el diagrama secuencia Version 0.1
+
+'Clase que encargada de la lógica del juego
+class Juego
+
+Juego *-right- Jugador
+
+'Clase que encapsula la logica de movimientos.
+class Movimiento{
+    - puntaje: Integer
+    + sumarMovimiento( movimientos )
+}
+
+interface Vehiculo{
+    + {abstract} avanzarComun(): Movimiento
+    + {abstract} avanzarPiquete(): Movimiento
+    + {abstract} avanzarControlPolicial(): Movimiento
+    + {abstract} avanzarPozo(): Movimiento
+}
+
+Moto .up.|> Vehiculo
+
+class Moto{
+    + avanzarComun(): Movimiento
+    + avanzarPiquete(): Movimiento
+    + avanzarControlPolicial(): Movimiento
+    + avanzarPozo(): Movimiento
+}
+
+'Clase que representa el estado del jugador.
+class Jugador{
+    - nombre
+    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v )
+}
+
+Jugador -down-> Vehiculo
+Jugador --> Movimiento: - puntaje
+Jugador --> Posicion
+
+'Hay que ver como, pero de alguna manera, por medio de la celda que compone a la posicion
+'le hablamos a una de las celdas adyacentes para movernos con el vehiculo.
+class Posicion{
+    + avanzarHaciaElNorteEn( Vehiculo v )
+    + avanzarHaciaElOesteEn( Vehiculo v )
+    + avanzarHaciaElSurEn( Vehiculo v )
+    + avanzarHaciaElEsteEn( Vehiculo v )
+}
+
+Posicion --> Celda: - posicionJugador
+
+'Clase que representa cada manzana del mapa.
+'Esta se va a comunicar con su estado, que representa
+'un "evento" particular.
+class Celda{
+    + avanzarEn( Vehiculo v ) ): Celda
+}
+
+Celda --> EstadoCelda
+
+'Patron State, cada celda tiene un estado/evento que va a utilizar
+'la información que le pasemos por parametros de manera distinta.
+
+interface EstadoCelda{
+    + avanzarCon( Vehiculo v ): Movimiento
+}
+
+Obstaculo ..|> EstadoCelda
+Comun ..|> EstadoCelda
+Sorpresa ..|> EstadoCelda
+
+class Comun{
+    + avanzarCon( Vehiculo v ): Movimiento
+}
+
+@enduml
