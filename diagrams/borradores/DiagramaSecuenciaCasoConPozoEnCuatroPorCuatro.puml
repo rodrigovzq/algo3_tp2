@@ -1,0 +1,44 @@
+@startuml
+title Diagrama Secuencia cxc Avanza Se Encuentra Con Pozo Y Se Penaliza
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Posicion": avanzarHaciaLaDireccion( este, cxc )
+
+activate Jugador
+"posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( cxc )
+
+deactivate "posicion : Posicion"
+"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( cxc )
+
+activate "posicion : Posicion"
+"celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
+Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
+create "unMovimiento  : Movimiento"
+"cxc : CuatroPorCuatro" -> "unMovimiento  : Movimiento": Movimiento( 1 )
+"cxc : CuatroPorCuatro" --> Pozo: unMovimiento
+deactivate "cxc : CuatroPorCuatro"
+Pozo --> "celdaEste : Celda": unMovimiento 
+deactivate Pozo
+"celdaEste : Celda" --> "posicion : Posicion": unMovimiento 
+deactivate "celdaEste : Celda"
+deactivate "posicion : Posicion"
+
+'Viola el TellDontAsk, pero no es la solucion final.
+'Es para chequear que el movimiento es posible, por ejemplo,
+'cuando queres pasar por un piquete con un auto. No debemos actualizar
+'la posicion, ya que no podemos avanzar.
+
+"unMovimiento  : Movimiento" <- "posicion : Posicion"++: esPosible()
+"unMovimiento  : Movimiento" --> "posicion : Posicion": true
+deactivate "unMovimiento  : Movimiento"
+"posicion : Posicion" -> "posicion : Posicion": setPosicion( celdaEste )
+
+"posicion : Posicion" --> Jugador: unMovimiento 
+
+deactivate Jugador
+Jugador -> "puntaje : Movimiento": sumarMovimientos( unMovimiento  )
+
+@enduml

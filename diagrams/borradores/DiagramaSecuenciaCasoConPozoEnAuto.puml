@@ -1,0 +1,44 @@
+@startuml
+title Diagrama Secuencia Moto Avanza Se Encuentra Con Pozo Y Se Penaliza
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Posicion": avanzarHaciaLaDireccion( este, moto )
+
+activate Jugador
+"posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( moto )
+
+deactivate "posicion : Posicion"
+"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( moto )
+
+activate "posicion : Posicion"
+"celdaEste : Celda" -> Pozo++: avanzarEn( moto )
+Pozo -> "moto : Moto"++: avanzarPozo()
+create "tresMovimientos : Movimiento"
+"moto : Moto" -> "tresMovimientos : Movimiento": Movimiento( 3 )
+"moto : Moto" --> Pozo: tresMovimientos
+deactivate "moto : Moto"
+Pozo --> "celdaEste : Celda": tresMovimientos
+deactivate Pozo
+"celdaEste : Celda" --> "posicion : Posicion": tresMovimientos
+deactivate "celdaEste : Celda"
+deactivate "posicion : Posicion"
+
+'Viola el TellDontAsk, pero no es la solucion final.
+'Es para chequear que el movimiento es posible, por ejemplo,
+'cuando queres pasar por un piquete con un auto. No debemos actualizar
+'la posicion, ya que no podemos avanzar.
+
+"tresMovimientos : Movimiento" <- "posicion : Posicion"++: esPosible()
+"tresMovimientos : Movimiento" --> "posicion : Posicion": true
+deactivate "tresMovimientos : Movimiento"
+"posicion : Posicion" -> "posicion : Posicion": setPosicion( celdaEste )
+
+"posicion : Posicion" --> Jugador: tresMovimientos
+
+deactivate Jugador
+Jugador -> "puntaje : Movimiento": sumarMovimientos( tresMovimientos )
+
+@enduml

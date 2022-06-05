@@ -42,10 +42,11 @@ Jugador --> Posicion
 'Hay que ver como, pero de alguna manera, por medio de la celda que compone a la posicion
 'le hablamos a una de las celdas adyacentes para movernos con el vehiculo.
 class Posicion{
-    + avanzarHaciaElNorteEn( Vehiculo v )
-    + avanzarHaciaElOesteEn( Vehiculo v )
-    + avanzarHaciaElSurEn( Vehiculo v )
-    + avanzarHaciaElEsteEn( Vehiculo v )
+    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v )
+    - avanzarHaciaElNorteEn( Vehiculo v )
+    - avanzarHaciaElOesteEn( Vehiculo v )
+    - avanzarHaciaElSurEn( Vehiculo v )
+    - avanzarHaciaElEsteEn( Vehiculo v )
 }
 
 Posicion --> Celda: - posicionJugador
@@ -54,7 +55,7 @@ Posicion --> Celda: - posicionJugador
 'Esta se va a comunicar con su estado, que representa
 'un "evento" particular.
 class Celda{
-    + avanzarEn( Vehiculo v ) ): Celda
+    + avanzarEn( Vehiculo v ): Movimiento
 }
 
 Celda --> EstadoCelda
