@@ -28,6 +28,8 @@ deactivate "posicion : Posicion"
 'cuando queres pasar por un piquete con un auto. No debemos actualizar
 'la posicion, ya que no podemos avanzar.
 
+' Además planteado así, deberíamos hacerlo en cada metodo de avanzar
+'porque necesitamos saber que celda es nuestra proxima posicion.
 "movimientos : Movimiento" <- "posicion : Posicion"++: esPosible()
 "movimientos : Movimiento" --> "posicion : Posicion": true
 deactivate "movimientos : Movimiento"

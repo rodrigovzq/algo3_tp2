@@ -1,0 +1,47 @@
+@startuml
+title Diagrama Secuencia Auto Avanza Se Encuentra Con Piquete Y No Avanza
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Posicion"++: avanzarHaciaLaDireccion( este, auto )
+
+activate Jugador
+"posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( auto )
+
+
+"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( auto )
+
+
+"celdaEste : Celda" -> Piquete++: avanzarEn( auto )
+Piquete -> "auto : Auto"++: avanzarPiquete()
+create "noMovimiento : Movimiento"
+' Podriamos hacer un enum con el numero de movimientos según el obstaculo?
+"auto : Auto" -> "noMovimiento : Movimiento": Movimiento( INFINITO )
+"auto : Auto" --> Piquete: noMovimiento
+deactivate "auto : Auto"
+Piquete --> "celdaEste : Celda": noMovimiento
+deactivate Piquete
+"celdaEste : Celda" --> "posicion : Posicion": noMovimiento
+deactivate "celdaEste : Celda"
+
+'Viola el TellDontAsk, pero no es la solucion final.
+'Es para chequear que el movimiento es posible, por ejemplo,
+'cuando queres pasar por un piquete con un auto. No debemos actualizar
+'la posicion, ya que no podemos avanzar.
+
+' Además planteado así, deberíamos hacerlo en cada metodo de avanzar
+'porque necesitamos saber que celda es nuestra proxima posicion.
+"noMovimiento : Movimiento" <- "posicion : Posicion"++: esPosible()
+"noMovimiento : Movimiento" --> "posicion : Posicion": false
+deactivate "noMovimiento : Movimiento"
+
+"posicion : Posicion" --> Jugador--: noMovimiento
+deactivate "posicion : Posicion"
+deactivate "posicion : Posicion"
+
+Jugador -> "puntaje : Movimiento": sumarMovimientos( noMovimiento )
+deactivate Jugador
+
+@enduml

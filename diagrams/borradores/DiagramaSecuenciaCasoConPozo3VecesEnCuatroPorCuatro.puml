@@ -1,5 +1,5 @@
 @startuml
-title Diagrama Secuencia Cuatro Por Cuatro Avanza Se Encuentra Con Pozo Y No Se Penaliza
+title Diagrama Secuencia Cuatro por Cuatro Avanza Se Encuentra Con Pozo por Tercera Vez Y Se Penaliza
 
 autonumber
 
@@ -9,20 +9,19 @@ Jugador -> "posicion : Posicion"++: avanzarHaciaLaDireccion( este, cxc )
 
 activate Jugador
 "posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( cxc )
-
-"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( cxc )
+"posicion : Posicion" -> "celdaEste : Celda"++: avanzarHaciaElEsteEn( cxc )
 
 "celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
 Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
 "cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limiteDePozosExcedido()
-"cxc : CuatroPorCuatro" --> "cxc : CuatroPorCuatro"--: false
-create "unMovimiento  : Movimiento"
-"cxc : CuatroPorCuatro" -> "unMovimiento  : Movimiento": Movimiento( 1 )
-"cxc : CuatroPorCuatro" --> Pozo: unMovimiento
+"cxc : CuatroPorCuatro" --> "cxc : CuatroPorCuatro"--: true
+create "dosMovimientos  : Movimiento"
+"cxc : CuatroPorCuatro" -> "dosMovimientos  : Movimiento": Movimiento( 2 )
+"cxc : CuatroPorCuatro" --> Pozo: dosMovimientos
 deactivate "cxc : CuatroPorCuatro"
-Pozo --> "celdaEste : Celda": unMovimiento 
+Pozo --> "celdaEste : Celda": dosMovimientos
 deactivate Pozo
-"celdaEste : Celda" --> "posicion : Posicion": unMovimiento 
+"celdaEste : Celda" --> "posicion : Posicion": dosMovimientos
 deactivate "celdaEste : Celda"
 
 'Viola el TellDontAsk, pero no es la solucion final.
@@ -32,15 +31,15 @@ deactivate "celdaEste : Celda"
 
 ' Además planteado así, deberíamos hacerlo en cada metodo de avanzar
 'porque necesitamos saber que celda es nuestra proxima posicion.
-"unMovimiento  : Movimiento" <- "posicion : Posicion"++: esPosible()
-"unMovimiento  : Movimiento" --> "posicion : Posicion": true
-deactivate "unMovimiento  : Movimiento"
+"dosMovimientos  : Movimiento" <- "posicion : Posicion"++: esPosible()
+"dosMovimientos  : Movimiento" --> "posicion : Posicion": true
+deactivate "dosMovimientos  : Movimiento"
+
 "posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
-
-"posicion : Posicion" --> Jugador--: unMovimiento
+"posicion : Posicion" --> Jugador--: dosMovimientos
 deactivate "posicion : Posicion"
 deactivate "posicion : Posicion"
+Jugador -> "puntaje: Movimiento"++: sumarMovimientos( dosMovimientos )
 
-Jugador -> "puntaje : Movimiento"++: sumarMovimientos( unMovimiento  )
-
+deactivate Jugador
 @enduml
