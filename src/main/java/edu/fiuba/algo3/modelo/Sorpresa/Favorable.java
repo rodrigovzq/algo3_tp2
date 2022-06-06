@@ -1,4 +1,4 @@
 package edu.fiuba.algo3.modelo.Sorpresa;
 
-public class Favorable {
+public class Favorable implements ISorpresa {
 }

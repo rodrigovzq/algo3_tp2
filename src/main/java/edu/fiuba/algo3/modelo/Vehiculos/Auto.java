@@ -1,4 +1,29 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
-public class Auto {
+import edu.fiuba.algo3.modelo.Movimiento;
+
+public class Auto implements IVehiculo {
+    @Override
+    public Movimiento avanzarComun() {
+        /* se implementa algo*/
+        return null;
+    }
+
+    @Override
+    public Movimiento avanzarPiquete() {
+        /* se implementa algo*/
+        return null;
+    }
+
+    @Override
+    public Movimiento avanzarControlPolicial() {
+        /* se implementa algo*/
+        return null;
+    }
+
+    @Override
+    public Movimiento avanzarPozo() {
+        /* se implementa algo*/
+        return null;
+    }
 }

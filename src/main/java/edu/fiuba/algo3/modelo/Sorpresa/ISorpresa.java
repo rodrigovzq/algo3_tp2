@@ -1,4 +1,4 @@
 package edu.fiuba.algo3.modelo.Sorpresa;
 
-public interface Sorpresa {
+public interface ISorpresa {
 }
