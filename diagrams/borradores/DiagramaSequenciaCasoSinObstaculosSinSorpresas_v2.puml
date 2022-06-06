@@ -1,5 +1,5 @@
 @startuml
-title Diagrama Secuencia auto Avanza Sin Obstaculos Y Sin Sorpresas Vol. 2
+title Diagrama Secuencia Auto Avanza Sin Obstaculos Y Sin Sorpresas Vol. 2
 autonumber
 actor Jugador
 
