@@ -12,8 +12,8 @@ class AutoTest {
     public void avanzarSobreUnPozoPenalizaTresMovimiento(){
         Auto auto = new Auto();
 
-        Movimiento esperado = auto.avanzarPozo();
-        Movimiento resultado = new MovimientoValido( 3 );
+        Movimiento resultado = auto.avanzarPozo();
+        Movimiento esperado = new MovimientoValido( 3 );
 
         assertEquals(esperado, resultado);
     }
@@ -21,8 +21,8 @@ class AutoTest {
     public void avanzarSobreUnPiqueteEsUnMovimientoInvalido(){
         Auto auto = new Auto();
 
-        Movimiento esperado = auto.avanzarPiquete();
-        Movimiento resultado = new MovimientoInvalido();
+        Movimiento resultado = auto.avanzarPiquete();
+        Movimiento esperado = new MovimientoInvalido();
 
         assertEquals(esperado, resultado);
     }
@@ -35,8 +35,8 @@ class AutoTest {
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza(){
         Auto auto = new Auto();
 
-        Movimiento esperado = auto.avanzarComun();
-        Movimiento resultado = new MovimientoValido( 1 );
+        Movimiento resultado = auto.avanzarComun();
+        Movimiento esperado = new MovimientoValido( 1 );
 
         assertEquals(esperado, resultado);
     }
