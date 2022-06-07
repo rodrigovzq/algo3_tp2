@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
-import edu.fiuba.algo3.modelo.Movimiento;
+
+import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 
 public class Auto implements IVehiculo {
     @Override

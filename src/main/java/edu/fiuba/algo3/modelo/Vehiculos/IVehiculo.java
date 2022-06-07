@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
-import edu.fiuba.algo3.modelo.Movimiento;
+import edu.fiuba.algo3.modelo.Movimiento.*;
 
 public interface IVehiculo {
 
