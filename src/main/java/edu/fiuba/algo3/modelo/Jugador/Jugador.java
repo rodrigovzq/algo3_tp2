@@ -19,6 +19,6 @@ public class Jugador {
     }
 
     public Movimiento avanzarHaciaLaDireccion(String direccion, IVehiculo vehiculo) {
-        return posicionActual.avanzarrHaciaLaDireccion( direccion, vehiculo);
+        return posicionActual.avanzarHaciaLaDireccion( direccion, vehiculo);
     }
 }

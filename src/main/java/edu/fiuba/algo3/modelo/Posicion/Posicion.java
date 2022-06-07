@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo.Posicion;
 
-import edu.fiuba.algo3.modelo.Jugador.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
-import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class Posicion {
@@ -16,9 +15,15 @@ public class Posicion {
         this.posicionJugador = posicionJugador;
     }
 
-    public Movimiento avanzarrHaciaLaDireccion(String direccion, IVehiculo vehiculo){
-        Movimiento movimiento = new MovimientoValido(3);
-
+    public Movimiento avanzarHaciaLaDireccion(String direccion, IVehiculo vehiculo){
+        Movimiento movimiento = null;
+        Celda nuevaPosicion = null;
+        // TODO: Cambiar. (?) Es algo que todavía no está decidido. Pero no concuerda
+        //  con los diagrama de secuencia.
+        if( direccion.equals("este")){
+            nuevaPosicion = posicionJugador.getCeldaEste();
+            movimiento = nuevaPosicion.avanzarEn( vehiculo );
+        }
         return movimiento;
     }
 }
