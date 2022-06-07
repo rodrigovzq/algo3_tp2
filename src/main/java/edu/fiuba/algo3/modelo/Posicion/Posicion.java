@@ -24,6 +24,11 @@ public class Posicion {
             nuevaPosicion = posicionJugador.getCeldaEste();
             movimiento = nuevaPosicion.avanzarEn( vehiculo );
         }
+
+        if( movimiento.esPosible() ){
+            this.posicionJugador = nuevaPosicion;
+        }
+
         return movimiento;
     }
 }
