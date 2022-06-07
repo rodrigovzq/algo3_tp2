@@ -1,7 +1,7 @@
 package Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
-//import edu.fiuba.algo3.modelo.Direccion;
+//import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Celda.Obstaculo.Piquete;
 import edu.fiuba.algo3.modelo.Celda.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
