@@ -17,7 +17,7 @@ Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
 "cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limiteDePozosExcedido()
 "cxc : CuatroPorCuatro" --> "cxc : CuatroPorCuatro"--: false
 create "unMovimiento  : Movimiento"
-"cxc : CuatroPorCuatro" -> "unMovimiento  : Movimiento": Movimiento( 1 )
+"cxc : CuatroPorCuatro" -> "unMovimiento  : Movimiento": MovimientoValido( 1 )
 "cxc : CuatroPorCuatro" --> Pozo: unMovimiento
 deactivate "cxc : CuatroPorCuatro"
 Pozo --> "celdaEste : Celda": unMovimiento 
@@ -32,19 +32,12 @@ Pregunta si es válido el
 movimiento, ya que a veces no nos
 podemos mover por un Piquete
 end note
+
 "unMovimiento  : Movimiento" <- "posicion : Posicion"++: esPosible()
 "unMovimiento  : Movimiento" --> "posicion : Posicion": true
 deactivate "unMovimiento  : Movimiento"
 "posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
 
-note left
-**Violacion Don't Repeat Yourself**
-
-Verificación para el seteo de la
-posicion se repite a lo largo de
-todos los diagramas, es decir,
-es refactorizable.
-end note
 
 "posicion : Posicion" --> Jugador--: unMovimiento
 deactivate "posicion : Posicion"

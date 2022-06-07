@@ -9,13 +9,26 @@ activate Jugador
 Jugador -> "posicion : Posicion"++: avanzarHaciaLaDireccion( este, auto )
 
 "posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( auto )
+note left
+** ¿A que celda me muevo?**
 
+Si cada celda conoce a sus
+adyacentes, con un simple
+switch() se soluciona la
+decisión para que celda movernos.
+
+Considero que esta ok el switch
+porque es dificil que el jugador
+varíe radicalmente su forma de
+moverse, aunque en caso de pasar
+habría que modificar mucho.
+end note
 "posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( auto )
 
 "celdaEste : Celda" -> Comun++: avanzarEn( auto )
 Comun -> "auto : Auto"++: avanzarComun()
 create "unMovimiento : Movimiento"
-"auto : Auto" -> "unMovimiento : Movimiento"
+"auto : Auto" -> "unMovimiento : Movimiento": MovimientoValido( 1 )
 "auto : Auto" --> Comun: unMovimiento
 deactivate "auto : Auto"
 Comun --> "celdaEste : Celda": unMovimiento
@@ -24,11 +37,11 @@ deactivate Comun
 deactivate "celdaEste : Celda"
 
 note left
-**Violación Tell Don't Ask**
+**¿ Violación Tell Don't Ask ?**
 
 Pregunta si es válido el
 movimiento, ya que a veces no nos
-podemos mover por un Piquete
+podemos mover por un Piquete.
 end note
 
 
@@ -37,14 +50,7 @@ end note
 deactivate "unMovimiento : Movimiento"
 "posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
 
-note left
-**Violacion Don't Repeat Yourself**
 
-Verificación para el seteo de la
-posicion se repite a lo largo de
-todos los diagramas, es decir,
-es refactorizable.
-end note
 
 
 "posicion : Posicion" --> Jugador--: unMovimiento

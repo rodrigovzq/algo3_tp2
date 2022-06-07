@@ -16,7 +16,7 @@ activate "posicion : Posicion"
 "celdaEste : Celda" -> Pozo++: avanzarEn( moto )
 Pozo -> "moto : Moto"++: avanzarPozo()
 create "tresMovimientos : Movimiento"
-"moto : Moto" -> "tresMovimientos : Movimiento": Movimiento( 3 )
+"moto : Moto" -> "tresMovimientos : Movimiento": MovimientoValido( 3 )
 "moto : Moto" --> Pozo: tresMovimientos
 deactivate "moto : Moto"
 Pozo --> "celdaEste : Celda": tresMovimientos
@@ -25,7 +25,7 @@ deactivate Pozo
 deactivate "celdaEste : Celda"
 
 note left
-**Violación Tell Don't Ask**
+**¿ Violación Tell Don't Ask ?**
 
 Pregunta si es válido el
 movimiento, ya que a veces no nos
@@ -37,15 +37,6 @@ end note
 deactivate "tresMovimientos : Movimiento"
 
 "posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
-
-note left
-**Violacion Don't Repeat Yourself**
-
-Verificación para el seteo de la
-posicion se repite a lo largo de
-todos los diagramas, es decir,
-es refactorizable.
-end note
 
 "posicion : Posicion" --> Jugador--: tresMovimientos
 deactivate "posicion : Posicion"

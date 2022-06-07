@@ -8,11 +8,21 @@ class Juego
 Juego *-right- Jugador
 
 'Clase que encapsula la logica de movimientos.
-class Movimiento{
+abstract class Movimiento{
     - cantidad: Integer
     + sumarMovimiento( movimientos )
+    + {abstract} esPosible(): boolean
+}
+
+class MovimientoValido{
     + esPosible(): boolean
 }
+class MovimientoInvalido{
+    +  esPosible(): boolean
+}
+
+MovimientoValido --|> Movimiento
+MovimientoInvalido --|> Movimiento
 
 interface Vehiculo{
     + {abstract} avanzarComun(): Movimiento
@@ -38,6 +48,9 @@ class Auto{
     + avanzarPozo(): Movimiento
 }
 class cuatroPorCuatro{
+    - contadorPozosAtravesados
+    - resetearContadorPozos()
+    - limitePozosExcedido(): boolean
     + avanzarComun(): Movimiento
     + avanzarPiquete(): Movimiento
     + avanzarControlPolicial(): Movimiento

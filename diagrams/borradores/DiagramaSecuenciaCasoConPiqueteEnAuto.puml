@@ -17,8 +17,15 @@ activate Jugador
 "celdaEste : Celda" -> Piquete++: avanzarEn( auto )
 Piquete -> "auto : Auto"++: avanzarPiquete()
 create "noMovimiento : Movimiento"
-' Podriamos hacer un enum con el numero de movimientos según el obstaculo?
-"auto : Auto" -> "noMovimiento : Movimiento": Movimiento( INFINITO )
+"auto : Auto" -> "noMovimiento : Movimiento": MovimientoInvalido()
+
+note right
+    MovimientoInvalido es una clase que
+    hereda de Movimiento, a diferencia
+    del MovimientoValido, esPosible()
+    siempre devuelve false.
+end note
+
 "auto : Auto" --> Piquete: noMovimiento
 deactivate "auto : Auto"
 Piquete --> "celdaEste : Celda": noMovimiento
@@ -27,7 +34,7 @@ deactivate Piquete
 deactivate "celdaEste : Celda"
 
 note left
-**Violación Tell Don't Ask**
+**¿ Violación Tell Don't Ask ?**
 
 Pregunta si es válido el
 movimiento, ya que a veces no nos
@@ -37,16 +44,6 @@ end note
 "noMovimiento : Movimiento" <- "posicion : Posicion"++: esPosible()
 "noMovimiento : Movimiento" --> "posicion : Posicion": false
 deactivate "noMovimiento : Movimiento"
-
-note left
-**Violacion Don't Repeat Yourself**
-
-Verificación para el seteo de la
-posicion se repite a lo largo de
-todos los diagramas, es decir,
-es refactorizable.
-end note
-
 
 "posicion : Posicion" --> Jugador--: noMovimiento
 deactivate "posicion : Posicion"

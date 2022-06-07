@@ -13,10 +13,10 @@ activate Jugador
 
 "celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
 Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
-"cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limiteDePozosExcedido()
+"cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limitePozosExcedido()
 "cxc : CuatroPorCuatro" --> "cxc : CuatroPorCuatro"--: true
 create "dosMovimientos  : Movimiento"
-"cxc : CuatroPorCuatro" -> "dosMovimientos  : Movimiento": Movimiento( 2 )
+"cxc : CuatroPorCuatro" -> "dosMovimientos  : Movimiento": MovimientoValido( 2 )
 "cxc : CuatroPorCuatro" --> Pozo: dosMovimientos
 deactivate "cxc : CuatroPorCuatro"
 Pozo --> "celdaEste : Celda": dosMovimientos
