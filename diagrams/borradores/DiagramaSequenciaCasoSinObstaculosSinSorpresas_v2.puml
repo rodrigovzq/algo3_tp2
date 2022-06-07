@@ -23,17 +23,29 @@ deactivate Comun
 "celdaEste : Celda" --> "posicion : Posicion": unMovimiento
 deactivate "celdaEste : Celda"
 
-'Viola el TellDontAsk, pero no es la solucion final.
-'Es para chequear que el movimiento es posible, por ejemplo,
-'cuando queres pasar por un piquete con un auto. No debemos actualizar
-'la posicion, ya que no podemos avanzar.
+note left
+**Violación Tell Don't Ask**
 
-' Además planteado así, deberíamos hacerlo en cada metodo de avanzar
-'porque necesitamos saber que celda es nuestra proxima posicion.
+Pregunta si es válido el
+movimiento, ya que a veces no nos
+podemos mover por un Piquete
+end note
+
+
 "unMovimiento : Movimiento" <- "posicion : Posicion"++: esPosible()
 "unMovimiento : Movimiento" --> "posicion : Posicion": true
 deactivate "unMovimiento : Movimiento"
 "posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
+
+note left
+**Violacion Don't Repeat Yourself**
+
+Verificación para el seteo de la
+posicion se repite a lo largo de
+todos los diagramas, es decir,
+es refactorizable.
+end note
+
 
 "posicion : Posicion" --> Jugador--: unMovimiento
 deactivate "posicion : Posicion"
