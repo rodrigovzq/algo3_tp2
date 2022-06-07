@@ -53,9 +53,16 @@ public class CasosDeUsosEntrega1Tests {
 
     @Test
     public void UnaCuatroPorCuatroAvanzaYSeEncuentraConTresPozosSePenalizaEnDosMovimientos (){
+        CuatroPorCuatro cxc = new CuatroPorCuatro();
+        Posicion posicionInicial = new Posicion(new Celda( new Pozo() ));
+        Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
-        //assertEquals(2, jugador.avanzarHaciaLaDireccion( este, cxc ) );
+        Movimiento resultado = jugador.avanzarHaciaLaDireccion("este", cxc);
+        resultado = jugador.avanzarHaciaLaDireccion("este", cxc);
+        resultado = jugador.avanzarHaciaLaDireccion("este", cxc);
+        Movimiento esperado = new MovimientoValido(2);
 
+        assertEquals(esperado, resultado);
     }
 
     @Test
