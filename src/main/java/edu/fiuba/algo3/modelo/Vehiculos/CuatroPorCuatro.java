@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Vehiculos;
 
 
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
+import edu.fiuba.algo3.modelo.Movimiento.MovimientoInvalido;
 import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 
 public class CuatroPorCuatro implements IVehiculo {
@@ -9,6 +10,7 @@ public class CuatroPorCuatro implements IVehiculo {
     public static final int RESET_CONTADOR = 0;
     public static final int SIN_PENALIZAR_POZO = 1;
     public static final int PENALIZACION_POZO = 2;
+    public static final int MOVIMIENTO_DEFAULT = 1;
     private Integer contadorPozosAtravesados;
 
     public CuatroPorCuatro() {
@@ -28,14 +30,12 @@ public class CuatroPorCuatro implements IVehiculo {
     }
     @Override
     public Movimiento avanzarComun() {
-        /* se implementa algo*/
-        return null;
+        return new MovimientoValido(MOVIMIENTO_DEFAULT);
     }
 
     @Override
     public Movimiento avanzarPiquete() {
-        /* se implementa algo*/
-        return null;
+        return new MovimientoInvalido();
     }
 
     @Override
