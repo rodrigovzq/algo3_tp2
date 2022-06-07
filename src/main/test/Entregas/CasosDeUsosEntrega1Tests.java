@@ -2,9 +2,11 @@ package Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 //import edu.fiuba.algo3.modelo.Direccion;
+import edu.fiuba.algo3.modelo.Celda.Obstaculo.Piquete;
 import edu.fiuba.algo3.modelo.Celda.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
+import edu.fiuba.algo3.modelo.Movimiento.MovimientoInvalido;
 import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 import edu.fiuba.algo3.modelo.Posicion.Posicion;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
@@ -67,8 +69,14 @@ public class CasosDeUsosEntrega1Tests {
 
     @Test
     public void UnAutoAvanzaYSeEncuentraConUnPiqueteYNoPuedePasar () {
+        Auto auto = new Auto();
+        Posicion posicionInicial = new Posicion(new Celda( new Piquete() ));
+        Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
-        //assertEquals(0, jugador.avanzarHaciaLaDireccion( este, auto ) );
+        Movimiento resultado = jugador.avanzarHaciaLaDireccion("este", auto);
+        Movimiento esperado = new MovimientoInvalido();
+
+        assertEquals(esperado, resultado);
 
     }
 }

@@ -15,7 +15,6 @@ public class Celda {
     }
 
     public Celda getCeldaEste() {
-        EstadoCelda obstaculo = new Pozo();
-        return new Celda( obstaculo );
+        return new Celda( estado );
     }
 }

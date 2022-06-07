@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Vehiculos;
 
 
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
+import edu.fiuba.algo3.modelo.Movimiento.MovimientoInvalido;
 import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 
 public class Auto implements IVehiculo {
@@ -16,8 +17,7 @@ public class Auto implements IVehiculo {
 
     @Override
     public Movimiento avanzarPiquete() {
-        /* se implementa algo*/
-        return null;
+        return new MovimientoInvalido();
     }
 
     @Override
