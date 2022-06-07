@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
+import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 import edu.fiuba.algo3.modelo.Posicion.Posicion;
@@ -19,7 +20,7 @@ public class Jugador {
         this.puntaje = new MovimientoValido(MOVIMIENTOS_INICIALES);
     }
 
-    public Movimiento avanzarHaciaLaDireccion(String direccion, IVehiculo vehiculo) {
+    public Movimiento avanzarHaciaLaDireccion(Direccion direccion, IVehiculo vehiculo){
         return posicionActual.avanzarHaciaLaDireccion( direccion, vehiculo);
     }
 }

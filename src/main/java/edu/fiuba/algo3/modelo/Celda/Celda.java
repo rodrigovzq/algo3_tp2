@@ -14,7 +14,23 @@ public class Celda {
         this.estado = estado;
     }
 
+    // TODO: La idea es que la celda que tiene posicion
+    // sea un nodo del grafo que representa nuestro mapa
+    // de esta forma con una celda es suficiente para
+    // movernos por el resto del mapa
     public Celda getCeldaEste() {
+        return new Celda( estado );
+    }
+
+    public Celda getCeldaNorte() {
+        return new Celda( estado );
+    }
+
+    public Celda getCeldaOeste() {
+        return new Celda( estado );
+    }
+
+    public Celda getCeldaSur() {
         return new Celda( estado );
     }
 }
