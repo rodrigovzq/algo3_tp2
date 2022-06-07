@@ -8,11 +8,11 @@ import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 public class Auto implements IVehiculo {
 
     public static final int PENALIZACION_POZO = 3;
+    public static final int MOVIMIENTO_DEFAULT = 1;
 
     @Override
     public Movimiento avanzarComun() {
-        /* se implementa algo*/
-        return null;
+        return new MovimientoValido(MOVIMIENTO_DEFAULT);
     }
 
     @Override
