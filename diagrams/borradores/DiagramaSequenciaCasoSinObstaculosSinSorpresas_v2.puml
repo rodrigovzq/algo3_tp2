@@ -3,25 +3,25 @@ title Diagrama Secuencia Auto Avanza Sin Obstaculos Y Sin Sorpresas Vol. 2
 autonumber
 actor Jugador
 
-group "X movimientos"
-Jugador -> "posicion : Posicion": avanzarHaciaLaDireccion( este, auto )
-
+group "X unMovimiento"
 activate Jugador
-"posicion : Posicion" -> "posicion : Posicion": avanzarHaciaElEsteEn( auto )
 
-deactivate "posicion : Posicion"
+Jugador -> "posicion : Posicion"++: avanzarHaciaLaDireccion( este, auto )
+
+"posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( auto )
+
 "posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( auto )
 
-activate "posicion : Posicion"
 "celdaEste : Celda" -> Comun++: avanzarEn( auto )
 Comun -> "auto : Auto"++: avanzarComun()
-"auto : Auto" --> Comun: movimientos
+create "unMovimiento : Movimiento"
+"auto : Auto" -> "unMovimiento : Movimiento"
+"auto : Auto" --> Comun: unMovimiento
 deactivate "auto : Auto"
-Comun --> "celdaEste : Celda": movimientos
+Comun --> "celdaEste : Celda": unMovimiento
 deactivate Comun
-"celdaEste : Celda" --> "posicion : Posicion": movimientos
+"celdaEste : Celda" --> "posicion : Posicion": unMovimiento
 deactivate "celdaEste : Celda"
-deactivate "posicion : Posicion"
 
 'Viola el TellDontAsk, pero no es la solucion final.
 'Es para chequear que el movimiento es posible, por ejemplo,
@@ -30,15 +30,16 @@ deactivate "posicion : Posicion"
 
 ' Además planteado así, deberíamos hacerlo en cada metodo de avanzar
 'porque necesitamos saber que celda es nuestra proxima posicion.
-"movimientos : Movimiento" <- "posicion : Posicion"++: esPosible()
-"movimientos : Movimiento" --> "posicion : Posicion": true
-deactivate "movimientos : Movimiento"
-"posicion : Posicion" -> "posicion : Posicion": setPosicion( celdaEste )
+"unMovimiento : Movimiento" <- "posicion : Posicion"++: esPosible()
+"unMovimiento : Movimiento" --> "posicion : Posicion": true
+deactivate "unMovimiento : Movimiento"
+"posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
 
-"posicion : Posicion" --> Jugador: movimientos
+"posicion : Posicion" --> Jugador--: unMovimiento
+deactivate "posicion : Posicion"
+deactivate "posicion : Posicion"
 
-deactivate Jugador
-Jugador -> "puntaje : Movimiento": sumarMovimientos( movimientos )
+Jugador -> "puntaje : Movimiento": sumarunMovimiento( unMovimiento )
 end
 
 @enduml
