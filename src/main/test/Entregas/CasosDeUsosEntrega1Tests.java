@@ -8,6 +8,8 @@ import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 import edu.fiuba.algo3.modelo.Obstaculo.Piquete;
 import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Posicion.Posicion;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,21 +26,30 @@ public class CasosDeUsosEntrega1Tests {
         Movimiento esperado = new MovimientoValido(3);
 
         assertEquals(esperado, resultado);
-
-
-
     }
 
     @Test
     public void UnAutoAvanzaYSeEncuentraConUnPozoSePenalizaEnTresMovimientos (){
+        Auto auto = new Auto();
+        Posicion posicionInicial = new Posicion( new Celda() );
+        Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
-       // assertEquals(3, jugador.avanzarHaciaLaDireccion( este, auto ) );
+        Movimiento resultado = jugador.avanzarHaciaLaDireccion( "Este", auto );
+        Movimiento esperado = new MovimientoValido(3);
+
+        assertEquals(esperado, resultado);
     }
 
     @Test
-    public void UnaCuatroPorCuatroAvanzaYSeEncuentraConUnPozoYNoSePenaliza (){
+    public void UnaCuatroPorCuatroAvanzaYSeEncuentraConUnPozoYNoSePenaliza () {
+        CuatroPorCuatro cxc = new CuatroPorCuatro();
+        Posicion posicionInicial = new Posicion(new Celda());
+        Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
-        //assertEquals(1, jugador.avanzarHaciaLaDireccion( este, cxc ) );
+        Movimiento resultado = jugador.avanzarHaciaLaDireccion("Este", cxc);
+        Movimiento esperado = new MovimientoValido(1);
+
+        assertEquals(esperado, resultado);
     }
 
     @Test

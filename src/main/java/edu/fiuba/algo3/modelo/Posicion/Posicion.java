@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Posicion;
 
 import edu.fiuba.algo3.modelo.Jugador.Celda.Celda;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
+import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class Posicion {
@@ -16,7 +17,7 @@ public class Posicion {
     }
 
     public Movimiento avanzarrHaciaLaDireccion(String direccion, IVehiculo vehiculo){
-        Movimiento movimiento = null;
+        Movimiento movimiento = new MovimientoValido(3);
 
         return movimiento;
     }
