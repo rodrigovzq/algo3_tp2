@@ -24,13 +24,6 @@ deactivate Pozo
 "celdaEste : Celda" --> "posicion : Posicion": tresMovimientos
 deactivate "celdaEste : Celda"
 
-note left
-**¿ Violación Tell Don't Ask ?**
-
-Pregunta si es válido el
-movimiento, ya que a veces no nos
-podemos mover por un Piquete
-end note
 
 "tresMovimientos : Movimiento" <- "posicion : Posicion": esPosible()
 "tresMovimientos : Movimiento" --> "posicion : Posicion": true

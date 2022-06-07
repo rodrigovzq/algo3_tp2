@@ -25,13 +25,6 @@ deactivate Pozo
 "celdaEste : Celda" --> "posicion : Posicion": unMovimiento 
 deactivate "celdaEste : Celda"
 
-note left
-**Violación Tell Don't Ask**
-
-Pregunta si es válido el
-movimiento, ya que a veces no nos
-podemos mover por un Piquete
-end note
 
 "unMovimiento  : Movimiento" <- "posicion : Posicion"++: esPosible()
 "unMovimiento  : Movimiento" --> "posicion : Posicion": true
