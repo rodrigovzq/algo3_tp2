@@ -38,14 +38,7 @@ deactivate "dosMovimientos  : Movimiento"
 
 "posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
 
-note left
-**Violacion Don't Repeat Yourself**
 
-Verificación para el seteo de la
-posicion se repite a lo largo de
-todos los diagramas, es decir,
-es refactorizable.
-end note
 
 "posicion : Posicion" --> Jugador--: dosMovimientos
 deactivate "posicion : Posicion"
