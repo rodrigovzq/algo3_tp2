@@ -9,8 +9,9 @@ Juego *-right- Jugador
 
 'Clase que encapsula la logica de movimientos.
 class Movimiento{
-    - puntaje: Integer
+    - cantidad: Integer
     + sumarMovimiento( movimientos )
+    + esPosible(): boolean
 }
 
 interface Vehiculo{
@@ -21,6 +22,8 @@ interface Vehiculo{
 }
 
 Moto .up.|> Vehiculo
+Auto .up.|> Vehiculo
+cuatroPorCuatro .up.|> Vehiculo
 
 class Moto{
     + avanzarComun(): Movimiento
@@ -28,11 +31,26 @@ class Moto{
     + avanzarControlPolicial(): Movimiento
     + avanzarPozo(): Movimiento
 }
+class Auto{
+    + avanzarComun(): Movimiento
+    + avanzarPiquete(): Movimiento
+    + avanzarControlPolicial(): Movimiento
+    + avanzarPozo(): Movimiento
+}
+class cuatroPorCuatro{
+    + avanzarComun(): Movimiento
+    + avanzarPiquete(): Movimiento
+    + avanzarControlPolicial(): Movimiento
+    + avanzarPozo(): Movimiento
+}
+
+
+
 
 'Clase que representa el estado del jugador.
 class Jugador{
-    - nombre
-    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v )
+    - nombre: String
+    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v ): Movimiento
 }
 
 Jugador -down-> Vehiculo
@@ -42,11 +60,12 @@ Jugador --> Posicion
 'Hay que ver como, pero de alguna manera, por medio de la celda que compone a la posicion
 'le hablamos a una de las celdas adyacentes para movernos con el vehiculo.
 class Posicion{
-    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v )
-    - avanzarHaciaElNorteEn( Vehiculo v )
-    - avanzarHaciaElOesteEn( Vehiculo v )
-    - avanzarHaciaElSurEn( Vehiculo v )
-    - avanzarHaciaElEsteEn( Vehiculo v )
+    + setPosicion( Celda posicion )
+    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v ): Movimiento
+    - avanzarHaciaElNorteEn( Vehiculo v ): Movimiento
+    - avanzarHaciaElOesteEn( Vehiculo v ): Movimiento
+    - avanzarHaciaElSurEn( Vehiculo v ): Movimiento
+    - avanzarHaciaElEsteEn( Vehiculo v ): Movimiento
 }
 
 Posicion --> Celda: - posicionJugador
@@ -64,15 +83,52 @@ Celda --> EstadoCelda
 'la información que le pasemos por parametros de manera distinta.
 
 interface EstadoCelda{
-    + avanzarCon( Vehiculo v ): Movimiento
+    + {abstract} avanzarEn( Vehiculo v ): Movimiento
 }
 
-Obstaculo ..|> EstadoCelda
-Comun ..|> EstadoCelda
-Sorpresa ..|> EstadoCelda
+Obstaculo --|> EstadoCelda
+Comun --|> EstadoCelda
 
 class Comun{
-    + avanzarCon( Vehiculo v ): Movimiento
+    + avanzarEn( Vehiculo v ): Movimiento
 }
 
+interface Obstaculo{
+    + {abstract} avanzarEn( Vehiculo v ): Movimiento
+}
+
+class Piquete{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+class Pozo{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+class ControlPolicial{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+
+Piquete ..|> Obstaculo
+Pozo ..|> Obstaculo
+ControlPolicial ..|> Obstaculo
+
+
+/' Por ahora no nos interesan las sorpresas
+interface Sorpresa{
+    + {abstract} avanzarEn( Vehiculo v ): Movimiento
+}
+
+Sorpresa --|> EstadoCelda
+class Favorable{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+Favorable ..|> Sorpresa
+class Desfavorable{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+Desfavorable ..|> Sorpresa
+class CambioVehiculo{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+CambioVehiculo ..|> Sorpresa
+'/
 @enduml
