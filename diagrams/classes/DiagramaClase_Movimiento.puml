@@ -1,0 +1,24 @@
+@startuml
+!include DiagramaClase_Movimiento.puml!SINSUBCLASES
+
+class MovimientoValido{
+    + esPosible(): boolean
+}
+class MovimientoInvalido{
+    +  esPosible(): boolean
+}
+
+MovimientoValido --|> Movimiento
+MovimientoInvalido --|> Movimiento
+
+@enduml
+@startuml(id=SINSUBCLASES)
+
+       'Clase que encapsula la logica de movimientos.
+       abstract class Movimiento{
+           - cantidad: Integer
+           + sumarMovimiento( movimientos )
+           + {abstract} esPosible(): boolean
+       }
+
+@enduml

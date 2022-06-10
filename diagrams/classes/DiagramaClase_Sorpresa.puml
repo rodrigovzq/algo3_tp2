@@ -1,0 +1,24 @@
+@startuml
+!include DiagramaClase_Sorpresa.puml!SINSUBCLASES
+
+class Favorable{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+Favorable ..|> Sorpresa
+class Desfavorable{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+Desfavorable ..|> Sorpresa
+class CambioVehiculo{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+CambioVehiculo ..|> Sorpresa
+
+@enduml
+
+@startuml(id=SINSUBCLASES)
+interface Sorpresa{
+    + {abstract} avanzarEn( Vehiculo v ): Movimiento
+}
+@enduml
+

@@ -1,0 +1,29 @@
+@startuml
+!include DiagramaClase_Celda.puml!SINSUBCLASES
+!include DiagramaClase_Obstaculo.puml!SINSUBCLASES
+!include DiagramaClase_Sorpresa.puml!SINSUBCLASES
+
+Obstaculo --|> EstadoCelda
+Comun ..|> EstadoCelda
+Sorpresa ..|> EstadoCelda
+
+class Comun{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+@enduml
+
+@startuml(id=SINSUBCLASES)
+class Celda{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+
+Celda --> EstadoCelda
+Celda -> "4" Celda
+
+interface EstadoCelda{
+
+    + {abstract} avanzarEn( Vehiculo v ): Movimiento
+}
+
+@enduml
+

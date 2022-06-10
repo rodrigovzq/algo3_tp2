@@ -1,0 +1,52 @@
+@startuml(id=CLASES)
+'Clase que encargada de la lógica del juego
+class Juego {
++ jugar(): void
+}
+Juego *-right- Jugador
+'Clase que representa el estado del jugador.
+class Jugador{
+    - nombre: String
+    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v ): Movimiento
+}
+class Posicion{
+    + setPosicion( Celda posicion )
+    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v ): Movimiento
+}
+Jugador --> Posicion
+@enduml
+
+@startuml
+!include DiagramaClase_Juego.puml!CLASES
+!include DiagramaClase_Celda.puml!SINSUBCLASES
+!include DiagramaClase_Movimiento.puml!SINSUBCLASES
+!include DiagramaClase_Vehiculo.puml!SINSUBCLASES
+
+Jugador -down-> Vehiculo
+Jugador --> Movimiento: - puntaje
+
+
+note right of Posicion
+Lo unico que
+hacer por
+ahora es
+darle significado
+a la direccion.
+Pero la celda es
+quien conoce a
+sus adyacentes
+end note
+
+Posicion --> Celda: - posicionJugador
+
+@enduml
+@startuml(id=COMPLETO)
+!include DiagramaClase_Juego.puml!CLASES
+!include DiagramaClase_Celda.puml
+!include DiagramaClase_Movimiento.puml
+!include DiagramaClase_Vehiculo.puml
+
+Jugador -down-> Vehiculo
+Jugador --> Movimiento: - puntaje
+Posicion --> Celda: - posicionJugador
+@enduml

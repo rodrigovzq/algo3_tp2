@@ -1,11 +1,5 @@
 @startuml
-
-interface Vehiculo{
-    + {abstract} avanzarComun(): Movimiento
-    + {abstract} avanzarPiquete(): Movimiento
-    + {abstract} avanzarControlPolicial(): Movimiento
-    + {abstract} avanzarPozo(): Movimiento
-}
+!include DiagramaClase_Vehiculo.puml!SINSUBCLASES
 
 Moto .up.|> Vehiculo
 Auto .up.|> Vehiculo
@@ -32,5 +26,15 @@ class cuatroPorCuatro{
     + avanzarControlPolicial(): Movimiento
     + avanzarPozo(): Movimiento
 }
+
+@enduml
+@startuml(id=SINSUBCLASES)
+
+       interface Vehiculo{
+           + {abstract} avanzarComun(): Movimiento
+           + {abstract} avanzarPiquete(): Movimiento
+           + {abstract} avanzarControlPolicial(): Movimiento
+           + {abstract} avanzarPozo(): Movimiento
+       }
 
 @enduml
