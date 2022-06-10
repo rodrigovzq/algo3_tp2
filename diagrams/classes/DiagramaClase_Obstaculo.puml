@@ -2,13 +2,13 @@
 !include DiagramaClase_Obstaculo.puml!SINSUBCLASES
 
 class Piquete{
-    + avanzarEn( Vehiculo v ): Movimiento
+    + avanzarEn( Vehiculo v ): ModificadorMovimiento
 }
 class Pozo{
-    + avanzarEn( Vehiculo v ): Movimiento
+    + avanzarEn( Vehiculo v ): ModificadorMovimiento
 }
 class ControlPolicial{
-    + avanzarEn( Vehiculo v ): Movimiento
+    + avanzarEn( Vehiculo v ): ModificadorMovimiento
 }
 
 Piquete ..|> Obstaculo
@@ -18,6 +18,6 @@ ControlPolicial ..|> Obstaculo
 
 @startuml(id=SINSUBCLASES)
 interface Obstaculo{
-    + {abstract} avanzarEn( Vehiculo v ): Movimiento
+    + {abstract} avanzarEn( Vehiculo v ): ModificadorMovimiento
 }
 @enduml

@@ -11,13 +11,22 @@ class MovimientoInvalido{
 MovimientoValido --|> Movimiento
 MovimientoInvalido --|> Movimiento
 
+note right of Movimiento
+Al usar ModificadorMovimiento
+me rompe la logica del
+MovimientoValido
+y MovimientoInvalido
+end note
 @enduml
 @startuml(id=SINSUBCLASES)
 
        'Clase que encapsula la logica de movimientos.
        abstract class Movimiento{
            - cantidad: Integer
-           + sumarMovimiento( movimientos )
+           + sumarMovimiento( Movimiento movimientos )
+           + descontarMovimiento( Movimiento movimientos )
+           + aplicarDescuento( Integer porcentaje)
+           + aplicarAumento( Integer porcentaje)
            + {abstract} esPosible(): boolean
        }
 

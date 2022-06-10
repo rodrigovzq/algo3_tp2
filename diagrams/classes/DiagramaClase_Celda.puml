@@ -8,13 +8,13 @@ Comun ..|> EstadoCelda
 Sorpresa ..|> EstadoCelda
 
 class Comun{
-    + avanzarEn( Vehiculo v ): Movimiento
+    + avanzarEn( Vehiculo v ): ModificadorMovimiento
 }
 @enduml
 
 @startuml(id=SINSUBCLASES)
 class Celda{
-    + avanzarEn( Vehiculo v ): Movimiento
+    + avanzarEn( Vehiculo v ): ModificadorMovimiento
 }
 
 Celda --> EstadoCelda
@@ -22,7 +22,7 @@ Celda -> "4" Celda
 
 interface EstadoCelda{
 
-    + {abstract} avanzarEn( Vehiculo v ): Movimiento
+    + {abstract} avanzarEn( Vehiculo v ): ModificadorMovimiento
 }
 
 @enduml
