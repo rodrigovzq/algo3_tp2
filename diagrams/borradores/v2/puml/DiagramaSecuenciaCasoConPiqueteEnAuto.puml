@@ -19,12 +19,6 @@ Piquete -> "auto : Auto"++: avanzarPiquete()
 create "noMovimiento : Movimiento"
 "auto : Auto" -> "noMovimiento : Movimiento": MovimientoInvalido()
 
-note right
-    MovimientoInvalido es una clase que
-    hereda de Movimiento, a diferencia
-    del MovimientoValido, esPosible()
-    siempre devuelve false.
-end note
 
 "auto : Auto" --> Piquete: noMovimiento
 deactivate "auto : Auto"
@@ -33,13 +27,6 @@ deactivate Piquete
 "celdaEste : Celda" --> "posicion : Posicion": noMovimiento
 deactivate "celdaEste : Celda"
 
-note left
-**¿ Violación Tell Don't Ask ?**
-
-Pregunta si es válido el
-movimiento, ya que a veces no nos
-podemos mover por un Piquete
-end note
 
 "noMovimiento : Movimiento" <- "posicion : Posicion"++: esPosible()
 "noMovimiento : Movimiento" --> "posicion : Posicion": false

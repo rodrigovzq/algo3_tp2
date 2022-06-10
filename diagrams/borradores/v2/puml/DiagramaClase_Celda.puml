@@ -1,0 +1,25 @@
+@startuml
+
+class Celda{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+
+Celda --> EstadoCelda
+
+
+interface EstadoCelda{
+    + {abstract} avanzarEn( Vehiculo v ): Movimiento
+}
+
+Obstaculo --|> EstadoCelda
+Comun --|> EstadoCelda
+
+class Comun{
+    + avanzarEn( Vehiculo v ): Movimiento
+}
+
+interface Obstaculo{
+    + {abstract} avanzarEn( Vehiculo v ): Movimiento
+}
+
+@enduml

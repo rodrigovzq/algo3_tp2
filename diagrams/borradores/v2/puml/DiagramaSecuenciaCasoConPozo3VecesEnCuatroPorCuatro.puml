@@ -24,13 +24,13 @@ deactivate Pozo
 "celdaEste : Celda" --> "posicion : Posicion": dosMovimientos
 deactivate "celdaEste : Celda"
 
-note left
-**Violación Tell Don't Ask**
+'note left
+'**Violación Tell Don't Ask**
 
-Pregunta si es válido el
-movimiento, ya que a veces no nos
-podemos mover por un Piquete
-end note
+'Pregunta si es válido el
+'movimiento, ya que a veces no nos
+'podemos mover por un Piquete
+'end note
 
 "dosMovimientos  : Movimiento" <- "posicion : Posicion"++: esPosible()
 "dosMovimientos  : Movimiento" --> "posicion : Posicion": true

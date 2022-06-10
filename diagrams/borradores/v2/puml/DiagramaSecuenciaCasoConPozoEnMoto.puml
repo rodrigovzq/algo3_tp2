@@ -26,13 +26,6 @@ deactivate "celdaEste : Celda"
 
 "tresMovimientos : Movimiento" <- "posicion : Posicion"++: esPosible()
 
-note left
-**¿ Violación Tell Don't Ask ?**
-
-Pregunta si es válido el
-movimiento, ya que a veces no nos
-podemos mover por un Piquete
-end note
 
 "tresMovimientos : Movimiento" --> "posicion : Posicion": true
 deactivate "tresMovimientos : Movimiento"
