@@ -1,0 +1,34 @@
+@startuml
+!include Celda.puml!SINSUBCLASES
+!include Obstaculo.puml!SINSUBCLASES
+!include Sorpresa.puml!SINSUBCLASES
+
+' En Java, una interfaz no puede implementar una
+'interfaz, solo puede heredarla.
+Obstaculo -up-|> EstadoCelda
+Comun .up.|> EstadoCelda
+Sorpresa .up.|> EstadoCelda
+
+class Comun{
+    + avanzarEn( Vehiculo v ): Evento
+}
+@enduml
+@startuml(id=SINSUBCLASES)
+class Celda{
+    + avanzarEn( Vehiculo v ): Evento
+}
+
+Celda --> EstadoCelda
+Celda -> "4" Celda
+
+interface EstadoCelda{
+    + {abstract} avanzarEn( Vehiculo v ): Evento
+}
+
+note right of Celda
+Tiene a sus "4"
+adyacentes.
+end note
+
+@enduml
+

@@ -1,8 +1,8 @@
 @startuml
-!include DiagramaClase_ModificadorMovimiento.puml!SINSUBCLASES
-DescuentoPorcentaje ..|> ModificadorMovimiento
-AumentoPorcentaje ..|> ModificadorMovimiento
-Penalizacion ..|> ModificadorMovimiento
+!include DiagramaClase_Evento.puml!SINSUBCLASES
+DescuentoPorcentaje ..|> Evento
+AumentoPorcentaje ..|> Evento
+Penalizacion ..|> Evento
 
 class DescuentoPorcentaje{
     - porcentaje: Integer
@@ -19,7 +19,7 @@ class Penalizacion{
 @enduml
 
 @startuml(id=SINSUBCLASES)
-interface ModificadorMovimiento{
+interface Evento{
     + {abstract} aplicarModificador( Movimiento m ): Movimiento
 }
 

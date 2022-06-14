@@ -1,0 +1,5 @@
+@startuml
+!include Juego.puml!COMPLETO
+!include Sorpresa.puml
+!include Obstaculo.puml
+@enduml
