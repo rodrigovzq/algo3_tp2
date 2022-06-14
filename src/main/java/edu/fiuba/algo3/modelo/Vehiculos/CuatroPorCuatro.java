@@ -57,13 +57,15 @@ public class CuatroPorCuatro implements IVehiculo {
 
     @Override
     public Evento avanzarPozo() {
-        Evento evento = new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
+        Evento evento = null;
 
         this.contarPozoAtravesado();
 
         if( this.limiteDePozosExcedido()){
             this.resetearContadorPozos();
             evento = new Evento( new Penalizacion(PENALIZACION_POZO),new NoCambiarVehiculo(), new Avanzar());
+        }else {
+            evento = new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
         }
 
         return evento;
