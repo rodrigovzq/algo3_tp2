@@ -1,0 +1,33 @@
+@startuml(id=CLASES)
+'Clase que encargada de la lógica del juego
+class Juego {
++ jugar(): void
+}
+Juego *-right- Jugador
+'Clase que representa el estado del jugador.
+class Jugador{
+    - nombre: String
+    + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v ): Movimiento
+}
+@enduml
+
+@startuml
+!include Juego.puml!CLASES
+!include Celda.puml!SINSUBCLASES
+!include Movimiento.puml!SINSUBCLASES
+!include Vehiculo.puml!SINSUBCLASES
+
+Jugador -down-> Vehiculo: - vehiculo
+Jugador --> Movimiento: - puntaje
+Jugador --> Celda: - posicionJugador
+@enduml
+@startuml(id=COMPLETO)
+!include Juego.puml!CLASES
+!include Celda.puml
+!include Movimiento.puml
+!include Vehiculo.puml
+
+Jugador -down-> Vehiculo
+Jugador --> Movimiento: - puntaje
+Jugador --> Celda: - posicionJugador
+@enduml
