@@ -32,19 +32,25 @@ deactivate "celdaEste : Celda"
 
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
+deactivate "sorpresa : CambioVehiculo"
 "posicion : Celda" --> Jugador--: evento
-
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+activate Jugador
 Jugador <-- "evento : Evento"--: movimientoTotales
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
+activate Jugador
 "evento : Evento" -> "auto : Auto"++: siguiente()
  "auto : Auto" --> "evento : Evento"--: cuatroPorCuatro
 
 Jugador <-- "evento : Evento"--: cuatroPorCuatro
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+activate Jugador
 Jugador <-- "evento : Evento"--: celdaEste
-
+deactivate Jugador
 @enduml
