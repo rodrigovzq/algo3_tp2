@@ -1,5 +1,0 @@
-@startuml
-!include DiagramaClase_Juego.puml!COMPLETO
-!include DiagramaClase_Sorpresa.puml
-!include DiagramaClase_Obstaculo.puml
-@enduml
