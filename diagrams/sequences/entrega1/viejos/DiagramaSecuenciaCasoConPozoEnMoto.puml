@@ -1,0 +1,41 @@
+@startuml
+title Diagrama Secuencia Moto Avanza Se Encuentra Con Pozo Y Se Penaliza
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Posicion"++: avanzarHaciaLaDireccion( este, moto )
+
+activate Jugador
+"posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( moto )
+
+"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( moto )
+
+"celdaEste : Celda" -> Pozo++: avanzarEn( moto )
+Pozo -> "moto : Moto"++: avanzarPozo()
+create "tresMovimientos : Movimiento"
+"moto : Moto" -> "tresMovimientos : Movimiento": MovimientoValido( 3 )
+"moto : Moto" --> Pozo: tresMovimientos
+deactivate "moto : Moto"
+Pozo --> "celdaEste : Celda": tresMovimientos
+deactivate Pozo
+"celdaEste : Celda" --> "posicion : Posicion"--: tresMovimientos
+deactivate "celdaEste : Celda"
+
+
+"tresMovimientos : Movimiento" <- "posicion : Posicion"++: esPosible()
+
+
+"tresMovimientos : Movimiento" --> "posicion : Posicion": true
+deactivate "tresMovimientos : Movimiento"
+"posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
+
+
+"posicion : Posicion" --> Jugador--: tresMovimientos
+deactivate "posicion : Posicion"
+deactivate "posicion : Posicion"
+
+Jugador -> "puntaje : Movimiento": sumarMovimientos( tresMovimientos )
+
+@enduml

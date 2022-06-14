@@ -1,0 +1,43 @@
+@startuml
+title Diagrama Secuencia Auto Avanza Sin Obstaculos Y Sin Sorpresas
+autonumber
+actor Jugador
+
+group "X unMovimiento"
+activate Jugador
+
+Jugador -> "posicion : Posicion"++: avanzarHaciaLaDireccion( este, auto )
+
+"posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( auto )
+
+"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( auto )
+
+"celdaEste : Celda" -> Comun++: avanzarEn( auto )
+Comun -> "auto : Auto"++: avanzarComun()
+create "unMovimiento : Movimiento"
+"auto : Auto" -> "unMovimiento : Movimiento": MovimientoValido( 1 )
+"auto : Auto" --> Comun: unMovimiento
+deactivate "auto : Auto"
+Comun --> "celdaEste : Celda": unMovimiento
+deactivate Comun
+"celdaEste : Celda" --> "posicion : Posicion": unMovimiento
+deactivate "celdaEste : Celda"
+
+
+
+"unMovimiento : Movimiento" <- "posicion : Posicion"++: esPosible()
+"unMovimiento : Movimiento" --> "posicion : Posicion": true
+deactivate "unMovimiento : Movimiento"
+"posicion : Posicion" -> "posicion : Posicion"++: setPosicion( celdaEste )
+
+
+
+
+"posicion : Posicion" --> Jugador--: unMovimiento
+deactivate "posicion : Posicion"
+deactivate "posicion : Posicion"
+
+Jugador -> "puntaje : Movimiento": sumarunMovimiento( unMovimiento )
+end
+
+@enduml

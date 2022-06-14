@@ -1,0 +1,42 @@
+@startuml
+title Diagrama Secuencia Auto Avanza Se Encuentra Con Piquete Y No Avanza
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Posicion"++: avanzarHaciaLaDireccion( este, auto )
+
+activate Jugador
+"posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( auto )
+
+
+"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( auto )
+
+
+"celdaEste : Celda" -> Piquete++: avanzarEn( auto )
+Piquete -> "auto : Auto"++: avanzarPiquete()
+create "noMovimiento : Movimiento"
+"auto : Auto" -> "noMovimiento : Movimiento": MovimientoInvalido()
+
+
+"auto : Auto" --> Piquete: noMovimiento
+deactivate "auto : Auto"
+Piquete --> "celdaEste : Celda": noMovimiento
+deactivate Piquete
+"celdaEste : Celda" --> "posicion : Posicion": noMovimiento
+deactivate "celdaEste : Celda"
+
+
+"noMovimiento : Movimiento" <- "posicion : Posicion"++: esPosible()
+"noMovimiento : Movimiento" --> "posicion : Posicion": false
+deactivate "noMovimiento : Movimiento"
+
+"posicion : Posicion" --> Jugador--: noMovimiento
+deactivate "posicion : Posicion"
+deactivate "posicion : Posicion"
+
+Jugador -> "puntaje : Movimiento": sumarMovimientos( noMovimiento )
+deactivate Jugador
+
+@enduml
