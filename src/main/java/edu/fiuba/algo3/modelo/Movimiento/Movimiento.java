@@ -26,4 +26,11 @@ public class Movimiento {
         return Objects.equals(cantidad, that.cantidad);
     }
 
+    public Movimiento aplicarAumento(Integer porcentaje) {
+        return null;
+    }
+
+    public Movimiento aplicarDescuento(Integer porcentaje) {
+        return null;
+    }
 }
