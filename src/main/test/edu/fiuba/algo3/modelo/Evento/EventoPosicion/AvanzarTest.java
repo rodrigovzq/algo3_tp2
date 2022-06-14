@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Evento.Avanzar;
+package edu.fiuba.algo3.modelo.Evento.EventoPosicion;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
@@ -12,9 +12,17 @@ class AvanzarTest {
     public void seteoLaDireccionParaElEsteYDevuelveLaCeldaEste(){
         Avanzar avanzar = new Avanzar();
         avanzar.setDireccion(Direccion.ESTE);
-        
-        Celda resultado = avanzar.actualizarPosicion( new Celda( null ) );
-        Celda esperado = new Celda( null );
+
+        Celda celdaEste = new Celda( null );
+        Celda celdaSur = new Celda( null );
+        Celda celdaNorte = celdaSur;
+        Celda celdaOeste = celdaSur;
+
+        Celda celdaActual = new Celda( null, celdaNorte, celdaEste, celdaSur, celdaOeste );
+
+
+        Celda resultado = avanzar.actualizarPosicion( celdaActual );
+        Celda esperado = celdaEste;
         
         assertEquals(esperado, resultado);
     }
@@ -23,8 +31,15 @@ class AvanzarTest {
         Avanzar avanzar = new Avanzar();
         avanzar.setDireccion(Direccion.NORTE);
 
-        Celda resultado = avanzar.actualizarPosicion( new Celda( null ) );
-        Celda esperado = new Celda( null );
+        Celda celdaNorte = new Celda( null );
+        Celda celdaEste = new Celda( null );
+        Celda celdaSur = celdaEste;
+        Celda celdaOeste = celdaEste;
+
+        Celda celdaActual = new Celda( null, celdaNorte, celdaEste, celdaSur, celdaOeste );
+
+        Celda resultado = avanzar.actualizarPosicion( celdaActual );
+        Celda esperado = celdaNorte;
 
         assertEquals(esperado, resultado);
     }
@@ -33,8 +48,16 @@ class AvanzarTest {
         Avanzar avanzar = new Avanzar();
         avanzar.setDireccion(Direccion.SUR);
 
-        Celda resultado = avanzar.actualizarPosicion( new Celda( null ) );
-        Celda esperado = new Celda( null );
+        Celda celdaSur = new Celda( null );
+        Celda celdaEste = new Celda( null );
+        Celda celdaNorte = celdaEste;
+        Celda celdaOeste = celdaEste;
+
+        Celda celdaActual = new Celda( null, celdaNorte, celdaEste, celdaSur, celdaOeste );
+
+
+        Celda resultado = avanzar.actualizarPosicion( celdaActual );
+        Celda esperado = celdaSur;
 
         assertEquals(esperado, resultado);
     }
@@ -43,8 +66,15 @@ class AvanzarTest {
         Avanzar avanzar = new Avanzar();
         avanzar.setDireccion(Direccion.OESTE);
 
-        Celda resultado = avanzar.actualizarPosicion( new Celda( null ) );
-        Celda esperado = new Celda( null );
+        Celda celdaOeste = new Celda( null );
+        Celda celdaEste = new Celda( null );
+        Celda celdaNorte = celdaEste;
+        Celda celdaSur = celdaEste;
+
+        Celda celdaActual = new Celda( null, celdaNorte, celdaEste, celdaSur, celdaOeste );
+
+        Celda resultado = avanzar.actualizarPosicion( celdaActual );
+        Celda esperado = celdaOeste;
 
         assertEquals(esperado, resultado);
 
