@@ -21,6 +21,7 @@ Jugador -down-> Vehiculo: - vehiculo
 Jugador --> Movimiento: - puntaje
 Jugador --> Celda: - posicionJugador
 @enduml
+
 @startuml(id=COMPLETO)
 !include Juego.puml!CLASES
 !include Celda.puml

@@ -60,30 +60,10 @@ class NoCambiarPosicion{
 }
 
 
-note left of SinPenalizar
-    Movimiento 
-    default +1
-end note
-
-note left of NoCambiarPuntaje
-    Movimiento 
-    nulo +0
-end note
-
-note left of SiguienteVehiculo
-Lo llame siguiente vehiculo
-porque utiliza el método 
-siguiente() de vehiculo. 
-end note
-
-note left of NoCambiarPosicion
-    Reemplaza la funcion
-    de MovimientoInvalido
-end note
 
 @enduml
 @startuml(id=SINSUBCLASES)
-class Evento{
+interface Evento{
         + setDireccionMovimiento( Direccion dir )
         + actualizarVehiculo( Vehiculo v ): Vehiculo
         + actualizarPuntaje( Movimiento m): Movimiento
@@ -104,23 +84,4 @@ class EventoPuntaje{
         + {abstract} actualizarPuntaje( Movimiento m): Movimiento
 }
 
-note left of Evento
-Es inflexible. Va a haber que agregar
-un metodo por cada estado que se desea
-modificar del jugador.
-
-end note
-
-
-note left
-Podría hacer un metodo que reciba
-un Jugador y que cada evento sepa
-que modificar del Jugador.
-
-El problema es que dentro del
-Evento no se me ocurre como
-modificar al Jugador sin abusar
-de getters y setters. ( violacion
-del encapsulamiento )
-end note
 @enduml
