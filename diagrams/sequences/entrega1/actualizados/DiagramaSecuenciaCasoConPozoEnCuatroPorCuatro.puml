@@ -1,0 +1,62 @@
+@startuml
+title Diagrama Secuencia Cuatro Por Cuatro Avanza Se Encuentra Con Pozo Y No Se Penaliza
+
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, cxc )
+
+activate Jugador
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( cxc )
+
+
+"celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
+Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
+
+create "eventoPuntaje :SinPenalizar"
+"cxc : CuatroPorCuatro"-> "eventoPuntaje :SinPenalizar": SinPenalizar()
+
+create "eventoVehiculo : NoCambiarVehiculo"
+"cxc : CuatroPorCuatro"-> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
+create "eventoPosicion : Avanzar"
+"cxc : CuatroPorCuatro"-> "eventoPosicion : Avanzar": Avanzar()
+
+create "evento : Evento"
+"cxc : CuatroPorCuatro"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
+
+
+
+alt#Gold   false
+    "cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limitePozosExcedido()
+    "cxc : CuatroPorCuatro" --> Pozo: evento
+    deactivate "cxc : CuatroPorCuatro"
+end
+
+
+
+deactivate "cxc : CuatroPorCuatro"
+
+Pozo --> "celdaEste : Celda": evento
+deactivate Pozo
+
+
+"celdaEste : Celda" --> "posicion : Celda": evento
+deactivate "celdaEste : Celda"
+
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
+"posicion : Celda" --> Jugador--: evento
+
+
+Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+Jugador <-- "evento : Evento"--: movimientoTotales
+
+Jugador -> "evento : Evento"++: actualizarVehiculo( cxc )
+Jugador <-- "evento : Evento"--: cxc
+
+Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+Jugador <-- "evento : Evento"--: celdaEste
+@enduml

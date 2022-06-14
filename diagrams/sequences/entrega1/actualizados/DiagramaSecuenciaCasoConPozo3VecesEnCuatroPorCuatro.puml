@@ -1,0 +1,76 @@
+@startuml
+title Diagrama Secuencia Cuatro por Cuatro Avanza Se Encuentra Con Pozo por Tercera Vez Y Se Penaliza 2 movimientos
+
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, cxc )
+
+activate Jugador
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( cxc )
+
+
+"celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
+Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
+
+create "eventoPuntaje :SinPenalizar"
+"cxc : CuatroPorCuatro"-> "eventoPuntaje :SinPenalizar": SinPenalizar()
+
+create "eventoVehiculo : NoCambiarVehiculo"
+"cxc : CuatroPorCuatro"-> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
+create "eventoPosicion : Avanzar"
+"cxc : CuatroPorCuatro"-> "eventoPosicion : Avanzar": Avanzar()
+
+create "evento : Evento"
+"cxc : CuatroPorCuatro"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
+
+
+"cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limitePozosExcedido()
+
+alt#Gold   true
+    "cxc : CuatroPorCuatro" ->"cxc : CuatroPorCuatro"++: resetearContadorPozos()
+    deactivate "cxc : CuatroPorCuatro"
+    create "eventPuntaje :Penalizacion"
+    "cxc : CuatroPorCuatro"-> "eventPuntaje :Penalizacion": Penalizacion(2)
+
+    create "eventVehiculo : NoCambiarVehiculo"
+    "cxc : CuatroPorCuatro"-> "eventVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
+    create "eventPosicion : Avanzar"
+    "cxc : CuatroPorCuatro"-> "eventPosicion : Avanzar": Avanzar()
+
+    create "event : Evento"
+    "cxc : CuatroPorCuatro"  -> "event : Evento": Evento( eventPuntaje, eventVehiculo, eventPosicion)
+
+    deactivate "cxc : CuatroPorCuatro"
+
+    "cxc : CuatroPorCuatro" --> Pozo: event
+    deactivate "cxc : CuatroPorCuatro"
+
+end
+
+
+Pozo --> "celdaEste : Celda": event
+deactivate Pozo
+
+
+"celdaEste : Celda" --> "posicion : Celda": event
+deactivate "celdaEste : Celda"
+
+"posicion : Celda" -> "event : Evento"++: setDireccion( ESTE )
+deactivate "event : Evento"
+"posicion : Celda" --> Jugador--: event
+
+
+Jugador -> "event : Evento"++: actualizarPuntaje( puntaje )
+Jugador <-- "event : Evento"--: movimientoTotales
+
+Jugador -> "event : Evento"++: actualizarVehiculo( cxc )
+Jugador <-- "event : Evento"--: cxc
+
+Jugador -> "event : Evento"++: actualizarPosicion( posicion )
+Jugador <-- "event : Evento"--: celdaEste
+@enduml
