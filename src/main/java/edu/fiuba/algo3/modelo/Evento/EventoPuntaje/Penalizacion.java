@@ -8,8 +8,22 @@ public class Penalizacion implements EventoPuntaje {
         this.penalizacion = new Movimiento(penalizacion);
     }
 
+    private Movimiento getPenalizacion() {
+        return penalizacion;
+    }
+
     @Override
     public Movimiento actualizarPuntaje(Movimiento m) {
         return m.sumarMovimiento( this.penalizacion );
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Penalizacion p = (Penalizacion) o;
+        return penalizacion.equals( p.getPenalizacion() );
+    }
+
+
 }

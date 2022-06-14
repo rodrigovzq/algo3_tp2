@@ -7,4 +7,12 @@ public class NoCambiarPuntaje implements EventoPuntaje{
     public Movimiento actualizarPuntaje(Movimiento m) {
         return m;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return true;
+    }
+
 }

@@ -14,4 +14,13 @@ public class Evento {
     private EventoPuntaje eventoPuntaje;
     private EventoVehiculo eventoVehiculo;
     private EventoPosicion eventoPosicion;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Evento evento = (Evento) o;
+        return eventoPuntaje.equals(evento.eventoPuntaje) && eventoVehiculo.equals(evento.eventoVehiculo) && eventoPosicion.equals(evento.eventoPosicion);
+    }
+
 }
