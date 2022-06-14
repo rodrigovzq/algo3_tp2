@@ -11,31 +11,35 @@ activate Jugador
 "posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( v )
 
 
-"celdaEste : Celda" -> "sorpresa : CambioVehiculo"++: avanzarEn( v )
+"celdaEste : Celda" -> "sorpresa : Desfavorable"++: avanzarEn( v )
 
-create "movimientos : AumentoPorcentaje"
-"sorpresa : CambioVehiculo"-> "movimientos : AumentoPorcentaje": AumentoPorcentaje( 25 )
+create "eventoPuntaje : AumentoPorcentaje"
+"sorpresa : Desfavorable"-> "eventoPuntaje : AumentoPorcentaje": AumentoPorcentaje( 25 )
 
-create "cambioVehiculo : NoCambiarVehiculo"
-"sorpresa : CambioVehiculo" -> "cambioVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+create "eventoVehiculo : NoCambiarVehiculo"
+"sorpresa : Desfavorable" -> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
 
-create "movimiento : Avanzar"
-"sorpresa : CambioVehiculo"  -> "movimiento : Avanzar": Avanzar()
+create "eventoPosicion : Avanzar"
+"sorpresa : Desfavorable"  -> "eventoPosicion : Avanzar": Avanzar()
 
 create "evento : Evento"
-"sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( movimientos, cambioVehiculo, movimiento)
+"sorpresa : Desfavorable"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
-"sorpresa : CambioVehiculo" --> "celdaEste : Celda"--: evento
+"sorpresa : Desfavorable" --> "celdaEste : Celda"--: evento
 
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
-"posicion : Celda" -> "evento : Evento": setDireccion( ESTE )
+
+
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
 "posicion : Celda" --> Jugador--: evento
 
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
-"evento : Evento" -> "puntaje : Movimiento": aplicarAumento( 25 )
+"evento : Evento" -> "puntaje : Movimiento"++: aplicarAumento( 25 )
 "puntaje : Movimiento" --> "evento : Evento": movimientoTotales
+deactivate "puntaje : Movimiento"
 Jugador <-- "evento : Evento"--: movimientoTotales
 
 Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
