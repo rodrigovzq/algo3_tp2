@@ -1,4 +1,4 @@
-package Entregas;
+package edu.fiuba.algo3.Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 //import edu.fiuba.algo3.modelo.Direccion.Direccion;
