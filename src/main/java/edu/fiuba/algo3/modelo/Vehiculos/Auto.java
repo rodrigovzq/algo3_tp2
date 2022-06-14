@@ -13,6 +13,7 @@ public class Auto implements IVehiculo {
 
     public static final int PENALIZACION_POZO = 3;
     public static final int  MOVIMIENTO_DEFAULT = 1;
+    private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.5f;
 
     @Override
     public  Evento avanzarComun() {
@@ -33,5 +34,10 @@ public class Auto implements IVehiculo {
     @Override
     public  Evento avanzarPozo() {
         return new Evento( new Penalizacion(PENALIZACION_POZO),new NoCambiarVehiculo(), new Avanzar());
+    }
+
+    @Override
+    public Float obtenerProbabilidadDeSerDetenido() {
+        return PROBABILIDAD_DE_SER_DEMORADO;
     }
 }

@@ -17,6 +17,7 @@ public class CuatroPorCuatro implements IVehiculo {
     public static final int SIN_PENALIZAR_POZO = 1;
     public static final int PENALIZACION_POZO = 2;
     public static final int MOVIMIENTO_DEFAULT = 1;
+    private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.3f;
     private Integer contadorPozosAtravesados;
 
     public CuatroPorCuatro() {
@@ -62,5 +63,10 @@ public class CuatroPorCuatro implements IVehiculo {
         }
 
         return evento;
+    }
+
+    @Override
+    public Float obtenerProbabilidadDeSerDetenido() {
+        return PROBABILIDAD_DE_SER_DEMORADO;
     }
 }

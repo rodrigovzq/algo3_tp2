@@ -12,6 +12,7 @@ public class Moto implements IVehiculo {
     public static final int PENALIZACION_PIQUETE = 2;
     public static final int  MOVIMIENTO_DEFAULT = 1;
 
+    private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.8f;
     @Override
     public  Evento avanzarComun() {
         return new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
@@ -31,5 +32,10 @@ public class Moto implements IVehiculo {
     @Override
     public  Evento avanzarPozo() {
         return new Evento( new Penalizacion(PENALIZACION_POZO),new NoCambiarVehiculo(), new Avanzar());
+    }
+
+    @Override
+    public Float obtenerProbabilidadDeSerDetenido() {
+        return PROBABILIDAD_DE_SER_DEMORADO;
     }
 }

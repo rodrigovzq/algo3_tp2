@@ -9,4 +9,5 @@ public interface IVehiculo {
     public  Evento avanzarControlPolicial();
     public  Evento avanzarPozo();
 
+    Float obtenerProbabilidadDeSerDetenido();
 }
