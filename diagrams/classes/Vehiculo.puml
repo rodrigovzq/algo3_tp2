@@ -24,7 +24,7 @@ class cuatroPorCuatro{
     + avanzarPiquete(): Evento
     + avanzarControlPolicial(): Evento
     + avanzarPozo(): Evento
-}
+}Vehi
 
 @enduml
 @startuml(id=SINSUBCLASES)

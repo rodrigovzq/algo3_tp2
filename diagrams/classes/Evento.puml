@@ -23,7 +23,7 @@ class AumentoPorcentaje{
     + actualizarPuntaje( Movimiento m): Movimiento
 }
 class Penalizacion{
-    - cantidad: Integer
+    - cantidad: Movimiento
     + actualizarPuntaje( Movimiento m): Movimiento
 }
 class SinPenalizar{
