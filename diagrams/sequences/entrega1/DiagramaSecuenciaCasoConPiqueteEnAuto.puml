@@ -5,38 +5,46 @@ autonumber
 
 actor Jugador
 
-Jugador -> "posicion : Posicion"++: avanzarHaciaLaDireccion( este, auto )
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, auto )
 
 activate Jugador
-"posicion : Posicion" -> "posicion : Posicion"++: avanzarHaciaElEsteEn( auto )
-
-
-"posicion : Posicion" -> "celdaEste : Celda"++: avanzarEn( auto )
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
 
 
 "celdaEste : Celda" -> Piquete++: avanzarEn( auto )
 Piquete -> "auto : Auto"++: avanzarPiquete()
-create "noMovimiento : Movimiento"
-"auto : Auto" -> "noMovimiento : Movimiento": MovimientoInvalido()
 
+create "ceroMovimiento : NoCambiarPuntaje"
+"auto : Auto" -> "ceroMovimiento : NoCambiarPuntaje": SinCambiarPosicion()
 
-"auto : Auto" --> Piquete: noMovimiento
+create "cambioVehiculo : NoCambiarVehiculo"
+"auto : Auto"  -> "cambioVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
+create "movimiento : NoCambiarPosicion"
+"auto : Auto"  -> "movimiento : NoCambiarPosicion": Avanzar()
+
+create "evento : Evento"
+"auto : Auto"  -> "evento : Evento": Evento( ceroMovimiento, cambioVehiculo, movimiento)
+
+"auto : Auto" --> Piquete: evento
 deactivate "auto : Auto"
-Piquete --> "celdaEste : Celda": noMovimiento
-deactivate Piquete
-"celdaEste : Celda" --> "posicion : Posicion": noMovimiento
+
+Piquete --> "celdaEste : Celda": evento
+
+
+"celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
 
+"posicion : Celda" --> Jugador--: evento
 
-"noMovimiento : Movimiento" <- "posicion : Posicion"++: esPosible()
-"noMovimiento : Movimiento" --> "posicion : Posicion": false
-deactivate "noMovimiento : Movimiento"
 
-"posicion : Posicion" --> Jugador--: noMovimiento
-deactivate "posicion : Posicion"
-deactivate "posicion : Posicion"
+Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+Jugador <-- "evento : Evento"--: movimientoTotales
 
-Jugador -> "puntaje : Movimiento": sumarMovimientos( noMovimiento )
-deactivate Jugador
+Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
+Jugador <-- "evento : Evento"--: auto
+
+Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+Jugador <-- "evento : Evento"--: celdaEste
 
 @enduml

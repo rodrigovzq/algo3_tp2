@@ -15,18 +15,18 @@ Comun -> "auto : Auto"++: avanzarComun()
 
 create "unMovimiento : SinPenalizar"
 "auto : Auto" -> "unMovimiento : SinPenalizar": SinPenalizar()
-"auto : Auto" --> Comun: unMovimiento
-deactivate "auto : Auto"
 
-create "cambioVehiculo : SinCambiarVehiculo"
-Comun -> "cambioVehiculo : SinCambiarVehiculo": SinCambiarVehiculo()
+create "cambioVehiculo : NoCambiarVehiculo"
+"auto : Auto"  -> "cambioVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
 
 create "movimiento : Avanzar"
-Comun -> "movimiento : Avanzar": Avanzar()
+"auto : Auto"  -> "movimiento : Avanzar": Avanzar()
 
 create "evento : Evento"
-Comun -> "evento : Evento": Evento( unMovimiento, cambioVehiculo, movimiento)
+"auto : Auto"  -> "evento : Evento": Evento( unMovimiento, cambioVehiculo, movimiento)
 
+"auto : Auto" --> Comun: evento
+deactivate "auto : Auto"
 
 Comun --> "celdaEste : Celda": evento
 deactivate Comun
