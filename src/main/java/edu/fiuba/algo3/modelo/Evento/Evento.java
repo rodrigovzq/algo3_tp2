@@ -1,8 +1,12 @@
 package edu.fiuba.algo3.modelo.Evento;
 
+import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.EventoPosicion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.EventoPuntaje;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.EventoVehiculo;
+import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
+import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class Evento {
     public Evento(EventoPuntaje eventoPuntaje, EventoVehiculo eventoVehiculo, EventoPosicion eventoPosicion) {
@@ -23,4 +27,17 @@ public class Evento {
         return eventoPuntaje.equals(evento.eventoPuntaje) && eventoVehiculo.equals(evento.eventoVehiculo) && eventoPosicion.equals(evento.eventoPosicion);
     }
 
+    public Movimiento actualizarPuntaje(Movimiento puntaje) {
+        return eventoPuntaje.actualizarPuntaje( puntaje );
+    }
+    public IVehiculo actualizarVehiculo(IVehiculo vehiculo) {
+        return eventoVehiculo.actualizarVehiculo( vehiculo );
+    } 
+    public Celda actualizarPosicion(Celda posicion) {
+        return eventoPosicion.actualizarPosicion( posicion );
+    }
+
+    public void setDireccion(Direccion direccion) {
+        eventoPosicion.setDireccion(direccion);
+    }
 }

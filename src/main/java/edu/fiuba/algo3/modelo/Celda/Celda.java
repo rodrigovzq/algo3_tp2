@@ -24,9 +24,9 @@ public class Celda {
     public Celda(EstadoCelda estado) {
         this.estado = estado;
         this.celdaNorte = null;
-        this.celdaEste = null;
-        this.celdaSur = null;
-        this.celdaOeste = null;
+        this.celdaEste =  null;
+        this.celdaSur =  null;
+        this.celdaOeste =  null;
     }
 
     public Evento avanzarEn(IVehiculo vehiculo){
@@ -39,21 +39,22 @@ public class Celda {
     // movernos por el resto del mapa
     public Celda getCelda(Direccion direccion){
         Celda celdaAdyacente = null;
+
         switch (direccion) {
             case NORTE:
-                celdaAdyacente = new Celda( estado );
+                celdaAdyacente = celdaNorte;
                 break;
 
             case ESTE:
-                celdaAdyacente = new Celda( estado );
+                celdaAdyacente = celdaEste;
                 break;
 
             case OESTE:
-                celdaAdyacente = new Celda( estado );
+                celdaAdyacente = celdaOeste;
                 break;
 
             case SUR:
-                celdaAdyacente = new Celda( estado );
+                celdaAdyacente = celdaSur;
                 break;
         }
         return celdaAdyacente;

@@ -1,6 +1,7 @@
 package Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.Comun;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Celda.Obstaculo.Piquete;
 import edu.fiuba.algo3.modelo.Celda.Obstaculo.Pozo;
@@ -24,7 +25,8 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnaMotoAvanzaYSeEncuentraConUnPozoSePenalizaEnTresMovimientos (){
         Moto moto = new Moto();
-        Celda posicionInicial =  new Celda( new Pozo() );
+        Celda celdaAdyacente = new Celda( new Pozo() );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, moto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, moto );
@@ -36,7 +38,8 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnAutoAvanzaYSeEncuentraConUnPozoSePenalizaEnTresMovimientos (){
         Auto auto = new Auto();
-        Celda posicionInicial =  new Celda( new Pozo() ) ;
+        Celda celdaAdyacente = new Celda( new Pozo() );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, auto );
@@ -48,7 +51,8 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnaCuatroPorCuatroAvanzaYSeEncuentraConUnPozoYNoSePenaliza () {
         CuatroPorCuatro cxc = new CuatroPorCuatro();
-        Celda posicionInicial = new Celda( new Pozo() );
+        Celda celdaAdyacente = new Celda( new Pozo() );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, cxc );
@@ -60,7 +64,8 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnaCuatroPorCuatroAvanzaYSeEncuentraConTresPozosSePenalizaEnDosMovimientos (){
         CuatroPorCuatro cxc = new CuatroPorCuatro();
-        Celda posicionInicial = new Celda( new Pozo() );
+        Celda celdaAdyacente = new Celda( new Pozo() );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
         jugador.avanzarHaciaLaDireccion(Direccion.ESTE, cxc);
@@ -75,7 +80,8 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnAutoAvanzaYSeEncuentraConUnPiqueteYNoPuedePasar () {
         Auto auto = new Auto();
-        Celda posicionInicial = new Celda( new Piquete() );
+        Celda celdaAdyacente = new Celda( new Piquete() );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, auto );

@@ -14,10 +14,12 @@ public class Avanzar implements EventoPosicion{
         return true;
     }
 
+    @Override
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
 
+    @Override
     public Celda actualizarPosicion( Celda posicion) {
         return posicion.getCelda( this.direccion );
     }
