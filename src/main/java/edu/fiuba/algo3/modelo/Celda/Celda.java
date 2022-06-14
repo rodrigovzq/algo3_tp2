@@ -40,22 +40,14 @@ public class Celda {
     public Celda getCelda(Direccion direccion){
         Celda celdaAdyacente = null;
 
-        switch (direccion) {
-            case NORTE:
-                celdaAdyacente = celdaNorte;
-                break;
-
-            case ESTE:
-                celdaAdyacente = celdaEste;
-                break;
-
-            case OESTE:
-                celdaAdyacente = celdaOeste;
-                break;
-
-            case SUR:
-                celdaAdyacente = celdaSur;
-                break;
+        if (direccion == Direccion.NORTE) {
+            celdaAdyacente = celdaNorte;
+        } else if (direccion == Direccion.ESTE) {
+            celdaAdyacente = celdaEste;
+        } else if (direccion == Direccion.OESTE) {
+            celdaAdyacente = celdaOeste;
+        } else if (direccion == Direccion.SUR) {
+            celdaAdyacente = celdaSur;
         }
         return celdaAdyacente;
     }
