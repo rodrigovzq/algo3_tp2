@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
+import java.util.Objects;
+
 public class Celda {
     private EstadoCelda estado;
     private Celda celdaNorte;
@@ -56,4 +58,13 @@ public class Celda {
         }
         return celdaAdyacente;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Celda celda = (Celda) o;
+        return Objects.equals(celdaNorte, celda.celdaNorte) && Objects.equals(celdaEste, celda.celdaEste) && Objects.equals(celdaSur, celda.celdaSur) && Objects.equals(celdaOeste, celda.celdaOeste);
+    }
+
 }
