@@ -51,6 +51,11 @@ public class CuatroPorCuatro implements IVehiculo {
     }
 
     @Override
+    public IVehiculo siguiente() {
+        return new Moto();
+    }
+
+    @Override
     public Evento avanzarPozo() {
         Evento evento = new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
 

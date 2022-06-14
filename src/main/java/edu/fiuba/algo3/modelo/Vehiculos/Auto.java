@@ -12,7 +12,6 @@ import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 public class Auto implements IVehiculo {
 
     public static final int PENALIZACION_POZO = 3;
-    public static final int  MOVIMIENTO_DEFAULT = 1;
 
     @Override
     public  Evento avanzarComun() {
@@ -33,5 +32,10 @@ public class Auto implements IVehiculo {
     @Override
     public  Evento avanzarPozo() {
         return new Evento( new Penalizacion(PENALIZACION_POZO),new NoCambiarVehiculo(), new Avanzar());
+    }
+
+    @Override
+    public IVehiculo siguiente() {
+        return new CuatroPorCuatro();
     }
 }
