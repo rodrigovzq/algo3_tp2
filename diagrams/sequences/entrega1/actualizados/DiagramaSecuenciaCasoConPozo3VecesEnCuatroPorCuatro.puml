@@ -15,19 +15,6 @@ activate Jugador
 "celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
 Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
 
-create "eventoPuntaje :SinPenalizar"
-"cxc : CuatroPorCuatro"-> "eventoPuntaje :SinPenalizar": SinPenalizar()
-
-create "eventoVehiculo : NoCambiarVehiculo"
-"cxc : CuatroPorCuatro"-> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
-
-create "eventoPosicion : Avanzar"
-"cxc : CuatroPorCuatro"-> "eventoPosicion : Avanzar": Avanzar()
-
-create "evento : Evento"
-"cxc : CuatroPorCuatro"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
-
-
 "cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limitePozosExcedido()
 
 alt#Gold   true
@@ -47,11 +34,8 @@ alt#Gold   true
 
     deactivate "cxc : CuatroPorCuatro"
 
-    "cxc : CuatroPorCuatro" --> Pozo: event
-    deactivate "cxc : CuatroPorCuatro"
-
 end
-
+    "cxc : CuatroPorCuatro" --> Pozo--: event
 
 Pozo --> "celdaEste : Celda": event
 deactivate Pozo
