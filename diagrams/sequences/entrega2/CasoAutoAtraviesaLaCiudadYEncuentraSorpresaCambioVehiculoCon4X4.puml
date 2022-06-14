@@ -1,5 +1,5 @@
 @startuml
-title Diagrama Secuencia Vehiculo Atraviesa La Ciudad Y Encuentra Sorpresa Cambio Vehiculo
+title Diagrama Secuencia Auto Atraviesa La Ciudad Y Encuentra Sorpresa Cambio Vehiculo con CuatroPorCuatro
 
 autonumber
 
@@ -13,24 +13,25 @@ activate Jugador
 
 "celdaEste : Celda" -> "sorpresa : CambioVehiculo"++: avanzarEn( auto )
 
-create "unMovimiento : SinPenalizar"
-"sorpresa : CambioVehiculo"-> "unMovimiento : SinPenalizar": SinPenalizar()
+create "eventoPuntaje : SinPenalizar"
+"sorpresa : CambioVehiculo"-> "eventoPuntaje : SinPenalizar": SinPenalizar()
 
-create "cambioVehiculo : SiguienteVehiculo"
-"sorpresa : CambioVehiculo" -> "cambioVehiculo : SiguienteVehiculo": SiguienteVehiculo()
+create "eventoVehiculo : SiguienteVehiculo"
+"sorpresa : CambioVehiculo" -> "eventoVehiculo : SiguienteVehiculo": SiguienteVehiculo()
 
-create "movimiento : Avanzar"
-"sorpresa : CambioVehiculo"  -> "movimiento : Avanzar": Avanzar()
+create "eventoPosicion : Avanzar"
+"sorpresa : CambioVehiculo"  -> "eventoPosicion : Avanzar": Avanzar()
 
 create "evento : Evento"
-"sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( unMovimiento, cambioVehiculo, movimiento)
+"sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
 "sorpresa : CambioVehiculo" --> "celdaEste : Celda": evento
 
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
 
-"posicion : Celda" -> "evento : Evento": setDireccion( ESTE )
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
 "posicion : Celda" --> Jugador--: evento
 
 

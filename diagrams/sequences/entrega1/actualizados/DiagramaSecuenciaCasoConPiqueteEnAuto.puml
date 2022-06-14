@@ -14,17 +14,17 @@ activate Jugador
 "celdaEste : Celda" -> Piquete++: avanzarEn( auto )
 Piquete -> "auto : Auto"++: avanzarPiquete()
 
-create "ceroMovimiento : NoCambiarPuntaje"
-"auto : Auto" -> "ceroMovimiento : NoCambiarPuntaje": SinCambiarPosicion()
+create "eventoPuntaje : NoCambiarPuntaje"
+"auto : Auto" -> "eventoPuntaje : NoCambiarPuntaje": NoCambiarPuntajes()
 
-create "cambioVehiculo : NoCambiarVehiculo"
-"auto : Auto"  -> "cambioVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+create "eventoVehiculo : NoCambiarVehiculo"
+"auto : Auto"  -> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
 
-create "movimiento : NoCambiarPosicion"
-"auto : Auto"  -> "movimiento : NoCambiarPosicion": Avanzar()
+create "eventoPosicion : NoCambiarPosicion"
+"auto : Auto"  -> "eventoPosicion : NoCambiarPosicion": Avanzar()
 
 create "evento : Evento"
-"auto : Auto"  -> "evento : Evento": Evento( ceroMovimiento, cambioVehiculo, movimiento)
+"auto : Auto"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
 "auto : Auto" --> Piquete: evento
 deactivate "auto : Auto"
@@ -35,7 +35,8 @@ Piquete --> "celdaEste : Celda": evento
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
 
-"posicion : Celda" -> "evento : Evento": setDireccion( ESTE )
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
 "posicion : Celda" --> Jugador--: evento
 
 
