@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.NoCambiarPuntaje;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
@@ -51,7 +52,7 @@ public class CasosDeUsosEntrega1Tests {
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, cxc );
-        Evento esperado = new Evento( new Penalizacion(3), new NoCambiarVehiculo(), new Avanzar() );
+        Evento esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar() );
 
         assertEquals(esperado, resultado);
     }
