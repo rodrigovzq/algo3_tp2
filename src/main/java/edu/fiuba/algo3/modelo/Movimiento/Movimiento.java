@@ -27,10 +27,13 @@ public class Movimiento {
     }
 
     public Movimiento aplicarAumento(Integer porcentaje) {
-        return null;
+        int puntajeNuevo = Math.round(this.cantidad * (1 + porcentaje/100));
+        return new Movimiento(puntajeNuevo);
+
     }
 
     public Movimiento aplicarDescuento(Integer porcentaje) {
-        return null;
+        int puntajeNuevo = Math.round(this.cantidad * (1 - porcentaje/100));
+        return new Movimiento(puntajeNuevo);
     }
 }

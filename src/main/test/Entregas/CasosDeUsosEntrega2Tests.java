@@ -58,7 +58,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
-        Evento esperado = new Evento( new DescuentoPorcentaje(20), new NoCambiarVehiculo(), new Avanzar() );
+        Evento esperado = new Evento( new AumentoPorcentaje(25), new NoCambiarVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
         jugador1.actualizar(resultado);
@@ -79,7 +79,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
-        Evento esperado = new Evento( new DescuentoPorcentaje(20), new NoCambiarVehiculo(), new Avanzar() );
+        Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
         jugador1.actualizar(resultado);
@@ -99,7 +99,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
-        Evento esperado = new Evento( new DescuentoPorcentaje(20), new NoCambiarVehiculo(), new Avanzar() );
+        Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
         jugador1.actualizar(resultado);
@@ -120,7 +120,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
-        Evento esperado = new Evento( new DescuentoPorcentaje(20), new NoCambiarVehiculo(), new Avanzar() );
+        Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
         jugador1.actualizar(resultado);
