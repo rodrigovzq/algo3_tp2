@@ -26,13 +26,13 @@ public class Movimiento {
         return Objects.equals(cantidad, that.cantidad);
     }
 
-    public Movimiento aplicarAumento(Integer porcentaje) {
+    public Movimiento aplicarAumento(Float porcentaje) {
         int puntajeNuevo = Math.round(this.cantidad * (1 + porcentaje/100));
         return new Movimiento(puntajeNuevo);
 
     }
 
-    public Movimiento aplicarDescuento(Integer porcentaje) {
+    public Movimiento aplicarDescuento(Float porcentaje) {
         int puntajeNuevo = Math.round(this.cantidad * (1 - porcentaje/100));
         return new Movimiento(puntajeNuevo);
     }

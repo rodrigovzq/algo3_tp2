@@ -2,7 +2,6 @@ package Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.Comun;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Celda.Sorpresa.Desfavorable;
 import edu.fiuba.algo3.modelo.Celda.Sorpresa.Favorable;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
@@ -30,14 +29,13 @@ public class CasosDeUsosEntrega2Tests {
     public void UnVehiculoAvanzaYEncuentraUnaSorpresaFavorable (){
         IVehiculo v = new Auto();
         Celda celdaAdyacente = new Celda( new Favorable() );
-        Celda posicion1Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
-        Celda posicion2Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
-        Jugador jugador1 = new Jugador("Pedro", posicion1Inicial, v);
-        Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
+        Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
+        Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
-        Evento esperado = new Evento( new DescuentoPorcentaje(20), new NoCambiarVehiculo(), new Avanzar() );
+        Evento esperado = new Evento( new DescuentoPorcentaje(20.0F), new NoCambiarVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
         jugador1.actualizar(resultado);
@@ -51,14 +49,13 @@ public class CasosDeUsosEntrega2Tests {
     public void UnAutoAvanzaYEncuentraUnaSorpresaDesfavorable (){
         IVehiculo v = new Auto();
         Celda celdaAdyacente = new Celda( new Desfavorable() );
-        Celda posicion1Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
-        Celda posicion2Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
-        Jugador jugador1 = new Jugador("Pedro", posicion1Inicial, v);
-        Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
+        Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
+        Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
-        Evento esperado = new Evento( new AumentoPorcentaje(25), new NoCambiarVehiculo(), new Avanzar() );
+        Evento esperado = new Evento( new AumentoPorcentaje(25.0F), new NoCambiarVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
         jugador1.actualizar(resultado);
@@ -72,11 +69,10 @@ public class CasosDeUsosEntrega2Tests {
     public void UnaMotoAvanzaYEncuentraUnaSorpresaCambioDeVehiculo (){
         IVehiculo v = new Auto();
         Celda celdaAdyacente = new Celda( new CambioVehiculo() );
-        Celda posicion1Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
-        Celda posicion2Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
-        Jugador jugador1 = new Jugador("Pedro", posicion1Inicial, v);
-        Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
+        Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
+        Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
         Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );
@@ -92,11 +88,10 @@ public class CasosDeUsosEntrega2Tests {
     public void UnaCuatroPorCuatroAvanzaYEncuentraUnaSorpresaCambioDeVehiculo (){
         IVehiculo v = new Auto();
         Celda celdaAdyacente = new Celda( new CambioVehiculo() );
-        Celda posicion1Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
-        Celda posicion2Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
-        Jugador jugador1 = new Jugador("Pedro", posicion1Inicial, v);
-        Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
+        Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
+        Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
         Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );
@@ -113,11 +108,10 @@ public class CasosDeUsosEntrega2Tests {
     public void UnMotoAvanzaYEncuentraUnaSorpresaCambioDeVehiculo (){
         IVehiculo v = new Moto();
         Celda celdaAdyacente = new Celda( new CambioVehiculo() );
-        Celda posicion1Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
-        Celda posicion2Inicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
-        Jugador jugador1 = new Jugador("Pedro", posicion1Inicial, v);
-        Jugador jugador2 = new Jugador("Pedro", posicion2Inicial, v);
+        Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
+        Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
         Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
         Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );

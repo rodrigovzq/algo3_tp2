@@ -3,8 +3,8 @@ package edu.fiuba.algo3.modelo.Evento.EventoPuntaje;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 
 public class DescuentoPorcentaje implements EventoPuntaje {
-    private Integer porcentaje;
-    public DescuentoPorcentaje(Integer porcentaje) {
+    private Float porcentaje;
+    public DescuentoPorcentaje(Float porcentaje) {
         this.porcentaje = porcentaje;
     }
 

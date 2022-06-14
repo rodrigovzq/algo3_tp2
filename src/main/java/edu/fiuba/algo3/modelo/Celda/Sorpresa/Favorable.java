@@ -10,10 +10,9 @@ import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.SiguienteVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class Favorable implements EstadoCelda {
-    public static final int PORCENTAJE = 20;
 
     @Override
     public Evento avanzarEn(IVehiculo vehiculo) {
-        return new Evento(new DescuentoPorcentaje(PORCENTAJE), new NoCambiarVehiculo(), new Avanzar());
+        return new Evento(new DescuentoPorcentaje(20.0F), new NoCambiarVehiculo(), new Avanzar());
     }
 }
