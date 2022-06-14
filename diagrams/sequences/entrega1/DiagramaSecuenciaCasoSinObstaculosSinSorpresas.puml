@@ -1,0 +1,51 @@
+@startuml
+title Diagrama Secuencia Auto Avanza Sin Obstaculos Y Sin Sorpresas
+autonumber
+actor Jugador
+
+group "X unMovimiento"
+activate Jugador
+
+Jugador -> "posicion : Celda"++: avanzarHacia( ESTE, auto )
+
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
+
+"celdaEste : Celda" -> Comun++: avanzarEn( auto )
+Comun -> "auto : Auto"++: avanzarComun()
+
+create "unMovimiento : SinPenalizar"
+"auto : Auto" -> "unMovimiento : SinPenalizar": SinPenalizar()
+
+create "cambioVehiculo : NoCambiarVehiculo"
+"auto : Auto"  -> "cambioVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
+create "movimiento : Avanzar"
+"auto : Auto"  -> "movimiento : Avanzar": Avanzar()
+
+create "evento : Evento"
+"auto : Auto"  -> "evento : Evento": Evento( unMovimiento, cambioVehiculo, movimiento)
+
+"auto : Auto" --> Comun: evento
+deactivate "auto : Auto"
+
+Comun --> "celdaEste : Celda": evento
+deactivate Comun
+"celdaEste : Celda" --> "posicion : Celda": evento
+deactivate "celdaEste : Celda"
+
+"posicion : Celda" -> "evento : Evento": setDireccion( ESTE )
+"posicion : Celda" --> Jugador--: evento
+
+
+Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+Jugador <-- "evento : Evento"--: movimientoTotales
+
+Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
+Jugador <-- "evento : Evento"--: auto
+
+Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+Jugador <-- "evento : Evento"--: celdaEste
+
+end
+
+@enduml

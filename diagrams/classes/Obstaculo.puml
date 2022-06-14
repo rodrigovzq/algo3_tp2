@@ -1,0 +1,23 @@
+@startuml
+!include Obstaculo.puml!SINSUBCLASES
+
+class Piquete{
+    + avanzarEn( Vehiculo v ): Evento
+}
+class Pozo{
+    + avanzarEn( Vehiculo v ): Evento
+}
+class ControlPolicial{
+    + avanzarEn( Vehiculo v ): Evento
+}
+
+Piquete .up.|> Obstaculo
+Pozo .up.|> Obstaculo
+ControlPolicial .up.|> Obstaculo
+@enduml
+
+@startuml(id=SINSUBCLASES)
+interface Obstaculo{
+    + {abstract} avanzarEn( Vehiculo v ): Evento
+}
+@enduml

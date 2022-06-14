@@ -1,8 +1,12 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
-import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
-import edu.fiuba.algo3.modelo.Movimiento.MovimientoInvalido;
-import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
+import edu.fiuba.algo3.modelo.Evento.Evento;
+import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
+import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.NoCambiarPuntaje;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
+import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,8 +16,8 @@ class AutoTest {
     public void avanzarSobreUnPozoPenalizaTresMovimiento(){
         Auto auto = new Auto();
 
-        Movimiento resultado = auto.avanzarPozo();
-        Movimiento esperado = new MovimientoValido( 3 );
+        Evento resultado = auto.avanzarPozo();
+        Evento esperado = new Evento( new Penalizacion(3), new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
     }
@@ -21,8 +25,8 @@ class AutoTest {
     public void avanzarSobreUnPiqueteEsUnMovimientoInvalido(){
         Auto auto = new Auto();
 
-        Movimiento resultado = auto.avanzarPiquete();
-        Movimiento esperado = new MovimientoInvalido();
+        Evento resultado = auto.avanzarPiquete();
+        Evento esperado = new Evento( new NoCambiarPuntaje(), new NoCambiarVehiculo(), new NoCambiarPosicion());
 
         assertEquals(esperado, resultado);
     }
@@ -35,8 +39,8 @@ class AutoTest {
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza(){
         Auto auto = new Auto();
 
-        Movimiento resultado = auto.avanzarComun();
-        Movimiento esperado = new MovimientoValido( 1 );
+        Evento resultado = auto.avanzarComun();
+        Evento esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
     }

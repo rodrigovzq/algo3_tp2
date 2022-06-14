@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
-import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
-import edu.fiuba.algo3.modelo.Movimiento.MovimientoInvalido;
-import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
+import edu.fiuba.algo3.modelo.Evento.Evento;
+import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
+import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,8 +14,8 @@ class MotoTest {
     public void avanzarSobreUnPozoPenalizaTresMovimiento() {
         Moto moto = new Moto();
 
-        Movimiento resultado = moto.avanzarPozo();
-        Movimiento esperado = new MovimientoValido(3);
+        Evento resultado = moto.avanzarPozo();
+        Evento esperado =  new Evento( new Penalizacion(3),new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
     }
@@ -22,8 +24,8 @@ class MotoTest {
     public void avanzarSobreUnPiquetePenalizaDosMovimientos() {
         Moto moto = new Moto();
 
-        Movimiento resultado = moto.avanzarPiquete();
-        Movimiento esperado = new MovimientoValido(2);
+        Evento resultado = moto.avanzarPiquete();
+        Evento esperado =  new Evento( new Penalizacion(2),new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
     }
@@ -38,8 +40,8 @@ class MotoTest {
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza() {
         Moto moto = new Moto();
 
-        Movimiento resultado = moto.avanzarComun();
-        Movimiento esperado = new MovimientoValido(1);
+        Evento resultado = moto.avanzarComun();
+        Evento esperado =  new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
     }

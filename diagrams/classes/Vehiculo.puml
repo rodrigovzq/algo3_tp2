@@ -1,0 +1,39 @@
+@startuml
+!include Vehiculo.puml!SINSUBCLASES
+Moto .up.|> Vehiculo
+Auto .up.|> Vehiculo
+cuatroPorCuatro .up.|> Vehiculo
+
+class Moto{
+    + avanzarComun(): Evento
+    + avanzarPiquete(): Evento
+    + avanzarControlPolicial(): Evento
+    + avanzarPozo(): Evento
+}
+class Auto{
+    + avanzarComun(): Evento
+    + avanzarPiquete(): Evento
+    + avanzarControlPolicial(): Evento
+    + avanzarPozo(): Evento
+}
+class cuatroPorCuatro{
+    - contadorPozosAtravesados
+    - resetearContadorPozos()
+    - limitePozosExcedido(): boolean
+    + avanzarComun(): Evento
+    + avanzarPiquete(): Evento
+    + avanzarControlPolicial(): Evento
+    + avanzarPozo(): Evento
+}Vehi
+
+@enduml
+@startuml(id=SINSUBCLASES)
+
+       interface Vehiculo{
+           + {abstract} avanzarComun(): Evento
+           + {abstract} avanzarPiquete(): Evento
+           + {abstract} avanzarControlPolicial(): Evento
+           + {abstract} avanzarPozo(): Evento
+       }
+
+@enduml

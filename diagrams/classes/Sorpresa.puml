@@ -1,0 +1,23 @@
+@startuml
+!include Sorpresa.puml!SINSUBCLASES
+
+class Favorable{
+    + avanzarEn( Vehiculo v ): Evento
+}
+Favorable ..|> Sorpresa
+class Desfavorable{
+    + avanzarEn( Vehiculo v ): Evento
+}
+Desfavorable ..|> Sorpresa
+class CambioVehiculo{
+    + avanzarEn( Vehiculo v ): Evento
+}
+CambioVehiculo ..|> Sorpresa
+@enduml
+
+@startuml(id=SINSUBCLASES)
+interface Sorpresa{
+    + {abstract} avanzarEn( Vehiculo v ): Evento
+}
+@enduml
+

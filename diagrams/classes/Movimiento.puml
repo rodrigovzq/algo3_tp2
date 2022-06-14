@@ -1,0 +1,11 @@
+@startuml(id=SINSUBCLASES)
+       'Clase que encapsula la logica de movimientos.
+       class Movimiento{
+           - cantidad: Integer
+           + sumarMovimiento( Movimiento movimientos ): Movimiento
+           + descontarMovimiento( Movimiento movimientos ): Movimiento
+           + aplicarDescuento( Integer porcentaje): Movimiento
+           + aplicarAumento( Integer porcentaje): Movimiento
+       }
+
+@enduml

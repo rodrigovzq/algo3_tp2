@@ -1,0 +1,126 @@
+@startuml
+!include Evento.puml!SINSUBCLASES
+
+DescuentoPorcentaje ..|> EventoPuntaje
+AumentoPorcentaje ..|> EventoPuntaje
+Penalizacion ..|> EventoPuntaje
+SinPenalizar ..|> EventoPuntaje 
+NoCambiarPuntaje ..|> EventoPuntaje
+
+SiguienteVehiculo ..|> EventoVehiculo
+NoCambiarVehiculo ..|> EventoVehiculo
+
+Avanzar ..|> EventoPosicion
+NoCambiarPosicion ..|> EventoPosicion
+
+'Eventos que afectan la cantidad de movimientos totales
+class DescuentoPorcentaje{
+    - porcentaje: Integer
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+class AumentoPorcentaje{
+    - porcentaje: Integer
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+class Penalizacion{
+    - cantidad: Movimiento
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+class SinPenalizar{
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+class NoCambiarPuntaje{
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+
+
+'Eventos que afectan el vehiculo del jugador
+'Lo llame siguiente vehiculo porque utiliza el
+'método siguiente() de vehiculo. 
+class SiguienteVehiculo{
+    + actualizarVehiculo( Vehiculo v ): Vehiculo
+}
+
+class NoCambiarVehiculo{
+    + actualizarVehiculo( Vehiculo v ): Vehiculo
+}
+
+
+'Eventos que afectan la posicion del Jugador
+class Avanzar{
+    - direccionMovimiento: Direccion
+    + actualizarPosicion( Celda ): Celda
+    + setDireccionMovimiento( Direccion dir )
+}
+
+class NoCambiarPosicion{
+    - direccionMovimiento: Direccion
+    + actualizarPosicion( Celda ): Celda
+    + setDireccionMovimiento( Direccion dir )
+}
+
+
+note left of SinPenalizar
+    Movimiento 
+    default +1
+end note
+
+note left of NoCambiarPuntaje
+    Movimiento 
+    nulo +0
+end note
+
+note left of SiguienteVehiculo
+Lo llame siguiente vehiculo
+porque utiliza el método 
+siguiente() de vehiculo. 
+end note
+
+note left of NoCambiarPosicion
+    Reemplaza la funcion
+    de MovimientoInvalido
+end note
+
+@enduml
+@startuml(id=SINSUBCLASES)
+class Evento{
+        + setDireccionMovimiento( Direccion dir )
+        + actualizarVehiculo( Vehiculo v ): Vehiculo
+        + actualizarPuntaje( Movimiento m): Movimiento
+        + actualizarPosicion(): Celda
+}
+
+Evento --> EventoPosicion: - posicion
+Evento --> EventoPuntaje: - puntaje 
+Evento --> EventoVehiculo: - vehiculo 
+
+class EventoPosicion{
+        + {abstract} actualizarPosicion(): Celda
+}
+class EventoVehiculo{
+        + {abstract} actualizarVehiculo( Vehiculo v ): Vehiculo
+}
+class EventoPuntaje{
+        + {abstract} actualizarPuntaje( Movimiento m): Movimiento
+}
+
+note left of Evento
+Es inflexible. Va a haber que agregar
+un metodo por cada estado que se desea
+modificar del jugador.
+
+end note
+
+
+note left
+Podría hacer un metodo que reciba
+un Jugador y que cada evento sepa
+que modificar del Jugador.
+
+El problema es que dentro del
+Evento no se me ocurre como
+modificar al Jugador sin abusar
+de getters y setters. ( violacion
+del encapsulamiento )
+end note
+@enduml

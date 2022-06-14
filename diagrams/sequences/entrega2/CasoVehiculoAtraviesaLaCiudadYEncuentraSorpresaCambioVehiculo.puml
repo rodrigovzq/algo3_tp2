@@ -1,0 +1,49 @@
+@startuml
+title Diagrama Secuencia Vehiculo Atraviesa La Ciudad Y Encuentra Sorpresa Cambio Vehiculo
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, auto )
+
+activate Jugador
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
+
+
+"celdaEste : Celda" -> "sorpresa : CambioVehiculo"++: avanzarEn( auto )
+
+create "unMovimiento : SinPenalizar"
+"sorpresa : CambioVehiculo"-> "unMovimiento : SinPenalizar": SinPenalizar()
+
+create "cambioVehiculo : SiguienteVehiculo"
+"sorpresa : CambioVehiculo" -> "cambioVehiculo : SiguienteVehiculo": SiguienteVehiculo()
+
+create "movimiento : Avanzar"
+"sorpresa : CambioVehiculo"  -> "movimiento : Avanzar": Avanzar()
+
+create "evento : Evento"
+"sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( unMovimiento, cambioVehiculo, movimiento)
+
+"sorpresa : CambioVehiculo" --> "celdaEste : Celda": evento
+
+"celdaEste : Celda" --> "posicion : Celda": evento
+deactivate "celdaEste : Celda"
+
+"posicion : Celda" -> "evento : Evento": setDireccion( ESTE )
+"posicion : Celda" --> Jugador--: evento
+
+
+Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+Jugador <-- "evento : Evento"--: movimientoTotales
+
+Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
+"evento : Evento" -> "auto : Auto"++: siguiente()
+ "auto : Auto" --> "evento : Evento"--: cuatroPorCuatro
+
+Jugador <-- "evento : Evento"--: cuatroPorCuatro
+
+Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+Jugador <-- "evento : Evento"--: celdaEste
+
+@enduml
