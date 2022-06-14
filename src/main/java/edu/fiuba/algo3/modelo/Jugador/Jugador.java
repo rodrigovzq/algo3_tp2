@@ -22,19 +22,7 @@ public class Jugador {
 
     public Evento avanzarHaciaLaDireccion(Direccion direccion, IVehiculo vehiculo){
         Evento movimiento = null;
-        Celda nuevaPosicion = null;
-
-        switch (direccion) {
-            case NORTE:
-                nuevaPosicion = posicion.getCeldaNorte();
-            case ESTE:
-                nuevaPosicion = posicion.getCeldaEste();
-            case OESTE:
-                nuevaPosicion = posicion.getCeldaOeste();
-            case SUR:
-                nuevaPosicion = posicion.getCeldaSur();
-                break;
-        }
+        Celda nuevaPosicion = posicion.getCelda(direccion);
 
         movimiento = nuevaPosicion.avanzarEn( vehiculo );
         return movimiento;
