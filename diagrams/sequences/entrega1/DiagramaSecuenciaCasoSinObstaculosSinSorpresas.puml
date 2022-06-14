@@ -33,6 +33,7 @@ deactivate Comun
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
 
+"posicion : Celda" -> "evento : Evento": setDireccion( ESTE )
 "posicion : Celda" --> Jugador--: evento
 
 
