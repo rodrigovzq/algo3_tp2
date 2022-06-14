@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo.Evento.EventoPosicion;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

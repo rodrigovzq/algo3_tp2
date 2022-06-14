@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
+import java.util.Objects;
+
 public class Celda {
     private EstadoCelda estado;
     private Celda celdaNorte;
@@ -22,9 +24,9 @@ public class Celda {
     public Celda(EstadoCelda estado) {
         this.estado = estado;
         this.celdaNorte = null;
-        this.celdaEste = null;
-        this.celdaSur = null;
-        this.celdaOeste = null;
+        this.celdaEste =  null;
+        this.celdaSur =  null;
+        this.celdaOeste =  null;
     }
 
     public Evento avanzarEn(IVehiculo vehiculo){
@@ -37,23 +39,25 @@ public class Celda {
     // movernos por el resto del mapa
     public Celda getCelda(Direccion direccion){
         Celda celdaAdyacente = null;
-        switch (direccion) {
-            case NORTE:
-                celdaAdyacente = new Celda( estado );
-                break;
 
-            case ESTE:
-                celdaAdyacente = new Celda( estado );
-                break;
-
-            case OESTE:
-                celdaAdyacente = new Celda( estado );
-                break;
-
-            case SUR:
-                celdaAdyacente = new Celda( estado );
-                break;
+        if (direccion == Direccion.NORTE) {
+            celdaAdyacente = celdaNorte;
+        } else if (direccion == Direccion.ESTE) {
+            celdaAdyacente = celdaEste;
+        } else if (direccion == Direccion.OESTE) {
+            celdaAdyacente = celdaOeste;
+        } else if (direccion == Direccion.SUR) {
+            celdaAdyacente = celdaSur;
         }
         return celdaAdyacente;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Celda celda = (Celda) o;
+        return Objects.equals(celdaNorte, celda.celdaNorte) && Objects.equals(celdaEste, celda.celdaEste) && Objects.equals(celdaSur, celda.celdaSur) && Objects.equals(celdaOeste, celda.celdaOeste);
+    }
+
 }

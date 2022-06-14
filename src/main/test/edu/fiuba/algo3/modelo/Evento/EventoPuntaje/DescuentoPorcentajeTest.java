@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PenalizacionTest {
+class DescuentoPorcentajeTest {
     @Test
-    public void actualizarPuntajeYSeAplicaLaPenalizacion(){
-        Penalizacion penalizacion = new Penalizacion(5);
-        Movimiento puntaje = new Movimiento(0);
+    public void actualizarPuntajeYSeAplicaElDescuento(){
+        DescuentoPorcentaje descuento = new DescuentoPorcentaje(50.0F);
+        Movimiento puntaje = new Movimiento(10);
 
-        Movimiento resultado = penalizacion.actualizarPuntaje(puntaje);
+        Movimiento resultado = descuento.actualizarPuntaje(puntaje);
         Movimiento esperado = new Movimiento(5);
 
         assertEquals(esperado, resultado);

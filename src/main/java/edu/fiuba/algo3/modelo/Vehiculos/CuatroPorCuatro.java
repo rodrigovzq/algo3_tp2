@@ -52,21 +52,34 @@ public class CuatroPorCuatro implements IVehiculo {
     }
 
     @Override
+    public IVehiculo siguiente() {
+        return new Moto();
+    }
+
+    @Override
     public Evento avanzarPozo() {
-        Evento evento = new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
+        Evento evento = null;
 
         this.contarPozoAtravesado();
 
         if( this.limiteDePozosExcedido()){
             this.resetearContadorPozos();
             evento = new Evento( new Penalizacion(PENALIZACION_POZO),new NoCambiarVehiculo(), new Avanzar());
+        }else {
+            evento = new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
         }
 
         return evento;
     }
 
     @Override
+
     public Float obtenerProbabilidadDeSerDetenido() {
         return PROBABILIDAD_DE_SER_DEMORADO;
+
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return true;
     }
 }

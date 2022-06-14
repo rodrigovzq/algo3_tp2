@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
+import java.util.Objects;
+
 public class Jugador {
     public static final int MOVIMIENTOS_INICIALES = 0;
     private String nombre;
@@ -21,11 +23,27 @@ public class Jugador {
     }
 
     public Evento avanzarHaciaLaDireccion(Direccion direccion, IVehiculo vehiculo){
-        Evento movimiento = null;
+        Evento evento = null;
         Celda nuevaPosicion = posicion.getCelda(direccion);
 
-        movimiento = nuevaPosicion.avanzarEn( vehiculo );
-        return movimiento;
+        evento = nuevaPosicion.avanzarEn( vehiculo );
+        evento.setDireccion(direccion);
+        return evento;
     }
+
+    public void actualizar(Evento resultado) {
+        this.puntaje = resultado.actualizarPuntaje( this.puntaje );
+        this.vehiculo = resultado.actualizarVehiculo( this.vehiculo );
+        this.posicion = resultado.actualizarPosicion( this.posicion );    
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jugador jugador = (Jugador) o;
+        return Objects.equals(nombre, jugador.nombre) && Objects.equals(posicion, jugador.posicion) && Objects.equals(vehiculo, jugador.vehiculo) && Objects.equals(puntaje, jugador.puntaje);
+    }
+
 }
 

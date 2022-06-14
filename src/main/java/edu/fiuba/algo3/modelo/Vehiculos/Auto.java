@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
 
+import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
@@ -9,10 +10,13 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 
+import java.util.Objects;
+
 public class Auto implements IVehiculo {
 
     public static final int PENALIZACION_POZO = 3;
     public static final int  MOVIMIENTO_DEFAULT = 1;
+    
     private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.5f;
 
     @Override
@@ -39,5 +43,15 @@ public class Auto implements IVehiculo {
     @Override
     public Float obtenerProbabilidadDeSerDetenido() {
         return PROBABILIDAD_DE_SER_DEMORADO;
+
+    public IVehiculo siguiente() {
+        return new CuatroPorCuatro();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return true;
     }
 }

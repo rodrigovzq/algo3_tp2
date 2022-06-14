@@ -1,0 +1,50 @@
+@startuml
+title Diagrama Secuencia Moto Atraviesa La Ciudad Y Encuentra Sorpresa Cambio Vehiculo con Auto
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, moto )
+
+activate Jugador
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( moto )
+
+
+"celdaEste : Celda" -> "sorpresa : CambioVehiculo"++: avanzarEn( moto )
+
+create "eventoPuntaje : SinPenalizar"
+"sorpresa : CambioVehiculo"-> "eventoPuntaje : SinPenalizar": SinPenalizar()
+
+create "eventoVehiculo : SiguienteVehiculo"
+"sorpresa : CambioVehiculo" -> "eventoVehiculo : SiguienteVehiculo": SiguienteVehiculo()
+
+create "eventoPosicion : Avanzar"
+"sorpresa : CambioVehiculo"  -> "eventoPosicion : Avanzar": Avanzar()
+
+create "evento : Evento"
+"sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
+
+"sorpresa : CambioVehiculo" --> "celdaEste : Celda": evento
+
+"celdaEste : Celda" --> "posicion : Celda": evento
+deactivate "celdaEste : Celda"
+
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
+"posicion : Celda" --> Jugador--: evento
+
+
+Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+Jugador <-- "evento : Evento"--: movimientoTotales
+
+Jugador -> "evento : Evento"++: actualizarVehiculo( moto )
+"evento : Evento" -> "moto : Moto"++: siguiente()
+ "moto : Moto" --> "evento : Evento"--: auto
+
+Jugador <-- "evento : Evento"--: auto
+
+Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+Jugador <-- "evento : Evento"--: celdaEste
+
+@enduml

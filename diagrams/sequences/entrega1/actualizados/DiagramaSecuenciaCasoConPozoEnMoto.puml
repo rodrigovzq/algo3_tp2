@@ -1,0 +1,60 @@
+@startuml
+title Diagrama Secuencia Moto Avanza Se Encuentra Con Pozo  Y Se Penaliza 3 movimientos
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, moto )
+
+activate Jugador
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( moto )
+
+
+"celdaEste : Celda" -> Pozo++: avanzarEn( moto )
+Pozo -> "moto : Moto"++: avanzarPozo()
+
+create "eventoPuntaje :Penalizacion"
+"moto : Moto"-> "eventoPuntaje :Penalizacion": Penalizacion(3)
+
+create "eventoVehiculo : NoCambiarVehiculo"
+"moto : Moto"-> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
+create "eventoPosicion : Avanzar"
+"moto : Moto"-> "eventoPosicion : Avanzar": Avanzar()
+
+create "evento : Evento"
+"moto : Moto"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
+
+
+"moto : Moto" --> Pozo: evento
+deactivate "moto : Moto"
+
+Pozo --> "celdaEste : Celda": evento
+deactivate Pozo
+
+
+"celdaEste : Celda" --> "posicion : Celda": evento
+deactivate "celdaEste : Celda"
+
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
+"posicion : Celda" --> Jugador--: evento
+deactivate Jugador
+
+Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+activate Jugador
+Jugador <-- "evento : Evento"--: movimientoTotales
+deactivate Jugador
+
+Jugador -> "evento : Evento"++: actualizarVehiculo( moto )
+activate Jugador
+Jugador <-- "evento : Evento"--: moto
+deactivate Jugador
+
+Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+activate Jugador
+Jugador <-- "evento : Evento"--: celdaEste
+deactivate Jugador
+
+@enduml

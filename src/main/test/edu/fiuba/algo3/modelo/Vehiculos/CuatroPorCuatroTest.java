@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.NoCambiarPuntaje;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
-import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

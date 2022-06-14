@@ -1,0 +1,67 @@
+@startuml
+title Diagrama Secuencia Cuatro por Cuatro Avanza Se Encuentra Con Pozo por Tercera Vez Y Se Penaliza 2 movimientos
+
+
+autonumber
+
+actor Jugador
+
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, cxc )
+
+activate Jugador
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( cxc )
+
+
+"celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
+Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
+
+"cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limitePozosExcedido()
+
+alt#Gold   true
+    "cxc : CuatroPorCuatro" ->"cxc : CuatroPorCuatro"++: resetearContadorPozos()
+    deactivate "cxc : CuatroPorCuatro"
+    create "eventPuntaje :Penalizacion"
+    "cxc : CuatroPorCuatro"-> "eventPuntaje :Penalizacion": Penalizacion(2)
+
+    create "eventVehiculo : NoCambiarVehiculo"
+    "cxc : CuatroPorCuatro"-> "eventVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
+    create "eventPosicion : Avanzar"
+    "cxc : CuatroPorCuatro"-> "eventPosicion : Avanzar": Avanzar()
+
+    create "event : Evento"
+    "cxc : CuatroPorCuatro"  -> "event : Evento": Evento( eventPuntaje, eventVehiculo, eventPosicion)
+
+    deactivate "cxc : CuatroPorCuatro"
+
+end
+    "cxc : CuatroPorCuatro" --> Pozo--: event
+
+Pozo --> "celdaEste : Celda": event
+deactivate Pozo
+
+
+"celdaEste : Celda" --> "posicion : Celda": event
+deactivate "celdaEste : Celda"
+
+
+"posicion : Celda" -> "event : Evento"++: setDireccion( ESTE )
+deactivate "event : Evento"
+"posicion : Celda" --> Jugador--: event
+deactivate Jugador
+
+Jugador -> "event : Evento"++: actualizarPuntaje( puntaje )
+activate Jugador
+Jugador <-- "event : Evento"--: movimientoTotales
+deactivate Jugador
+
+Jugador -> "event : Evento"++: actualizarVehiculo( cxc )
+activate Jugador
+Jugador <-- "event : Evento"--: cxc
+deactivate Jugador
+
+Jugador -> "event : Evento"++: actualizarPosicion( posicion )
+activate Jugador
+Jugador <-- "event : Evento"--: celdaEste
+deactivate Jugador
+@enduml
