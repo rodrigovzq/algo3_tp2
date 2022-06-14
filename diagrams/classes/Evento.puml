@@ -63,7 +63,7 @@ class NoCambiarPosicion{
 
 @enduml
 @startuml(id=SINSUBCLASES)
-interface Evento{
+class Evento{
         + setDireccionMovimiento( Direccion dir )
         + actualizarVehiculo( Vehiculo v ): Vehiculo
         + actualizarPuntaje( Movimiento m): Movimiento
