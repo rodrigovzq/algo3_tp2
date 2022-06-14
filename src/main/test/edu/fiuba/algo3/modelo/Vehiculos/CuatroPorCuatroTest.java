@@ -1,8 +1,13 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
+import edu.fiuba.algo3.modelo.Evento.Evento;
+import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
+import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.NoCambiarPuntaje;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
+import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
-import edu.fiuba.algo3.modelo.Movimiento.MovimientoInvalido;
-import edu.fiuba.algo3.modelo.Movimiento.MovimientoValido;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,8 +19,8 @@ class CuatroPorCuatroTest {
         CuatroPorCuatro cxc = new CuatroPorCuatro();
 
         cxc.avanzarPozo();
-        Movimiento esperado = cxc.avanzarPozo();
-        Movimiento resultado = new MovimientoValido( 1 );
+        Evento resultado = cxc.avanzarPozo();
+        Evento esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
     }
@@ -26,9 +31,10 @@ class CuatroPorCuatroTest {
 
         cxc.avanzarPozo();
         cxc.avanzarPozo();
-        Movimiento resultado = cxc.avanzarPozo();
+        Evento resultado = cxc.avanzarPozo();
 
-        Movimiento esperado = new MovimientoValido( 2 );
+        Evento esperado = new Evento( new Penalizacion(2), new NoCambiarVehiculo(), new Avanzar());
+
 
         assertEquals(esperado, resultado);
     }
@@ -38,14 +44,15 @@ class CuatroPorCuatroTest {
 
         cxc.avanzarPozo();
         cxc.avanzarPozo();
-        Movimiento resultado = cxc.avanzarPozo();
+        Evento resultado = cxc.avanzarPozo();
 
-        Movimiento esperado = new MovimientoValido( 2 );
+        Evento esperado = new Evento( new Penalizacion(2), new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
 
         resultado = cxc.avanzarPozo();
-        esperado = new MovimientoValido( 1 );
+
+        esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
     }
@@ -54,8 +61,9 @@ class CuatroPorCuatroTest {
     public void avanzarSobreUnPiqueteEsUnMovimientoInvalido(){
         CuatroPorCuatro cxc = new CuatroPorCuatro();
 
-        Movimiento resultado = cxc.avanzarPiquete();
-        Movimiento esperado = new MovimientoInvalido();
+        Evento resultado = cxc.avanzarPiquete();
+
+        Evento esperado = new Evento( new NoCambiarPuntaje(), new NoCambiarVehiculo(), new NoCambiarPosicion());
 
         assertEquals(esperado, resultado);
     }
@@ -68,8 +76,8 @@ class CuatroPorCuatroTest {
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza(){
         CuatroPorCuatro cxc = new CuatroPorCuatro();
 
-        Movimiento resultado = cxc.avanzarComun();
-        Movimiento esperado = new MovimientoValido( 1 );
+        Evento resultado = cxc.avanzarComun();
+        Evento esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
     }
