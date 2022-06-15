@@ -10,7 +10,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <junit.jupiter.version>5.4.0</junit.jupiter.version>
         <mockito-mockito-core-version>3.3.0</mockito-mockito-core-version>
-        <maven-surefire-version>3.0.0-M3</maven-surefire-version>
+        <maven-surefire-version>3.0.0-M7</maven-surefire-version>
         <archunit-version>0.21.0</archunit-version>
         <javafx-version>15.0.1</javafx-version>
         <main-class>edu.fiuba.algo3.main</main-class>
@@ -118,7 +118,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>${maven-surefire-version}</version>
+
                 <configuration>
                     <argLine>${argLine} -XX:MaxPermSize=256m</argLine>
                 </configuration>
