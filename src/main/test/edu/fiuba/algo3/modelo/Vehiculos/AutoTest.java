@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Vehiculos;
+package UnitTest.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.NoCambiarPuntaje;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

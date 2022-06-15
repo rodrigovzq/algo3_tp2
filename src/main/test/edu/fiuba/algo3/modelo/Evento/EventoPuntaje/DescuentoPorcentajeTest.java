@@ -1,5 +1,6 @@
-package edu.fiuba.algo3.modelo.Evento.EventoPuntaje;
+package edu.fiuba.algo3.modelo.Celda.Obstaculo.Evento.EventoPuntaje;
 
+import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.DescuentoPorcentaje;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import org.junit.jupiter.api.Test;
 
