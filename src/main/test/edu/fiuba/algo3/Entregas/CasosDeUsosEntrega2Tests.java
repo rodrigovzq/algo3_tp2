@@ -15,6 +15,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.SiguienteVehiculo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import org.junit.jupiter.api.Test;
@@ -85,7 +86,7 @@ public class CasosDeUsosEntrega2Tests {
     @Test
 
     public void UnaCuatroPorCuatroAvanzaYEncuentraUnaSorpresaCambioDeVehiculo (){
-        IVehiculo v = new Auto();
+        IVehiculo v = new CuatroPorCuatro();
         Celda celdaAdyacente = new Celda( new CambioVehiculo() );
         Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
