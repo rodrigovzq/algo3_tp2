@@ -26,13 +26,13 @@ create "evento : Evento"
 "sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
 "sorpresa : CambioVehiculo" --> "celdaEste : Celda": evento
+deactivate "sorpresa : CambioVehiculo"
 
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
-
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
-deactivate "sorpresa : CambioVehiculo"
+
 "posicion : Celda" --> Jugador--: evento
 deactivate Jugador
 

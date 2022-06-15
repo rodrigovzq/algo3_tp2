@@ -21,7 +21,7 @@ create "eventoVehiculo : NoCambiarVehiculo"
 "auto : Auto"  -> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
 
 create "eventoPosicion : NoCambiarPosicion"
-"auto : Auto"  -> "eventoPosicion : NoCambiarPosicion": Avanzar()
+"auto : Auto"  -> "eventoPosicion : NoCambiarPosicion": NoCambiarPosicion()
 
 create "evento : Evento"
 "auto : Auto"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
@@ -34,6 +34,7 @@ Piquete --> "celdaEste : Celda": evento
 deactivate Piquete
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
+
 
 
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )

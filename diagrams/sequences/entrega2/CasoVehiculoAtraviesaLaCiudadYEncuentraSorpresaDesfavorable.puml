@@ -1,32 +1,31 @@
 @startuml
 title Diagrama Secuencia Vehiculo Atraviesa La Ciudad Y Encuentra Sorpresa Desfavorable
-
 autonumber
-
 actor Jugador
 
 Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, v )
-
 activate Jugador
 "posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( v )
-
-
 "celdaEste : Celda" -> "sorpresa : Desfavorable"++: avanzarEn( v )
+
 
 create "eventoPuntaje : AumentoPorcentaje"
 "sorpresa : Desfavorable"-> "eventoPuntaje : AumentoPorcentaje": AumentoPorcentaje( 25 )
 
+
 create "eventoVehiculo : NoCambiarVehiculo"
 "sorpresa : Desfavorable" -> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
 
 create "eventoPosicion : Avanzar"
 "sorpresa : Desfavorable"  -> "eventoPosicion : Avanzar": Avanzar()
 
+
 create "evento : Evento"
 "sorpresa : Desfavorable"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
-"sorpresa : Desfavorable" --> "celdaEste : Celda"--: evento
 
+"sorpresa : Desfavorable" --> "celdaEste : Celda"--: evento
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
 
@@ -34,18 +33,26 @@ deactivate "celdaEste : Celda"
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
 "posicion : Celda" --> Jugador--: evento
+deactivate Jugador
 
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+activate Jugador
 "evento : Evento" -> "puntaje : Movimiento"++: aplicarAumento( 25 )
 "puntaje : Movimiento" --> "evento : Evento": movimientoTotales
 deactivate "puntaje : Movimiento"
 Jugador <-- "evento : Evento"--: movimientoTotales
+deactivate Jugador
+
 
 Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
+activate Jugador
 Jugador <-- "evento : Evento"--: auto
+deactivate Jugador
+
 
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+activate Jugador
 Jugador <-- "evento : Evento"--: celdaEste
-
+deactivate Jugador
 @enduml

@@ -26,25 +26,32 @@ create "evento : Evento"
 "sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
 "sorpresa : CambioVehiculo" --> "celdaEste : Celda": evento
-
+deactivate "sorpresa : CambioVehiculo"
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
 
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
 "posicion : Celda" --> Jugador--: evento
+deactivate Jugador
 
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+activate Jugador
 Jugador <-- "evento : Evento"--: movimientoTotales
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarVehiculo( moto )
+activate Jugador
 "evento : Evento" -> "moto : Moto"++: siguiente()
- "moto : Moto" --> "evento : Evento"--: auto
-
+"moto : Moto" --> "evento : Evento"--: auto
 Jugador <-- "evento : Evento"--: auto
+deactivate Jugador
+
 
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+activate Jugador
 Jugador <-- "evento : Evento"--: celdaEste
+deactivate Jugador
 
 @enduml
