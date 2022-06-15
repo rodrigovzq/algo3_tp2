@@ -15,7 +15,6 @@ import java.util.Objects;
 public class Auto implements IVehiculo {
 
     public static final int PENALIZACION_POZO = 3;
-    public static final int  MOVIMIENTO_DEFAULT = 1;
     
     private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.5f;
 
@@ -43,6 +42,7 @@ public class Auto implements IVehiculo {
     @Override
     public Float obtenerProbabilidadDeSerDetenido() {
         return PROBABILIDAD_DE_SER_DEMORADO;
+    }
 
     public IVehiculo siguiente() {
         return new CuatroPorCuatro();

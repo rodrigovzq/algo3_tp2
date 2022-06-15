@@ -73,9 +73,9 @@ public class CuatroPorCuatro implements IVehiculo {
     }
 
     @Override
-
     public Float obtenerProbabilidadDeSerDetenido() {
         return PROBABILIDAD_DE_SER_DEMORADO;
+    }
 
     public boolean equals(Object o){
         if (this == o) return true;
