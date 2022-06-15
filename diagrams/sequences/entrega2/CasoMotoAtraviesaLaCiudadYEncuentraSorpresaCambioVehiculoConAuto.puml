@@ -25,7 +25,7 @@ create "eventoPosicion : Avanzar"
 create "evento : Evento"
 "sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
-"sorpresa : CambioVehiculo" --> "celdaEste : Celda": evento
+"sorpresa : CambioVehiculo" --> "celdaEste : Celda"--: evento
 
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"

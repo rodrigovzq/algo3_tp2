@@ -4,15 +4,15 @@
 class Favorable{
     + avanzarEn( Vehiculo v ): Evento
 }
-Favorable ..|> Sorpresa
+Favorable .up.|> Sorpresa
 class Desfavorable{
     + avanzarEn( Vehiculo v ): Evento
 }
-Desfavorable ..|> Sorpresa
+Desfavorable .up.|> Sorpresa
 class CambioVehiculo{
     + avanzarEn( Vehiculo v ): Evento
 }
-CambioVehiculo ..|> Sorpresa
+CambioVehiculo .up.|> Sorpresa
 @enduml
 
 @startuml(id=SINSUBCLASES)

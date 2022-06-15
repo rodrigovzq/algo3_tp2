@@ -17,7 +17,7 @@ class Auto{
     + avanzarPozo(): Evento
 }
 class cuatroPorCuatro{
-    - contadorPozosAtravesados
+    - contadorPozosAtravesados: Integer
     - resetearContadorPozos()
     - limitePozosExcedido(): boolean
     + avanzarComun(): Evento

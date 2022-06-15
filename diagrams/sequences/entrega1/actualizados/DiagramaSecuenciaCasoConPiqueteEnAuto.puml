@@ -15,13 +15,13 @@ activate Jugador
 Piquete -> "auto : Auto"++: avanzarPiquete()
 
 create "eventoPuntaje : NoCambiarPuntaje"
-"auto : Auto" -> "eventoPuntaje : NoCambiarPuntaje": NoCambiarPuntajes()
+"auto : Auto" -> "eventoPuntaje : NoCambiarPuntaje": NoCambiarPuntaje()
 
 create "eventoVehiculo : NoCambiarVehiculo"
 "auto : Auto"  -> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
 
 create "eventoPosicion : NoCambiarPosicion"
-"auto : Auto"  -> "eventoPosicion : NoCambiarPosicion": Avanzar()
+"auto : Auto"  -> "eventoPosicion : NoCambiarPosicion": NoCambiarPosicion()
 
 create "evento : Evento"
 "auto : Auto"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
@@ -47,6 +47,6 @@ Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
 Jugador <-- "evento : Evento"--: auto
 
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
-Jugador <-- "evento : Evento"--: celdaEste
+Jugador <-- "evento : Evento"--: posicion
 
 @enduml

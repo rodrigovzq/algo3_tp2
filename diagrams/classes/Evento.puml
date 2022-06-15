@@ -1,17 +1,17 @@
 @startuml
 !include Evento.puml!SINSUBCLASES
 
-DescuentoPorcentaje ..|> EventoPuntaje
-AumentoPorcentaje ..|> EventoPuntaje
-Penalizacion ..|> EventoPuntaje
-SinPenalizar ..|> EventoPuntaje 
-NoCambiarPuntaje ..|> EventoPuntaje
+DescuentoPorcentaje .up.|> EventoPuntaje
+AumentoPorcentaje .up.|> EventoPuntaje
+Penalizacion .up.|> EventoPuntaje
+SinPenalizar .up.|> EventoPuntaje 
+NoCambiarPuntaje .up.|> EventoPuntaje
 
-SiguienteVehiculo ..|> EventoVehiculo
-NoCambiarVehiculo ..|> EventoVehiculo
+SiguienteVehiculo .up.|> EventoVehiculo
+NoCambiarVehiculo .up.|> EventoVehiculo
 
-Avanzar ..|> EventoPosicion
-NoCambiarPosicion ..|> EventoPosicion
+Avanzar .up.|> EventoPosicion
+NoCambiarPosicion .up.|> EventoPosicion
 
 'Eventos que afectan la cantidad de movimientos totales
 class DescuentoPorcentaje{
@@ -49,13 +49,13 @@ class NoCambiarVehiculo{
 'Eventos que afectan la posicion del Jugador
 class Avanzar{
     - direccionMovimiento: Direccion
-    + actualizarPosicion( Celda ): Celda
+    + actualizarPosicion( Celda p ): Celda
     + setDireccionMovimiento( Direccion dir )
 }
 
 class NoCambiarPosicion{
     - direccionMovimiento: Direccion
-    + actualizarPosicion( Celda ): Celda
+    + actualizarPosicion( Celda p ): Celda
     + setDireccionMovimiento( Direccion dir )
 }
 
@@ -67,20 +67,20 @@ class Evento{
         + setDireccionMovimiento( Direccion dir )
         + actualizarVehiculo( Vehiculo v ): Vehiculo
         + actualizarPuntaje( Movimiento m): Movimiento
-        + actualizarPosicion(): Celda
+        + actualizarPosicion( Celda p ): Celda
 }
 
 Evento --> EventoPosicion: - posicion
 Evento --> EventoPuntaje: - puntaje 
 Evento --> EventoVehiculo: - vehiculo 
 
-class EventoPosicion{
-        + {abstract} actualizarPosicion(): Celda
+interface EventoPosicion{
+        + {abstract} actualizarPosicion( Celda p ): Celda
 }
-class EventoVehiculo{
+interface EventoVehiculo{
         + {abstract} actualizarVehiculo( Vehiculo v ): Vehiculo
 }
-class EventoPuntaje{
+interface EventoPuntaje{
         + {abstract} actualizarPuntaje( Movimiento m): Movimiento
 }
 

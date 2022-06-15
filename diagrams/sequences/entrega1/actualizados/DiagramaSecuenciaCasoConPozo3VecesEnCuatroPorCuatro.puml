@@ -20,41 +20,41 @@ Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
 alt#Gold   true
     "cxc : CuatroPorCuatro" ->"cxc : CuatroPorCuatro"++: resetearContadorPozos()
     deactivate "cxc : CuatroPorCuatro"
-    create "eventPuntaje :Penalizacion"
-    "cxc : CuatroPorCuatro"-> "eventPuntaje :Penalizacion": Penalizacion(2)
+    create "eventoPuntaje :Penalizacion"
+    "cxc : CuatroPorCuatro"-> "eventoPuntaje :Penalizacion": Penalizacion( 2 )
 
-    create "eventVehiculo : NoCambiarVehiculo"
-    "cxc : CuatroPorCuatro"-> "eventVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+    create "eventoVehiculo : NoCambiarVehiculo"
+    "cxc : CuatroPorCuatro"-> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
 
-    create "eventPosicion : Avanzar"
-    "cxc : CuatroPorCuatro"-> "eventPosicion : Avanzar": Avanzar()
+    create "eventoPosicion : Avanzar"
+    "cxc : CuatroPorCuatro"-> "eventoPosicion : Avanzar": Avanzar()
 
-    create "event : Evento"
-    "cxc : CuatroPorCuatro"  -> "event : Evento": Evento( eventPuntaje, eventVehiculo, eventPosicion)
+    create "evento : Evento"
+    "cxc : CuatroPorCuatro"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
     deactivate "cxc : CuatroPorCuatro"
 
 end
-    "cxc : CuatroPorCuatro" --> Pozo--: event
+    "cxc : CuatroPorCuatro" --> Pozo--: evento
 
-Pozo --> "celdaEste : Celda": event
+Pozo --> "celdaEste : Celda": evento
 deactivate Pozo
 
 
-"celdaEste : Celda" --> "posicion : Celda": event
+"celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
 
-"posicion : Celda" -> "event : Evento"++: setDireccion( ESTE )
-deactivate "event : Evento"
-"posicion : Celda" --> Jugador--: event
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
+"posicion : Celda" --> Jugador--: evento
 
 
-Jugador -> "event : Evento"++: actualizarPuntaje( puntaje )
-Jugador <-- "event : Evento"--: movimientoTotales
+Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+Jugador <-- "evento : Evento"--: movimientoTotales
 
-Jugador -> "event : Evento"++: actualizarVehiculo( cxc )
-Jugador <-- "event : Evento"--: cxc
+Jugador -> "evento : Evento"++: actualizarVehiculo( cxc )
+Jugador <-- "evento : Evento"--: cxc
 
-Jugador -> "event : Evento"++: actualizarPosicion( posicion )
-Jugador <-- "event : Evento"--: celdaEste
+Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+Jugador <-- "evento : Evento"--: celdaEste
 @enduml
