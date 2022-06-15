@@ -1,11 +1,13 @@
 @startuml
 !include Evento.puml!SINSUBCLASES
 
-DescuentoPorcentaje .up.|> EventoPuntaje
-AumentoPorcentaje .up.|> EventoPuntaje
-Penalizacion .up.|> EventoPuntaje
-SinPenalizar .up.|> EventoPuntaje 
-NoCambiarPuntaje .up.|> EventoPuntaje
+title Diagrama Clase completo de Evento
+EventoPuntaje <|..  DescuentoPorcentaje
+EventoPuntaje <|.. AumentoPorcentaje
+EventoPuntaje <|.. Penalizacion
+EventoPuntaje <|.. SinPenalizar
+EventoPuntaje <|.. NoCambiarPuntaje
+
 
 SiguienteVehiculo .up.|> EventoVehiculo
 NoCambiarVehiculo .up.|> EventoVehiculo
@@ -70,9 +72,10 @@ class Evento{
         + actualizarPosicion( Celda p ): Celda
 }
 
-Evento --> EventoPosicion: - posicion
-Evento --> EventoPuntaje: - puntaje 
-Evento --> EventoVehiculo: - vehiculo 
+
+Evento --> EventoPuntaje: - puntaje
+Evento -right-> EventoVehiculo: - vehiculo
+Evento -left-> EventoPosicion: - posicion
 
 interface EventoPosicion{
         + {abstract} actualizarPosicion( Celda p ): Celda

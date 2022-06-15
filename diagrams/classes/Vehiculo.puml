@@ -1,8 +1,8 @@
 @startuml
 !include Vehiculo.puml!SINSUBCLASES
-Moto .up.|> Vehiculo
-Auto .up.|> Vehiculo
-cuatroPorCuatro .up.|> Vehiculo
+Moto .down.|> Vehiculo
+Auto .down.|> Vehiculo
+cuatroPorCuatro .down.|> Vehiculo
 
 class Moto{
     + avanzarComun(): Evento

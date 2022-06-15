@@ -36,17 +36,22 @@ deactivate "celdaEste : Celda"
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
 "posicion : Celda" --> Jugador--: evento
-
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+activate Jugador
 Jugador <-- "evento : Evento"--: movimientoTotales
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
+activate Jugador
 Jugador <-- "evento : Evento"--: auto
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+activate Jugador
 Jugador <-- "evento : Evento"--: celdaEste
-
+deactivate Jugador
 end
 
 @enduml

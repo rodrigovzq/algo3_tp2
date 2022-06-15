@@ -3,6 +3,7 @@ package edu.fiuba.algo3.architecture;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.ArchRule;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
@@ -12,6 +13,7 @@ public class ModelDependenciesTest {
     private final String JAVA_LANG = "java..";
     private final String JUNIT = "org.junit..";
 
+    //@Disabled("Deshabilitado hasta entender porque falla.")
     @Test
     public void elModeloSoloPuedeReferenciarClasesDelModeloAdemasJavaAdemasJunit() {
         JavaClasses importedClasses = new ClassFileImporter().importPackages("edu.fiuba.algo3.modelo");

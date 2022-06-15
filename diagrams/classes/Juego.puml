@@ -19,7 +19,7 @@ class Jugador{
 
 Jugador -down-> Vehiculo: - vehiculo
 Jugador --> Movimiento: - puntaje
-Jugador --> Celda: - posicionJugador
+Jugador -right-> Celda: - posicionJugador
 @enduml
 
 @startuml(id=COMPLETO)
@@ -28,7 +28,7 @@ Jugador --> Celda: - posicionJugador
 !include Movimiento.puml
 !include Vehiculo.puml
 
-Jugador -down-> Vehiculo
+Jugador -up-> Vehiculo
 Jugador --> Movimiento: - puntaje
-Jugador --> Celda: - posicionJugador
+Jugador -right-> Celda: - posicionJugador
 @enduml

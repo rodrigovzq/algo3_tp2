@@ -5,9 +5,9 @@
 
 ' En Java, una interfaz no puede implementar una
 'interfaz, solo puede heredarla.
-Obstaculo -up-|> EstadoCelda
-Comun .up.|> EstadoCelda
-Sorpresa .up.|> EstadoCelda
+ EstadoCelda <|.left. Obstaculo
+EstadoCelda <|.down.. Comun
+EstadoCelda <|.right. Sorpresa
 
 class Comun{
     + avanzarEn( Vehiculo v ): Evento
@@ -18,8 +18,8 @@ class Celda{
     + avanzarEn( Vehiculo v ): Evento
 }
 
-Celda --> EstadoCelda
-Celda -> "4" Celda
+Celda -down--> EstadoCelda
+Celda ---> "4" Celda
 
 interface EstadoCelda{
     + {abstract} avanzarEn( Vehiculo v ): Evento

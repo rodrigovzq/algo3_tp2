@@ -31,22 +31,35 @@ deactivate "auto : Auto"
 
 Piquete --> "celdaEste : Celda": evento
 
-
+deactivate Piquete
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
+
+
 
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
 "posicion : Celda" --> Jugador--: evento
+deactivate Jugador
 
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
+activate Jugador
 Jugador <-- "evento : Evento"--: movimientoTotales
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarVehiculo( auto )
+activate Jugador
 Jugador <-- "evento : Evento"--: auto
+deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
+<<<<<<< HEAD
 Jugador <-- "evento : Evento"--: posicion
 
+=======
+activate Jugador
+Jugador <-- "evento : Evento"--: celdaEste
+deactivate Jugador
+>>>>>>> 2ecd710c0ba5a129db266f8ffac3fedd1d359222
 @enduml
