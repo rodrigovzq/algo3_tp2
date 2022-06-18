@@ -1,0 +1,24 @@
+@startuml
+!include Juego.puml!CLASES
+
+' Clase que habla con JavaFX para renderizar nuestro juego.
+' App es la que percibe los inputs del usuario
+' se lo manda al juego.
+'El juego reacciona y devuelve un nuevo estado para renderizar
+
+class App {
+    + start( Stage stage )
+}
+' Creo que lo mejor va a ser que el mapa sea inicializado al principio
+'después del jugador elija la configuración.
+'La configuración nos permite inicializar el jugador y el mapa con sus
+'estados generados aleatoriamente.
+
+'Luego, el input procesado por la APP deberá traducirse en un
+'mensaje al Juego y el Juego deberá efectuar los cambios de estado
+'según ese mensaje. Una vez hecho los cambios de los estados, devuelve
+'ALGO que App deberá renderizar para que se vea en la ventana.
+
+
+App -> Juego
+@enduml
