@@ -14,7 +14,7 @@ class CambioVehiculo{
 Sorpresa <|.. CambioVehiculo
 Sorpresa <|.. Favorable
 Sorpresa <|.. Desfavorable
->>>>>>> 2ecd710c0ba5a129db266f8ffac3fedd1d359222
+
 @enduml
 
 @startuml(id=SINSUBCLASES)
