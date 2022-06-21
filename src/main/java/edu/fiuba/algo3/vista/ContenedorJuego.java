@@ -14,29 +14,13 @@ public class ContenedorJuego {
 
     private MapaVista mapaVista;
     private JugadorVista jugadorVista;
-    public ContenedorJuego(Stage stage, String nombreJugador, String nombreVehiculo) {
+    public ContenedorJuego(Stage stage, Jugador jugador) {
         this.stage = stage;
 
-        //TODO: Crear el mapaVista y el mapa (grafo)
-
-        //Crea el vehiculo
-        IVehiculo vehiculoJugador;
-        if( nombreVehiculo.equals("Moto")){
-            vehiculoJugador = new Moto();
-        }
-        if( nombreVehiculo.equals("Auto")){
-            vehiculoJugador = new Auto();
-        }
-        if( nombreVehiculo.equals("4x4")){
-            vehiculoJugador = new CuatroPorCuatro();
-        }
-
-        //Crea el jugador. Falta crear el mapa (grafo) para poder darle una celda al jugador.
-        //Jugador jugador = new Jugador(nombreJugador, nombreVehiculo);
 
         VBox layout = new VBox();
         //TODO: Implementar contenido de la ventana del juego
-            //  Va a estar compuesta por JugadorVista, PuntajeVista
+            //  Va a estar compuesta por JugadorVista, PuntajeVista, Mapavista
             //y un par de botones para volver al menu, ver intrucciones etc.
 
 

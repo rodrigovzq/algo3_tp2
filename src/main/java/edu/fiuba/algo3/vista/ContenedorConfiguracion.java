@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -26,7 +27,7 @@ public class ContenedorConfiguracion {
 
     private void iniciar(){
         Button botonJugar = new Button("Jugar");
-        botonJugar.setOnAction( e -> new ContenedorJuego( this.stage, this.nombreJugador, this.nombreVehiculo)  );
+        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.nombreJugador, this.nombreVehiculo) );
         Button botonCancelar = new Button("Cancelar");
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
 
