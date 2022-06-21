@@ -18,7 +18,11 @@ public class ContenedorConfiguracion {
     Stage stage;
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
+        this.iniciar();
+    }
 
+
+    private void iniciar(){
         Button botonJugar = new Button("Jugar");
         botonJugar.setOnAction( e -> new ContenedorJuego( this.stage )  );
         Button botonCancelar = new Button("Cancelar");
