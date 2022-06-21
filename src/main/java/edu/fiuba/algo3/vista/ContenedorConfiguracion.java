@@ -1,11 +1,16 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
+import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -15,9 +20,8 @@ import javafx.stage.Stage;
 
 public class ContenedorConfiguracion {
     VBox root = new VBox();
-
     String nombreJugador = "";
-    String nombreVehiculo = "";
+    IVehiculo vehiculoElegido;
     Stage stage;
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
@@ -27,7 +31,7 @@ public class ContenedorConfiguracion {
 
     private void iniciar(){
         Button botonJugar = new Button("Jugar");
-        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.nombreJugador, this.nombreVehiculo) );
+        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.nombreJugador, this.vehiculoElegido) );
         Button botonCancelar = new Button("Cancelar");
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
 
@@ -44,16 +48,13 @@ public class ContenedorConfiguracion {
 
         //campo de texto
         TextField campoNombre = new TextField();
-        campoNombre.setOnAction( e -> nombreJugador = campoNombre.getText() );
+        campoNombre.setOnAction( e -> {
+            nombreJugador = campoNombre.getText();
+        });
         campoNombre.setMaxWidth(150);
         campoNombre.setPromptText("Ingrese un nombre");
 
-        //Mejorar
-        ObservableList<String> vehiculos = FXCollections.observableArrayList (
-                "Moto", "Auto", "4x4");
-        ChoiceBox<String> listaVehiculo = new ChoiceBox<>(vehiculos);
-        listaVehiculo.setOnHidden( e -> nombreVehiculo = listaVehiculo.getSelectionModel().getSelectedItem());
-        listaVehiculo.setValue("Moto");
+        Group listaVehiculo = emitirOpcionesVehiculos();
 
         Button boton20X20 = new Button("20x20");
         boton20X20.setCursor(Cursor.HAND);
@@ -111,5 +112,34 @@ public class ContenedorConfiguracion {
 
         this.stage.setScene( config );
         this.stage.show();
+    }
+
+    private Group emitirOpcionesVehiculos() {
+        Menu fileMenu = new Menu("Vehiculo");
+
+        MenuItem item1 = new MenuItem("Auto");
+        item1.setOnAction( e -> {
+            vehiculoElegido = new Auto();
+        });
+
+        MenuItem item2 = new MenuItem("Moto");
+        item2.setOnAction( e -> {
+            vehiculoElegido = new Moto();
+        });
+
+        MenuItem item3 = new MenuItem("4 X 4");
+        item3.setOnAction( e -> {
+            vehiculoElegido = new CuatroPorCuatro();
+        });
+
+        fileMenu.getItems().addAll(item1, item2, item3);
+        MenuBar menuBar = new MenuBar(fileMenu);
+
+        menuBar.setTranslateX(200);
+        menuBar.setTranslateY(20);
+
+        Group root = new Group(menuBar);
+        return root;
+
     }
 }

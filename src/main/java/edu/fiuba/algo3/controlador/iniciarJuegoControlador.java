@@ -8,45 +8,49 @@ import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import edu.fiuba.algo3.vista.ContenedorJuego;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
-public class iniciarJuegoControlador extends EventHandler {
+public class iniciarJuegoControlador implements EventHandler<ActionEvent> {
     private final Stage stage;
     String nombreJugador;
-    String nombreVehiculo;
+    IVehiculo vehiculo;
+
+    //Mapa mapa;
 
     //Responsable de crear al jugador y cambiar la escena en la ventana.
-    public iniciarJuegoControlador(Stage stage, String nombreJugador, String nombreVehiculo ) {
+    public iniciarJuegoControlador(Stage stage, String nombreJugador, IVehiculo vehiculo ) {
         this.nombreJugador = nombreJugador;
-        this.nombreVehiculo = nombreVehiculo;
+        this.vehiculo = vehiculo;
         this.stage = stage;
     }
 
     @Override
-    public void handle(Event event) {
+    public void handle(ActionEvent event) {
         if( nombreJugador.equals("") || nombreJugador.equals( null ) ){
             //No iniciar juego.
+            //TODO: Deberia avisarle al jugador que le falta ingresar un nombre
         }
-
-        IVehiculo vehiculoJugador = null;
-        if( nombreVehiculo.equals("Moto")){
-            vehiculoJugador = new Moto();
+        if(  vehiculo.equals( null ) ){
+            //No iniciar juego.
+            //TODO: Deberia avisarle al jugador que le falta seleccionar un vehiculo
         }
-        if( nombreVehiculo.equals("Auto")){
-            vehiculoJugador = new Auto();
+        /* TODO: Clase Mapa que se encargue de tener la configuración para la creacion del grafo.
+        if(  mapa.equals( null ) ){
+            //No iniciar juego.
+            //TODO: Deberia avisarle al jugador que le falta seleccionar un tamanio de mapa
         }
-        if( nombreVehiculo.equals("4x4")){
-            vehiculoJugador = new CuatroPorCuatro();
-        }
+        */
         //TODO: Crear el mapa (grafo)
 
 
         //Crea el jugador. Falta crear el mapa (grafo) para poder darle una celda al jugador.
-        Jugador jugador = new Jugador(nombreJugador, new Celda(new Comun()) , vehiculoJugador);
+        Jugador jugador = new Jugador(nombreJugador, new Celda(new Comun()) , this.vehiculo);
 
         //Cambiar de escena
         new ContenedorJuego(this.stage, jugador);
     }
+
 }
