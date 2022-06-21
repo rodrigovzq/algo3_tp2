@@ -13,15 +13,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("Juego GPS Challenge");
-
         ContenedorMenu menu = new ContenedorMenu(stage);
-        ContenedorConfiguracion configuracion= new ContenedorConfiguracion(stage);
-
-        //menu.mostrar();
-        configuracion.mostrar();
-
-
-
     }
 
 

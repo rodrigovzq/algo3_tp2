@@ -34,7 +34,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
-        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
+        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE );
         Evento esperado = new Evento( new DescuentoPorcentaje(20.0F), new NoCambiarVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
@@ -54,7 +54,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
-        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
+        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE );
         Evento esperado = new Evento( new AumentoPorcentaje(25.0F), new NoCambiarVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
@@ -74,7 +74,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
-        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
+        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE );
         Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
@@ -93,7 +93,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
-        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
+        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE );
         Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 
@@ -113,7 +113,7 @@ public class CasosDeUsosEntrega2Tests {
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
 
-        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, v );
+        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE );
         Evento esperado = new Evento( new SinPenalizar(), new SiguienteVehiculo(), new Avanzar() );
         esperado.setDireccion(Direccion.ESTE);
 

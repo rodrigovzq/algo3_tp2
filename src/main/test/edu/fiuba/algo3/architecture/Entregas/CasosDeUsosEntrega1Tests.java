@@ -29,7 +29,7 @@ public class CasosDeUsosEntrega1Tests {
         Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, moto);
 
-        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, moto );
+        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
         Evento esperado = new Evento( new Penalizacion(3), new NoCambiarVehiculo(), new Avanzar() );
 
         assertEquals(esperado, resultado);
@@ -42,7 +42,7 @@ public class CasosDeUsosEntrega1Tests {
         Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
-        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, auto );
+        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
         Evento esperado = new Evento( new Penalizacion(3), new NoCambiarVehiculo(), new Avanzar() );
 
         assertEquals(esperado, resultado);
@@ -55,7 +55,7 @@ public class CasosDeUsosEntrega1Tests {
         Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
-        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, cxc );
+        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
         Evento esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar() );
 
         assertEquals(esperado, resultado);
@@ -68,9 +68,9 @@ public class CasosDeUsosEntrega1Tests {
         Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
-        jugador.avanzarHaciaLaDireccion(Direccion.ESTE, cxc);
-        jugador.avanzarHaciaLaDireccion(Direccion.ESTE, cxc);
-        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, cxc );
+        jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
+        jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
+        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
         Evento esperado = new Evento( new Penalizacion(2), new NoCambiarVehiculo(), new Avanzar() );
 
 
@@ -84,7 +84,7 @@ public class CasosDeUsosEntrega1Tests {
         Celda posicionInicial = new Celda( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
-        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE, auto );
+        Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
         Evento esperado = new Evento( new NoCambiarPuntaje(), new NoCambiarVehiculo(), new NoCambiarPosicion() );
 
         assertEquals(esperado, resultado);

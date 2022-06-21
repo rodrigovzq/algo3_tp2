@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controlador.BotonCancelar;
-import edu.fiuba.algo3.controlador.BotonJugar;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -15,16 +13,17 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class ContenedorConfiguracion {
+    VBox root = new VBox();
 
-    private Stage stage;
-    private BotonJugar botonJugar = new BotonJugar();
-    private BotonCancelar botonCancelar = new BotonCancelar();
-
+    Stage stage;
     public ContenedorConfiguracion(Stage stage) {
-        this.stage=stage;
-    }
+        this.stage = stage;
 
-    public void mostrar() {
+        Button botonJugar = new Button("Jugar");
+        botonJugar.setOnAction( e -> new ContenedorJuego( this.stage )  );
+        Button botonCancelar = new Button("Cancelar");
+        botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
+
         Label nombre = new Label("Nombre");
         nombre.setFont(new Font(15));
 
@@ -59,12 +58,6 @@ public class ContenedorConfiguracion {
         boton35X35.setCursor(Cursor.HAND);
         boton35X35.setPrefSize(100,100);
 
-
-        botonJugar.iniciar();
-        botonCancelar.iniciar();
-
-
-        VBox root = new VBox();
         HBox rootH1 = new HBox();
         HBox rootH2 = new HBox();
         HBox rootH3 = new HBox();
@@ -83,9 +76,7 @@ public class ContenedorConfiguracion {
         rootH4.getChildren().addAll(boton30X30, boton35X35);
         rootH4.setAlignment(Pos.CENTER);
 
-        rootH5.getChildren().addAll(botonCancelar.obtenerBoton(), botonJugar.obtenerBoton());
-
-
+        rootH5.getChildren().addAll(botonCancelar, botonJugar);
 
         root.getChildren().addAll(rootH1,rootH2,mapa,rootH3,rootH4,rootH5);
 
@@ -94,22 +85,18 @@ public class ContenedorConfiguracion {
         HBox.setMargin(boton30X30,new Insets(15,10,10,10));
         HBox.setMargin(boton35X35,new Insets(15,10,10,10));
 
-
-        HBox.setMargin(botonCancelar.obtenerBoton(),new Insets(10,100,10,10));
-        HBox.setMargin(botonJugar.obtenerBoton(),new Insets(10,10,10,350));
-
-
+        HBox.setMargin(botonCancelar, new Insets(10,100,10,10));
+        HBox.setMargin(botonJugar, new Insets(10,10,10,350));
 
         HBox.setMargin(nombre,new Insets(10,10,10,10));
         HBox.setMargin(nombreJugador,new Insets(10,10,10,10));
         HBox.setMargin(vehiculo,new Insets(10,10,10,10));
         HBox.setMargin(tipoVehiculo,new Insets(10,10,10,10));
-
         root.setAlignment(Pos.CENTER);
 
-        Scene confg = new Scene(root, 640,480);
-        this.stage.setScene(confg);
-        this.stage.show();
+        Scene config = new Scene(root, 640,480);
 
+        this.stage.setScene( config );
+        this.stage.show();
     }
 }
