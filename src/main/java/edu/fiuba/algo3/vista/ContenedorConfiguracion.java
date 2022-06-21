@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.vista;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -43,16 +43,16 @@ public class ContenedorConfiguracion {
 
         //campo de texto
         TextField campoNombre = new TextField();
-        campoNombre.setOnAction( e -> nombreJugador = campoNombre.getText());
+        campoNombre.setOnAction( e -> nombreJugador = campoNombre.getText() );
         campoNombre.setMaxWidth(150);
         campoNombre.setPromptText("Ingrese un nombre");
 
         //Mejorar
-        TextField tipoVehiculo = new TextField();
-        tipoVehiculo.setOnAction( e -> nombreJugador = tipoVehiculo.getText());
-        tipoVehiculo.setMaxWidth(200);
-        tipoVehiculo.setPromptText("Ingrese \"moto\", \"auto\" o \"4x4\" ");
-        tipoVehiculo.setOnAction( e -> nombreVehiculo = tipoVehiculo.getText());
+        ObservableList<String> vehiculos = FXCollections.observableArrayList (
+                "Moto", "Auto", "4x4");
+        ChoiceBox<String> listaVehiculo = new ChoiceBox<>(vehiculos);
+        listaVehiculo.setOnHidden( e -> nombreVehiculo = listaVehiculo.getSelectionModel().getSelectedItem());
+        listaVehiculo.setValue("Moto");
 
         Button boton20X20 = new Button("20x20");
         boton20X20.setCursor(Cursor.HAND);
@@ -79,7 +79,7 @@ public class ContenedorConfiguracion {
         rootH1.getChildren().addAll(nombre, campoNombre);
         rootH1.setAlignment(Pos.CENTER);
 
-        rootH2.getChildren().addAll(vehiculo, tipoVehiculo);
+        rootH2.getChildren().addAll(vehiculo, listaVehiculo);
         rootH2.setAlignment(Pos.CENTER);
 
         rootH3.getChildren().addAll(boton20X20, boton25X25);
@@ -103,7 +103,7 @@ public class ContenedorConfiguracion {
         HBox.setMargin(nombre,new Insets(10,10,10,10));
         HBox.setMargin(campoNombre,new Insets(10,10,10,10));
         HBox.setMargin(vehiculo,new Insets(10,10,10,10));
-        HBox.setMargin(tipoVehiculo,new Insets(10,10,10,10));
+        HBox.setMargin(listaVehiculo,new Insets(10,10,10,10));
         root.setAlignment(Pos.CENTER);
 
         Scene config = new Scene(root, 640,480);
