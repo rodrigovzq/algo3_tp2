@@ -1,5 +1,6 @@
-package edu.fiuba.algo3.modelo.Celda;
+package edu.fiuba.algo3.modelo.Celda.Obstaculo;
 
+import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;

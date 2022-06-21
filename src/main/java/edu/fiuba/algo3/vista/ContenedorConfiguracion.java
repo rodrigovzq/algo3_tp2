@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
@@ -23,6 +24,8 @@ public class ContenedorConfiguracion {
     String nombreJugador = "";
     IVehiculo vehiculoElegido;
     Stage stage;
+    private Mapa tamanioMapa;
+
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
         this.iniciar();
@@ -31,7 +34,7 @@ public class ContenedorConfiguracion {
 
     private void iniciar(){
         Button botonJugar = new Button("Jugar");
-        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.nombreJugador, this.vehiculoElegido) );
+        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.nombreJugador, this.tamanioMapa, this.vehiculoElegido) );
         Button botonCancelar = new Button("Cancelar");
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
 
@@ -57,18 +60,30 @@ public class ContenedorConfiguracion {
         Group listaVehiculo = emitirOpcionesVehiculos();
 
         Button boton20X20 = new Button("20x20");
+        boton20X20.setOnAction(e -> {
+            tamanioMapa = new Mapa(20,20);
+        });
         boton20X20.setCursor(Cursor.HAND);
         boton20X20.setPrefSize(100,100);
 
         Button boton25X25 = new Button("25X25");
+        boton20X20.setOnAction(e -> {
+            tamanioMapa = new Mapa(20,20);
+        });
         boton25X25.setCursor(Cursor.HAND);
         boton25X25.setPrefSize(100,100);
 
         Button boton30X30 = new Button("30X30");
+        boton20X20.setOnAction(e -> {
+            tamanioMapa = new Mapa(20,20);
+        });
         boton30X30.setCursor(Cursor.HAND);
         boton30X30.setPrefSize(100,100);
 
         Button boton35X35 = new Button("35X35");
+        boton20X20.setOnAction(e -> {
+            tamanioMapa = new Mapa(20,20);
+        });
         boton35X35.setCursor(Cursor.HAND);
         boton35X35.setPrefSize(100,100);
 

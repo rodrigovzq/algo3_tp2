@@ -1,6 +1,7 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo.Evento.EventoPosicion;
+package edu.fiuba.algo3.modelo.CeldaInterna.Obstaculo.Evento.EventoPosicion;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
 import org.junit.jupiter.api.Test;
@@ -9,17 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NoCambiarPosicionTest {
     @Test
-    public void cualquieraSeaLaDireccionDevuelveLaMismaCeldaQueSePasaPorParametro(){
+    public void cualquieraSeaLaDireccionDevuelveLaMismaCeldaInternaQueSePasaPorParametro(){
         NoCambiarPosicion sinCambiar = new NoCambiarPosicion();
 
-        Celda celdaOeste = new Celda( null );
-        Celda celdaEste = new Celda( null );
-        Celda celdaNorte = celdaEste;
-        Celda celdaSur = celdaEste;
+        CeldaInterna celdaOeste = new CeldaInterna( null );
+        CeldaInterna celdaEste = new CeldaInterna( null );
+        CeldaInterna celdaNorte = celdaEste;
+        CeldaInterna celdaSur = celdaEste;
 
-        Celda celdaActual = new Celda( null, celdaNorte, celdaEste, celdaSur, celdaOeste );
+        CeldaInterna celdaActual = new CeldaInterna( null, celdaNorte, celdaEste, celdaSur, celdaOeste );
 
-        Celda esperado = celdaActual;
+        CeldaInterna esperado = celdaActual;
 
         sinCambiar.setDireccion(Direccion.ESTE);
         Celda resultado = sinCambiar.actualizarPosicion( celdaActual );
