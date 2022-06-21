@@ -1,2 +1,4 @@
-package edu.fiuba.algo3.vista;public class JugadorVista {
+package edu.fiuba.algo3.vista;
+
+public class JugadorVista {
 }

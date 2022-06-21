@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 
 public class ContenedorJuego {
     private Stage stage;
+
+    private MapaVista mapaVista;
+    private JugadorVista jugadorVista;
     public ContenedorJuego(Stage stage) {
         this.stage = stage;
         VBox layout = new VBox();

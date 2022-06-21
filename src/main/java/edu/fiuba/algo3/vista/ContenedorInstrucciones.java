@@ -4,4 +4,8 @@ package edu.fiuba.algo3.vista;
 //el juego (no escucha las entradas que hace el jugador ni hace nada) hasta cerrar dicha ventana.
 
 public class ContenedorInstrucciones {
+    public static void mostrar(){
+        VentanaPopUp.mostrar("Intrucciones", "Para moverte usar W,A,S,D");
+
+    }
 }

@@ -18,7 +18,10 @@ public class ContenedorMenu {
         botonJugar.setOnAction( e -> new ContenedorConfiguracion( this.stage )  );
 
         Button botonRanking = new Button("Ranking");
+
         Button botonInstruciones = new Button("Instrucciones");
+        botonInstruciones.setOnAction( e -> ContenedorInstrucciones.mostrar());
+
         Button botonSalir = new Button("Salir");
         Button botonHelpPls = new Button("help pls");
 
