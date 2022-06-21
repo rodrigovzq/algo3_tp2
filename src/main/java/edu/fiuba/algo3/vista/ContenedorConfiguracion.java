@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 public class ContenedorConfiguracion {
     VBox root = new VBox();
 
+    String nombreJugador = "";
+    String nombreVehiculo = "";
     Stage stage;
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
@@ -24,7 +26,7 @@ public class ContenedorConfiguracion {
 
     private void iniciar(){
         Button botonJugar = new Button("Jugar");
-        botonJugar.setOnAction( e -> new ContenedorJuego( this.stage )  );
+        botonJugar.setOnAction( e -> new ContenedorJuego( this.stage, this.nombreJugador, this.nombreVehiculo)  );
         Button botonCancelar = new Button("Cancelar");
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
 
@@ -40,11 +42,17 @@ public class ContenedorConfiguracion {
         mapa.setFont(new Font(15));
 
         //campo de texto
-        TextField nombreJugador = new TextField();
-        nombreJugador.setMaxWidth(150);
-        nombreJugador.setPromptText("Ingrese un nombre");
-        TextField tipoVehiculo = new TextField();
+        TextField campoNombre = new TextField();
+        campoNombre.setOnAction( e -> nombreJugador = campoNombre.getText());
+        campoNombre.setMaxWidth(150);
+        campoNombre.setPromptText("Ingrese un nombre");
 
+        //Mejorar
+        TextField tipoVehiculo = new TextField();
+        tipoVehiculo.setOnAction( e -> nombreJugador = tipoVehiculo.getText());
+        tipoVehiculo.setMaxWidth(200);
+        tipoVehiculo.setPromptText("Ingrese \"moto\", \"auto\" o \"4x4\" ");
+        tipoVehiculo.setOnAction( e -> nombreVehiculo = tipoVehiculo.getText());
 
         Button boton20X20 = new Button("20x20");
         boton20X20.setCursor(Cursor.HAND);
@@ -68,7 +76,7 @@ public class ContenedorConfiguracion {
         HBox rootH4 = new HBox();
         HBox rootH5 = new HBox();
 
-        rootH1.getChildren().addAll(nombre, nombreJugador);
+        rootH1.getChildren().addAll(nombre, campoNombre);
         rootH1.setAlignment(Pos.CENTER);
 
         rootH2.getChildren().addAll(vehiculo, tipoVehiculo);
@@ -93,7 +101,7 @@ public class ContenedorConfiguracion {
         HBox.setMargin(botonJugar, new Insets(10,10,10,350));
 
         HBox.setMargin(nombre,new Insets(10,10,10,10));
-        HBox.setMargin(nombreJugador,new Insets(10,10,10,10));
+        HBox.setMargin(campoNombre,new Insets(10,10,10,10));
         HBox.setMargin(vehiculo,new Insets(10,10,10,10));
         HBox.setMargin(tipoVehiculo,new Insets(10,10,10,10));
         root.setAlignment(Pos.CENTER);
