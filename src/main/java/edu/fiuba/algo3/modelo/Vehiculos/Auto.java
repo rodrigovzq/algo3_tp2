@@ -34,8 +34,10 @@ public class Auto implements IVehiculo {
     public  Evento avanzarControlPolicial() {
         Evento evento = null;
         Random random = new Random();
-        if (this.obtenerProbabilidadDeSerDetenido()<random.nextDouble()){
+        if (this.obtenerProbabilidadDeSerDetenido()>random.nextDouble()){
             evento = new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new Avanzar());
+        }else{
+            evento = new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new NoCambiarPosicion());
         }
         return evento;
     }

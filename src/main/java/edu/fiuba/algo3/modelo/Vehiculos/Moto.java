@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
+import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
@@ -30,8 +31,10 @@ public class Moto implements IVehiculo {
     public  Evento avanzarControlPolicial() {
         Evento evento = null;
         Random random = new Random();
-        if (this.obtenerProbabilidadDeSerDetenido()<random.nextDouble()){
+        if (this.obtenerProbabilidadDeSerDetenido()>random.nextDouble()){
             evento = new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new Avanzar());
+        }else{
+            evento = new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new NoCambiarPosicion());
         }
         return evento;
     }
