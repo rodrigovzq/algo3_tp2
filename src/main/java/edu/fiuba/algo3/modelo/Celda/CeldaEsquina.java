@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Celda;
 
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ public class CeldaEsquina extends Celda {
         } else if (direccion == direccionVertical) {
             celdaAdyacente = celdaVertical;
         } else{
-            //TODO: Lanzar excepcion.
+            throw new DireccionInvalida("getCelda :");
         }
         return celdaAdyacente;
     }
@@ -41,7 +42,7 @@ public class CeldaEsquina extends Celda {
         } else if (direccion == direccionVertical  ) {
             this.celdaVertical = nuevaCelda;
         } else {
-            //TODO: Lanzar excepcion
+            throw new DireccionInvalida("setCelda :");
         }
     }
 
