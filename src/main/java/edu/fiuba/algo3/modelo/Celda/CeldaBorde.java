@@ -30,7 +30,7 @@ public class CeldaBorde extends Celda {
         } else if (direccion == direccion3) {
             celdaAdyacente = celda3;
         } else {
-            throw new DireccionInvalida();
+            throw new DireccionInvalida("getCelda :");
         }
         return celdaAdyacente;
     }
@@ -53,7 +53,7 @@ public class CeldaBorde extends Celda {
         } else if (direccion == direccion3  ) {
             this.celda3 = nuevaCelda;
         } else {
-            throw new DireccionInvalida();
+            throw new DireccionInvalida("setCelda :");
         }
     }
 }
