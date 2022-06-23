@@ -49,14 +49,12 @@ public class CuatroPorCuatro implements IVehiculo {
 
     @Override
     public Evento avanzarControlPolicial() {
-        Evento evento = null;
         Random random = new Random();
         if (this.obtenerProbabilidadDeSerDetenido()>random.nextDouble()){
-            evento = new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new Avanzar());
+            return new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new Avanzar());
         }else{
-            evento = new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new NoCambiarPosicion());
+            return new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new NoCambiarPosicion());
         }
-        return evento;
     }
 
     @Override
