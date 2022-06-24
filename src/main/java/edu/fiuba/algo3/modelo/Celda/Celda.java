@@ -18,8 +18,15 @@ public abstract class Celda {
     }
 
     public void setCeldaOpuesta( Celda celda, Direccion direccion){
-        if( celda.getCelda(direccion.opuesto()) == null)
-            celda.setCelda( this, direccion.opuesto() );
+        try{
+            Celda opuesto = celda.getCelda(direccion.opuesto());
+            if( opuesto == null )
+                celda.setCelda( this, direccion.opuesto() );
+        }
+        catch( DireccionInvalida e){
+            //Si entra es porque accedí a una Direccion bloqueada. No hago nada.
+        }
+
     }
 
     public abstract Celda getCelda(Direccion direccion) throws DireccionInvalida;

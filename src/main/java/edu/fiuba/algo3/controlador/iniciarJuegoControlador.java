@@ -47,45 +47,12 @@ public class iniciarJuegoControlador implements EventHandler<ActionEvent> {
         }
 
         //TODO: Crear el mapa (grafo)
-        /*
-        int columna = 0;
-        for( int fila = 0; fila < mapa.getAncho(); fila++ ){
-            Celda nuevaCelda = null;
-            //TODO: Refactor a un Factory.
-            if( fila == 0 && columna == 0){
-                nuevaCelda = new CeldaEsquina(new Comun(), Direccion.SUR, Direccion.ESTE);
-            }
-            else if( fila == mapa.getAltura() && columna == 0){
-                nuevaCelda = new CeldaEsquina(new Comun(), Direccion.NORTE, Direccion.ESTE);
-            }
-            else if( fila == 0 && columna == mapa.getAltura()){
-                nuevaCelda = new CeldaEsquina(new Comun(), Direccion.SUR, Direccion.OESTE);
-            }
-            else if( fila == mapa.getAltura() && columna == mapa.getAncho()){
-                nuevaCelda = new CeldaEsquina(new Comun(), Direccion.NORTE, Direccion.OESTE);
-            }
-            else if( fila != 0 && columna == mapa.getAncho() ){
-                nuevaCelda = new CeldaBorde(new Comun(), Direccion.NORTE, Direccion.ESTE, Direccion.SUR);
-            }
-            else if( fila != 0 && columna == 0 ){
-                nuevaCelda = new CeldaBorde(new Comun(), Direccion.NORTE, Direccion.OESTE, Direccion.SUR);
-            }
-            else if( fila == 0 && columna != 0 ){
-                nuevaCelda = new CeldaBorde(new Comun(), Direccion.ESTE, Direccion.OESTE, Direccion.SUR);
-            }
-            else if( fila == mapa.getAltura() && columna != 0 ){
-                nuevaCelda = new CeldaBorde(new Comun(), Direccion.NORTE, Direccion.OESTE, Direccion.ESTE);
-            }
-            else{ nuevaCelda = new CeldaInterna( new Comun()); }
-
-        }
 
         //Crea el jugador. Falta crear el mapa (grafo) para poder darle una celda al jugador.
         //Jugador jugador = new Jugador(nombreJugador, new CeldaInterna(new Comun()) , this.vehiculo);
 
         //Cambiar de escena
-        new ContenedorJuego(this.stage, jugador);
-    */
+        //new ContenedorJuego(this.stage, jugador);
     }
 
 

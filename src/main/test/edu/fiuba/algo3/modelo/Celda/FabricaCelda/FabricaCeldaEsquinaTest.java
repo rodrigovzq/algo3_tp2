@@ -17,16 +17,16 @@ class FabricaCeldaEsquinaTest {
         Celda noroeste = fabrica.crearCelda(Direccion.NOROESTE);
         Celda sudoeste = fabrica.crearCelda(Direccion.SUDOESTE);
 
-        Celda esperado = new CeldaEsquina(null, Direccion.NORTE,Direccion.ESTE);
+        Celda esperado = new CeldaEsquina(null, Direccion.SUR,Direccion.OESTE);
         assertEquals(esperado, norteste);
 
-        esperado = new CeldaEsquina(null, Direccion.SUR,Direccion.ESTE);
+        esperado = new CeldaEsquina(null, Direccion.NORTE,Direccion.OESTE);
         assertEquals(esperado, sureste);
 
-        esperado = new CeldaEsquina(null, Direccion.NORTE,Direccion.OESTE);
+        esperado = new CeldaEsquina(null, Direccion.SUR,Direccion.ESTE);
         assertEquals(esperado, noroeste);
 
-        esperado = new CeldaEsquina(null, Direccion.SUR,Direccion.OESTE);
+        esperado = new CeldaEsquina(null, Direccion.NORTE,Direccion.ESTE);
         assertEquals(esperado, sudoeste);
     }
 }
