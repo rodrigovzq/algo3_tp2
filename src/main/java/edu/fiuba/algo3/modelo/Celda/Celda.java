@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
+//TODO: Refactorizar distribución de paquetes. Celda en paquete aparte, separado de Obstaculo, Sorpresa y FabricaCelda.
 public abstract class Celda {
     private EstadoCelda estado;
 

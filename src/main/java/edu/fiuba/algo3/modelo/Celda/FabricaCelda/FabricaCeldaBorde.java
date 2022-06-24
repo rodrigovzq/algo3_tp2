@@ -1,9 +1,7 @@
-package edu.fiuba.algo3.modelo.Celda.Fabrica;
+package edu.fiuba.algo3.modelo.Celda.FabricaCelda;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.CeldaBorde;
-import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 
