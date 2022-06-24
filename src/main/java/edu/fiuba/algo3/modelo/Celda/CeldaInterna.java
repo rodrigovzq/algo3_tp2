@@ -46,6 +46,7 @@ public class CeldaInterna extends Celda {
 
     @Override
     public void setCelda(Celda nuevaCelda, Direccion direccion){
+
         if (direccion == Direccion.NORTE) {
             this.celdaNorte = nuevaCelda;
         } else if (direccion == Direccion.ESTE) {
@@ -55,6 +56,9 @@ public class CeldaInterna extends Celda {
         } else if (direccion == Direccion.SUR) {
             this.celdaSur = nuevaCelda;
         }
+
+        if( nuevaCelda.getCelda(direccion.opuesto()) == null)
+            nuevaCelda.setCelda( this, direccion.opuesto() );
     }
 
     @Override

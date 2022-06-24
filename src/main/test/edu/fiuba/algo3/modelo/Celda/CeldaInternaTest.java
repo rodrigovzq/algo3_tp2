@@ -32,4 +32,26 @@ class CeldaInternaTest {
         esperado =  celda.getCelda(Direccion.OESTE);
         assertEquals(esperado, c4);
     }
+
+    @Test
+    public void verificoQueLaInicializacionDeCeldasSeaCoherente() {
+        // TODO: Mockear
+        CeldaInterna celda = new CeldaInterna(new Comun());
+
+        CeldaInterna norte = new CeldaInterna(new Pozo());
+        CeldaInterna sur = new CeldaInterna(new Pozo());
+        CeldaInterna este = new CeldaInterna(new Pozo());
+        CeldaInterna oeste = new CeldaInterna(new Pozo());
+
+        celda.setCelda( norte , Direccion.NORTE);
+        celda.setCelda( sur , Direccion.SUR);
+        celda.setCelda( este  , Direccion.ESTE);
+        celda.setCelda( oeste , Direccion.OESTE);
+
+
+        assertEquals(celda, norte.getCelda( Direccion.SUR ) );
+        assertEquals(celda, sur.getCelda( Direccion.NORTE ) );
+        assertEquals(celda, este .getCelda( Direccion.OESTE ) );
+        assertEquals(celda, oeste.getCelda( Direccion.ESTE ) );
+    }
 }
