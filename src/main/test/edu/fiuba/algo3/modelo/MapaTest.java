@@ -57,10 +57,11 @@ class MapaTest {
     @Test
     public void pasandoleCoordenadasMapaVerificaSiEsUnBorde() {
         Mapa mapa = new Mapa(5, 5);
-
+    //TODO: Refactor a Coordenada.
         boolean resultado = mapa.esBorde(0, 0);
         boolean esperado = false;
         assertEquals(esperado, resultado);
+
 
         resultado = mapa.esBorde(4, 0);
         esperado = false;

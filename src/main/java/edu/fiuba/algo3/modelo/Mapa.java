@@ -37,14 +37,14 @@ public class Mapa {
         //Que Coordenada si es una esquina o borde o no, pasandole el tamaño del mapa.
         //Que sepa como mover los indices según la dirección que le pasemos.
 
-        for(; fila < this.altura; fila++ ) {
+        for(; fila < this.altura - 1; fila++ ) {
             //TODO Refactor: Coordenada.mover(dirX)
             if(dirX == Direccion.ESTE)
                 columna += 1;
             else
                 columna -= 1;
 
-            while( columna <= this.ancho && columna >= 0){
+            while( columna < this.ancho && columna >= 0){
                 //Creo la Celda que necesito
                 nuevaCelda = this.generarNuevaCelda(fila, columna);
 
@@ -188,5 +188,6 @@ public class Mapa {
             return false;
         return true;
     }
+
 
 }
