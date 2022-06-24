@@ -20,6 +20,7 @@ public class CeldaBorde extends Celda {
         this.direccion2 = direccion2;
         this.direccion3 = direccion3;
     }
+
     public Celda getCelda(Direccion direccion){
         Celda celdaAdyacente = null;
 

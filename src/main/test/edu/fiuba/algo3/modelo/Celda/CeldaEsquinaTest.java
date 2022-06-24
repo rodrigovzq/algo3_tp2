@@ -30,4 +30,20 @@ class CeldaEsquinaTest {
         assertDoesNotThrow(() -> celda.setCelda(new CeldaInterna(new Pozo()), Direccion.SUR));
         assertDoesNotThrow(() -> celda.setCelda(new CeldaInterna(new Pozo()), Direccion.ESTE));
     }
+
+    @Test
+    public void verificoQueLaInicializacionDeCeldasSeaCoherente() {
+        // TODO: Mockear
+        CeldaEsquina celda = new CeldaEsquina(new Comun(), Direccion.NORTE, Direccion.ESTE);
+
+        CeldaInterna norte = new CeldaInterna(new Pozo());
+        CeldaInterna este = new CeldaInterna(new Pozo());
+
+        celda.setCelda( norte , Direccion.NORTE);
+        celda.setCelda( este  , Direccion.ESTE);
+
+        assertEquals(celda, norte.getCelda( Direccion.SUR ) );
+        assertEquals(celda, este .getCelda( Direccion.OESTE ) );
+    }
+
 }
