@@ -16,6 +16,11 @@ public abstract class Celda {
         return estado.avanzarEn( vehiculo );
     }
 
+    public void setCeldaOpuesta( Celda celda, Direccion direccion){
+        if( celda.getCelda(direccion.opuesto()) == null)
+            celda.setCelda( this, direccion.opuesto() );
+    }
+
     // TODO: Lanzar excepcion para las direcciones inaccesibles.
     public abstract Celda getCelda(Direccion direccion) throws DireccionInvalida;
     public abstract void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida;

@@ -45,8 +45,8 @@ public class CeldaEsquina extends Celda {
             throw new DireccionInvalida("setCelda :");
         }
 
-        if( nuevaCelda.getCelda(direccion.opuesto()) == null)
-            nuevaCelda.setCelda( this, direccion.opuesto() );
+        this.setCeldaOpuesta( nuevaCelda, direccion);
+
     }
 
     @Override

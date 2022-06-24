@@ -57,8 +57,8 @@ public class CeldaInterna extends Celda {
             this.celdaSur = nuevaCelda;
         }
 
-        if( nuevaCelda.getCelda(direccion.opuesto()) == null)
-            nuevaCelda.setCelda( this, direccion.opuesto() );
+        this.setCeldaOpuesta( nuevaCelda, direccion);
+
     }
 
     @Override
