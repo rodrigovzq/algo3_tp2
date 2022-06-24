@@ -2,9 +2,12 @@ package edu.fiuba.algo3.modelo.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
+import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
+
+import java.util.Random;
 
 public class Moto implements IVehiculo {
 
@@ -14,7 +17,6 @@ public class Moto implements IVehiculo {
 
     private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.8f;
     private static final Integer PENALIZACION_CONTROL_POLICIAL = 3;
-
     @Override
     public  Evento avanzarComun() {
         return new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
