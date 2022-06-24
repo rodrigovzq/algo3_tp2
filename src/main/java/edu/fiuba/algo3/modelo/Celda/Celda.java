@@ -22,7 +22,6 @@ public abstract class Celda {
             celda.setCelda( this, direccion.opuesto() );
     }
 
-    // TODO: Lanzar excepcion para las direcciones inaccesibles.
     public abstract Celda getCelda(Direccion direccion) throws DireccionInvalida;
     public abstract void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida;
 }

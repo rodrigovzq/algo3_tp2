@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FabricaCeldaEsquinaTest {
     @Test
-    public void creoUnaCeldaBordePasandoLaDireccionBloqueada(){
+    public void creoUnaCeldaEsquinaPasandoLaDireccionBloqueada(){
         FabricaCeldaEsquina fabrica = new FabricaCeldaEsquina();
         // TODO: ¿Debo pasarle el estado? El null no es correcto ya que no es un estado valido.
         Celda norteste = fabrica.crearCelda(Direccion.NORESTE);

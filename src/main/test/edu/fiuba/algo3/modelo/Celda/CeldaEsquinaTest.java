@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CeldaEsquinaTest {
     @Test
     public void creoUnaCeldaEsquinaYObtengoLasCeldasBloqueada() {
-        // TODO: Mockear
+        // TODO: Mockear?
         CeldaEsquina celda = new CeldaEsquina(new Comun(), Direccion.SUR, Direccion.ESTE);
 
         assertThrows(DireccionInvalida.class, () -> celda.getCelda(Direccion.NORTE));
@@ -22,7 +22,7 @@ class CeldaEsquinaTest {
 
     @Test
     public void creoUnaCeldaEsquinaYInicializoEnLasCeldasBloqueadas() {
-        // TODO: Mockear
+        // TODO: Mockear?
         CeldaEsquina celda = new CeldaEsquina(new Comun(), Direccion.SUR, Direccion.ESTE);
 
         assertThrows(DireccionInvalida.class, () -> celda.setCelda(new CeldaInterna(new Pozo()), Direccion.NORTE));
@@ -33,7 +33,7 @@ class CeldaEsquinaTest {
 
     @Test
     public void verificoQueLaInicializacionDeCeldasSeaCoherente() {
-        // TODO: Mockear
+        // TODO: Mockear?
         CeldaEsquina celda = new CeldaEsquina(new Comun(), Direccion.NORTE, Direccion.ESTE);
 
         CeldaInterna norte = new CeldaInterna(new Pozo());

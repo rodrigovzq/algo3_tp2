@@ -15,7 +15,7 @@ public class CeldaEsquina extends Celda {
 
     public CeldaEsquina(EstadoCelda estado, Direccion direccionVertical, Direccion direccionLateral) {
         super( estado );
-        //TODO: inicializar en un estado válido
+        //TODO: Inicializar en un estado válido. ¿CeldaAnemica?
         this.celdaVertical = null;
         this.celdaLateral = null;
         this.direccionVertical = direccionVertical;

@@ -11,7 +11,7 @@ class FabricaCeldaBordeTest {
     @Test
     public void creoUnaCeldaBordePasandoLaDireccionBloqueada(){
         FabricaCeldaBorde fabrica = new FabricaCeldaBorde();
-        // TODO: ¿Debo pasarle el estado? El null no es correcto ya que no es un estado valido.
+        //TODO: ¿Debo pasarle el estado? El null no es correcto ya que no es un estado valido.
         Celda norte = fabrica.crearCelda(Direccion.NORTE);
         Celda sur = fabrica.crearCelda(Direccion.SUR);
         Celda este = fabrica.crearCelda(Direccion.ESTE);

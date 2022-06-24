@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CeldaInternaTest {
     @Test
     public void creoUnaCeldaInternaYInicializoEnLasCeldas() {
-        // TODO: Mockear
+        // TODO: Mockear?
         CeldaInterna celda = new CeldaInterna(new Comun());
 
         CeldaInterna c1 = new CeldaInterna(new Pozo());
@@ -35,7 +35,7 @@ class CeldaInternaTest {
 
     @Test
     public void verificoQueLaInicializacionDeCeldasSeaCoherente() {
-        // TODO: Mockear
+        // TODO: Mockear?
         CeldaInterna celda = new CeldaInterna(new Comun());
 
         CeldaInterna norte = new CeldaInterna(new Pozo());

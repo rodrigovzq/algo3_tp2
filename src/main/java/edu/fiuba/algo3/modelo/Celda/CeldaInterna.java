@@ -20,7 +20,7 @@ public class CeldaInterna extends Celda {
         this.celdaSur = celdaSur;
         this.celdaOeste = celdaOeste;
     }
-
+    //TODO: NO es correcto que este inicializado en null. ¿Agregar CeldaAnemica?
     public CeldaInterna(EstadoCelda estado) {
         super( estado );
         this.celdaNorte = null;
