@@ -31,4 +31,23 @@ class CeldaBordeTest {
         assertDoesNotThrow(() -> celda.setCelda( new CeldaInterna( new Pozo()), Direccion.OESTE ));
     }
 
+    @Test
+    public void verificoQueLaInicializacionDeCeldasSeaCoherente() {
+        // TODO: Mockear?
+        CeldaBorde celda = new CeldaBorde(new Comun(), Direccion.NORTE, Direccion.SUR, Direccion.ESTE);           ;
+
+        CeldaInterna norte = new CeldaInterna(new Pozo());
+        CeldaInterna sur = new CeldaInterna(new Pozo());
+        CeldaInterna este = new CeldaInterna(new Pozo());
+
+        celda.setCelda( norte , Direccion.NORTE);
+        celda.setCelda( sur , Direccion.SUR);
+        celda.setCelda( este  , Direccion.ESTE);
+
+
+        assertEquals(celda, norte.getCelda( Direccion.SUR ) );
+        assertEquals(celda, sur.getCelda( Direccion.NORTE ) );
+        assertEquals(celda, este .getCelda( Direccion.OESTE ) );
+    }
+
 }

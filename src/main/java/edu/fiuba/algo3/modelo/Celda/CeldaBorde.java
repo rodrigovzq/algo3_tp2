@@ -56,5 +56,8 @@ public class CeldaBorde extends Celda {
         } else {
             throw new DireccionInvalida("setCelda :");
         }
+
+        if( nuevaCelda.getCelda(direccion.opuesto()) == null)
+            nuevaCelda.setCelda( this, direccion.opuesto() );
     }
 }
