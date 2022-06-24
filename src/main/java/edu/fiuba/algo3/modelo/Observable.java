@@ -1,4 +1,4 @@
 package edu.fiuba.algo3.modelo;
 
-public interface Obvservable {
+public interface Observable {
 }
