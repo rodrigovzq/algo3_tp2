@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
 import javafx.geometry.Pos;
@@ -10,6 +11,7 @@ import java.util.Objects;
 public class Coordenada {
     private Integer posY;
     private Integer posX;
+    // El (0,0) es la esquina izquierda.
 
     public Coordenada(Integer posX, Integer posY) {
         this.posX = posX;
@@ -31,9 +33,9 @@ public class Coordenada {
 
     public void mover(Direccion direccion) {
         if( direccion == Direccion.NORTE){
-            this.posY += 1;
-        }else if( direccion == Direccion.SUR){
             this.posY -= 1;
+        }else if( direccion == Direccion.SUR){
+            this.posY += 1;
         }else if( direccion == Direccion.ESTE){
             this.posX += 1;
         }else if( direccion == Direccion.OESTE){
@@ -79,4 +81,31 @@ public class Coordenada {
         return false;
     }
 
+    public Direccion determinarEsquina(Integer ancho, Integer altura) {
+        if( this.posY == 0 && this.posX == 0){
+            return Direccion.NOROESTE;
+        }else if( this.posY == 0 && this.posX == ancho-1){
+            return Direccion.NORESTE;
+        }else if( this.posY == altura-1 && this.posX == 0){
+            return Direccion.SUDOESTE;
+        }else if( this.posY == altura-1 && this.posX == ancho-1){
+            return Direccion.SUDESTE;
+        }else {
+            throw new DireccionInvalida( "determinarEsquina :");
+        }
+    }
+
+    public Direccion determinarBorde(Integer ancho, Integer altura) {
+        if(this.posY == 0) {
+            return Direccion.NORTE;
+        }else if(this.posY == altura-1){
+            return Direccion.SUR;
+        }else if(this.posX == 0){
+            return Direccion.OESTE;
+        }else if (this.posX == ancho-1) {
+            return Direccion.ESTE;
+        }else{
+            throw new DireccionInvalida("determinarBorde :");
+        }
+    }
 }

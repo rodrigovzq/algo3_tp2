@@ -16,18 +16,25 @@ public class Mapa {
 
     private FabricaCelda fabrica;
     public Mapa(Integer ancho, Integer altura) {
-        this.ancho = ancho-1;
-        this.altura = altura-1;
+        this.ancho = ancho;
+        this.altura = altura;
     }
 
     //TODO: Test. ¿Como?
+    //La implementacion del metodo generarMapa está acoplada con la entidad Coordenada
     public void generarMapa(){
         int columna = 0;
         int fila = 0;
-        Celda anteriorCelda = this.generarEsquinaMapa(fila, columna);
+        Coordenada coord = new Coordenada( columna , fila);
+        Celda anteriorCelda = this.generarEsquinaMapa( coord );
 
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
+        //dependiendo de la cantidad de filas, la ultima
+        //celda creada será una esquina.
+        Direccion esquinaFIN = Direccion.SUDOESTE;
+        if( this.altura % 2 == 1 )
+            esquinaFIN = Direccion.SUDESTE;
 
         Celda nuevaCelda;
         Celda filaAnteriorCelda = null;
@@ -37,23 +44,20 @@ public class Mapa {
         //Que Coordenada si es una esquina o borde o no, pasandole el tamaño del mapa.
         //Que sepa como mover los indices según la dirección que le pasemos.
 
-        for(; fila < this.altura - 1; fila++ ) {
-            //TODO Refactor: Coordenada.mover(dirX)
-            if(dirX == Direccion.ESTE)
-                columna += 1;
-            else
-                columna -= 1;
-
-            while( columna < this.ancho && columna >= 0){
-                //Creo la Celda que necesito
-                nuevaCelda = this.generarNuevaCelda(fila, columna);
-
+        while( !( coord.determinarEsquina(this.ancho, this.altura) == esquinaFIN ) ) {
+            do{
                 if( setDirY ) {
+                    //coord = new Coordenada(columna, fila);
+                    nuevaCelda = this.generarNuevaCelda( coord );
                     //Comienza una nueva fila. Solo seteo en direccion Y.
                     //TODO Refactor: Usar filaAnterior. setDirY significa que no seteo en X.
                     anteriorCelda.setCelda(nuevaCelda, dirY);
                     setDirY = false;
                 }else {
+                    coord.mover(dirX);
+                    //Creo la Celda que necesito
+                    //coord = new Coordenada(columna, fila);
+                    nuevaCelda = this.generarNuevaCelda( coord );
                     //Seteo en el sentido X la nueva Celda.
                     anteriorCelda.setCelda(nuevaCelda, dirX);
 
@@ -62,123 +66,58 @@ public class Mapa {
                         filaAnteriorCelda.setCelda(nuevaCelda, dirY);
                 }
 
-                if( filaAnteriorCelda != null)
-                    //TODO Refactor: Control de Flujo con excepcion.
-
-                    // ¿Solucion?
-                    // La solucion de agregar un if mas para chequear
-                    // lo haría mas engorroso
-                    try {
-                        //Me muevo sobre la fila anterior.
+                if( filaAnteriorCelda != null && !coord.esBorde(this.ancho, this.altura))
                         filaAnteriorCelda = filaAnteriorCelda.getCelda(dirX);
-                    }catch (DireccionInvalida e){
-                        //Llegue al borde opuesto, pedir la celda de DirX rompe.
-                        // No hago nada.
-                    }
+
 
                 //Me muevo sobre la misma fila.
                 anteriorCelda = nuevaCelda;
 
-                //TODO Refactor: Coordenada.mover(dirX)
-                //El sentido del reccorrido debe coincidir con el mov en columnas
-                if(dirX == Direccion.ESTE)
-                    columna += 1;
-                else
-                    columna -= 1;
-
-            }
+            }while( !(coord.determinarBorde( this.ancho, this.altura ) == dirX ));
             //Cuando llega al final de una fila.
             dirX = dirX.opuesto(); //Recorremos al reves.
 
             //Seteo en direccion Y. (Bajo una fila)
             setDirY = true;
+            coord.mover(dirY);
 
             //Seteo el pivot de la fila de arriba. (Permite conectar verticalmente las celdas)
             filaAnteriorCelda = anteriorCelda;
         }
     }
 
-    public boolean esEsquina(Integer fila, Integer columna){
-        //TODO Refactor: Coordenada.esEsquina(anchoMapa, altoMapa)
-        boolean res = false;
-        if( fila == 0 && columna == 0){ //ESQUINA NOROESTE
-            res = true;
-        }else if( fila == 0 && columna == this.ancho){ //ESQUINA NORESTE
-            res = true;
-        }else if( fila == this.altura && columna == 0){ //ESQUINA SUDOESTE
-            res = true;
-        }else if( fila == this.altura && columna == this.ancho){ //ESQUINA SUDESTE
-            res = true;
-        }else if( !this.esCoordenadaValida(fila, columna)){
-            throw new CeldaIncorrecta();
-        }
-        return res;
-    }
-
-    public boolean esBorde(Integer fila, Integer columna){
-        boolean res = false;
-        //TODO Refactor: Coordenada.esBorde(anchoMapa, altoMapa)
-        if( !esEsquina(fila, columna))
-            if(  fila == 0 || fila == this.altura){ //BORDE NORTE || SUR
-                res = true;
-            }else if(  columna == 0 || columna == this.ancho) { //BORDE OESTE || ESTE
-                res = true;
-            }else if( !this.esCoordenadaValida(fila, columna)){
-                throw new CeldaIncorrecta();
-            }
-        return res;
-    }
-    private Celda generarEsquinaMapa(Integer fila, Integer columna){
+     private Celda generarEsquinaMapa( Coordenada coordenada){
         Celda nuevaCelda;
         fabrica = new FabricaCeldaEsquina();
-        //TODO Refactor: Coordenada.determinarEsquina(anchoMapa, altoMapa)
-        if( fila == 0 && columna == 0){
-            nuevaCelda = fabrica.crearCelda(Direccion.NOROESTE);
-        }else if( fila == 0 && columna == this.ancho){
-            nuevaCelda = fabrica.crearCelda(Direccion.NORESTE);
-        }else if( fila == this.altura && columna == 0){
-            nuevaCelda = fabrica.crearCelda(Direccion.SUDOESTE);
-        }else if( fila == this.altura && columna == this.ancho){
-            nuevaCelda = fabrica.crearCelda(Direccion.SUDESTE);
-        }else {
-            throw new CeldaIncorrecta();
-        }
+        Direccion dir = coordenada.determinarEsquina( this.ancho, this.altura );
+        nuevaCelda = fabrica.crearCelda(dir);
+
         return nuevaCelda;
     }
-    private Celda generarBordeMapa(Integer fila, Integer columna){
+    private Celda generarBordeMapa( Coordenada coordenada ){
         Celda nuevaCelda;
         fabrica = new FabricaCeldaBorde();
         //TODO:  ¿Debo protegerme (de nuevo) de la CeldaEsquina?
-        //TODO Refactor: Coordenada.determinarBorde(anchoMapa, altoMapa)
-        if(fila == 0) {
-            nuevaCelda = fabrica.crearCelda(Direccion.NORTE);
-        }else if(fila == this.altura){
-            nuevaCelda = fabrica.crearCelda(Direccion.SUR);
-        }else if(columna == 0){
-            nuevaCelda = fabrica.crearCelda(Direccion.OESTE);
-        }else if (columna == this.ancho) {
-            nuevaCelda = fabrica.crearCelda(Direccion.ESTE);
-        }else{
-            throw new CeldaIncorrecta();
-        }
+        Direccion dir = coordenada.determinarBorde( this.ancho, this.altura);
+        nuevaCelda = fabrica.crearCelda( dir );
 
         return nuevaCelda;
     }
 
-    private Celda generarInternaMapa(Integer fila, Integer columna){
+    private Celda generarInternaMapa( Coordenada coordenada ){
         fabrica = new FabricaCeldaInterna();
         Celda nuevaCelda = fabrica.crearCelda(Direccion.ESTE); //no importa la direccion
         return nuevaCelda;
     }
 
-    public Celda generarNuevaCelda( Integer fila, Integer columna){
+    public Celda generarNuevaCelda( Coordenada coordenada ){
         Celda celda;
-        if( esEsquina(fila, columna) ){
-            celda = this.generarEsquinaMapa(fila, columna);
-        }else if( esBorde(fila, columna) ){
-            celda = this.generarBordeMapa(fila, columna);
+        if( coordenada.esEsquina( this.ancho , this.altura ) ){
+            celda = this.generarEsquinaMapa( coordenada );
+        }else if( coordenada.esBorde( this.ancho , this.altura ) ){
+            celda = this.generarBordeMapa( coordenada );
         }else{
-            celda = this.generarInternaMapa(fila, columna);
+            celda = this.generarInternaMapa( coordenada );
         }
         return celda;
     }

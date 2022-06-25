@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.CeldaIncorrecta;
+import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,106 +17,36 @@ import static org.junit.Assert.assertThrows;
 
 class MapaTest {
     @Test
-    public void pasandoleCoordenadasMapaVerificaSiEsUnaEsquina(){
-        Mapa mapa = new Mapa(5,5);
-
-        boolean resultado = mapa.esEsquina(0,0);
-        boolean esperado = true;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esEsquina(4,0);
-        esperado = true;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esEsquina(0,4);
-        esperado = true;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esEsquina(4,4);
-        esperado = true;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esEsquina(0,1);
-        esperado = false;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esEsquina(1,0);
-        esperado = false;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esEsquina(4,1);
-        esperado = false;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esEsquina(1,4);
-        esperado = false;
-        assertEquals(esperado, resultado);
-
-        assertThrows(CeldaIncorrecta.class, () -> mapa.esEsquina(5,5));
-    }
-
-    @Test
-    public void pasandoleCoordenadasMapaVerificaSiEsUnBorde() {
-        Mapa mapa = new Mapa(5, 5);
-    //TODO: Refactor a Coordenada.
-        boolean resultado = mapa.esBorde(0, 0);
-        boolean esperado = false;
-        assertEquals(esperado, resultado);
-
-
-        resultado = mapa.esBorde(4, 0);
-        esperado = false;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esBorde(0, 4);
-        esperado = false;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esBorde(4, 4);
-        esperado = false;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esBorde(0, 1);
-        esperado = true;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esBorde(1, 0);
-        esperado = true;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esBorde(4, 1);
-        esperado = true;
-        assertEquals(esperado, resultado);
-
-        resultado = mapa.esBorde(1, 4);
-        esperado = true;
-        assertEquals(esperado, resultado);
-
-        assertThrows(CeldaIncorrecta.class, () -> mapa.esEsquina(5, 5));
-    }
-    
-    @Test
     public void mapaEsCapazDeGenerarCorrectamenteCeldasEsquinasSegunLasCoordenadas(){
         Mapa mapa = new Mapa(2,2);
         //TODO: Mockear Fabrica.
         FabricaCelda fabrica = new FabricaCeldaEsquina();
-        Celda resultado = mapa.generarNuevaCelda(0,0);
+
+        Coordenada coord = new Coordenada(0,0);
+        Celda resultado = mapa.generarNuevaCelda(coord );
         Celda esperado = fabrica.crearCelda(Direccion.NOROESTE);
         assertEquals(esperado, resultado);
-        
-        resultado = mapa.generarNuevaCelda(0,1);
+
+        coord = new Coordenada(0,1);
+        resultado = mapa.generarNuevaCelda(coord);
         esperado = fabrica.crearCelda(Direccion.NORESTE);
         assertEquals(esperado, resultado);
 
-        resultado = mapa.generarNuevaCelda(1,1);
+        coord = new Coordenada(1,1);
+        resultado = mapa.generarNuevaCelda(coord);
         esperado = fabrica.crearCelda(Direccion.SUDESTE);
         assertEquals(esperado, resultado);
 
-        resultado = mapa.generarNuevaCelda(1,0);
+
+        coord = new Coordenada(1,0);
+        resultado = mapa.generarNuevaCelda(coord);
         esperado = fabrica.crearCelda(Direccion.SUDESTE);
         assertEquals(esperado, resultado);
 
-        assertThrows(CeldaIncorrecta.class, ()-> mapa.generarNuevaCelda(2,2));
+        assertThrows(PosicionInvalida.class, ()-> {
+            Coordenada coords = new Coordenada(2,2);
+            mapa.generarNuevaCelda( coords );
+        });
     }
 
     @Test
@@ -123,23 +54,30 @@ class MapaTest {
         Mapa mapa = new Mapa(3,3);
         //TODO: Mockear Fabrica.
         FabricaCelda fabrica = new FabricaCeldaBorde();
-        Celda resultado = mapa.generarNuevaCelda(0,1);
+        Coordenada coord = new Coordenada(0,1);
         Celda esperado = fabrica.crearCelda(Direccion.NORTE);
+        Celda resultado = mapa.generarNuevaCelda( coord );
         assertEquals(esperado, resultado);
 
-        resultado = mapa.generarNuevaCelda(1,0);
+        coord = new Coordenada(1,0);
+        resultado = mapa.generarNuevaCelda( coord );
         esperado = fabrica.crearCelda(Direccion.OESTE);
         assertEquals(esperado, resultado);
 
-        resultado = mapa.generarNuevaCelda(2,1);
+        coord = new Coordenada(2,1);
+        resultado = mapa.generarNuevaCelda( coord );
         esperado = fabrica.crearCelda(Direccion.SUR);
         assertEquals(esperado, resultado);
 
-        resultado = mapa.generarNuevaCelda(1,2);
+        coord = new Coordenada(1,2);
+        resultado = mapa.generarNuevaCelda( coord );
         esperado = fabrica.crearCelda(Direccion.OESTE);
         assertEquals(esperado, resultado);
 
-        assertThrows(CeldaIncorrecta.class, ()-> mapa.generarNuevaCelda(3,3));
+        assertThrows(PosicionInvalida.class, ()-> {
+            Coordenada coords = new Coordenada(3, 3);
+            mapa.generarNuevaCelda( coords );
+        });
     }
 
     @Test
@@ -147,22 +85,29 @@ class MapaTest {
         Mapa mapa = new Mapa(4,4);
         //TODO: Mockear Fabrica.
         FabricaCeldaInterna fabrica = new FabricaCeldaInterna();
-        Celda resultado = mapa.generarNuevaCelda(1,1);
+        Coordenada coord = new Coordenada(1,1);
+        Celda resultado = mapa.generarNuevaCelda( coord );
         Celda esperado = fabrica.crearCelda();
         assertEquals(esperado, resultado);
 
-        resultado = mapa.generarNuevaCelda(1,2);
+        coord = new Coordenada(1,2);
+        resultado = mapa.generarNuevaCelda(coord );
         esperado = fabrica.crearCelda();
         assertEquals(esperado, resultado);
 
-        resultado = mapa.generarNuevaCelda(2,1);
+        coord = new Coordenada(2,1);
+        resultado = mapa.generarNuevaCelda(coord );
         esperado = fabrica.crearCelda();
         assertEquals(esperado, resultado);
 
-        resultado = mapa.generarNuevaCelda(2,2);
+        coord = new Coordenada(2,2);
+        resultado = mapa.generarNuevaCelda(coord );
         esperado = fabrica.crearCelda();
         assertEquals(esperado, resultado);
 
-        assertThrows(CeldaIncorrecta.class, ()-> mapa.generarNuevaCelda(4,4));
+        assertThrows(PosicionInvalida.class, ()-> {
+            Coordenada coords = new Coordenada(4,4);
+            mapa.generarNuevaCelda( coords );
+        });
     }
 }

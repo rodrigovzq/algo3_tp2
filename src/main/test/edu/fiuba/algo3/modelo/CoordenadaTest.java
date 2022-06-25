@@ -43,11 +43,11 @@ class CoordenadaTest {
     public void creoUnaCoordenadaYMuevoLaPosicionEnDistintasDirecciones(){
         Coordenada coord = new Coordenada(0,0);
 
-        coord.mover(Direccion.NORTE);
+        coord.mover(Direccion.SUR);
         Coordenada esperado = new Coordenada(0,1);
         assertEquals(esperado, coord);
 
-        coord.mover(Direccion.SUR);
+        coord.mover(Direccion.NORTE);
         esperado = new Coordenada(0,0);
         assertEquals(esperado, coord);
 
@@ -60,7 +60,7 @@ class CoordenadaTest {
         esperado = new Coordenada(0,0);
         assertEquals(esperado, coord);
 
-        assertThrows( PosicionInvalida.class, () -> coord.mover(Direccion.SUR));
+        assertThrows( PosicionInvalida.class, () -> coord.mover(Direccion.NORTE));
         assertThrows( PosicionInvalida.class, () -> coord.mover(Direccion.OESTE));
     }
     @Test
