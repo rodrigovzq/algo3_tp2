@@ -40,48 +40,58 @@ public class Mapa {
         Celda filaAnteriorCelda = null;
         boolean setDirY = false;
 
-        //TODO Refactor: Encapsular fila y columna en Coordenada?
-        //Que Coordenada si es una esquina o borde o no, pasandole el tamaño del mapa.
-        //Que sepa como mover los indices según la dirección que le pasemos.
+        //Inicializo la primera fila.
+        while( !(coord.determinarEsquina( this.ancho, this.altura ) == Direccion.NORESTE )){
+            coord.mover(dirX);
+            //Creo la Celda que necesito
+            //coord = new Coordenada(columna, fila);
+            nuevaCelda = this.generarNuevaCelda( coord );
+            //Seteo en el sentido X la nueva Celda.
+            anteriorCelda.setCelda(nuevaCelda, dirX);
+            anteriorCelda = nuevaCelda;
 
+        }
+        //Cuando llega al final de una fila.
+        dirX = dirX.opuesto(); //Recorremos al reves.
+
+        //Seteo unicamente en direccion Y.
+        setDirY = true;
+        // Bajo una fila
+        coord.mover(dirY);
+
+        //Seteo el "pivot" de la fila de arriba. (Permite conectar verticalmente las celdas)
+        filaAnteriorCelda = anteriorCelda;
+
+        //Continua construyendo el resto de filas.
         while( !( coord.determinarEsquina(this.ancho, this.altura) == esquinaFIN ) ) {
+            // TODO: Celda tendrá coordenada? Si es así, hay que inicalizar una nueva coordenada
+            //  en cada iteracion.
             do{
                 if( setDirY ) {
-                    //coord = new Coordenada(columna, fila);
-                    nuevaCelda = this.generarNuevaCelda( coord );
-                    //Comienza una nueva fila. Solo seteo en direccion Y.
-                    //TODO Refactor: Usar filaAnterior. setDirY significa que no seteo en X.
-                    anteriorCelda.setCelda(nuevaCelda, dirY);
                     setDirY = false;
+                    nuevaCelda = this.generarNuevaCelda( coord );
                 }else {
                     coord.mover(dirX);
-                    //Creo la Celda que necesito
-                    //coord = new Coordenada(columna, fila);
                     nuevaCelda = this.generarNuevaCelda( coord );
-                    //Seteo en el sentido X la nueva Celda.
                     anteriorCelda.setCelda(nuevaCelda, dirX);
-
-                    //Seteo verticalmente con la celda de la fila anterior.
-                    if( filaAnteriorCelda != null)
-                        filaAnteriorCelda.setCelda(nuevaCelda, dirY);
                 }
 
-                if( filaAnteriorCelda != null && !coord.esBorde(this.ancho, this.altura))
+                //Seteo verticalmente con la celda de la fila anterior.
+                filaAnteriorCelda.setCelda(nuevaCelda, dirY);
+
+                //Cuando llego a un borde, no puedo pedir la celda adyacente.
+                if(!coord.esBorde(this.ancho, this.altura))
                         filaAnteriorCelda = filaAnteriorCelda.getCelda(dirX);
 
-
-                //Me muevo sobre la misma fila.
                 anteriorCelda = nuevaCelda;
 
             }while( !(coord.determinarBorde( this.ancho, this.altura ) == dirX ));
-            //Cuando llega al final de una fila.
-            dirX = dirX.opuesto(); //Recorremos al reves.
 
-            //Seteo en direccion Y. (Bajo una fila)
+            dirX = dirX.opuesto();
+
             setDirY = true;
             coord.mover(dirY);
 
-            //Seteo el pivot de la fila de arriba. (Permite conectar verticalmente las celdas)
             filaAnteriorCelda = anteriorCelda;
         }
     }
