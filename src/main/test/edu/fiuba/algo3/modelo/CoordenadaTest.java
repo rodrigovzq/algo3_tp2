@@ -93,6 +93,18 @@ class CoordenadaTest {
         esperado = false;
         assertEquals(esperado, resultado);
 
+        coord = new Coordenada(0,3 );
+
+        resultado = coord.esEsquina( 3, 4 );
+        esperado = true;
+        assertEquals(esperado, resultado);
+
+        coord = new Coordenada(2,0 );
+
+        resultado = coord.esEsquina( 3, 4 );
+        esperado = true;
+        assertEquals(esperado, resultado);
+
         assertThrows( MapaInvalido.class, () -> {
             Coordenada coordenada = new Coordenada(2,3 );
             coordenada.esEsquina(1,1);
@@ -103,5 +115,59 @@ class CoordenadaTest {
         } );
 
     }
+
+    @Test
+    public void creoUnaCoordenadaYEsCapazDeReconocerSiEsUnaBordePasandoleElTamanioDelMapa(){
+        Coordenada coord = new Coordenada(3,3);
+
+        boolean resultado = coord.esBorde( 4, 4 );
+        boolean esperado = false;
+        assertEquals(esperado, resultado);
+
+        resultado = coord.esBorde( 5, 4 );
+        esperado = true;
+        assertEquals(esperado, resultado);
+
+        resultado = coord.esBorde( 4, 5 );
+        esperado = true;
+        assertEquals(esperado, resultado);
+
+        coord = new Coordenada(0,0 );
+
+        resultado = coord.esBorde( 3, 4 );
+        esperado = false;
+        assertEquals(esperado, resultado);
+
+        coord = new Coordenada(0,1 );
+        
+        resultado = coord.esBorde( 2, 2 );
+        esperado = false;
+        assertEquals(esperado, resultado);
+
+        resultado = coord.esBorde( 3, 3 );
+        esperado = true;
+        assertEquals(esperado, resultado);
+        
+        coord = new Coordenada(1,0 );
+
+        resultado = coord.esBorde( 2, 2 );
+        esperado = false;
+        assertEquals(esperado, resultado);
+
+        resultado = coord.esBorde( 3, 3 );
+        esperado = true;
+        assertEquals(esperado, resultado);
+
+        assertThrows( MapaInvalido.class, () -> {
+            Coordenada coordenada = new Coordenada(2,3 );
+            coordenada.esBorde(1,1);
+        } );
+        assertThrows( PosicionInvalida.class, () -> {
+            Coordenada coordenada = new Coordenada(2,3 );
+            coordenada.esBorde(2, 3);
+        } );
+
+    }
+
 
 }

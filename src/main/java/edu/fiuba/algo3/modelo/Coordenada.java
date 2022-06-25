@@ -61,13 +61,22 @@ public class Coordenada {
         if( (posX - ancho >= 0) || (posX - ancho >= 0)){
             throw new PosicionInvalida();
         }
-        if( (posX == 0) && (this.posY == 0)){
-            return true;
-        }
-        if( (posX == ancho - 1) && (this.posY == altura - 1)){
-            return true;
+        if( (posX == 0) || (posX == ancho - 1) ){
+            if((this.posY == 0)  || (this.posY == altura - 1)){
+                return true;
+            }
         }
 
         return false;
     }
+
+    public boolean esBorde(Integer ancho, Integer altura) {
+        if( !this.esEsquina(ancho, altura) ) {
+            if ((posX == 0) || (this.posY == 0) || (posX == ancho - 1) || (this.posY == altura - 1)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
