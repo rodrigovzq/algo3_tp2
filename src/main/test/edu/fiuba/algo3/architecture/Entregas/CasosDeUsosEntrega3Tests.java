@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.architecture.Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Celda.Obstaculo.ControlPolicial;
 import edu.fiuba.algo3.modelo.Celda.Obstaculo.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Celda.Sorpresa.Favorable;
@@ -26,15 +27,15 @@ public class CasosDeUsosEntrega3Tests {
         IVehiculo mockIVehiculo = new Auto();
         GeneradorAleatorio mockGenerador = mock(GeneradorAleatorio.class);
 
-        Celda celdaAdyacente = new Celda(new ControlPolicial(mockGenerador));
-        Celda posicionInicial = new Celda( new ControlPolicial(mockGenerador), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda celdaAdyacente = new CeldaInterna(new ControlPolicial(mockGenerador));
+        Celda posicionInicial = new CeldaInterna( new ControlPolicial(mockGenerador), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
         when(mockGenerador.aplicar(mockIVehiculo.obtenerProbabilidadDeSerDetenido())).thenReturn(true);
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, mockIVehiculo);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, mockIVehiculo);
 
-        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, mockIVehiculo);
+        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE);
         Evento esperado = new Evento( new Penalizacion(3), new NoCambiarVehiculo(), new Avanzar() );
 
         esperado.setDireccion(Direccion.ESTE);
@@ -48,15 +49,15 @@ public class CasosDeUsosEntrega3Tests {
         IVehiculo mockIVehiculo = new Auto();
         GeneradorAleatorio mockGenerador = mock(GeneradorAleatorio.class);
 
-        Celda celdaAdyacente = new Celda(new ControlPolicial(mockGenerador));
-        Celda posicionInicial = new Celda( new ControlPolicial(mockGenerador), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda celdaAdyacente = new CeldaInterna(new ControlPolicial(mockGenerador));
+        Celda posicionInicial = new CeldaInterna( new ControlPolicial(mockGenerador), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
         when(mockGenerador.aplicar(mockIVehiculo.obtenerProbabilidadDeSerDetenido())).thenReturn(false);
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, mockIVehiculo);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, mockIVehiculo);
 
-        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE, mockIVehiculo);
+        Evento resultado = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE);
         Evento esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar() );
 
         esperado.setDireccion(Direccion.ESTE);
