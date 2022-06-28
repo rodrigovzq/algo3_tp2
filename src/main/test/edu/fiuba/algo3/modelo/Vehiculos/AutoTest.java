@@ -32,9 +32,7 @@ class AutoTest {
         assertEquals(esperado, resultado);
     }
     @Test
-    public void avanzarSobreUnControlPolicialPenalizaConUnaProbabilidad(){
-        // Inyectar la dependencia del que tiene la responsabilidad de sortea
-        // la probabilidad ?
+    public void avanzarSobreUnControlPolicialPolicialYNoSerDetenido(){
     }
     @Test
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza(){

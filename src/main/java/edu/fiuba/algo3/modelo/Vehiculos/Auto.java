@@ -11,14 +11,13 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class Auto implements IVehiculo {
 
-    public static final int PENALIZACION_POZO = 3;
+    private static final int PENALIZACION_POZO = 3;
     
     private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.5f;
-    private static final int PENALIZACION_POLICIAL=3;
+    private static final Integer PENALIZACION_CONTROL_POLICIAL = 3 ;
 
     @Override
     public  Evento avanzarComun() {
@@ -32,12 +31,7 @@ public class Auto implements IVehiculo {
 
     @Override
     public  Evento avanzarControlPolicial() {
-        Random random = new Random();
-        if (this.obtenerProbabilidadDeSerDetenido()>random.nextDouble()){
-            return new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new Avanzar());
-        }else{
-            return new Evento(new Penalizacion(PENALIZACION_POLICIAL),new NoCambiarVehiculo(),new NoCambiarPosicion());
-        }
+        return new Evento(new Penalizacion(PENALIZACION_CONTROL_POLICIAL), new NoCambiarVehiculo(), new Avanzar());
     }
 
     @Override
