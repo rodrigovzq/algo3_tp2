@@ -96,14 +96,15 @@ public class Coordenada {
     }
 
     public Direccion determinarBorde(Integer ancho, Integer altura) {
-        if(this.posY == 0) {
-            return Direccion.NORTE;
-        }else if(this.posY == altura-1){
-            return Direccion.SUR;
-        }else if(this.posX == 0){
+        // Si yo le paso una esquina, no va a lanzar una excepcion, lo va a detectar como un borde ESTE o OESTE.
+        if(this.posX == 0){
             return Direccion.OESTE;
         }else if (this.posX == ancho-1) {
             return Direccion.ESTE;
+        }else if(this.posY == 0) {
+            return Direccion.NORTE;
+        }else if(this.posY == altura-1){
+            return Direccion.SUR;
         }else{
             throw new DireccionInvalida("determinarBorde :");
         }

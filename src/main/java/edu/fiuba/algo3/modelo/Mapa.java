@@ -13,11 +13,15 @@ import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 public class Mapa {
     private Integer ancho;
     private Integer altura;
-
+    private Celda esquinaSuperiorIzquierda;
     private FabricaCelda fabrica;
     public Mapa(Integer ancho, Integer altura) {
         this.ancho = ancho;
         this.altura = altura;
+    }
+
+    public Celda getEsquinaSuperiorIzquierda() {
+        return esquinaSuperiorIzquierda;
     }
 
     //TODO: Test. ¿Como?
@@ -27,6 +31,7 @@ public class Mapa {
         int fila = 0;
         Coordenada coord = new Coordenada( columna , fila);
         Celda anteriorCelda = this.generarEsquinaMapa( coord );
+        esquinaSuperiorIzquierda = anteriorCelda;
 
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
@@ -39,9 +44,9 @@ public class Mapa {
         Celda nuevaCelda;
         Celda filaAnteriorCelda = null;
         boolean setDirY = false;
-
+        boolean condCorte = false;
         //Inicializo la primera fila.
-        while( !(coord.determinarEsquina( this.ancho, this.altura ) == Direccion.NORESTE )){
+        do{
             coord.mover(dirX);
             //Creo la Celda que necesito
             //coord = new Coordenada(columna, fila);
@@ -50,22 +55,25 @@ public class Mapa {
             anteriorCelda.setCelda(nuevaCelda, dirX);
             anteriorCelda = nuevaCelda;
 
-        }
-        //Cuando llega al final de una fila.
-        dirX = dirX.opuesto(); //Recorremos al reves.
+            condCorte = coord.esEsquina( this.ancho, this.altura);
+            if( condCorte )
+                condCorte = ( coord.determinarEsquina( this.ancho, this.altura) == Direccion.NORESTE ) ;
 
-        //Seteo unicamente en direccion Y.
-        setDirY = true;
-        // Bajo una fila
-        coord.mover(dirY);
-
-        //Seteo el "pivot" de la fila de arriba. (Permite conectar verticalmente las celdas)
-        filaAnteriorCelda = anteriorCelda;
+        }while( !condCorte );
 
         //Continua construyendo el resto de filas.
-        while( !( coord.determinarEsquina(this.ancho, this.altura) == esquinaFIN ) ) {
-            // TODO: Celda tendrá coordenada? Si es así, hay que inicalizar una nueva coordenada
-            //  en cada iteracion.
+        do{
+            //Cuando llega al final de una fila.
+            dirX = dirX.opuesto(); //Recorremos al reves.
+
+            //Seteo unicamente en direccion Y.
+            setDirY = true;
+            // Bajo una fila
+            coord.mover(dirY);
+
+            //Seteo el "pivot" de la fila de arriba. (Permite conectar verticalmente las celdas)
+            filaAnteriorCelda = anteriorCelda;
+
             do{
                 if( setDirY ) {
                     setDirY = false;
@@ -79,21 +87,26 @@ public class Mapa {
                 //Seteo verticalmente con la celda de la fila anterior.
                 filaAnteriorCelda.setCelda(nuevaCelda, dirY);
 
-                //Cuando llego a un borde, no puedo pedir la celda adyacente.
-                if(!coord.esBorde(this.ancho, this.altura))
-                        filaAnteriorCelda = filaAnteriorCelda.getCelda(dirX);
+                condCorte = ( coord.esEsquina(this.ancho, this.altura) || coord.esBorde(this.ancho, this.altura) );
+                if( condCorte ) {
+                    condCorte = coord.determinarBorde(this.ancho, this.altura) == dirX;
+                }
+
+                //Cuando llego al borde hacia donde me dirijo, no puedo pedir la celda adyacente.
+                if(!condCorte)
+                    filaAnteriorCelda = filaAnteriorCelda.getCelda(dirX);
 
                 anteriorCelda = nuevaCelda;
+            }while( !condCorte );
 
-            }while( !(coord.determinarBorde( this.ancho, this.altura ) == dirX ));
+            condCorte = coord.esEsquina( this.ancho, this.altura);
+            if( condCorte )
+                condCorte = ( coord.determinarEsquina( this.ancho, this.altura) == esquinaFIN ) ;
 
-            dirX = dirX.opuesto();
+        }while( !condCorte );
+            // TODO: Celda tendrá coordenada? Si es así, hay que inicalizar una nueva coordenada
+            //  en cada iteracion.
 
-            setDirY = true;
-            coord.mover(dirY);
-
-            filaAnteriorCelda = anteriorCelda;
-        }
     }
 
      private Celda generarEsquinaMapa( Coordenada coordenada){
