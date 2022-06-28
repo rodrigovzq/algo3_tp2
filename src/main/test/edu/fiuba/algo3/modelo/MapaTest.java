@@ -177,4 +177,89 @@ class MapaTest {
         assertNotEquals( null, esquinaSE.getCelda(Direccion.OESTE ) );
 
     }
+
+    @Test
+    public void generoUnMapa3x4YPuedoMovermeALoLargoDeTodoElMapa(){
+        Mapa mapa = new Mapa( 3, 4);
+        mapa.generarMapa();
+        Celda esquinaNO = mapa.getEsquinaSuperiorIzquierda();
+
+        assertThrows(DireccionInvalida.class, () -> esquinaNO.getCelda(Direccion.OESTE));
+        assertNotEquals( null, esquinaNO.getCelda(Direccion.SUR ) );
+        assertThrows(DireccionInvalida.class, () -> esquinaNO.getCelda(Direccion.NORTE));
+        assertNotEquals( null, esquinaNO.getCelda(Direccion.ESTE ) );
+
+        Celda bordeO1 = esquinaNO.getCelda(Direccion.SUR);
+        Celda bordeO2 = bordeO1.getCelda(Direccion.SUR);
+        Celda esquinaSO = bordeO2.getCelda(Direccion.SUR);
+
+
+        assertThrows(DireccionInvalida.class, () -> bordeO1.getCelda(Direccion.OESTE));
+        assertNotEquals( null, bordeO1.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, bordeO1.getCelda(Direccion.SUR ) );
+        assertNotEquals( null, bordeO1.getCelda(Direccion.ESTE ) );
+
+        assertThrows(DireccionInvalida.class, () -> bordeO2.getCelda(Direccion.OESTE));
+        assertNotEquals( null, bordeO2.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, bordeO2.getCelda(Direccion.SUR ) );
+        assertNotEquals( null, bordeO2.getCelda(Direccion.ESTE ) );
+
+
+        assertThrows(DireccionInvalida.class, () -> esquinaSO.getCelda(Direccion.OESTE));
+        assertThrows(DireccionInvalida.class, () -> esquinaSO.getCelda(Direccion.SUR));
+        assertNotEquals( null, esquinaSO.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, esquinaSO.getCelda(Direccion.ESTE ) );
+
+
+        Celda bordeN = esquinaNO.getCelda(Direccion.ESTE);
+        Celda centro1 = bordeO1.getCelda(Direccion.ESTE);
+        Celda centro2 = bordeO2.getCelda(Direccion.ESTE);
+        Celda bordeS = esquinaSO.getCelda(Direccion.ESTE);
+
+        assertThrows(DireccionInvalida.class, () -> bordeN.getCelda(Direccion.NORTE));
+        assertNotEquals( null, bordeN.getCelda(Direccion.SUR ) );
+        assertNotEquals( null, bordeN.getCelda(Direccion.ESTE ) );
+        assertNotEquals( null, bordeN.getCelda(Direccion.OESTE ) );
+
+        assertThrows(DireccionInvalida.class, () -> bordeS.getCelda(Direccion.SUR));
+        assertNotEquals( null, bordeS.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, bordeS.getCelda(Direccion.ESTE ) );
+        assertNotEquals( null, bordeS.getCelda(Direccion.OESTE ) );
+
+        assertNotEquals( null, centro1.getCelda(Direccion.SUR ) );
+        assertNotEquals( null, centro1.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, centro1.getCelda(Direccion.ESTE ) );
+        assertNotEquals( null, centro1.getCelda(Direccion.OESTE ) );
+
+        assertNotEquals( null, centro2.getCelda(Direccion.SUR ) );
+        assertNotEquals( null, centro2.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, centro2.getCelda(Direccion.ESTE ) );
+        assertNotEquals( null, centro2.getCelda(Direccion.OESTE ) );
+
+        Celda esquinaNE = bordeN.getCelda(Direccion.ESTE);
+        Celda bordeE1 = centro1.getCelda(Direccion.ESTE);
+        Celda bordeE2 = centro2.getCelda(Direccion.ESTE);
+        Celda esquinaSE = bordeS.getCelda(Direccion.ESTE);
+
+        assertThrows(DireccionInvalida.class, () -> esquinaNE.getCelda(Direccion.ESTE));
+        assertThrows(DireccionInvalida.class, () -> esquinaNE.getCelda(Direccion.NORTE));
+        assertNotEquals( null, esquinaNE.getCelda(Direccion.SUR ) );
+        assertNotEquals( null, esquinaNE.getCelda(Direccion.OESTE ) );
+
+        assertThrows(DireccionInvalida.class, () -> bordeE1.getCelda(Direccion.ESTE));
+        assertNotEquals( null, bordeE1.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, bordeE1.getCelda(Direccion.SUR ) );
+        assertNotEquals( null, bordeE1.getCelda(Direccion.OESTE ) );
+
+        assertThrows(DireccionInvalida.class, () -> bordeE2.getCelda(Direccion.ESTE));
+        assertNotEquals( null, bordeE2.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, bordeE2.getCelda(Direccion.SUR ) );
+        assertNotEquals( null, bordeE2.getCelda(Direccion.OESTE ) );
+
+        assertThrows(DireccionInvalida.class, () -> esquinaSE.getCelda(Direccion.ESTE));
+        assertThrows(DireccionInvalida.class, () -> esquinaSE.getCelda(Direccion.SUR));
+        assertNotEquals( null ,esquinaSE.getCelda(Direccion.NORTE ) );
+        assertNotEquals( null, esquinaSE.getCelda(Direccion.OESTE ) );
+
+    }
 }
