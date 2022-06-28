@@ -12,7 +12,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
-public class iniciarJuegoControlador extends EventHandler {
+public class iniciarJuegoControlador implements EventHandler {
     private final Stage stage;
     String nombreJugador;
     String nombreVehiculo;

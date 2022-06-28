@@ -2,6 +2,7 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.vista.ContenedorConfiguracion;
 import edu.fiuba.algo3.vista.ContenedorMenu;
+import edu.fiuba.algo3.vista.MapaVista;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,7 +14,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("Juego GPS Challenge");
-        ContenedorMenu menu = new ContenedorMenu(stage);
+        //ContenedorMenu menu = new ContenedorMenu(stage);
+        MapaVista m = new MapaVista();
+        m.mostrarMapa(stage);
     }
 
 
