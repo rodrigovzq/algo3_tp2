@@ -22,11 +22,11 @@ public class Jugador {
         this.puntaje = new Movimiento(MOVIMIENTOS_INICIALES);
     }
 
-    public Evento avanzarHaciaLaDireccion(Direccion direccion, IVehiculo vehiculo){
+    public Evento avanzarHaciaLaDireccion(Direccion direccion){
         Evento evento = null;
         Celda nuevaPosicion = posicion.getCelda(direccion);
 
-        evento = nuevaPosicion.avanzarEn( vehiculo );
+        evento = nuevaPosicion.avanzarEn( this.vehiculo );
         evento.setDireccion(direccion);
         return evento;
     }
