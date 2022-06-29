@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controlador.CampoTextoEnter;
+import edu.fiuba.algo3.controlador.SelectorMapa;
 import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
@@ -22,17 +24,21 @@ public class ContenedorConfiguracion {
     String nombreJugador = "";
     IVehiculo vehiculoElegido;
     Stage stage;
-    private Mapa tamanioMapa;
+    private Mapa mapaJuego;
 
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
+        //TODO: Valor default de mapa.
+        mapaJuego = new Mapa(10,20);
+        //TODO: Valor default de vehiculo.
+        IVehiculo vehiculoElegido = new Auto();
         this.iniciar();
     }
 
 
     private void iniciar(){
         Button botonJugar = new Button("Jugar");
-        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.nombreJugador, this.tamanioMapa, this.vehiculoElegido) );
+        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.nombreJugador, this.mapaJuego, this.vehiculoElegido) );
         Button botonCancelar = new Button("Cancelar");
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
 
@@ -50,41 +56,33 @@ public class ContenedorConfiguracion {
         //TODO: Validar que el nombre no este vacío, ni este ocupado por otros.
         // antes de iniciar el juego.
         TextField campoNombre = new TextField();
-        campoNombre.setOnAction( e -> {
-            nombreJugador = campoNombre.getText();
-        });
-        campoNombre.setMaxWidth(150);
+        CampoTextoEnter enterNombre = new CampoTextoEnter(campoNombre, this.nombreJugador);
+        enterNombre.setMensajeIncorrecto("Ingresá un nombre válido.");
+        campoNombre.setOnKeyPressed( enterNombre );
+        campoNombre.setMinWidth(200);
         campoNombre.setPromptText("Ingrese un nombre");
 
         //TODO: Mostrar valor seleccionado.
         Group listaVehiculo = emitirOpcionesVehiculos();
 
-        Button boton10X20 = new Button("10x20");
-        boton10X20.setOnAction(e -> {
-            tamanioMapa = new Mapa(10,20);
-        });
+        Button boton10X20 = new Button("10x20"); ;
+        boton10X20.setOnAction(new SelectorMapa(mapaJuego, 10 ,20 ));
+        //TODO: Encapsular botones de mapa, en una
         boton10X20.setCursor(Cursor.HAND);
         boton10X20.setPrefSize(100,100);
 
         Button boton20X30 = new Button("20X30");
-        boton20X30.setOnAction(e -> {
-            tamanioMapa = new Mapa(20,30);
-        });
+        boton20X30.setOnAction(new SelectorMapa(mapaJuego, 20 ,30 ));
         boton20X30.setCursor(Cursor.HAND);
         boton20X30.setPrefSize(100,100);
 
         Button boton30X30 = new Button("30X30");
-        boton30X30.setOnAction(e -> {
-            tamanioMapa = new Mapa(30,30);
-        });
+        boton30X30.setOnAction(new SelectorMapa(mapaJuego, 30 ,30 ));
         boton30X30.setCursor(Cursor.HAND);
         boton30X30.setPrefSize(100,100);
 
         Button boton30X40 = new Button("30X40");
-        boton10X20.setOnAction(e -> {
-            tamanioMapa = new Mapa(30,40);
-        });
-
+        boton30X40.setOnAction(new SelectorMapa(mapaJuego, 30 ,40 ));
         boton30X40.setCursor(Cursor.HAND);
         boton30X40.setPrefSize(100,100);
 

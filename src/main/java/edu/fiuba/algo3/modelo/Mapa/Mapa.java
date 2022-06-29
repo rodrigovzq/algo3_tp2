@@ -151,4 +151,17 @@ public class Mapa {
         }
         return celda;
     }
+
+    //TODO: Borrar. Es solo para debugear.
+    public String asString(){
+        return "(" + this.ancho + " x " + this.altura + ")";
+    }
+
+    public void setAncho(Integer ancho) {
+        this.ancho = ancho;
+    }
+
+    public void setAltura(Integer altura) {
+        this.altura = altura;
+    }
 }
