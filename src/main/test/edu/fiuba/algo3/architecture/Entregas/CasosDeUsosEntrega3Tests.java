@@ -2,9 +2,8 @@ package edu.fiuba.algo3.architecture.Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.ControlPolicial;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.GeneradorAleatorio;
-import edu.fiuba.algo3.modelo.Celda.Sorpresa.Favorable;
+import edu.fiuba.algo3.modelo.Obstaculo.ControlPolicial;
+import edu.fiuba.algo3.modelo.Obstaculo.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;

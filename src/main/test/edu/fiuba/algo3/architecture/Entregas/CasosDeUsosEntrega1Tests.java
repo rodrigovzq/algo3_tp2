@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.architecture.Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Comun;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Piquete;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Pozo;
+import edu.fiuba.algo3.modelo.Obstaculo.Piquete;
+import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo;
+package edu.fiuba.algo3.modelo.Obstaculo;
 
 import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;

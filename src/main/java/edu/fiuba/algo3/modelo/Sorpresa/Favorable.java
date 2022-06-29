@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Celda.Sorpresa;
+package edu.fiuba.algo3.modelo.Sorpresa;
 
 import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Evento.Evento;
