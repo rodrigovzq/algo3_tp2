@@ -47,7 +47,8 @@ public class ContenedorConfiguracion {
         Label mapa = new Label("Mapas");
         mapa.setFont(new Font(15));
 
-        //campo de texto
+        //TODO: Validar que el nombre no este vacío, ni este ocupado por otros.
+        // antes de iniciar el juego.
         TextField campoNombre = new TextField();
         campoNombre.setOnAction( e -> {
             nombreJugador = campoNombre.getText();
@@ -55,62 +56,64 @@ public class ContenedorConfiguracion {
         campoNombre.setMaxWidth(150);
         campoNombre.setPromptText("Ingrese un nombre");
 
+        //TODO: Mostrar valor seleccionado.
         Group listaVehiculo = emitirOpcionesVehiculos();
 
-        Button boton20X20 = new Button("20x20");
-        boton20X20.setOnAction(e -> {
-            tamanioMapa = new Mapa(20,20);
+        Button boton10X20 = new Button("10x20");
+        boton10X20.setOnAction(e -> {
+            tamanioMapa = new Mapa(10,20);
         });
-        boton20X20.setCursor(Cursor.HAND);
-        boton20X20.setPrefSize(100,100);
+        boton10X20.setCursor(Cursor.HAND);
+        boton10X20.setPrefSize(100,100);
 
-        Button boton25X25 = new Button("25X25");
-        boton20X20.setOnAction(e -> {
-            tamanioMapa = new Mapa(20,20);
+        Button boton20X30 = new Button("20X30");
+        boton20X30.setOnAction(e -> {
+            tamanioMapa = new Mapa(20,30);
         });
-        boton25X25.setCursor(Cursor.HAND);
-        boton25X25.setPrefSize(100,100);
+        boton20X30.setCursor(Cursor.HAND);
+        boton20X30.setPrefSize(100,100);
 
         Button boton30X30 = new Button("30X30");
-        boton20X20.setOnAction(e -> {
-            tamanioMapa = new Mapa(20,20);
+        boton30X30.setOnAction(e -> {
+            tamanioMapa = new Mapa(30,30);
         });
         boton30X30.setCursor(Cursor.HAND);
         boton30X30.setPrefSize(100,100);
 
-        Button boton35X35 = new Button("35X35");
-        boton20X20.setOnAction(e -> {
-            tamanioMapa = new Mapa(20,20);
+        Button boton30X40 = new Button("30X40");
+        boton10X20.setOnAction(e -> {
+            tamanioMapa = new Mapa(30,40);
         });
-        boton35X35.setCursor(Cursor.HAND);
-        boton35X35.setPrefSize(100,100);
 
-        HBox rootH1 = new HBox();
-        HBox rootH2 = new HBox();
-        HBox rootH3 = new HBox();
-        HBox rootH4 = new HBox();
-        HBox rootH5 = new HBox();
+        boton30X40.setCursor(Cursor.HAND);
+        boton30X40.setPrefSize(100,100);
 
-        rootH1.getChildren().addAll(nombre, campoNombre);
-        rootH1.setAlignment(Pos.CENTER);
+        HBox layout_nombre = new HBox();
+        HBox layout_vehiculo = new HBox();
+        HBox layout_mapas_1 = new HBox();
+        HBox layout_mapas2 = new HBox();
+        HBox layout_salir_jugar = new HBox();
 
-        rootH2.getChildren().addAll(vehiculo, listaVehiculo);
-        rootH2.setAlignment(Pos.CENTER);
+        layout_nombre.getChildren().addAll(nombre, campoNombre);
+        layout_nombre.setAlignment(Pos.CENTER);
 
-        rootH3.getChildren().addAll(boton20X20, boton25X25);
-        rootH3.setAlignment(Pos.CENTER);
+        layout_vehiculo.getChildren().addAll(vehiculo, listaVehiculo);
+        layout_vehiculo.setAlignment(Pos.CENTER);
 
-        rootH4.getChildren().addAll(boton30X30, boton35X35);
-        rootH4.setAlignment(Pos.CENTER);
+        layout_mapas_1.getChildren().addAll(boton10X20, boton20X30);
+        layout_mapas_1.setAlignment(Pos.CENTER);
 
-        rootH5.getChildren().addAll(botonCancelar, botonJugar);
+        layout_mapas2.getChildren().addAll(boton30X30, boton30X40);
+        layout_mapas2.setAlignment(Pos.CENTER);
 
-        root.getChildren().addAll(rootH1,rootH2,mapa,rootH3,rootH4,rootH5);
+        layout_salir_jugar.getChildren().addAll(botonCancelar, botonJugar);
 
-        HBox.setMargin(boton20X20,new Insets(10,10,10,10));
-        HBox.setMargin(boton25X25,new Insets(15,10,10,10));
+        root.getChildren().addAll(layout_nombre,layout_vehiculo,mapa,layout_mapas_1,layout_mapas2, layout_salir_jugar);
+
+        HBox.setMargin(boton10X20,new Insets(10,10,10,10));
+        HBox.setMargin(boton20X30,new Insets(15,10,10,10));
         HBox.setMargin(boton30X30,new Insets(15,10,10,10));
-        HBox.setMargin(boton35X35,new Insets(15,10,10,10));
+        HBox.setMargin(boton30X40,new Insets(15,10,10,10));
 
         HBox.setMargin(botonCancelar, new Insets(10,100,10,10));
         HBox.setMargin(botonJugar, new Insets(10,10,10,350));

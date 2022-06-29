@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -15,8 +16,8 @@ public class VentanaConfirmacion {
         //Bloquea actividad en otras ventanas.
         nueva_ventana.initModality( Modality.APPLICATION_MODAL );
         nueva_ventana.setTitle( titulo );
-        nueva_ventana.setMinWidth(500);
-        nueva_ventana.setMinHeight(500);
+        nueva_ventana.setMinWidth(350);
+        nueva_ventana.setMinHeight(60);
 
         Label label = new Label();
         label.setText( pregunta );
@@ -34,13 +35,17 @@ public class VentanaConfirmacion {
             resultado = false;
         } );
 
+        HBox layout_botones = new HBox();
         VBox layout = new VBox();
 
-        layout.getChildren().addAll(label, botonSi, botonNo);
+        layout_botones.getChildren().addAll(botonSi, botonNo);
+        layout_botones.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(label, layout_botones);
         layout.setAlignment(Pos.CENTER);
 
         Scene escena  = new Scene(layout);
         nueva_ventana.setScene( escena );
+
         //Para volver a la ventana anterior, pide cerrar la ventana.
         nueva_ventana.showAndWait();
         return resultado;

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo;
+package edu.fiuba.algo3.modelo.Obstaculo;
 
 import edu.fiuba.algo3.modelo.Obstaculo.ControlPolicial;
 import edu.fiuba.algo3.modelo.Obstaculo.GeneradorAleatorio;

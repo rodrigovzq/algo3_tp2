@@ -16,8 +16,6 @@ public class App extends Application {
         ContenedorMenu menu = new ContenedorMenu(stage);
     }
 
-
-
     public static void main(String[] args) {
         launch();
     }

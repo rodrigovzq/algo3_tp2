@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 
 public class ContenedorJuego {
     private Stage stage;
-
     private MapaVista mapaVista;
     private JugadorVista jugadorVista;
     public ContenedorJuego(Stage stage, Jugador jugador) {
@@ -23,7 +22,7 @@ public class ContenedorJuego {
             //  Va a estar compuesta por JugadorVista, PuntajeVista, Mapavista
             //y un par de botones para volver al menu, ver intrucciones etc.
 
-
+        //
         Scene contenido = new Scene( layout );
         this.stage.setScene( contenido );
     }

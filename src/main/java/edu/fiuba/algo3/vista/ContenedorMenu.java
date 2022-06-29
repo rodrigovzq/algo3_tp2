@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controlador.CerrarJuegoBoton;
+import edu.fiuba.algo3.controlador.CerrarJuegoVentana;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,7 +12,7 @@ import javafx.stage.Stage;
 public class ContenedorMenu {
     private Stage stage;
     public ContenedorMenu(Stage stage) {
-        this.stage=stage;
+        this.stage = stage;
         this.iniciar();
     }
     private void iniciar(){
@@ -21,16 +23,20 @@ public class ContenedorMenu {
         botonRanking.setOnAction( e -> new ContenedorRanking( this.stage ));
 
         Button botonInstruciones = new Button("Instrucciones");
+        //TODO: La idea es que sea una ventana Pop Up que muestre las instrucciones.
         botonInstruciones.setOnAction( e -> ContenedorInstrucciones.mostrar());
 
         Button botonSalir = new Button("Salir");
-        stage.setOnCloseRequest( e -> {
-            e.consume(); // Borra el comportamiento default de cerrar la ventana.
-            closeProgram();
-        });
-        botonSalir.setOnAction( e -> closeProgram() );
+
+        //Creo los controladores
+        CerrarJuegoVentana cerrarVentana = new CerrarJuegoVentana( botonSalir );
+        CerrarJuegoBoton cerrarBoton = new CerrarJuegoBoton( this.stage );
+        //Accion al cerrar la ventana con la X
+        stage.setOnCloseRequest( cerrarVentana );
+        botonSalir.setOnAction( cerrarBoton );
 
         Button botonHelpPls = new Button("help pls");
+        //TODO: Ver si sirve para algo o no.
         botonHelpPls.setOnAction( e -> VentanaPopUp.mostrar("Help", "no se como ayudarte") );
 
         VBox root = new VBox();
@@ -47,10 +53,4 @@ public class ContenedorMenu {
         this.stage.show();
     }
 
-    private void closeProgram(){
-        boolean resultado = VentanaConfirmacion.mostrar( "Salir del juego", "¿Estas seguro de salir del juego?");
-        if( resultado ){
-            this.stage.close();
-        }
-    }
 }
