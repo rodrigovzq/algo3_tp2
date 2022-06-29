@@ -10,8 +10,8 @@ public class FabricaCeldaInterna implements FabricaCelda{
     public Celda crearCelda(Direccion dir) {
         return new CeldaInterna( new Comun() );
     }
-
-    //TODO: Solución a la ruptura de interfaz. Sobrecarga de metodos.
+    //Ruptura del contrato, no tiene sentido pasarle una direccion para la creación de una CeldaInterna.
+    //TODO: Solución a la "ruptura" de interfaz? Sobrecarga de metodos.
     public Celda crearCelda() {
         return crearCelda( Direccion.NORTE );
     }

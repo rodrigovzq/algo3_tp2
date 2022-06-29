@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.Excepcion.CoordenadaInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
@@ -16,15 +17,10 @@ public class Coordenada {
     public Coordenada(Integer posX, Integer posY) {
         this.posX = posX;
         this.posY = posY;
+        if( !this.esValida() ){ throw new CoordenadaInvalida(); }
     }
 
     public boolean esValidaEnMapa( Integer ancho, Integer altura){
-        //El ancho mínimo del mapa es 2x2.
-        //TODO: no debería estar aca seguramente esta validación.
-        if( ancho < 2 || altura < 2){
-            throw new MapaInvalido();
-        }
-
         if( posY < altura && posX < ancho )
             return true;
 
@@ -55,23 +51,6 @@ public class Coordenada {
         return Objects.equals(posY, that.posY) && Objects.equals(posX, that.posX);
     }
 
-    public boolean esEsquina(Integer ancho, Integer altura) {
-        //TODO: no debería estar aca seguramente esta validación.
-        if( ancho < 2 || altura < 2){
-            throw new MapaInvalido();
-        }
-        if( (posX - ancho >= 0) || (posX - ancho >= 0)){
-            throw new PosicionInvalida();
-        }
-        if( (posX == 0) || (posX == ancho - 1) ){
-            if((this.posY == 0)  || (this.posY == altura - 1)){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public boolean esBorde(Integer ancho, Integer altura) {
         if( !this.esEsquina(ancho, altura) ) {
             if ((posX == 0) || (this.posY == 0) || (posX == ancho - 1) || (this.posY == altura - 1)) {
@@ -81,6 +60,20 @@ public class Coordenada {
         return false;
     }
 
+    public boolean esEsquina(Integer ancho, Integer altura) {
+        if( ((posX - ancho) >= 0) || ((posX - ancho) >= 0)){
+            throw new PosicionInvalida();
+        }
+        if( (posX == 0) || (posX == ancho - 1) ){
+            if((this.posY == 0)  || (this.posY == (altura - 1))){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+//TODO: Encapsular en un determinarDireccion()? Va a tener Refactorizar el generarMapa()
     public Direccion determinarEsquina(Integer ancho, Integer altura) {
         if( this.posY == 0 && this.posX == 0){
             return Direccion.NOROESTE;
@@ -108,5 +101,11 @@ public class Coordenada {
         }else{
             throw new DireccionInvalida("determinarBorde :");
         }
+    }
+
+    private boolean esValida(){
+        if( posY < 0  || posX < 0 )
+            return false;
+        return true;
     }
 }

@@ -8,9 +8,8 @@ import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 
 public class Moto implements IVehiculo {
 
-    public static final int PENALIZACION_POZO = 3;
-    public static final int PENALIZACION_PIQUETE = 2;
-    public static final int  MOVIMIENTO_DEFAULT = 1;
+    private final Integer PENALIZACION_POZO = 3;
+    private final Integer PENALIZACION_PIQUETE = 2;
 
     private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.8f;
     @Override

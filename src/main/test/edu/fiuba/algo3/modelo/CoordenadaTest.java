@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.Excepcion.CoordenadaInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
 import org.junit.jupiter.api.Test;
@@ -33,9 +34,17 @@ class CoordenadaTest {
         esperado = false;
         assertEquals( esperado, resultado );
 
-        assertThrows( MapaInvalido.class, () -> coord.esValidaEnMapa(-1,5));
-        assertThrows( MapaInvalido.class, () -> coord.esValidaEnMapa(2,0));
-        assertThrows( MapaInvalido.class, () -> coord.esValidaEnMapa(1,1));
+        resultado = coord.esValidaEnMapa(-1,5);
+        esperado = false;
+        assertEquals( esperado, resultado );
+
+        resultado = coord.esValidaEnMapa(2,0);
+        esperado = false;
+        assertEquals( esperado, resultado );
+
+        resultado = coord.esValidaEnMapa(1,1);
+        esperado = false;
+        assertEquals( esperado, resultado );
 
     }
 
@@ -105,7 +114,7 @@ class CoordenadaTest {
         esperado = true;
         assertEquals(esperado, resultado);
 
-        assertThrows( MapaInvalido.class, () -> {
+        assertThrows( PosicionInvalida.class, () -> {
             Coordenada coordenada = new Coordenada(2,3 );
             coordenada.esEsquina(1,1);
         } );
@@ -158,7 +167,7 @@ class CoordenadaTest {
         esperado = true;
         assertEquals(esperado, resultado);
 
-        assertThrows( MapaInvalido.class, () -> {
+        assertThrows( PosicionInvalida.class, () -> {
             Coordenada coordenada = new Coordenada(2,3 );
             coordenada.esBorde(1,1);
         } );
@@ -169,5 +178,13 @@ class CoordenadaTest {
 
     }
 
+    @Test
+    public void creoDistintasCombinacionesDeCoordenadas(){
+        assertDoesNotThrow( () -> new Coordenada(1,1) );
+        assertDoesNotThrow( () -> new Coordenada(0,0) );
+        assertThrows( CoordenadaInvalida.class, () -> new Coordenada(1,-1) );
+        assertThrows( CoordenadaInvalida.class, () -> new Coordenada(-1,-1) );
+        assertThrows( CoordenadaInvalida.class, () -> new Coordenada(-1,1) );
 
+    }
 }

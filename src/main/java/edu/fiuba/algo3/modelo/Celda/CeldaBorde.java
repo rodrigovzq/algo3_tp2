@@ -21,6 +21,7 @@ public class CeldaBorde extends Celda {
         this.direccion3 = direccion3;
     }
 
+    @Override
     public Celda getCelda(Direccion direccion){
         Celda celdaAdyacente = null;
 

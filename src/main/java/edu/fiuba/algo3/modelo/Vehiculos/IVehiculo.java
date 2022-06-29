@@ -7,10 +7,10 @@ import java.util.Objects;
 
 public interface IVehiculo {
 
-    public  Evento avanzarComun();
-    public  Evento avanzarPiquete();
-    public  Evento avanzarControlPolicial();
-    public  Evento avanzarPozo();
+    Evento avanzarComun();
+    Evento avanzarPiquete();
+    Evento avanzarControlPolicial();
+    Evento avanzarPozo();
     Float obtenerProbabilidadDeSerDetenido();
     IVehiculo siguiente();
 

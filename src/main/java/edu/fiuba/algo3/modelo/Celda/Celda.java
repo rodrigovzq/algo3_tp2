@@ -24,7 +24,8 @@ public abstract class Celda {
                 celda.setCelda( this, direccion.opuesto() );
         }
         catch( DireccionInvalida e){
-            //TODO: Completar. Si entra es porque accedí a una Direccion bloqueada. No hago nada.
+            //TODO: Completar.
+            // Sinceramente no se si hay algun caso posible que pase.
         }
 
     }

@@ -14,9 +14,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 public class CuatroPorCuatro implements IVehiculo {
     public static final int LIMITE_POZOS = 3;
     public static final int RESET_CONTADOR = 0;
-    public static final int SIN_PENALIZAR_POZO = 1;
     public static final int PENALIZACION_POZO = 2;
-    public static final int MOVIMIENTO_DEFAULT = 1;
     private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.3f;
     private Integer contadorPozosAtravesados;
 

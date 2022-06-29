@@ -1,2 +1,4 @@
-package edu.fiuba.algo3.modelo.Excepcion;public class CoordenadaInvalida extends Throwable {
+package edu.fiuba.algo3.modelo.Excepcion;
+
+public class CoordenadaInvalida extends RuntimeException {
 }

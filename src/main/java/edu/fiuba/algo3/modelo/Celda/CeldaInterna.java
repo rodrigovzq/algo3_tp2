@@ -21,6 +21,8 @@ public class CeldaInterna extends Celda {
         this.celdaOeste = celdaOeste;
     }
     //TODO: NO es correcto que este inicializado en null. ¿Agregar CeldaAnemica?
+    // No es un estado válido para la celda, pero en sí necesitamos haber creado
+    // las otras celdas para inicializar en un estado valido. Problema del huevo y la gallina.
     public CeldaInterna(EstadoCelda estado) {
         super( estado );
         this.celdaNorte = null;

@@ -8,13 +8,12 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.Excepcion.CeldaIncorrecta;
-import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
-import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
+import edu.fiuba.algo3.modelo.Excepcion.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MapaTest {
     @Test
@@ -262,4 +261,19 @@ class MapaTest {
         assertNotEquals( null, esquinaSE.getCelda(Direccion.OESTE ) );
 
     }
+    @Test
+    public void creoDistintasCombinacionesDeMapas(){
+        assertDoesNotThrow( () -> new Mapa(10,10) );
+        assertDoesNotThrow( () -> new Mapa(2,2) );
+        assertThrows( MapaInvalido.class, () -> new Mapa(1,1) );
+        assertThrows( MapaInvalido.class, () -> new Mapa(0,2) );
+        assertThrows( MapaInvalido.class, () -> new Mapa(2,0) );
+        assertThrows( MapaInvalido.class, () -> new Mapa(0,0) );
+        assertThrows( MapaInvalido.class, () -> new Mapa(-3,3) );
+        assertThrows( MapaInvalido.class, () -> new Mapa(3,-3) );
+
+
+
+    }
+    
 }

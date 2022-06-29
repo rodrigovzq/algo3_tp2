@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.CeldaIncorrecta;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
+import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 
 // Clase con la responsabilidad de generar el escenario.
 public class Mapa {
@@ -18,13 +19,19 @@ public class Mapa {
     public Mapa(Integer ancho, Integer altura) {
         this.ancho = ancho;
         this.altura = altura;
+        if( !this.esValido() ){ throw new MapaInvalido(); }
+    }
+
+    private boolean esValido() {
+        if( this.altura < 2 || this.ancho < 2)
+            return false;
+        return true;
     }
 
     public Celda getEsquinaSuperiorIzquierda() {
         return esquinaSuperiorIzquierda;
     }
 
-    //TODO: Test. ¿Como?
     //La implementacion del metodo generarMapa está acoplada con la entidad Coordenada
     public void generarMapa(){
         int columna = 0;
@@ -127,7 +134,7 @@ public class Mapa {
         return nuevaCelda;
     }
 
-    private Celda generarInternaMapa( Coordenada coordenada ){
+    private Celda generarInternaMapa(){
         fabrica = new FabricaCeldaInterna();
         Celda nuevaCelda = fabrica.crearCelda(Direccion.ESTE); //no importa la direccion
         return nuevaCelda;
@@ -140,16 +147,8 @@ public class Mapa {
         }else if( coordenada.esBorde( this.ancho , this.altura ) ){
             celda = this.generarBordeMapa( coordenada );
         }else{
-            celda = this.generarInternaMapa( coordenada );
+            celda = this.generarInternaMapa();
         }
         return celda;
     }
-    //TODO: Refactor Coordenada.
-    private boolean esCoordenadaValida(Integer fila, Integer columna){
-        if( fila < 0 || fila > this.altura || columna < 0 || columna > this.ancho)
-            return false;
-        return true;
-    }
-
-
 }
