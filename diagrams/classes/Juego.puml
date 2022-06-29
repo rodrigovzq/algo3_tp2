@@ -7,7 +7,9 @@ Juego *-right- Jugador
 'Clase que representa el estado del jugador.
 class Jugador{
     - nombre: String
+    + Jugador( String nombre, Celda posicion, IVehiculo vehiculo): Jugador
     + avanzarHaciaLaDireccion( Direccion dirMovimiento, Vehiculo v ): Movimiento
+    + actualizar( Evento resultado )
 }
 @enduml
 

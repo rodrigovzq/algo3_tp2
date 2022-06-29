@@ -2,9 +2,12 @@
 !include Sorpresa.puml!SINSUBCLASES
 
 class Favorable{
+    - PORCENTAJE: float
     + avanzarEn( Vehiculo v ): Evento
 }
+'TODO: IntelliJ automaticamente lo puso estatico, no se si tiene sentido.'
 class Desfavorable{
+    - PORCENTAJE: float
     + avanzarEn( Vehiculo v ): Evento
 }
 class CambioVehiculo{

@@ -1,0 +1,14 @@
+@startuml
+!include Direccion.puml
+!include Celda.puml!SINSUBCLASES
+CeldaInterna --|> Celda
+CeldaInterna --> "4" Celda
+CeldaInterna -up-> "4" Direccion
+
+class CeldaInterna {
+    + CeldaEsquina(EstadoCelda estado, Direccion d1, Direccion d2, Direccion d3, Direccion d4): CeldaInterna
+    + getCelda( Direccion direccion ): Celda
+    + setCelda( Celda nueva, Direccion direccion)
+    + equals( Object o): boolean
+}
+@enduml

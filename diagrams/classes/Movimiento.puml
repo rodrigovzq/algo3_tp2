@@ -2,10 +2,10 @@
        'Clase que encapsula la logica de movimientos.
        class Movimiento{
            - cantidad: Integer
+           + Movimiento( Integer cantidad ): Movimiento
            + sumarMovimiento( Movimiento movimientos ): Movimiento
            + descontarMovimiento( Movimiento movimientos ): Movimiento
            + aplicarDescuento( Integer porcentaje): Movimiento
            + aplicarAumento( Integer porcentaje): Movimiento
        }
-
 @enduml
