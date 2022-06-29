@@ -10,12 +10,15 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.EventoVehiculo;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
+import java.util.Random;
 
 public class CuatroPorCuatro implements IVehiculo {
     public static final int LIMITE_POZOS = 3;
     public static final int RESET_CONTADOR = 0;
     public static final int PENALIZACION_POZO = 2;
     private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.3f;
+    private static final Integer PENALIZACION_CONTROL_POLICIAL = 3;
+  
     private Integer contadorPozosAtravesados;
 
     public CuatroPorCuatro() {
@@ -45,8 +48,7 @@ public class CuatroPorCuatro implements IVehiculo {
 
     @Override
     public Evento avanzarControlPolicial() {
-        /* se implementa algo*/
-        return null;
+        return new Evento(new Penalizacion(PENALIZACION_CONTROL_POLICIAL), new NoCambiarVehiculo(), new Avanzar());
     }
 
     @Override
