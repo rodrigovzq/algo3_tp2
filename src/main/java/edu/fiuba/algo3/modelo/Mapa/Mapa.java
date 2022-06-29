@@ -1,13 +1,12 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Mapa;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.Excepcion.CeldaIncorrecta;
-import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 
 // Clase con la responsabilidad de generar el escenario.

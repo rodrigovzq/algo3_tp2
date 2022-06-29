@@ -1,13 +1,11 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
-import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;

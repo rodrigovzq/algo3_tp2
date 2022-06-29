@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

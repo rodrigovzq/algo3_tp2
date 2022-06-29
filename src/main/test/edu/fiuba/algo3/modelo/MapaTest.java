@@ -1,14 +1,14 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
-import edu.fiuba.algo3.modelo.Celda.CeldaEsquina;
-import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.*;
+import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;

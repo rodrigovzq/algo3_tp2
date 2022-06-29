@@ -1,11 +1,9 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Coordenada;
 
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.CoordenadaInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
-import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
-import javafx.geometry.Pos;
 
 import java.util.Objects;
 

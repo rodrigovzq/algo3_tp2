@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.CoordenadaInvalida;
-import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
 import org.junit.jupiter.api.Test;
 
