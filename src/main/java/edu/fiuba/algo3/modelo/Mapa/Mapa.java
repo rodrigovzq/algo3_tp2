@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 
 // Clase con la responsabilidad de generar el escenario.
@@ -15,7 +16,7 @@ public class Mapa {
     private Integer altura;
     private Celda esquinaSuperiorIzquierda;
     private FabricaCelda fabrica;
-    public Mapa(Integer ancho, Integer altura) {
+    public Mapa(Integer ancho, Integer altura) throws MapaInvalido {
         this.ancho = ancho;
         this.altura = altura;
         if( !this.esValido() ){ throw new MapaInvalido(); }

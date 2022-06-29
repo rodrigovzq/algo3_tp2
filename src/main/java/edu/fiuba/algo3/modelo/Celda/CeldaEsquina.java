@@ -22,7 +22,7 @@ public class CeldaEsquina extends Celda {
         this.direccionLateral = direccionLateral;
     }
 
-    public Celda getCelda(Direccion direccion){
+    public Celda getCelda(Direccion direccion) throws DireccionInvalida{
         Celda celdaAdyacente = null;
 
         if (direccion == direccionLateral) {
@@ -36,7 +36,7 @@ public class CeldaEsquina extends Celda {
     }
 
     @Override
-    public void setCelda(Celda nuevaCelda, Direccion direccion) {
+    public void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida {
         if (direccion == direccionLateral  ) {
             this.celdaLateral = nuevaCelda;
         } else if (direccion == direccionVertical  ) {

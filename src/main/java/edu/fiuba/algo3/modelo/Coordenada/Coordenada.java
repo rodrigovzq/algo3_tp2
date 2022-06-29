@@ -12,7 +12,7 @@ public class Coordenada {
     private Integer posX;
     // El (0,0) es la esquina izquierda.
 
-    public Coordenada(Integer posX, Integer posY) {
+    public Coordenada(Integer posX, Integer posY) throws CoordenadaInvalida {
         this.posX = posX;
         this.posY = posY;
         if( !this.esValida() ){ throw new CoordenadaInvalida(); }
@@ -25,7 +25,7 @@ public class Coordenada {
         return false;
     }
 
-    public void mover(Direccion direccion) {
+    public void mover(Direccion direccion)  throws PosicionInvalida {
         if( direccion == Direccion.NORTE){
             this.posY -= 1;
         }else if( direccion == Direccion.SUR){
@@ -58,7 +58,7 @@ public class Coordenada {
         return false;
     }
 
-    public boolean esEsquina(Integer ancho, Integer altura) {
+    public boolean esEsquina(Integer ancho, Integer altura)  throws PosicionInvalida {
         if( ((posX - ancho) >= 0) || ((posX - ancho) >= 0)){
             throw new PosicionInvalida();
         }
@@ -72,7 +72,7 @@ public class Coordenada {
     }
 
 //TODO: Encapsular en un determinarDireccion()? Va a tener Refactorizar el generarMapa()
-    public Direccion determinarEsquina(Integer ancho, Integer altura) {
+    public Direccion determinarEsquina(Integer ancho, Integer altura) throws DireccionInvalida {
         if( this.posY == 0 && this.posX == 0){
             return Direccion.NOROESTE;
         }else if( this.posY == 0 && this.posX == ancho-1){
@@ -86,7 +86,7 @@ public class Coordenada {
         }
     }
 
-    public Direccion determinarBorde(Integer ancho, Integer altura) {
+    public Direccion determinarBorde(Integer ancho, Integer altura) throws DireccionInvalida {
         // Si yo le paso una esquina, no va a lanzar una excepcion, lo va a detectar como un borde ESTE o OESTE.
         if(this.posX == 0){
             return Direccion.OESTE;

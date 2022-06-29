@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 public class FabricaCeldaEsquina implements FabricaCelda{
     //dir es la direccion BLOQUEADA.
     @Override
-    public Celda crearCelda(Direccion dir) {
+    public Celda crearCelda(Direccion dir) throws DireccionInvalida {
         Celda celda = null;
         if( dir == Direccion.NORESTE){
             celda = new CeldaEsquina(  new Comun()  , Direccion.SUR, Direccion.OESTE );

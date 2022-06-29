@@ -11,7 +11,7 @@ public class GeneradorDemora implements GeneradorAleatorio {
         this.rng = new Random();
     }
     @Override
-    public boolean aplicar(Float probabilidad) {
+    public boolean aplicar(Float probabilidad) throws ProbabilidadInvalida{
         if( probabilidad > 0)
             return this.rng.nextDouble() <= probabilidad;
         else

@@ -8,7 +8,7 @@ import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 
 public class FabricaCeldaBorde implements FabricaCelda{
     @Override
-    public Celda crearCelda(Direccion dir) {
+    public Celda crearCelda(Direccion dir) throws DireccionInvalida {
         Celda celda = null;
         if( dir == Direccion.NORTE){
             celda = new CeldaBorde( new Comun() , Direccion.OESTE, Direccion.SUR, Direccion.ESTE );

@@ -22,7 +22,7 @@ public class CeldaBorde extends Celda {
     }
 
     @Override
-    public Celda getCelda(Direccion direccion){
+    public Celda getCelda(Direccion direccion) throws DireccionInvalida{
         Celda celdaAdyacente = null;
 
         if (direccion == direccion1) {
@@ -47,7 +47,7 @@ public class CeldaBorde extends Celda {
 
 
     @Override
-    public void setCelda(Celda nuevaCelda, Direccion direccion){
+    public void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida{
         if (direccion == direccion1  ) {
             this.celda1 = nuevaCelda;
         } else if (direccion == direccion2  ) {
