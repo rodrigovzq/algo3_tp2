@@ -29,19 +29,25 @@ public class ContenedorConfiguracion {
 
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
-        //TODO: Valor default de mapa.
+        //Valor default de mapa.
         this.mapaJuego = new Mapa(2,2);
         this.mapaJuego.generarMapa();
-        //TODO: Valor default del jugador.
+        //Valor default del jugador.
         this.jugador = new Jugador("", mapaJuego.sortearCeldaJugador(), new Auto());
         this.iniciar();
+
+        //TODO: ¿Que pasa si el usuario no elije nada y va directo a jugar?
+        // Es un estado valido, pero una mierda de juego jajaja
     }
 
 
     private void iniciar(){
         Button botonJugar = new Button("Jugar");
+        //Se genera el mapa, le sortea una celda al jugador y DEBERIA cambiar la ventana a la del juego.
         botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
+
         Button botonCancelar = new Button("Cancelar");
+        //Usamos la f. anonima para hacer el cambio de vista.
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
 
         Label nombre = new Label("Nombre");
@@ -55,27 +61,24 @@ public class ContenedorConfiguracion {
         Label mapa = new Label("Mapas");
         mapa.setFont(new Font(15));
 
-        //TODO: Validar que el nombre no este vacío, ni este ocupado por otros.
-        // antes de iniciar el juego.
         TextField campoNombre = new TextField();
+        //CampoTextoEnter la gracia es que detecta el ENTER y "valida" si es valido el
+        //nombre
+        //TODO: Validaciones nombres en CampoTextoEnter.
         CampoTextoEnter enterNombre = new CampoTextoEnter(campoNombre, this.jugador);
         enterNombre.setMensajeIncorrecto("Ingresá un nombre válido.");
         campoNombre.setOnKeyPressed( enterNombre );
         campoNombre.setMinWidth(200);
         campoNombre.setPromptText("Ingrese un nombre");
 
-        //TODO: Mi problema con todo esto es que la vista esta en contacto con el modelo
-        //directamente. Pero no se cual sería la forma más correcta de implementarlo.
-        //Además el menu, debería mostrar el auto elegido.
 
-        //Lo que se me ocurre es que la ventana instancie a Jugador y al jugador ponerle
-        //directamente setters y que los controladores usen a esos setters.
-        //Y que además el controlador modifique el nombre del Menu.
         Group listaVehiculo = emitirOpcionesVehiculos();
 
+        //Cada selector de mapa, sabe setear el ancho y el alto del mapa
+        //NO se vuelve a generar el mapa en cada selector, se genera recien
+        //cuando el usuario clickea "Jugar".
         Button boton10X20 = new Button("10x20"); ;
         boton10X20.setOnAction(new SelectorMapa(mapaJuego, 10 ,20 ));
-        //TODO: Encapsular botones de mapa, en una?
         boton10X20.setCursor(Cursor.HAND);
         boton10X20.setPrefSize(100,100);
 
@@ -139,6 +142,8 @@ public class ContenedorConfiguracion {
     private Group emitirOpcionesVehiculos() {
         Menu fileMenu = new Menu("Vehiculo");
 
+        // Basicamente cada selector sabe como inicializar el vehiculo del jugador
+        // y modificar el texto de fileMenu.
         SelectorVehiculo selectorItem1 = new SelectorAuto( fileMenu, this.jugador);
         SelectorVehiculo selectorItem2 = new SelectorMoto( fileMenu, this.jugador);
         SelectorVehiculo selectorItem3 = new SelectorCuatroPorCuatro( fileMenu, this.jugador);

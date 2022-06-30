@@ -8,7 +8,6 @@ import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 //TODO: Refactorizar distribución de paquetes. Celda en paquete aparte, separado de Obstaculo, Sorpresa y FabricaCelda.
 public abstract class Celda {
     private EstadoCelda estado;
-
     public Celda(EstadoCelda estado) {
         this.estado = estado;
     }
