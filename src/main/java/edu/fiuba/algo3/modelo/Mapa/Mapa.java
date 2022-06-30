@@ -164,4 +164,9 @@ public class Mapa {
     public void setAltura(Integer altura) {
         this.altura = altura;
     }
+
+    public Celda sortearCeldaJugador() {
+        //TODO: Sortear aleatroiamente una posicion del mapa.
+        return esquinaSuperiorIzquierda;
+    }
 }
