@@ -5,18 +5,29 @@ Auto .down.|> Vehiculo
 cuatroPorCuatro .down.|> Vehiculo
 
 class Moto{
+    - PENALIZACION_POZO: Integer
+    - PENALIZACION_PIQUETE: Integer
+    - PROBABILIDAD_DE_SER_DEMORADO: Float
     + avanzarComun(): Evento
     + avanzarPiquete(): Evento
     + avanzarControlPolicial(): Evento
     + avanzarPozo(): Evento
+    + obtenerProbabilidadDeSerDetenido(): Float
 }
 class Auto{
+    - PENALIZACION_POZO: Integer
+    - PROBABILIDAD_DE_SER_DEMORADO: Float
     + avanzarComun(): Evento
     + avanzarPiquete(): Evento
     + avanzarControlPolicial(): Evento
     + avanzarPozo(): Evento
+    + obtenerProbabilidadDeSerDetenido(): Float
 }
 class cuatroPorCuatro{
+    - LIMITE_POZOS: Integer
+    - RESET_CONTADOR: Integer
+    - PENALIZACION_POZO: Integer
+    - PROBABILIDAD_DE_SER_DEMORADO: Float
     - contadorPozosAtravesados: Integer
     - resetearContadorPozos()
     - limitePozosExcedido(): boolean
@@ -24,16 +35,18 @@ class cuatroPorCuatro{
     + avanzarPiquete(): Evento
     + avanzarControlPolicial(): Evento
     + avanzarPozo(): Evento
+    + obtenerProbabilidadDeSerDetenido(): Float
 }
 
 @enduml
 @startuml(id=SINSUBCLASES)
-
-       interface Vehiculo{
-           + {abstract} avanzarComun(): Evento
-           + {abstract} avanzarPiquete(): Evento
-           + {abstract} avanzarControlPolicial(): Evento
-           + {abstract} avanzarPozo(): Evento
-       }
+interface Vehiculo{
+    + {abstract} avanzarComun(): Evento
+    + {abstract} avanzarPiquete(): Evento
+    + {abstract} avanzarControlPolicial(): Evento
+    + {abstract} avanzarPozo(): Evento
+    + {abstract} siguiente(): IVehiculo
+    + {abstract} obtenerProbabilidadDeSerDetenido(): Float
+}
 
 @enduml

@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modelo.Celda;
 
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Comun;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Pozo;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
+import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +12,13 @@ class CeldaInternaTest {
     @Test
     public void creoUnaCeldaInternaYInicializoEnLasCeldas() {
         // TODO: Mockear?
-        CeldaInterna celda = new CeldaInterna(new Comun());
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celda = new CeldaInterna(new Comun(), coordenada);
 
-        CeldaInterna c1 = new CeldaInterna(new Pozo());
-        CeldaInterna c2 = new CeldaInterna(new Pozo());
-        CeldaInterna c3 = new CeldaInterna(new Pozo());
-        CeldaInterna c4 = new CeldaInterna(new Pozo());
+        CeldaInterna c1 = new CeldaInterna(new Pozo(), coordenada);
+        CeldaInterna c2 = new CeldaInterna(new Pozo(), coordenada);
+        CeldaInterna c3 = new CeldaInterna(new Pozo(), coordenada);
+        CeldaInterna c4 = new CeldaInterna(new Pozo(), coordenada);
 
         celda.setCelda(c1, Direccion.NORTE);
         celda.setCelda(c2, Direccion.SUR);
@@ -36,12 +38,13 @@ class CeldaInternaTest {
     @Test
     public void verificoQueLaInicializacionDeCeldasSeaCoherente() {
         // TODO: Mockear?
-        CeldaInterna celda = new CeldaInterna(new Comun());
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celda = new CeldaInterna(new Comun(), coordenada);
 
-        CeldaInterna norte = new CeldaInterna(new Pozo());
-        CeldaInterna sur = new CeldaInterna(new Pozo());
-        CeldaInterna este = new CeldaInterna(new Pozo());
-        CeldaInterna oeste = new CeldaInterna(new Pozo());
+        CeldaInterna norte = new CeldaInterna(new Pozo(), coordenada);
+        CeldaInterna sur = new CeldaInterna(new Pozo(), coordenada);
+        CeldaInterna este = new CeldaInterna(new Pozo(), coordenada);
+        CeldaInterna oeste = new CeldaInterna(new Pozo(), coordenada);
 
         celda.setCelda( norte , Direccion.NORTE);
         celda.setCelda( sur , Direccion.SUR);

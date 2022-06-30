@@ -1,0 +1,42 @@
+@startuml
+!include EventoPuntaje.puml!SINSUBCLASES
+
+'Eventos que afectan la cantidad de movimientos totales
+class DescuentoPorcentaje{
+    - porcentaje: Integer
+    + DescuentoPorcentaje( float porcentaje ): AumentoPorcentaje
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+class AumentoPorcentaje{
+    - porcentaje: Integer
+    + AumentoPorcentaje( float porcentaje ): AumentoPorcentaje
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+class Penalizacion{
+    - cantidad: Movimiento
+    + Penalizacion(Integer penalizacion): Penalizacion
+    - getPenalizacion(): Movimiento
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+class SinPenalizar{
+    - MOVIMIENTO_DEFAULT = 1
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+class NoCambiarPuntaje{
+    + actualizarPuntaje( Movimiento m): Movimiento
+}
+
+EventoPuntaje <|.. DescuentoPorcentaje
+EventoPuntaje <|.. AumentoPorcentaje
+EventoPuntaje <|.. Penalizacion
+EventoPuntaje <|.. SinPenalizar
+EventoPuntaje <|.. NoCambiarPuntaje
+@enduml
+
+@startuml(id=SINSUBCLASES)
+interface EventoPuntaje{
+        + {abstract} actualizarPuntaje( Movimiento m): Movimiento
+}
+
+Evento --> EventoPuntaje: - puntaje
+@enduml

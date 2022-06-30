@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modelo.Celda;
 
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Comun;
-import edu.fiuba.algo3.modelo.Celda.Obstaculo.Pozo;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
+import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,8 @@ class CeldaEsquinaTest {
     @Test
     public void creoUnaCeldaEsquinaYObtengoLasCeldasBloqueada() {
         // TODO: Mockear?
-        CeldaEsquina celda = new CeldaEsquina(new Comun(), Direccion.SUR, Direccion.ESTE);
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaEsquina celda = new CeldaEsquina(new Comun(), coordenada, Direccion.SUR, Direccion.ESTE);
 
         assertThrows(DireccionInvalida.class, () -> celda.getCelda(Direccion.NORTE));
         assertThrows(DireccionInvalida.class, () -> celda.getCelda(Direccion.OESTE));
@@ -23,21 +25,23 @@ class CeldaEsquinaTest {
     @Test
     public void creoUnaCeldaEsquinaYInicializoEnLasCeldasBloqueadas() {
         // TODO: Mockear?
-        CeldaEsquina celda = new CeldaEsquina(new Comun(), Direccion.SUR, Direccion.ESTE);
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaEsquina celda = new CeldaEsquina(new Comun(), coordenada, Direccion.SUR, Direccion.ESTE);
 
-        assertThrows(DireccionInvalida.class, () -> celda.setCelda(new CeldaInterna(new Pozo()), Direccion.NORTE));
-        assertThrows(DireccionInvalida.class, () -> celda.setCelda(new CeldaInterna(new Pozo()), Direccion.OESTE));
-        assertDoesNotThrow(() -> celda.setCelda(new CeldaInterna(new Pozo()), Direccion.SUR));
-        assertDoesNotThrow(() -> celda.setCelda(new CeldaInterna(new Pozo()), Direccion.ESTE));
+        assertThrows(DireccionInvalida.class, () -> celda.setCelda(new CeldaInterna(new Pozo(), coordenada), Direccion.NORTE));
+        assertThrows(DireccionInvalida.class, () -> celda.setCelda(new CeldaInterna(new Pozo(), coordenada), Direccion.OESTE));
+        assertDoesNotThrow(() -> celda.setCelda(new CeldaInterna(new Pozo(), coordenada), Direccion.SUR));
+        assertDoesNotThrow(() -> celda.setCelda(new CeldaInterna(new Pozo(), coordenada), Direccion.ESTE));
     }
 
     @Test
     public void verificoQueLaInicializacionDeCeldasSeaCoherente() {
         // TODO: Mockear?
-        CeldaEsquina celda = new CeldaEsquina(new Comun(), Direccion.NORTE, Direccion.ESTE);
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaEsquina celda = new CeldaEsquina(new Comun(), coordenada, Direccion.NORTE, Direccion.ESTE);
 
-        CeldaInterna norte = new CeldaInterna(new Pozo());
-        CeldaInterna este = new CeldaInterna(new Pozo());
+        CeldaInterna norte = new CeldaInterna(new Pozo(), coordenada);
+        CeldaInterna este = new CeldaInterna(new Pozo(), coordenada);
 
         celda.setCelda( norte , Direccion.NORTE);
         celda.setCelda( este  , Direccion.ESTE);

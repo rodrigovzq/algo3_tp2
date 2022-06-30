@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.modelo.Celda;
 
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 
 import java.util.Objects;
 
@@ -13,16 +15,16 @@ public class CeldaEsquina extends Celda {
     private Direccion direccionVertical;
     private Direccion direccionLateral;
 
-    public CeldaEsquina(EstadoCelda estado, Direccion direccionVertical, Direccion direccionLateral) {
-        super( estado );
-        //TODO: Inicializar en un estado válido. ¿CeldaAnemica?
-        this.celdaVertical = null;
-        this.celdaLateral = null;
+    public CeldaEsquina(EstadoCelda estado, Coordenada coordenada, Direccion direccionVertical, Direccion direccionLateral) {
+        super( estado, coordenada );
+        Celda celdaNula = new CeldaBloqueadora();
+        this.celdaVertical = celdaNula;
+        this.celdaLateral = celdaNula;
         this.direccionVertical = direccionVertical;
         this.direccionLateral = direccionLateral;
     }
 
-    public Celda getCelda(Direccion direccion){
+    public Celda getCelda(Direccion direccion) throws DireccionInvalida{
         Celda celdaAdyacente = null;
 
         if (direccion == direccionLateral) {
@@ -36,7 +38,7 @@ public class CeldaEsquina extends Celda {
     }
 
     @Override
-    public void setCelda(Celda nuevaCelda, Direccion direccion) {
+    public void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida {
         if (direccion == direccionLateral  ) {
             this.celdaLateral = nuevaCelda;
         } else if (direccion == direccionVertical  ) {

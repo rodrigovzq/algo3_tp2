@@ -1,0 +1,23 @@
+@startuml
+interface FabricaCelda{
+    + crearCelda(Direccion dir): Celda
+}
+
+class FabricaCeldaInterna{
+    + crearCelda( Direccion dir): Celda
+    + crearCelda(): Celda
+}
+
+class FabricaCeldaBorde{
+     + crearCelda( Direccion dirBloqueada): Celda
+}
+
+class FabricaCeldaEsquina{
+     + crearCelda( Direccion dirBloqueada): Celda
+}
+
+FabricaCeldaBorde ..|> FabricaCelda
+FabricaCeldaInterna ..|> FabricaCelda
+FabricaCeldaEsquina ..|> FabricaCelda
+
+@enduml

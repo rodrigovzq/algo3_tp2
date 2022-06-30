@@ -1,0 +1,14 @@
+@startuml
+!include Direccion.puml
+!include Celda.puml!SINSUBCLASES
+CeldaBorde --|> Celda
+CeldaBorde --> "3" Celda
+CeldaBorde -up-> "3" Direccion
+
+class CeldaBorde {
+    + CeldaBorde(EstadoCelda estado, Direccion d1, Direccion d2, Direccion d3): CeldaBorde
+    + getCelda( Direccion direccion ): Celda
+    + setCelda( Celda nueva, Direccion direccion)
+    + equals( Object o): boolean
+}
+@enduml

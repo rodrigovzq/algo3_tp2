@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Celda;
 
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 
@@ -14,14 +15,19 @@ public class CeldaBorde extends Celda {
     private Direccion direccion2;
     private Direccion direccion3;
     
-    public CeldaBorde(EstadoCelda estado, Direccion direccion1, Direccion direccion2, Direccion direccion3) {
-        super( estado );
+    public CeldaBorde(EstadoCelda estado, Coordenada coordenada, Direccion direccion1, Direccion direccion2, Direccion direccion3) {
+        super( estado, coordenada );
+        Celda celdaNula = new CeldaBloqueadora();
+        this.celda1 = celdaNula;
+        this.celda2 = celdaNula;
+        this.celda3 = celdaNula;
         this.direccion1 = direccion1;
         this.direccion2 = direccion2;
         this.direccion3 = direccion3;
     }
 
-    public Celda getCelda(Direccion direccion){
+    @Override
+    public Celda getCelda(Direccion direccion) throws DireccionInvalida{
         Celda celdaAdyacente = null;
 
         if (direccion == direccion1) {
@@ -46,7 +52,7 @@ public class CeldaBorde extends Celda {
 
 
     @Override
-    public void setCelda(Celda nuevaCelda, Direccion direccion){
+    public void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida{
         if (direccion == direccion1  ) {
             this.celda1 = nuevaCelda;
         } else if (direccion == direccion2  ) {

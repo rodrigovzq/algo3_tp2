@@ -1,0 +1,14 @@
+@startuml
+enum Direccion{
+    NORTE
+    SUR
+    ESTE
+    OESTE
+    NORESTE
+    NOROESTE
+    SUDESTE
+    SUDOESTE
+    + {abstract} opuesto(): Direccion
+}
+
+@enduml
