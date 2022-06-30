@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Mapa;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
@@ -162,10 +163,10 @@ public class Mapa {
         return celda;
     }
 
-    //TODO: Borrar. Es solo para debugear.
-    public String asString(){
-        return "(" + this.ancho + " x " + this.altura + ")";
-    }
+    // Borrar. Es solo para debugear.
+    //public String asString(){
+    //    return "(" + this.ancho + " x " + this.altura + ")";
+    //}
 
     public void setAncho(Integer ancho) {
         this.ancho = ancho;
@@ -177,7 +178,30 @@ public class Mapa {
 
     public Celda sortearCeldaJugador() {
         //TODO: Sortear aleatoriamente una posicion del mapa.
-        return esquinaSuperiorIzquierda;
+        Integer fila = (int) (this.generador.sortearNumero() * this.altura);
+        Integer columna = (int) (this.generador.sortearNumero() * this.ancho);
+        Coordenada coordenada = new Coordenada( columna, fila);
+
+        return getCelda( coordenada );
+    }
+
+    //TODO: Test.
+    private Celda getCelda(Coordenada coordenada) {
+        Celda celda = new CeldaInterna( new Comun(), coordenada);
+        Integer diferenciaX = esquinaSuperiorIzquierda.distanciaHorizontal( celda );
+        Integer diferenciaY = esquinaSuperiorIzquierda.distanciaVertical( celda );
+        Celda celdaSeleccionada = esquinaSuperiorIzquierda;
+
+        while ( diferenciaX > 0 ){
+            celdaSeleccionada = celdaSeleccionada.getCelda( Direccion.ESTE );
+            diferenciaX -= 1;
+        }
+        while( diferenciaY > 0 ){
+            celdaSeleccionada = celdaSeleccionada.getCelda( Direccion.SUR );
+            diferenciaY -= 1;
+        }
+
+        return celdaSeleccionada;
     }
 
     public void sortearEstadosMapa() {
@@ -195,7 +219,7 @@ public class Mapa {
             celdaSeleccionada.setEstado( estado );
 
             condCorte = esFinRecorrido(coordenada);
-
+            //TODO: Refactorizar.
             if( !condCorte) {
                 if (coordenada.esEsquina(this.ancho, this.altura) || coordenada.esBorde(this.ancho, this.altura)) {
                     if (coordenada.determinarBorde(this.ancho, this.altura) == dirX) {
@@ -225,17 +249,15 @@ public class Mapa {
     }
 
     private EstadoCelda sortearEstadoCelda() {
-        EstadoCelda estado;
+        EstadoCelda estado = new Comun();
         if( generador.aplicar( PROBABILIDAD_OBSTACULO ) ){
             this.generador = new GeneradorObstaculo();
             estado = generador.sortearEstadoCelda();
-
-        }else if( generador.aplicar( PROBABILIDAD_SORPRESA ) ){
+        }else if( generador.aplicar( PROBABILIDAD_SORPRESA ) ) {
             this.generador = new GeneradorSorpresa();
             estado = generador.sortearEstadoCelda();
-        }else{
-            estado = new Comun();
         }
+
         return estado;
     }
 }
