@@ -11,7 +11,7 @@ public class Movimiento {
 
     public Movimiento sumarMovimiento(Movimiento m) {
         this.cantidad += m.cantidad;
-        return m;
+        return this;
     }
 
     @Override
