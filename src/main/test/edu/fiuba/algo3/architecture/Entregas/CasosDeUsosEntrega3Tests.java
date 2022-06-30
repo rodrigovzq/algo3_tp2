@@ -51,7 +51,7 @@ public class CasosDeUsosEntrega3Tests {
 
         assertEquals(jugador1, jugador2);
     }
-
+    @Test
     public void UnAutoAvanzaYNoEsDetenidoPorUnControlPolicialAh (){
         IVehiculo mockIVehiculo = new Auto();
         GeneradorAleatorio mockGenerador = mock(GeneradorAleatorio.class);
