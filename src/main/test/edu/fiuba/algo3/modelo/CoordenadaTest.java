@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class CoordenadaTest {
     @Test
     public void creoUnaCoordenadaYDeterminaSiEsValidaSegunElTamañoDelMapa(){
-        //TODO: PosicionInvalida -> posX o posY negativa.
         Coordenada coord = new Coordenada(2,5);
 
         boolean resultado = coord.esValidaEnMapa(2,2);

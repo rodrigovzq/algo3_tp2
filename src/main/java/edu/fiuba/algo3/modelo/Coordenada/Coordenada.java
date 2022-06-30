@@ -92,6 +92,7 @@ public class Coordenada {
     }
 
     public Direccion determinarBorde(Integer ancho, Integer altura) throws DireccionInvalida {
+        // (Sacamos provecho de este "bug")
         // Si yo le paso una esquina, no va a lanzar una excepcion, lo va a detectar como un borde ESTE o OESTE.
         if(this.posX == 0){
             return Direccion.OESTE;

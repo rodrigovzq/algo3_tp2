@@ -111,8 +111,6 @@ public class Mapa {
                 condCorte = ( coord.determinarEsquina( this.ancho, this.altura) == esquinaFIN ) ;
 
         }while( !condCorte );
-            // TODO: Celda tendrá coordenada? Si es así, hay que inicalizar una nueva coordenada
-            //  en cada iteracion.
 
     }
 
@@ -127,7 +125,6 @@ public class Mapa {
     private Celda generarBordeMapa( Coordenada coordenada ){
         Celda nuevaCelda;
         fabrica = new FabricaCeldaBorde();
-        //TODO:  ¿Debo protegerme (de nuevo) de la CeldaEsquina?
         Direccion dir = coordenada.determinarBorde( this.ancho, this.altura);
         nuevaCelda = fabrica.crearCelda( dir, coordenada);
 
@@ -166,7 +163,8 @@ public class Mapa {
     }
 
     public Celda sortearCeldaJugador() {
-        //TODO: Sortear aleatroiamente una posicion del mapa.
+        //TODO: Sortear aleatoriamente una posicion del mapa.
+        // Enum de Estados y con el numeros sorteado se elije que tipo de celda es?
         return esquinaSuperiorIzquierda;
     }
 }
