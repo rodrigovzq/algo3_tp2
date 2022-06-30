@@ -30,7 +30,12 @@ public class CasosDeUsosEntrega3Tests {
         Coordenada coordenada = new Coordenada(0,0);
 
         Celda celdaAdyacente = new CeldaInterna(new ControlPolicial(mockGenerador), coordenada);
-        Celda posicionInicial = new CeldaInterna( new ControlPolicial(mockGenerador), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda posicionInicial = new CeldaInterna( new ControlPolicial(mockGenerador), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
 
         when(mockGenerador.aplicar(mockIVehiculo.obtenerProbabilidadDeSerDetenido())).thenReturn(true);
 
@@ -54,7 +59,12 @@ public class CasosDeUsosEntrega3Tests {
         Coordenada coordenada = new Coordenada(0,0);
 
         Celda celdaAdyacente = new CeldaInterna(new ControlPolicial(mockGenerador), coordenada);
-        Celda posicionInicial = new CeldaInterna( new ControlPolicial(mockGenerador), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Celda posicionInicial = new CeldaInterna( new ControlPolicial(mockGenerador), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
 
         when(mockGenerador.aplicar(mockIVehiculo.obtenerProbabilidadDeSerDetenido())).thenReturn(false);
 

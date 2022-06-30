@@ -19,10 +19,7 @@ public class SelectorMapa implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        //TODO: Borrar sout. Solo para debugear por consola.
-        System.out.println("Antes: " +  mapa.asString());
         mapa.setAltura(this.alto);
         mapa.setAncho(this.ancho);
-        System.out.println("Despues: "  +  mapa.asString() );
     }
 }

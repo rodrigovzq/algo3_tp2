@@ -29,7 +29,13 @@ public class CasosDeUsosEntrega1Tests {
 
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
         Jugador jugador = new Jugador("Pedro", posicionInicial, moto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
@@ -43,7 +49,13 @@ public class CasosDeUsosEntrega1Tests {
         Auto auto = new Auto();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
         Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
@@ -57,8 +69,15 @@ public class CasosDeUsosEntrega1Tests {
         CuatroPorCuatro cxc = new CuatroPorCuatro();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
+
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
         Evento esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar() );
@@ -71,7 +90,13 @@ public class CasosDeUsosEntrega1Tests {
         CuatroPorCuatro cxc = new CuatroPorCuatro();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
         jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
@@ -88,7 +113,13 @@ public class CasosDeUsosEntrega1Tests {
         Auto auto = new Auto();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new Piquete(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
         Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);

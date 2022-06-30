@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +21,12 @@ class NoCambiarPosicionTest {
         CeldaInterna celdaNorte = celdaEste;
         CeldaInterna celdaSur = celdaEste;
 
-        CeldaInterna celdaActual = new CeldaInterna( null, coordenada, celdaNorte, celdaEste, celdaSur, celdaOeste );
+        CeldaInterna celdaActual = new CeldaInterna( new Comun(), coordenada);
+
+        celdaActual.setCelda(celdaNorte, Direccion.NORTE);
+        celdaActual.setCelda(celdaEste, Direccion.ESTE);
+        celdaActual.setCelda(celdaOeste, Direccion.OESTE);
+        celdaActual.setCelda(celdaSur, Direccion.SUR);
 
         CeldaInterna esperado = celdaActual;
 

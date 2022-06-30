@@ -17,6 +17,10 @@ public class CeldaBorde extends Celda {
     
     public CeldaBorde(EstadoCelda estado, Coordenada coordenada, Direccion direccion1, Direccion direccion2, Direccion direccion3) {
         super( estado, coordenada );
+        Celda celdaNula = new CeldaBloqueadora();
+        this.celda1 = celdaNula;
+        this.celda2 = celdaNula;
+        this.celda3 = celdaNula;
         this.direccion1 = direccion1;
         this.direccion2 = direccion2;
         this.direccion3 = direccion3;

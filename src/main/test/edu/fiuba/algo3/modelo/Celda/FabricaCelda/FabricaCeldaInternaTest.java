@@ -13,7 +13,7 @@ class FabricaCeldaInternaTest {
     public void creoUnaCeldaInterna(){
         FabricaCeldaInterna fabrica = new FabricaCeldaInterna();
         Coordenada coordenada = new Coordenada(0,0);
-        //TODO: ¿Debo pasarle el estado? El null no es correcto ya que no es un estado valido.
+
         Celda norte = fabrica.crearCelda(Direccion.NORTE, coordenada);
         Celda sur = fabrica.crearCelda(Direccion.SUR, coordenada);
         Celda este = fabrica.crearCelda(Direccion.ESTE, coordenada);

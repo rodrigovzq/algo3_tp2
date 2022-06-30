@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,13 +17,17 @@ class AvanzarTest {
         avanzar.setDireccion(Direccion.ESTE);
 
         Coordenada coordenada = new Coordenada(0,0);
-        CeldaInterna celdaEste = new CeldaInterna( null, coordenada);
-        CeldaInterna celdaSur = new CeldaInterna( null, coordenada);
+        CeldaInterna celdaEste = new CeldaInterna( new Comun(), coordenada);
+        CeldaInterna celdaSur = new CeldaInterna( new Comun(), coordenada);
         CeldaInterna celdaNorte = celdaSur;
         CeldaInterna celdaOeste = celdaSur;
 
-        CeldaInterna celdaActual = new CeldaInterna( null, coordenada , celdaNorte, celdaEste, celdaSur, celdaOeste );
+        CeldaInterna celdaActual = new CeldaInterna( new Comun(), coordenada);
 
+        celdaActual.setCelda(celdaNorte, Direccion.NORTE);
+        celdaActual.setCelda(celdaEste, Direccion.ESTE);
+        celdaActual.setCelda(celdaOeste, Direccion.OESTE);
+        celdaActual.setCelda(celdaSur, Direccion.SUR);
 
         Celda resultado = avanzar.actualizarPosicion( celdaActual );
         CeldaInterna esperado = celdaEste;
@@ -35,12 +40,17 @@ class AvanzarTest {
         avanzar.setDireccion(Direccion.NORTE);
 
         Coordenada coordenada = new Coordenada(0,0);
-        CeldaInterna celdaNorte = new CeldaInterna( null, coordenada);
-        CeldaInterna celdaEste = new CeldaInterna( null, coordenada);
+        CeldaInterna celdaNorte = new CeldaInterna( new Comun(), coordenada);
+        CeldaInterna celdaEste = new CeldaInterna( new Comun(), coordenada);
         CeldaInterna celdaSur = celdaEste;
         CeldaInterna celdaOeste = celdaEste;
 
-        CeldaInterna celdaActual = new CeldaInterna( null, coordenada, celdaNorte, celdaEste, celdaSur, celdaOeste );
+        CeldaInterna celdaActual = new CeldaInterna( new Comun(), coordenada);
+
+        celdaActual.setCelda(celdaNorte, Direccion.NORTE);
+        celdaActual.setCelda(celdaEste, Direccion.ESTE);
+        celdaActual.setCelda(celdaOeste, Direccion.OESTE);
+        celdaActual.setCelda(celdaSur, Direccion.SUR);
 
         Celda resultado = avanzar.actualizarPosicion( celdaActual );
         CeldaInterna esperado = celdaNorte;
@@ -53,13 +63,17 @@ class AvanzarTest {
         avanzar.setDireccion(Direccion.SUR);
 
         Coordenada coordenada = new Coordenada(0,0);
-        CeldaInterna celdaSur = new CeldaInterna( null, coordenada);
-        CeldaInterna celdaEste = new CeldaInterna( null, coordenada);
+        CeldaInterna celdaSur = new CeldaInterna( new Comun(), coordenada);
+        CeldaInterna celdaEste = new CeldaInterna( new Comun(), coordenada);
         CeldaInterna celdaNorte = celdaEste;
         CeldaInterna celdaOeste = celdaEste;
 
-        CeldaInterna celdaActual = new CeldaInterna( null, coordenada, celdaNorte, celdaEste, celdaSur, celdaOeste );
+        CeldaInterna celdaActual = new CeldaInterna( new Comun(), coordenada);
 
+        celdaActual.setCelda(celdaNorte, Direccion.NORTE);
+        celdaActual.setCelda(celdaEste, Direccion.ESTE);
+        celdaActual.setCelda(celdaOeste, Direccion.OESTE);
+        celdaActual.setCelda(celdaSur, Direccion.SUR);
 
         Celda resultado = avanzar.actualizarPosicion( celdaActual );
         CeldaInterna esperado = celdaSur;
@@ -72,12 +86,17 @@ class AvanzarTest {
         avanzar.setDireccion(Direccion.OESTE);
 
         Coordenada coordenada = new Coordenada(0,0);
-        CeldaInterna celdaOeste = new CeldaInterna( null, coordenada);
-        CeldaInterna celdaEste = new CeldaInterna( null, coordenada);
+        CeldaInterna celdaOeste = new CeldaInterna( new Comun(), coordenada);
+        CeldaInterna celdaEste = new CeldaInterna( new Comun(), coordenada);
         CeldaInterna celdaNorte = celdaEste;
         CeldaInterna celdaSur = celdaEste;
 
-        CeldaInterna celdaActual = new CeldaInterna( null, coordenada, celdaNorte, celdaEste, celdaSur, celdaOeste );
+        CeldaInterna celdaActual = new CeldaInterna( new Comun(), coordenada);
+
+        celdaActual.setCelda(celdaNorte, Direccion.NORTE);
+        celdaActual.setCelda(celdaEste, Direccion.ESTE);
+        celdaActual.setCelda(celdaOeste, Direccion.OESTE);
+        celdaActual.setCelda(celdaSur, Direccion.SUR);
 
         Celda resultado = avanzar.actualizarPosicion( celdaActual );
         CeldaInterna esperado = celdaOeste;

@@ -31,7 +31,13 @@ public class CasosDeUsosEntrega2Tests {
         IVehiculo v = new Auto();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new Favorable(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
@@ -52,7 +58,13 @@ public class CasosDeUsosEntrega2Tests {
         IVehiculo v = new Auto();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new Desfavorable(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
@@ -73,7 +85,13 @@ public class CasosDeUsosEntrega2Tests {
         IVehiculo v = new Auto();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
@@ -93,7 +111,13 @@ public class CasosDeUsosEntrega2Tests {
         IVehiculo v = new CuatroPorCuatro();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
@@ -114,7 +138,13 @@ public class CasosDeUsosEntrega2Tests {
         IVehiculo v = new Moto();
         Coordenada coordenada = new Coordenada(0,0);
         CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo(), coordenada);
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada);
+
+        posicionInicial.setCelda(celdaAdyacente, Direccion.NORTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.ESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.OESTE);
+        posicionInicial.setCelda(celdaAdyacente, Direccion.SUR);
+
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);

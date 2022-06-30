@@ -6,7 +6,6 @@ import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
-//TODO: Refactorizar distribución de paquetes. Celda en paquete aparte, separado de Obstaculo, Sorpresa y FabricaCelda.
 public abstract class Celda {
     private EstadoCelda estado;
     private Coordenada coordenada;
@@ -22,7 +21,7 @@ public abstract class Celda {
     public void setCeldaOpuesta( Celda celda, Direccion direccion){
         try{
             Celda opuesto = celda.getCelda(direccion.opuesto());
-            if( opuesto == null )
+            if( opuesto.equals( new CeldaBloqueadora() ) )
                 celda.setCelda( this, direccion.opuesto() );
         }
         catch( DireccionInvalida e){

@@ -15,7 +15,7 @@ class FabricaCeldaEsquinaTest {
         FabricaCeldaEsquina fabrica = new FabricaCeldaEsquina();
         Coordenada coordenada = new Coordenada(0,0);
 
-        // TODO: ¿Debo pasarle el estado? El null no es correcto ya que no es un estado valido.
+
         Celda norteste = fabrica.crearCelda(Direccion.NORESTE, coordenada);
         Celda sureste = fabrica.crearCelda(Direccion.SUDESTE, coordenada);
         Celda noroeste = fabrica.crearCelda(Direccion.NOROESTE, coordenada);
