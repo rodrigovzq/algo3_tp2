@@ -1,10 +1,12 @@
-package edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.vista.PantallasPrincipales;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
+import edu.fiuba.algo3.vista.JugadorVista;
+import edu.fiuba.algo3.vista.MapaVista;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;

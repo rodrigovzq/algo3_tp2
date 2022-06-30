@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.controlador;
+package edu.fiuba.algo3.controlador.Cerrar;
 
 import edu.fiuba.algo3.vista.Ventanas.VentanaConfirmacion;
 import javafx.event.ActionEvent;

@@ -1,7 +1,7 @@
-package edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.vista.PantallasPrincipales;
 
-import edu.fiuba.algo3.controlador.CerrarJuegoBoton;
-import edu.fiuba.algo3.controlador.CerrarJuegoVentana;
+import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoBoton;
+import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoVentana;
 import edu.fiuba.algo3.vista.Ventanas.VentanaPopUp;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

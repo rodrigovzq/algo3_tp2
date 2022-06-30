@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.vista.PantallasPrincipales;
 
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
 import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;

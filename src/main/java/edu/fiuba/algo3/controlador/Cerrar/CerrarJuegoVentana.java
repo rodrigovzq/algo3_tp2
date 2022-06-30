@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.controlador;
+package edu.fiuba.algo3.controlador.Cerrar;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
