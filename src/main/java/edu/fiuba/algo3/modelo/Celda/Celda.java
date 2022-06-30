@@ -52,4 +52,14 @@ public abstract class Celda {
         Celda celda = (Celda) o;
         return Objects.equals(coordenada, celda.coordenada);
     }
+
+    //TODO: Test
+    public Integer distanciaVertical(Celda celda) {
+        return coordenada.distanciaVertical(celda.coordenada);
+    }
+
+    //TODO: Test
+    public Integer distanciaHorizontal(Celda celda) {
+        return coordenada.distanciaHorizontal(celda.coordenada);
+    }
 }
