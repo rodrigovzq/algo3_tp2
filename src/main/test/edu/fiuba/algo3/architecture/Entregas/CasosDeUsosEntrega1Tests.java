@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.architecture.Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Obstaculo.Piquete;
@@ -25,8 +26,10 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnaMotoAvanzaYSeEncuentraConUnPozoSePenalizaEnTresMovimientos (){
         Moto moto = new Moto();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, moto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
@@ -38,8 +41,9 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnAutoAvanzaYSeEncuentraConUnPozoSePenalizaEnTresMovimientos (){
         Auto auto = new Auto();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
@@ -51,8 +55,9 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnaCuatroPorCuatroAvanzaYSeEncuentraConUnPozoYNoSePenaliza () {
         CuatroPorCuatro cxc = new CuatroPorCuatro();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
@@ -64,8 +69,9 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnaCuatroPorCuatroAvanzaYSeEncuentraConTresPozosSePenalizaEnDosMovimientos (){
         CuatroPorCuatro cxc = new CuatroPorCuatro();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new Pozo(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, cxc);
 
         jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
@@ -80,8 +86,9 @@ public class CasosDeUsosEntrega1Tests {
     @Test
     public void UnAutoAvanzaYSeEncuentraConUnPiqueteYNoPuedePasar () {
         Auto auto = new Auto();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new Piquete() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new Piquete(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
         Jugador jugador = new Jugador("Pedro", posicionInicial, auto);
 
         Evento resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);

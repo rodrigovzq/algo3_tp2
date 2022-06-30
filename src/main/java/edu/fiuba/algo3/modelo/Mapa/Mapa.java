@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 
 // Clase con la responsabilidad de generar el escenario.
@@ -120,7 +119,7 @@ public class Mapa {
         Celda nuevaCelda;
         fabrica = new FabricaCeldaEsquina();
         Direccion dir = coordenada.determinarEsquina( this.ancho, this.altura );
-        nuevaCelda = fabrica.crearCelda(dir);
+        nuevaCelda = fabrica.crearCelda(dir, coordenada);
 
         return nuevaCelda;
     }
@@ -129,14 +128,14 @@ public class Mapa {
         fabrica = new FabricaCeldaBorde();
         //TODO:  ¿Debo protegerme (de nuevo) de la CeldaEsquina?
         Direccion dir = coordenada.determinarBorde( this.ancho, this.altura);
-        nuevaCelda = fabrica.crearCelda( dir );
+        nuevaCelda = fabrica.crearCelda( dir, coordenada);
 
         return nuevaCelda;
     }
 
-    private Celda generarInternaMapa(){
+    private Celda generarInternaMapa(Coordenada coordenada){
         fabrica = new FabricaCeldaInterna();
-        Celda nuevaCelda = fabrica.crearCelda(Direccion.ESTE); //no importa la direccion
+        Celda nuevaCelda = fabrica.crearCelda(Direccion.ESTE, coordenada); //no importa la direccion
         return nuevaCelda;
     }
 
@@ -147,7 +146,7 @@ public class Mapa {
         }else if( coordenada.esBorde( this.ancho , this.altura ) ){
             celda = this.generarBordeMapa( coordenada );
         }else{
-            celda = this.generarInternaMapa();
+            celda = this.generarInternaMapa( coordenada );
         }
         return celda;
     }

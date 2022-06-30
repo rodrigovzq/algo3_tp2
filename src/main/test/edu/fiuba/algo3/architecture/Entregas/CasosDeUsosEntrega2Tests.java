@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.architecture.Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 import edu.fiuba.algo3.modelo.Sorpresa.Desfavorable;
 import edu.fiuba.algo3.modelo.Sorpresa.Favorable;
@@ -28,8 +29,9 @@ public class CasosDeUsosEntrega2Tests {
 
     public void UnVehiculoAvanzaYEncuentraUnaSorpresaFavorable (){
         IVehiculo v = new Auto();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new Favorable() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new Favorable(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
@@ -48,8 +50,9 @@ public class CasosDeUsosEntrega2Tests {
 
     public void UnAutoAvanzaYEncuentraUnaSorpresaDesfavorable (){
         IVehiculo v = new Auto();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new Desfavorable() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new Desfavorable(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
@@ -68,8 +71,9 @@ public class CasosDeUsosEntrega2Tests {
 
     public void UnaMotoAvanzaYEncuentraUnaSorpresaCambioDeVehiculo (){
         IVehiculo v = new Auto();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
@@ -87,8 +91,9 @@ public class CasosDeUsosEntrega2Tests {
 
     public void UnaCuatroPorCuatroAvanzaYEncuentraUnaSorpresaCambioDeVehiculo (){
         IVehiculo v = new CuatroPorCuatro();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);
@@ -107,8 +112,9 @@ public class CasosDeUsosEntrega2Tests {
 
     public void UnMotoAvanzaYEncuentraUnaSorpresaCambioDeVehiculo (){
         IVehiculo v = new Moto();
-        CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo() );
-        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaAdyacente = new CeldaInterna( new CambioVehiculo(), coordenada);
+        CeldaInterna posicionInicial = new CeldaInterna( new Comun(), coordenada, celdaAdyacente, celdaAdyacente,celdaAdyacente,celdaAdyacente );
 
         Jugador jugador1 = new Jugador("Pedro", posicionInicial, v);
         Jugador jugador2 = new Jugador("Pedro", posicionInicial, v);

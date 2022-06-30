@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo.Celda;
 
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.Evento.Evento;
-import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 import java.util.Objects;
 
@@ -13,8 +12,9 @@ public class CeldaInterna extends Celda {
     private Celda celdaSur;
     private Celda celdaOeste;
 
-    public CeldaInterna(EstadoCelda estado, Celda celdaNorte, Celda celdaEste, Celda celdaSur, Celda celdaOeste) {
-        super( estado );
+    //TODO: ¿Codigo sólo de testing?
+    public CeldaInterna(EstadoCelda estado, Coordenada coordenada, Celda celdaNorte, Celda celdaEste, Celda celdaSur, Celda celdaOeste) {
+        super( estado, coordenada );
         this.celdaNorte = celdaNorte;
         this.celdaEste = celdaEste;
         this.celdaSur = celdaSur;
@@ -23,8 +23,8 @@ public class CeldaInterna extends Celda {
     //TODO: NO es correcto que este inicializado en null. ¿Agregar CeldaAnemica?
     // No es un estado válido para la celda, pero en sí necesitamos haber creado
     // las otras celdas para inicializar en un estado valido. Problema del huevo y la gallina.
-    public CeldaInterna(EstadoCelda estado) {
-        super( estado );
+    public CeldaInterna(EstadoCelda estado, Coordenada coordenada) {
+        super( estado, coordenada );
         this.celdaNorte = null;
         this.celdaEste =  null;
         this.celdaSur =  null;
