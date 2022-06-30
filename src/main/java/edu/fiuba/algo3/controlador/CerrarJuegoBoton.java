@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.vista.VentanaConfirmacion;
+import edu.fiuba.algo3.vista.Ventanas.VentanaConfirmacion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;

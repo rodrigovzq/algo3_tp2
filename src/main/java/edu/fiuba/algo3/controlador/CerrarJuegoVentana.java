@@ -1,12 +1,9 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.vista.VentanaConfirmacion;
-
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class CerrarJuegoVentana implements EventHandler<WindowEvent> {
