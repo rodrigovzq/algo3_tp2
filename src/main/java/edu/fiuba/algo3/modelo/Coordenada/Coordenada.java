@@ -106,4 +106,9 @@ public class Coordenada {
             return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "(" + posY + " , " + posX + ')';
+    }
 }

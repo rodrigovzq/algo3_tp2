@@ -50,4 +50,9 @@ public class Moto implements IVehiculo {
         if (o == null || getClass() != o.getClass()) return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Moto";
+    }
 }

@@ -32,4 +32,9 @@ public class Movimiento {
         int puntajeNuevo = Math.round(this.cantidad * (1 - porcentaje/100));
         return new Movimiento(puntajeNuevo);
     }
+
+    @Override
+    public String toString() {
+        return  cantidad + " movimientos" ;
+    }
 }

@@ -14,4 +14,6 @@ public interface IVehiculo {
     Float obtenerProbabilidadDeSerDetenido();
     IVehiculo siguiente();
 
+    String toString();
+
 }

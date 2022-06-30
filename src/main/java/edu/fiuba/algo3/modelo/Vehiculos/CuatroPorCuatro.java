@@ -18,32 +18,33 @@ public class CuatroPorCuatro implements IVehiculo {
     public static final int PENALIZACION_POZO = 2;
     private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.3f;
     private static final Integer PENALIZACION_CONTROL_POLICIAL = 3;
-  
+
     private Integer contadorPozosAtravesados;
 
     public CuatroPorCuatro() {
         this.contadorPozosAtravesados = RESET_CONTADOR;
     }
 
-    private void resetearContadorPozos(){
+    private void resetearContadorPozos() {
         this.contadorPozosAtravesados = RESET_CONTADOR;
     }
 
-    private void contarPozoAtravesado(){
+    private void contarPozoAtravesado() {
         this.contadorPozosAtravesados++;
     }
 
-    private boolean limiteDePozosExcedido(){
+    private boolean limiteDePozosExcedido() {
         return contadorPozosAtravesados.equals(LIMITE_POZOS);
     }
+
     @Override
     public Evento avanzarComun() {
-         return new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
+        return new Evento(new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar());
     }
 
     @Override
     public Evento avanzarPiquete() {
-        return new Evento( new NoCambiarPuntaje(),new NoCambiarVehiculo(), new NoCambiarPosicion());
+        return new Evento(new NoCambiarPuntaje(), new NoCambiarVehiculo(), new NoCambiarPosicion());
     }
 
     @Override
@@ -62,11 +63,11 @@ public class CuatroPorCuatro implements IVehiculo {
 
         this.contarPozoAtravesado();
 
-        if( this.limiteDePozosExcedido()){
+        if (this.limiteDePozosExcedido()) {
             this.resetearContadorPozos();
-            evento = new Evento( new Penalizacion(PENALIZACION_POZO),new NoCambiarVehiculo(), new Avanzar());
-        }else {
-            evento = new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
+            evento = new Evento(new Penalizacion(PENALIZACION_POZO), new NoCambiarVehiculo(), new Avanzar());
+        } else {
+            evento = new Evento(new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar());
         }
 
         return evento;
@@ -77,9 +78,14 @@ public class CuatroPorCuatro implements IVehiculo {
         return PROBABILIDAD_DE_SER_DEMORADO;
     }
 
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "4 x 4";
     }
 }
