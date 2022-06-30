@@ -33,9 +33,7 @@ public class Mapa {
 
     //La implementacion del metodo generarMapa está acoplada con la entidad Coordenada
     public void generarMapa(){
-        int columna = 0;
-        int fila = 0;
-        Coordenada coord = new Coordenada( columna , fila);
+        Coordenada coord = new Coordenada( 0 , 0);
         Celda anteriorCelda = this.generarEsquinaMapa( coord );
         esquinaSuperiorIzquierda = anteriorCelda;
 
@@ -53,6 +51,7 @@ public class Mapa {
         boolean condCorte = false;
         //Inicializo la primera fila.
         do{
+            coord = new Coordenada(coord);
             coord.mover(dirX);
             //Creo la Celda que necesito
             //coord = new Coordenada(columna, fila);
@@ -75,6 +74,7 @@ public class Mapa {
             //Seteo unicamente en direccion Y.
             setDirY = true;
             // Bajo una fila
+            coord = new Coordenada(coord);
             coord.mover(dirY);
 
             //Seteo el "pivot" de la fila de arriba. (Permite conectar verticalmente las celdas)
@@ -85,6 +85,7 @@ public class Mapa {
                     setDirY = false;
                     nuevaCelda = this.generarNuevaCelda( coord );
                 }else {
+                    coord = new Coordenada(coord);
                     coord.mover(dirX);
                     nuevaCelda = this.generarNuevaCelda( coord );
                     anteriorCelda.setCelda(nuevaCelda, dirX);

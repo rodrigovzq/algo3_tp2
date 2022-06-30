@@ -288,13 +288,13 @@ class MapaTest {
 
         Celda bordeS = esquinaSO.getCelda(Direccion.ESTE);
         coord.mover(Direccion.ESTE);
-        resultado = esquinaSO.toString();
+        resultado = bordeS.toString();
         esperado = coord.toString();
         assertEquals(esperado, resultado);
 
         Celda centro = bordeO.getCelda(Direccion.ESTE);
         coord.mover(Direccion.NORTE);
-        resultado = bordeO.toString();
+        resultado = centro.toString();
         esperado = coord.toString();
         assertEquals(esperado, resultado);
 

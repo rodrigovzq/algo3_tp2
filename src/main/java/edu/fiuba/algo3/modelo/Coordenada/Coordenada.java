@@ -18,6 +18,11 @@ public class Coordenada {
         if( !this.esValida() ){ throw new CoordenadaInvalida(); }
     }
 
+    public Coordenada(Coordenada coord) {
+        this.posX = coord.posX;
+        this.posY = coord.posY;
+    }
+
     public boolean esValidaEnMapa( Integer ancho, Integer altura){
         if( posY < altura && posX < ancho )
             return true;
