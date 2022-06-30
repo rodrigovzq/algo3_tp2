@@ -118,4 +118,14 @@ public class Coordenada {
     public String toString() {
         return "(" + posY + " , " + posX + ')';
     }
+
+    //TODO: Test
+    public Integer distanciaVertical(Coordenada coordenada) {
+        return coordenada.posY - this.posY;
+    }
+
+    //TODO: Test
+    public Integer distanciaHorizontal(Coordenada coordenada) {
+        return coordenada.posX - this.posX;
+    }
 }
