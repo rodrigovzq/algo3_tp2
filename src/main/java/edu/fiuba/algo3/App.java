@@ -12,7 +12,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("Juego GPS Challenge");
-        ContenedorMenu menu = new ContenedorMenu(stage);
+        //ContenedorMenu menu = new ContenedorMenu(stage);
+        MapaVista m = new MapaVista();
+        m.mostrarMapa(stage);
     }
 
     public static void main(String[] args) {
