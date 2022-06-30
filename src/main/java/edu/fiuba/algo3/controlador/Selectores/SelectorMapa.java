@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.controlador;
+package edu.fiuba.algo3.controlador.Selectores;
 
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import javafx.event.ActionEvent;
@@ -24,6 +24,5 @@ public class SelectorMapa implements EventHandler<ActionEvent> {
         mapa.setAltura(this.alto);
         mapa.setAncho(this.ancho);
         System.out.println("Despues: "  +  mapa.asString() );
-        return null;
     }
 }

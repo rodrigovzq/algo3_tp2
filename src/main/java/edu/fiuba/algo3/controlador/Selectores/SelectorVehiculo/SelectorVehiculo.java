@@ -1,34 +1,26 @@
-package edu.fiuba.algo3.controlador;
+package edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo;
 
-import edu.fiuba.algo3.modelo.Vehiculos.Auto;
-import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
-import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Menu;
 
-public class SelectorVehiculo implements EventHandler<ActionEvent> {
-    private IVehiculo eleccionVehiculo;
-    private final ComboBox lista;
+public abstract class SelectorVehiculo implements EventHandler<ActionEvent> {
+    private final Menu lista;
+    private final Jugador jugador;
 
-    public SelectorVehiculo(ComboBox lista , IVehiculo vehiculoJugador) {
+    public SelectorVehiculo(Menu lista, Jugador jugador ) {
         this.lista = lista;
-        this.eleccionVehiculo = vehiculoJugador;
-        System.out.println("Valor inicial lista:" + lista.getValue());
+        this.jugador = jugador;
     }
 
-    @Override
-    public void handle(ActionEvent actionEvent) {
-        if( !lista.getValue().equals(null) ){
-            String valor = String.valueOf(lista.getValue());
-            if( valor == "Auto"){
-                eleccionVehiculo = new Auto();
-            }else if( valor == "Moto"){
-                eleccionVehiculo = new Moto();
-            }else if( valor == "4x4"){
-                eleccionVehiculo = new CuatroPorCuatro();
-            }
-        }
+    public void actualizarMenu( IVehiculo v){
+        lista.setText( v.toString() );
+    }
+
+    public void actualizarVehiculo( IVehiculo v){
+        this.jugador.setVehiculo( v );
+        this.actualizarMenu( v );
     }
 }
