@@ -13,8 +13,13 @@ public class GeneradorDemora implements GeneradorAleatorio {
     @Override
     public boolean aplicar(Float probabilidad) throws ProbabilidadInvalida{
         if( probabilidad > 0)
-            return this.rng.nextDouble() <= probabilidad;
+            return this.sortearNumero() <= probabilidad;
         else
             throw new ProbabilidadInvalida();
+    }
+
+    @Override
+    public Float sortearNumero() {
+        return this.rng.nextFloat();
     }
 }

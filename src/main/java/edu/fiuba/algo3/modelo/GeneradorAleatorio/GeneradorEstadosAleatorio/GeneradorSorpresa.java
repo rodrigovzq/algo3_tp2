@@ -16,6 +16,7 @@ import edu.fiuba.algo3.modelo.Sorpresa.Sorpresa;
 import java.util.Random;
 
 public class GeneradorSorpresa implements GeneradorEstadosAleatorio {
+    private final int NUM_SORPRESA = Sorpresa.values().length;
     Random rng;
     public GeneradorSorpresa() {
         this.rng = new Random();
@@ -23,14 +24,14 @@ public class GeneradorSorpresa implements GeneradorEstadosAleatorio {
     @Override
     public boolean aplicar(Float probabilidad) throws ProbabilidadInvalida {
         if( probabilidad > 0 )
-            return this.rng.nextDouble() <= probabilidad;
+            return this.sortearNumero() <= probabilidad;
         else
             throw new ProbabilidadInvalida();
     }
 
     @Override
     public EstadoCelda sortearEstadoCelda(){
-        Integer indice = (int) (this.rng.nextDouble() * 3);
+        Integer indice = (int) (sortearNumero() * NUM_SORPRESA);
         Sorpresa sorpresa = Sorpresa.values()[indice];
 
         if( sorpresa == Sorpresa.FAVORABLE )
@@ -41,5 +42,10 @@ public class GeneradorSorpresa implements GeneradorEstadosAleatorio {
             return new CambioVehiculo();
         else
             throw new ObstaculoInvalido();
+    }
+
+    @Override
+    public Float sortearNumero() {
+        return this.rng.nextFloat();
     }
 }

@@ -13,6 +13,7 @@ import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import java.util.Random;
 
 public class GeneradorObstaculo implements GeneradorEstadosAleatorio {
+    private final int NUM_OBSTACULOS = Obstaculo.values().length;
     Random rng;
     public GeneradorObstaculo() {
         this.rng = new Random();
@@ -26,7 +27,7 @@ public class GeneradorObstaculo implements GeneradorEstadosAleatorio {
     }
     @Override
     public EstadoCelda sortearEstadoCelda(){
-        Integer indice = (int) (this.rng.nextDouble() * 3);
+        Integer indice = (int) (this.rng.nextDouble() * NUM_OBSTACULOS);
         Obstaculo obstaculo = Obstaculo.values()[indice];
 
         if( obstaculo == Obstaculo.CONTROL_POLICIAL )
@@ -37,5 +38,10 @@ public class GeneradorObstaculo implements GeneradorEstadosAleatorio {
             return new Pozo();
         else
             throw new ObstaculoInvalido();
+    }
+
+    @Override
+    public Float sortearNumero() {
+        return this.rng.nextFloat();
     }
 }
