@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
+import java.util.Objects;
+
 public abstract class Celda {
     private EstadoCelda estado;
     private Coordenada coordenada;
@@ -41,5 +43,13 @@ public abstract class Celda {
 
     public void setEstado(EstadoCelda estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Celda celda = (Celda) o;
+        return Objects.equals(coordenada, celda.coordenada);
     }
 }
