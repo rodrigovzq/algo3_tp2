@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.vista.Ventanas;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

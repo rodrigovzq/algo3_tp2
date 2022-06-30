@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controlador.CerrarJuegoBoton;
 import edu.fiuba.algo3.controlador.CerrarJuegoVentana;
+import edu.fiuba.algo3.vista.Ventanas.VentanaPopUp;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
