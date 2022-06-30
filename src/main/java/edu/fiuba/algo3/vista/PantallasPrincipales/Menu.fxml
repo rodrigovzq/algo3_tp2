@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="imgFondoMenu" fitHeight="511.0" fitWidth="738.0">
+         <image>
+            <Image url="@../../../../../../../../../../../../../Desktop/BACKGROUND.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" prefHeight="414.0" prefWidth="614.0">
+         <children>
+            <Label fx:id="lblTitulo" text="GPS Challenge" textAlignment="CENTER">
+               <font>
+                  <Font name="Helvetica Bold" size="53.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="btnJugar" mnemonicParsing="false" prefHeight="72.0" prefWidth="400.0" text="JUGAR">
+               <font>
+                  <Font name="Helvetica Bold" size="38.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnRanking" layoutX="217.0" layoutY="122.0" mnemonicParsing="false" prefWidth="400.0" text="RANKING">
+               <font>
+                  <Font name="Helvetica Bold" size="38.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnInstrucciones" layoutX="217.0" layoutY="214.0" mnemonicParsing="false" prefWidth="400.0" text="INSTRUCCIONES">
+               <font>
+                  <Font name="Helvetica Bold" size="38.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnSalir" layoutX="217.0" layoutY="286.0" mnemonicParsing="false" prefWidth="400.0" text="SALIR">
+               <font>
+                  <Font name="Helvetica Bold" size="38.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Button>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnAyuda" mnemonicParsing="false" text="AYUDA">
+                     <font>
+                        <Font name="Helvetica Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>
