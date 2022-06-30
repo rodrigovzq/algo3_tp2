@@ -1,0 +1,28 @@
+@startuml
+!include EventoPosicion.puml!SINSUBCLASES
+Avanzar .up.|> EventoPosicion
+NoCambiarPosicion .up.|> EventoPosicion
+
+'Eventos que afectan la posicion del Jugador
+class Avanzar{
+    - direccion: Direccion
+    + actualizarPosicion( Celda p ): Celda
+    + setDireccion( Direccion dir )
+}
+
+class NoCambiarPosicion{
+    'Puede prescindirse de esto?
+    - direccion: Direccion
+    + actualizarPosicion( Celda p ): Celda
+    + setDireccion( Direccion dir )
+}
+
+@enduml
+@startuml(id=SINSUBCLASES)
+Evento -left-> EventoPosicion: - posicion
+
+interface EventoPosicion{
+        + {abstract} actualizarPosicion( Celda p ): Celda
+        + {abstract} setDireccion(Direccion dir)
+}
+@enduml

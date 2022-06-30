@@ -1,90 +1,23 @@
 @startuml
 !include Evento.puml!SINSUBCLASES
+!include EventoPosicion.puml
+!include EventoVehiculo.puml
+!include EventoPuntaje.puml
 
 title Diagrama Clase completo de Evento
-EventoPuntaje <|..  DescuentoPorcentaje
-EventoPuntaje <|.. AumentoPorcentaje
-EventoPuntaje <|.. Penalizacion
-EventoPuntaje <|.. SinPenalizar
-EventoPuntaje <|.. NoCambiarPuntaje
-
-
-SiguienteVehiculo .up.|> EventoVehiculo
-NoCambiarVehiculo .up.|> EventoVehiculo
-
-Avanzar .up.|> EventoPosicion
-NoCambiarPosicion .up.|> EventoPosicion
-
-'Eventos que afectan la cantidad de movimientos totales
-class DescuentoPorcentaje{
-    - porcentaje: Integer
-    + actualizarPuntaje( Movimiento m): Movimiento
-}
-class AumentoPorcentaje{
-    - porcentaje: Integer
-    + actualizarPuntaje( Movimiento m): Movimiento
-}
-class Penalizacion{
-    - cantidad: Movimiento
-    + actualizarPuntaje( Movimiento m): Movimiento
-}
-class SinPenalizar{
-    + actualizarPuntaje( Movimiento m): Movimiento
-}
-class NoCambiarPuntaje{
-    + actualizarPuntaje( Movimiento m): Movimiento
-}
-
-
-'Eventos que afectan el vehiculo del jugador
-'Lo llame siguiente vehiculo porque utiliza el
-'método siguiente() de vehiculo. 
-class SiguienteVehiculo{
-    + actualizarVehiculo( Vehiculo v ): Vehiculo
-}
-
-class NoCambiarVehiculo{
-    + actualizarVehiculo( Vehiculo v ): Vehiculo
-}
-
-
-'Eventos que afectan la posicion del Jugador
-class Avanzar{
-    - direccionMovimiento: Direccion
-    + actualizarPosicion( Celda p ): Celda
-    + setDireccionMovimiento( Direccion dir )
-}
-
-class NoCambiarPosicion{
-    - direccionMovimiento: Direccion
-    + actualizarPosicion( Celda p ): Celda
-    + setDireccionMovimiento( Direccion dir )
-}
-
 
 
 @enduml
 @startuml(id=SINSUBCLASES)
+!include EventoPuntaje.puml!SINSUBLCASES
+!include EventoPosicion.puml!SINSUBLCASES
+!include EventoVehiculo.puml!SINSUBLCASES
+
 class Evento{
+        + Evento( EventoPuntaje pun, EventoVehiculo veh, EventoPosicion pos)
         + setDireccionMovimiento( Direccion dir )
         + actualizarVehiculo( Vehiculo v ): Vehiculo
         + actualizarPuntaje( Movimiento m): Movimiento
         + actualizarPosicion( Celda p ): Celda
 }
-
-
-Evento --> EventoPuntaje: - puntaje
-Evento -right-> EventoVehiculo: - vehiculo
-Evento -left-> EventoPosicion: - posicion
-
-interface EventoPosicion{
-        + {abstract} actualizarPosicion( Celda p ): Celda
-}
-interface EventoVehiculo{
-        + {abstract} actualizarVehiculo( Vehiculo v ): Vehiculo
-}
-interface EventoPuntaje{
-        + {abstract} actualizarPuntaje( Movimiento m): Movimiento
-}
-
 @enduml

@@ -9,15 +9,14 @@ import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class Evento {
+    private EventoPuntaje eventoPuntaje;
+    private EventoVehiculo eventoVehiculo;
+    private EventoPosicion eventoPosicion;
     public Evento(EventoPuntaje eventoPuntaje, EventoVehiculo eventoVehiculo, EventoPosicion eventoPosicion) {
         this.eventoPuntaje = eventoPuntaje;
         this.eventoVehiculo = eventoVehiculo;
         this.eventoPosicion = eventoPosicion;
     }
-
-    private EventoPuntaje eventoPuntaje;
-    private EventoVehiculo eventoVehiculo;
-    private EventoPosicion eventoPosicion;
 
     @Override
     public boolean equals(Object o) {

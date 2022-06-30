@@ -1,0 +1,24 @@
+@startuml
+!include EventoVehiculo.puml!SINSUBCLASES
+'Eventos que afectan el vehiculo del jugador
+
+class SiguienteVehiculo{
+    + actualizarVehiculo( Vehiculo v ): Vehiculo
+}
+
+class NoCambiarVehiculo{
+    + actualizarVehiculo( Vehiculo v ): Vehiculo
+}
+
+SiguienteVehiculo .up.|> EventoVehiculo
+NoCambiarVehiculo .up.|> EventoVehiculo
+@enduml
+
+@startuml(id=SINSUBCLASES)
+interface EventoVehiculo{
+        + {abstract} actualizarVehiculo( Vehiculo v ): Vehiculo
+}
+
+Evento -right-> EventoVehiculo: - vehiculo
+
+@enduml

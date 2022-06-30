@@ -1,8 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.vista.ContenedorConfiguracion;
-import edu.fiuba.algo3.vista.ContenedorMenu;
-import edu.fiuba.algo3.vista.MapaVista;
+import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorMenu;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,8 +16,6 @@ public class App extends Application {
         MapaVista m = new MapaVista();
         m.mostrarMapa(stage);
     }
-
-
 
     public static void main(String[] args) {
         launch();

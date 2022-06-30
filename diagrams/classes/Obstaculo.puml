@@ -8,6 +8,9 @@ class Pozo{
     + avanzarEn( Vehiculo v ): Evento
 }
 class ControlPolicial{
+    - PROBABILIDAD_DE_SER_DEMORADO: float
+    - generador: GeneradorAleatorio
+    + ControlPolicial( GeneradorAleatorio generador): ControlPolicial
     + avanzarEn( Vehiculo v ): Evento
 }
 

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
+import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 import java.util.Objects;
@@ -45,5 +46,26 @@ public class Jugador {
         return Objects.equals(nombre, jugador.nombre) && Objects.equals(posicion, jugador.posicion) && Objects.equals(vehiculo, jugador.vehiculo) && Objects.equals(puntaje, jugador.puntaje);
     }
 
+    public void setVehiculo(IVehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public void setNombre(String texto) {
+        this.nombre = texto;
+    }
+
+    public void setPosicion(Celda posicion) {
+        this.posicion = posicion;
+    }
+
+    @Override
+    public String toString() {
+        return "Jugador{" +
+                "nombre='" + nombre + '\'' +
+                ", posicion=" + posicion +
+                ", vehiculo=" + vehiculo +
+                ", puntaje=" + puntaje +
+                '}';
+    }
 }
 

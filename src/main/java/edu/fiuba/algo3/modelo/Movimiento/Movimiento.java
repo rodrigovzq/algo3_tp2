@@ -9,10 +9,6 @@ public class Movimiento {
         this.cantidad = cantidad;
     }
 
-    private Integer getCantidad() {
-        return cantidad;
-    }
-
     public Movimiento sumarMovimiento(Movimiento m) {
         this.cantidad += m.cantidad;
         return m;
@@ -22,8 +18,8 @@ public class Movimiento {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Movimiento that = (Movimiento) o;
-        return Objects.equals(cantidad, that.cantidad);
+        Movimiento m = (Movimiento) o;
+        return Objects.equals(cantidad, m.cantidad);
     }
 
     public Movimiento aplicarAumento(Float porcentaje) {
@@ -35,5 +31,10 @@ public class Movimiento {
     public Movimiento aplicarDescuento(Float porcentaje) {
         int puntajeNuevo = Math.round(this.cantidad * (1 - porcentaje/100));
         return new Movimiento(puntajeNuevo);
+    }
+
+    @Override
+    public String toString() {
+        return  cantidad + " movimientos" ;
     }
 }

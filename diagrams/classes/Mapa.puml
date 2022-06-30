@@ -1,0 +1,16 @@
+@startuml
+class Mapa{
+    - ancho: Integer
+    - alto: Integer
+    - esquinaSuperiorIzquierda: Celda
+    - fabrica: FabricaCelda
+    + Mapa( Integer ancho, Integer altura): Mapa
+    + generarMapa()
+    + generarNuevaCelda( Coordenada coordenada ): Celda
+    - generarEsquinaMapa( Coordenada coordenada ): Celda
+    - generarBordeMapa( Coordenada coordenada ): Celda
+    - generarInternaMapa(): Celda
+    - esValido(): boolean
+}
+
+@enduml
