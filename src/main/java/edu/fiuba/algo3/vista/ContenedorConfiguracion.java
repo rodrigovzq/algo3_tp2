@@ -1,13 +1,15 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
-import edu.fiuba.algo3.controlador.SelectorMapa;
+import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;
+import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorAuto;
+import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorCuatroPorCuatro;
+import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorMoto;
+import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorVehiculo;
 import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
-import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
-import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
-import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -21,24 +23,24 @@ import javafx.stage.Stage;
 
 public class ContenedorConfiguracion {
     VBox root = new VBox();
-    String nombreJugador = "";
-    IVehiculo vehiculoElegido;
+    Jugador jugador;
     Stage stage;
     private Mapa mapaJuego;
 
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
         //TODO: Valor default de mapa.
-        mapaJuego = new Mapa(10,20);
-        //TODO: Valor default de vehiculo.
-        IVehiculo vehiculoElegido = new Auto();
+        this.mapaJuego = new Mapa(2,2);
+        this.mapaJuego.generarMapa();
+        //TODO: Valor default del jugador.
+        this.jugador = new Jugador("", mapaJuego.sortearCeldaJugador(), new Auto());
         this.iniciar();
     }
 
 
     private void iniciar(){
         Button botonJugar = new Button("Jugar");
-        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.nombreJugador, this.mapaJuego, this.vehiculoElegido) );
+        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
         Button botonCancelar = new Button("Cancelar");
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
 
@@ -56,18 +58,24 @@ public class ContenedorConfiguracion {
         //TODO: Validar que el nombre no este vacío, ni este ocupado por otros.
         // antes de iniciar el juego.
         TextField campoNombre = new TextField();
-        CampoTextoEnter enterNombre = new CampoTextoEnter(campoNombre, this.nombreJugador);
+        CampoTextoEnter enterNombre = new CampoTextoEnter(campoNombre, this.jugador);
         enterNombre.setMensajeIncorrecto("Ingresá un nombre válido.");
         campoNombre.setOnKeyPressed( enterNombre );
         campoNombre.setMinWidth(200);
         campoNombre.setPromptText("Ingrese un nombre");
 
-        //TODO: Mostrar valor seleccionado.
+        //TODO: Mi problema con todo esto es que la vista esta en contacto con el modelo
+        //directamente. Pero no se cual sería la forma más correcta de implementarlo.
+        //Además el menu, debería mostrar el auto elegido.
+
+        //Lo que se me ocurre es que la ventana instancie a Jugador y al jugador ponerle
+        //directamente setters y que los controladores usen a esos setters.
+        //Y que además el controlador modifique el nombre del Menu.
         Group listaVehiculo = emitirOpcionesVehiculos();
 
         Button boton10X20 = new Button("10x20"); ;
         boton10X20.setOnAction(new SelectorMapa(mapaJuego, 10 ,20 ));
-        //TODO: Encapsular botones de mapa, en una
+        //TODO: Encapsular botones de mapa, en una?
         boton10X20.setCursor(Cursor.HAND);
         boton10X20.setPrefSize(100,100);
 
@@ -131,20 +139,18 @@ public class ContenedorConfiguracion {
     private Group emitirOpcionesVehiculos() {
         Menu fileMenu = new Menu("Vehiculo");
 
+        SelectorVehiculo selectorItem1 = new SelectorAuto( fileMenu, this.jugador);
+        SelectorVehiculo selectorItem2 = new SelectorMoto( fileMenu, this.jugador);
+        SelectorVehiculo selectorItem3 = new SelectorCuatroPorCuatro( fileMenu, this.jugador);
+
         MenuItem item1 = new MenuItem("Auto");
-        item1.setOnAction( e -> {
-            vehiculoElegido = new Auto();
-        });
+        item1.setOnAction( selectorItem1 );
 
         MenuItem item2 = new MenuItem("Moto");
-        item2.setOnAction( e -> {
-            vehiculoElegido = new Moto();
-        });
+        item2.setOnAction( selectorItem2 );
 
         MenuItem item3 = new MenuItem("4 X 4");
-        item3.setOnAction( e -> {
-            vehiculoElegido = new CuatroPorCuatro();
-        });
+        item3.setOnAction( selectorItem3 );
 
         fileMenu.getItems().addAll(item1, item2, item3);
         MenuBar menuBar = new MenuBar(fileMenu);
