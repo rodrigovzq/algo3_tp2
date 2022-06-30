@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Mapa;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
@@ -8,6 +9,10 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorEstadosAleatorio;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorObstaculo;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorSorpresa;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 
 // Clase con la responsabilidad de generar el escenario.
 public class Mapa {
@@ -15,9 +20,17 @@ public class Mapa {
     private Integer altura;
     private Celda esquinaSuperiorIzquierda;
     private FabricaCelda fabrica;
+
+    private GeneradorEstadosAleatorio generador;
+
+    private final Float PROBABILIDAD_OBSTACULO = 0.5F;
+    private final Float PROBABILIDAD_SORPRESA = 0.5F;
     public Mapa(Integer ancho, Integer altura) throws MapaInvalido {
         this.ancho = ancho;
         this.altura = altura;
+        //ValorPorDefault
+        this.generador = new GeneradorObstaculo();
+
         if( !this.esValido() ){ throw new MapaInvalido(); }
     }
 
@@ -39,9 +52,6 @@ public class Mapa {
 
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
-        //dependiendo de la cantidad de filas, la ultima
-        //celda creada será una esquina.
-        Direccion esquinaFIN = this.direccionRecorridoFinal();
 
         Celda nuevaCelda;
         Celda filaAnteriorCelda = null;
@@ -103,9 +113,7 @@ public class Mapa {
                 anteriorCelda = nuevaCelda;
             }while( !condCorte );
 
-            condCorte = coord.esEsquina( this.ancho, this.altura);
-            if( condCorte )
-                condCorte = ( coord.determinarEsquina( this.ancho, this.altura) == esquinaFIN ) ;
+            condCorte = esFinRecorrido( coord );
 
         }while( !condCorte );
 
@@ -173,10 +181,61 @@ public class Mapa {
     }
 
     public void sortearEstadosMapa() {
-        //Enum de Estados y con el numeros sorteado se elije que tipo de celda es?
-        //Recorre el mapa desde la esquina izquierda
-        //y va sorteando para cada celda que estado le toca.
-        //dependiendo de que estado, va a tener que volver a sortear para que tipo le toca.
-        // Una vez sorteado el estado, setea el estado en la celda que esta.
+        Coordenada coordenada = new Coordenada(0,0);
+        Celda celdaSeleccionada = esquinaSuperiorIzquierda;
+        Direccion dirX = Direccion.ESTE;
+        Direccion dirY = Direccion.SUR;
+        boolean condCorte = false;
+        EstadoCelda estado;
+
+        while( !condCorte ){
+
+            estado = sortearEstadoCelda();
+
+            celdaSeleccionada.setEstado( estado );
+
+            condCorte = esFinRecorrido(coordenada);
+
+            if( !condCorte) {
+                if (coordenada.esEsquina(this.ancho, this.altura) || coordenada.esBorde(this.ancho, this.altura)) {
+                    if (coordenada.determinarBorde(this.ancho, this.altura) == dirX) {
+                        dirX = dirX.opuesto();
+                        coordenada.mover(dirY);
+                        celdaSeleccionada = celdaSeleccionada.getCelda(dirY);
+                    } else {
+                        celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
+                        coordenada.mover(dirX);
+                    }
+                }else{
+                    celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
+                    coordenada.mover(dirX);
+                }
+
+            }
+
+        }
+
+    }
+
+    private boolean esFinRecorrido(Coordenada coordenada) {
+        boolean condCorte = false;
+        if( coordenada.esEsquina(this.ancho, this.altura ) )
+            condCorte = ( coordenada.determinarEsquina(this.ancho, this.altura) == direccionRecorridoFinal());
+        return condCorte;
+    }
+
+    private EstadoCelda sortearEstadoCelda() {
+        EstadoCelda estado;
+        if( generador.aplicar( PROBABILIDAD_OBSTACULO ) ){
+            this.generador = new GeneradorObstaculo();
+            estado = generador.sortearEstadoCelda();
+
+        }else if( generador.aplicar( PROBABILIDAD_SORPRESA ) ){
+            this.generador = new GeneradorSorpresa();
+            estado = generador.sortearEstadoCelda();
+        }else{
+            estado = new Comun();
+        }
+        return estado;
     }
 }

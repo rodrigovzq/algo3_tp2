@@ -38,4 +38,8 @@ public abstract class Celda {
     public String toString() {
         return coordenada.toString();
     }
+
+    public void setEstado(EstadoCelda estado) {
+        this.estado = estado;
+    }
 }

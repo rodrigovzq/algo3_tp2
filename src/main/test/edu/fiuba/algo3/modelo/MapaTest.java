@@ -324,6 +324,7 @@ class MapaTest {
 
 
     }
+
     @Test
     public void creoDistintasCombinacionesDeMapas(){
         assertDoesNotThrow( () -> new Mapa(10,10) );

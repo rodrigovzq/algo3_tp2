@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Obstaculo;
 
-import edu.fiuba.algo3.modelo.Obstaculo.ControlPolicial;
-import edu.fiuba.algo3.modelo.Obstaculo.GeneradorAleatorio;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;

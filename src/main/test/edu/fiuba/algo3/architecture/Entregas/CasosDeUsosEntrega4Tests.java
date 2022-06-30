@@ -12,6 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class CasosDeUsosEntrega4Tests {
     @Test
     public void seGeneraUnMapaAleatoriamenteMeMuevoEnCirculoConElAutoYTengoMasMovimientosQueAvances(){
+        //TODO: Mockear. Para quitar lo estocástico.
+        //TODO: Testear generadores aleatorios.
+        //TODO: Immplementar sortearCeldaJugador
+        //TODO: Rehacer este test de manera que sea deterministico. Cuando se sortee la posicion del jugador,
+        //va a ser mas estocastico que esto funcione.
         Mapa mapa1 = new Mapa( 20, 20);
         mapa1.generarMapa();
         mapa1.sortearEstadosMapa();
@@ -39,7 +44,7 @@ public class CasosDeUsosEntrega4Tests {
         ev = jugador2.avanzarHaciaLaDireccion(Direccion.NORTE);
         jugador2.actualizar( ev );
 
-        //mmm- aca me va a estar afectando la posicion?
+
         assertNotEquals(jugador2, jugador1);
     }
 
