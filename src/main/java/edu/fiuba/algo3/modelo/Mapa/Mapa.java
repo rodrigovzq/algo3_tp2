@@ -41,9 +41,7 @@ public class Mapa {
         Direccion dirY = Direccion.SUR;
         //dependiendo de la cantidad de filas, la ultima
         //celda creada será una esquina.
-        Direccion esquinaFIN = Direccion.SUDOESTE;
-        if( this.altura % 2 == 1 )
-            esquinaFIN = Direccion.SUDESTE;
+        Direccion esquinaFIN = this.direccionRecorridoFinal();
 
         Celda nuevaCelda;
         Celda filaAnteriorCelda = null;
@@ -53,8 +51,7 @@ public class Mapa {
         do{
             coord = new Coordenada(coord);
             coord.mover(dirX);
-            //Creo la Celda que necesito
-            //coord = new Coordenada(columna, fila);
+
             nuevaCelda = this.generarNuevaCelda( coord );
             //Seteo en el sentido X la nueva Celda.
             anteriorCelda.setCelda(nuevaCelda, dirX);
@@ -114,7 +111,15 @@ public class Mapa {
 
     }
 
-     private Celda generarEsquinaMapa( Coordenada coordenada){
+    private Direccion direccionRecorridoFinal() {
+        Direccion esquinaFIN = Direccion.SUDOESTE;
+        if( this.altura % 2 == 1 )
+            esquinaFIN = Direccion.SUDESTE;
+        return esquinaFIN;
+    }
+
+
+    private Celda generarEsquinaMapa( Coordenada coordenada){
         Celda nuevaCelda;
         fabrica = new FabricaCeldaEsquina();
         Direccion dir = coordenada.determinarEsquina( this.ancho, this.altura );
@@ -164,7 +169,14 @@ public class Mapa {
 
     public Celda sortearCeldaJugador() {
         //TODO: Sortear aleatoriamente una posicion del mapa.
-        // Enum de Estados y con el numeros sorteado se elije que tipo de celda es?
         return esquinaSuperiorIzquierda;
+    }
+
+    public void sortearEstadosMapa() {
+        //Enum de Estados y con el numeros sorteado se elije que tipo de celda es?
+        //Recorre el mapa desde la esquina izquierda
+        //y va sorteando para cada celda que estado le toca.
+        //dependiendo de que estado, va a tener que volver a sortear para que tipo le toca.
+        // Una vez sorteado el estado, setea el estado en la celda que esta.
     }
 }
