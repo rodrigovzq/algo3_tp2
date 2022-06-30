@@ -34,4 +34,9 @@ public abstract class Celda {
 
     public abstract Celda getCelda(Direccion direccion) throws DireccionInvalida;
     public abstract void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida;
+
+    @Override
+    public String toString() {
+        return coordenada.toString();
+    }
 }
