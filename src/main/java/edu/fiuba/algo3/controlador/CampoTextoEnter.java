@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controlador;
 
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -8,11 +9,11 @@ import javafx.scene.input.KeyEvent;
 public class CampoTextoEnter implements EventHandler<KeyEvent> {
 
     private final TextField campoTexto;
-    String texto;
+    Jugador jugador;
     String msj_incorrecto;
-    public CampoTextoEnter(TextField campoTexto, String texto) {
+    public CampoTextoEnter(TextField campoTexto, Jugador jugador) {
         this.campoTexto = campoTexto;
-        this.texto = texto;
+        this.jugador = jugador;
         this.msj_incorrecto = "Valor inválido.";
     }
 
@@ -25,7 +26,7 @@ public class CampoTextoEnter implements EventHandler<KeyEvent> {
                 campoTexto.setText(msj_incorrecto);
                 campoTexto.setStyle("-fx-text-inner-color: #EF3030;");
             }else {
-                texto = campoTexto.getText();
+                jugador.setNombre( campoTexto.getText() );
                 campoTexto.setStyle("-fx-text-inner-color: #10AF30;");
 
             }

@@ -24,5 +24,6 @@ public class SelectorMapa implements EventHandler<ActionEvent> {
         mapa.setAltura(this.alto);
         mapa.setAncho(this.ancho);
         System.out.println("Despues: "  +  mapa.asString() );
+        return null;
     }
 }
