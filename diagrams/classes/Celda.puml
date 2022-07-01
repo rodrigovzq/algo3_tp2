@@ -1,34 +1,23 @@
-@startuml
+@startuml(id=COMPLETO)
 !include Celda.puml!SINSUBCLASES
 !include Obstaculo.puml!SINSUBCLASES
 !include Sorpresa.puml!SINSUBCLASES
-
-' En Java, una interfaz no puede implementar una
-'interfaz, solo puede heredarla.
- EstadoCelda <|.left. Obstaculo
-EstadoCelda <|.down.. Comun
-EstadoCelda <|.right. Sorpresa
-
-class Comun{
-    + avanzarEn( Vehiculo v ): Evento
-}
+!include CeldaBorde.puml
+!include CeldaInterna.puml
+!include CeldaEsquina.puml
+!include EstadoCelda.puml
 @enduml
+
 @startuml(id=SINSUBCLASES)
-class Celda{
+!include EstadoCelda.puml!SINSUBCLASES
+abstract class Celda{
+    + Celda( EstadoCelda estado ): Celda
     + avanzarEn( Vehiculo v ): Evento
+    + setCeldaOpuesta( Celda celda, Direccion direccion )
+    + {abstract} getCelda( Direccion direccion ): Celda
+    + {abstract} setCelda( Celda nueva, Direccion direccion)
 }
 
 Celda -down--> EstadoCelda
-Celda ---> "4" Celda
-
-interface EstadoCelda{
-    + {abstract} avanzarEn( Vehiculo v ): Evento
-}
-
-note right of Celda
-Tiene a sus "4"
-adyacentes.
-end note
-
 @enduml
 

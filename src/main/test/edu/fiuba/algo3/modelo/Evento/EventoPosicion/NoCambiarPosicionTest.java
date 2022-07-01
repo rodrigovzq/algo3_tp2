@@ -1,25 +1,34 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo.Evento.EventoPosicion;
+package edu.fiuba.algo3.modelo.CeldaInterna.Obstaculo.Evento.EventoPosicion;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class NoCambiarPosicionTest {
     @Test
-    public void cualquieraSeaLaDireccionDevuelveLaMismaCeldaQueSePasaPorParametro(){
+    public void cualquieraSeaLaDireccionDevuelveLaMismaCeldaInternaQueSePasaPorParametro(){
         NoCambiarPosicion sinCambiar = new NoCambiarPosicion();
 
-        Celda celdaOeste = new Celda( null );
-        Celda celdaEste = new Celda( null );
-        Celda celdaNorte = celdaEste;
-        Celda celdaSur = celdaEste;
+        Coordenada coordenada = new Coordenada(0,0);
+        CeldaInterna celdaOeste = new CeldaInterna( null, coordenada);
+        CeldaInterna celdaEste = new CeldaInterna( null, coordenada);
+        CeldaInterna celdaNorte = celdaEste;
+        CeldaInterna celdaSur = celdaEste;
 
-        Celda celdaActual = new Celda( null, celdaNorte, celdaEste, celdaSur, celdaOeste );
+        CeldaInterna celdaActual = new CeldaInterna( new Comun(), coordenada);
 
-        Celda esperado = celdaActual;
+        celdaActual.setCelda(celdaNorte, Direccion.NORTE);
+        celdaActual.setCelda(celdaEste, Direccion.ESTE);
+        celdaActual.setCelda(celdaOeste, Direccion.OESTE);
+        celdaActual.setCelda(celdaSur, Direccion.SUR);
+
+        CeldaInterna esperado = celdaActual;
 
         sinCambiar.setDireccion(Direccion.ESTE);
         Celda resultado = sinCambiar.actualizarPosicion( celdaActual );

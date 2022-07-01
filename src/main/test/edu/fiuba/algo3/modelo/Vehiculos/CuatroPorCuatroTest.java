@@ -7,7 +7,9 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.NoCambiarPuntaje;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
+import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -67,11 +69,7 @@ class CuatroPorCuatroTest {
 
         assertEquals(esperado, resultado);
     }
-    @Test
-    public void avanzarSobreUnControlPolicialPenalizaConUnaProbabilidad(){
-        // Inyectar la dependencia del que tiene la responsabilidad de sortea
-        // la probabilidad ?
-    }
+
     @Test
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza(){
         CuatroPorCuatro cxc = new CuatroPorCuatro();
@@ -80,5 +78,11 @@ class CuatroPorCuatroTest {
         Evento esperado = new Evento( new SinPenalizar(), new NoCambiarVehiculo(), new Avanzar());
 
         assertEquals(esperado, resultado);
+    }
+    @Test
+    public void anteUnCambioDeVehiculoSecuencialElAutoSeConvierteEnCuatroPorCuatro(){
+        Auto auto = new Auto();
+
+        assertEquals( new CuatroPorCuatro(), auto.siguiente());
     }
 }

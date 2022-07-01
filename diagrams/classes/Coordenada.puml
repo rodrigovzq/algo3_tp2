@@ -1,0 +1,16 @@
+@startuml
+class Coordenada{
+    - posicionX: Integer
+    - posicionY: Integer
+    + Coordenada(Integer x, Integer y): Coordenada
+    + esValidaEnMapa( Integer ancho, Integer alto ): boolean
+    + mover( Direccion direccion)
+    ' Puedo encapsularlo en uno?
+    + esEsquina( Integer ancho, Integer alto ): boolean
+    + esBorde( Integer ancho, Integer alto ): boolean
+    + determinarEsquina( Integer ancho, Integer alto ): Direccion
+    + determinarBorde( Integer ancho, Integer alto ): Direccion
+    - esValida(): boolean
+}
+
+@enduml

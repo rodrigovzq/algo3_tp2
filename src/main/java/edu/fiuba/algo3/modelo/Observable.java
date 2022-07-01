@@ -12,13 +12,13 @@ public abstract class Observable {
         this.observadores = new ArrayList<>();
     }
 
-    public void notificarATodos(){
-        for( Observador o : observadores){
+    public void notificarATodos() {
+        for (Observador o : observadores) {
             o.actualizar();
         }
     }
 
-    public void agregarObservador(Observador o){
+    public void agregarObservador(Observador o) {
         observadores.add(o);
     }
 }

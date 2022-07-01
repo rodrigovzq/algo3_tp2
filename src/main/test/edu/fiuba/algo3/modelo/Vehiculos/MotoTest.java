@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import org.junit.jupiter.api.Test;
 
@@ -32,12 +33,6 @@ class MotoTest {
     }
 
     @Test
-    public void avanzarSobreUnControlPolicialPenalizaConUnaProbabilidad() {
-        // Inyectar la dependencia del que tiene la responsabilidad de sortea
-        // la probabilidad ?
-    }
-
-    @Test
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza() {
         Moto moto = new Moto();
 
@@ -47,4 +42,10 @@ class MotoTest {
         assertEquals(esperado, resultado);
     }
 
+    @Test
+    public void anteUnCambioDeVehiculoSecuencialLaMotoSeConvierteEnAuto(){
+        Moto moto = new Moto();
+
+        assertEquals( new Auto(), moto.siguiente());
+    }
 }
