@@ -57,4 +57,34 @@ class CeldaInternaTest {
         assertEquals(celda, este .getCelda( Direccion.OESTE ) );
         assertEquals(celda, oeste.getCelda( Direccion.ESTE ) );
     }
+
+    @Test
+    public void obtengoLaDistanciaEntreDosCeldasAdyacentes() {
+        // TODO: Mockear?
+        Coordenada coordenada = new Coordenada(1,1);
+        CeldaInterna celda = new CeldaInterna(new Comun(), coordenada);
+
+        coordenada = new Coordenada(1,0);
+        CeldaInterna norte = new CeldaInterna(new Pozo(), coordenada);
+
+        coordenada = new Coordenada(1,2);
+        CeldaInterna sur = new CeldaInterna(new Pozo(), coordenada);
+
+        coordenada = new Coordenada(2,1);
+        CeldaInterna este = new CeldaInterna(new Pozo(), coordenada);
+
+        coordenada = new Coordenada(0,1);
+        CeldaInterna oeste = new CeldaInterna(new Pozo(), coordenada);
+
+        assertEquals(0, celda.distanciaHorizontal(norte));
+        assertEquals(0, celda.distanciaHorizontal(sur));
+        assertEquals(1, celda.distanciaHorizontal(este));
+        assertEquals(-1, celda.distanciaHorizontal(oeste));
+
+        assertEquals(-1, celda.distanciaVertical(norte));
+        assertEquals(1, celda.distanciaVertical(sur));
+        assertEquals(0, celda.distanciaVertical(este));
+        assertEquals(0, celda.distanciaVertical(oeste));
+    }
+
 }
