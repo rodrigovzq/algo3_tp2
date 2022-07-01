@@ -5,10 +5,11 @@ import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
+import javafx.beans.Observable;
 
 import java.util.Objects;
 
-public abstract class Celda {
+public abstract class Celda implements Observable {
     private EstadoCelda estado;
     private Coordenada coordenada;
     public Celda(EstadoCelda estado, Coordenada coordenada) {

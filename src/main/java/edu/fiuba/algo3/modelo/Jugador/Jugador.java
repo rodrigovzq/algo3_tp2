@@ -58,14 +58,10 @@ public class Jugador {
         this.posicion = posicion;
     }
 
+    //Primero el puntaje para que sea mas facil ordenar el ranking
     @Override
     public String toString() {
-        return "Jugador{" +
-                "nombre='" + nombre + '\'' +
-                ", posicion=" + posicion +
-                ", vehiculo=" + vehiculo +
-                ", puntaje=" + puntaje +
-                '}';
+        return  nombre + "," + puntaje;
     }
 }
 
