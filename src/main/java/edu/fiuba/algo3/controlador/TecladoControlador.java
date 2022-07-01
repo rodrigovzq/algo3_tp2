@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -16,20 +17,22 @@ public class TecladoControlador implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent keyEvent) {
+        Evento resultado = null;
         try{
             if(keyEvent.getCode() == KeyCode.W ){
-                jugador.avanzarHaciaLaDireccion(Direccion.NORTE);
+                resultado = jugador.avanzarHaciaLaDireccion(Direccion.NORTE);
             }
             if(keyEvent.getCode() == KeyCode.A ){
-                jugador.avanzarHaciaLaDireccion(Direccion.OESTE);
+                resultado = jugador.avanzarHaciaLaDireccion(Direccion.OESTE);
             }
             if(keyEvent.getCode() == KeyCode.S ){
-                jugador.avanzarHaciaLaDireccion(Direccion.SUR);
+                resultado = jugador.avanzarHaciaLaDireccion(Direccion.SUR);
             }
             if(keyEvent.getCode() == KeyCode.D ){
-                jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
+                resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
             }
         }catch (Exception e){}
+        jugador.actualizar(resultado);
 
     }
 }
