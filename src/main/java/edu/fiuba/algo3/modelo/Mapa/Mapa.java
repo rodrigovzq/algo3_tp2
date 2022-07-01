@@ -57,7 +57,9 @@ public class Mapa {
         Celda nuevaCelda;
         Celda filaAnteriorCelda = null;
         boolean setDirY = false;
-        boolean condCorte = false;
+        boolean esElBorde = false;
+        boolean esCeldaInterna = true;
+
         //Inicializo la primera fila.
         do{
             coord = new Coordenada(coord);
@@ -68,11 +70,11 @@ public class Mapa {
             anteriorCelda.setCelda(nuevaCelda, dirX);
             anteriorCelda = nuevaCelda;
 
-            condCorte = coord.esEsquina( this.ancho, this.altura);
-            if( condCorte )
-                condCorte = ( coord.determinarEsquina( this.ancho, this.altura) == Direccion.NORESTE ) ;
+            esElBorde = coord.esEsquina( this.ancho, this.altura);
+            if( esElBorde )
+                esElBorde = ( coord.determinarEsquina( this.ancho, this.altura) == Direccion.NORESTE ) ;
 
-        }while( !condCorte );
+        }while( !esElBorde );
 
         //Continua construyendo el resto de filas.
         do{
@@ -102,21 +104,21 @@ public class Mapa {
                 //Seteo verticalmente con la celda de la fila anterior.
                 filaAnteriorCelda.setCelda(nuevaCelda, dirY);
 
-                condCorte = ( coord.esEsquina(this.ancho, this.altura) || coord.esBorde(this.ancho, this.altura) );
-                if( condCorte ) {
-                    condCorte = coord.determinarBorde(this.ancho, this.altura) == dirX;
+                esCeldaInterna = esCeldaInterna(coord);
+                //Si no es celda interna chequeo si llegue al borde.
+                if( !esCeldaInterna ) {
+                    esElBorde = (coord.determinarBorde(this.ancho, this.altura) == dirX);
                 }
 
+                //Si es celda interna o no es EL borde, me muevo en la fila anterior.
                 //Cuando llego al borde hacia donde me dirijo, no puedo pedir la celda adyacente.
-                if(!condCorte)
+                if( !esElBorde || esCeldaInterna )
                     filaAnteriorCelda = filaAnteriorCelda.getCelda(dirX);
 
                 anteriorCelda = nuevaCelda;
-            }while( !condCorte );
+            }while( !esElBorde );
 
-            condCorte = esFinRecorrido( coord );
-
-        }while( !condCorte );
+        }while( !esFinRecorrido( coord ) );
 
     }
 
@@ -209,36 +211,29 @@ public class Mapa {
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
-        boolean condCorte = false;
+
         EstadoCelda estado;
 
-        while( !condCorte ){
+        while( !esFinRecorrido(coordenada)){
 
             estado = sortearEstadoCelda();
 
             celdaSeleccionada.setEstado( estado );
 
-            condCorte = esFinRecorrido(coordenada);
-            //TODO: Refactorizar.
-            if( !condCorte) {
-                if (coordenada.esEsquina(this.ancho, this.altura) || coordenada.esBorde(this.ancho, this.altura)) {
-                    if (coordenada.determinarBorde(this.ancho, this.altura) == dirX) {
-                        dirX = dirX.opuesto();
-                        coordenada.mover(dirY);
-                        celdaSeleccionada = celdaSeleccionada.getCelda(dirY);
-                    } else {
-                        celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
-                        coordenada.mover(dirX);
-                    }
-                }else{
-                    celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
-                    coordenada.mover(dirX);
-                }
-
+            if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
+                celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
+                coordenada.mover(dirX);
+            } else {
+                dirX = dirX.opuesto();
+                coordenada.mover(dirY);
+                celdaSeleccionada = celdaSeleccionada.getCelda(dirY);
             }
 
         }
+    }
 
+    private boolean esCeldaInterna(Coordenada coordenada) {
+        return !(coordenada.esEsquina(this.ancho, this.altura) || coordenada.esBorde(this.ancho, this.altura));
     }
 
     private boolean esFinRecorrido(Coordenada coordenada) {

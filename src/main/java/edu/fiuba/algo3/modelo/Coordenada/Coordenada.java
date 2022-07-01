@@ -116,7 +116,7 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return "(" + posY + " , " + posX + ')';
+        return "(" + posX + " , " + posY + ')';
     }
 
     //TODO: Test
