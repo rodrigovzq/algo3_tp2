@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio;
 import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Excepcion.ObstaculoInvalido;
 import edu.fiuba.algo3.modelo.Excepcion.ProbabilidadInvalida;
+import edu.fiuba.algo3.modelo.Excepcion.SorpresaInvalida;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Obstaculo.ControlPolicial;
 import edu.fiuba.algo3.modelo.Obstaculo.Obstaculo;
@@ -41,7 +42,7 @@ public class GeneradorSorpresa implements GeneradorEstadosAleatorio {
         else if( sorpresa == Sorpresa.CAMBIO_VEHICULO )
             return new CambioVehiculo();
         else
-            throw new ObstaculoInvalido();
+            throw new SorpresaInvalida();
     }
 
     @Override

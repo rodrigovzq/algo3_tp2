@@ -326,7 +326,10 @@ class MapaTest {
 
 
     }
-
+    //SUPUESTO: El mapa no puede ser menor a 2x2.
+    //SUPUESTO: Las coordenadas no pueden ser negativas
+    //SUPUESTO: El jugador se inicializa en el cuarto cuarto del mapa.
+    //SUPUESTO: La Meta se inicializa en el segundos cuarto del mapa. (agujas de reloj)
     @Test
     public void creoDistintasCombinacionesDeMapas(){
         assertDoesNotThrow( () -> new Mapa(10,10) );
