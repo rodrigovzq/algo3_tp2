@@ -179,7 +179,6 @@ public class Mapa {
     }
 
     public Celda sortearCeldaJugador() {
-        //TODO: Sortear aleatoriamente una posicion del mapa.
         Integer fila = (int) (this.generador.sortearNumero() * this.altura);
         Integer columna = (int) (this.generador.sortearNumero() * this.ancho);
         Coordenada coordenada = new Coordenada( columna, fila);
