@@ -41,7 +41,7 @@ public class ContenedorMenu {
         botonSalir.setOnAction( cerrarBoton );
 
         //TODO: Ver si sirve para algo o no.
-        botonHelpPls.setOnAction( e -> VentanaPopUp.mostrar("Help", "no se como ayudarte") );
+        botonHelpPls.setOnAction( e -> VentanaPopUp.mostrar("Help", "No se como ayudarte") );
 
 
         VBox root = new VBox();
