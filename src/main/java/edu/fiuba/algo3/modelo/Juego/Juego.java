@@ -9,21 +9,17 @@ import java.util.Comparator;
 public class Juego implements Observador {
 
     private Jugador jugador;
-    private ArrayList<String> ranking;
+    private Ranking ranking;
 
     public Juego(Jugador jugador) {
         this.jugador = jugador;
         //TODO: Levantar de files rankings anteriores
-        this.ranking = new ArrayList<String>();
+        this.ranking = new Ranking();
     }
 
     @Override
     public void actualizar() {
-        ranking.add( jugador.toString() );
-        ranking.sort( (o1,o2) -> {
-            Integer puntaje1 = Integer.parseInt(o1.split(",")[1]);
-            Integer puntaje2 = Integer.parseInt(o2.split(",")[1]);
-            return puntaje2.compareTo(puntaje1);
-        });
+        this.ranking.agregar(jugador);
+        //TODO: Cerrar partida.
     }
 }

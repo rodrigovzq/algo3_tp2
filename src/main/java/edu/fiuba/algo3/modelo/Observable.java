@@ -5,7 +5,7 @@ import java.util.List;
 
 // Las clases pertenecientes al Modelo son observables y van a notificar la ocurrencia
 // de cambios de estados cada vez que se cambie algo en el.
-public abstract class Observable {
+public abstract class Observable{
     private List<Observador> observadores;
 
     public Observable() {
