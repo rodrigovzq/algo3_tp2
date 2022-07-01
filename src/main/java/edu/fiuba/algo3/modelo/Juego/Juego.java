@@ -13,7 +13,7 @@ public class Juego implements Observador {
 
     public Juego(Jugador jugador) {
         this.jugador = jugador;
-        //TODO: Levantar de files rankings anteriores
+        //TODO: Levantar de files rankings anteriores.
         this.ranking = new Ranking();
     }
 
@@ -21,5 +21,6 @@ public class Juego implements Observador {
     public void actualizar() {
         this.ranking.agregar(jugador);
         //TODO: Cerrar partida.
+        //Escribir archivo.
     }
 }
