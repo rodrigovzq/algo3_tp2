@@ -9,6 +9,7 @@ import java.util.List;
 //agregar() y ordenar() para hacerlo más correcto y flexible.
 //TODO: Jugador que sea rankeable, de manera que obligue
 //a tener una forma de compararse. Acá estoy forzando que sea strings.
+//Ademas no creo que sea un uso correcto del ToString().
 public class Ranking{
     private List<String> ranking;
 

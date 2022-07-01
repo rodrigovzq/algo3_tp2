@@ -359,31 +359,16 @@ class MapaTest {
         assertTrue(resultado);
 
         //Repito el test
-        celda = mapa.sortearCeldaJugador();
-        distanciaX = celda.distanciaHorizontal(celdaMax);
-        distanciaY = celda.distanciaVertical(celdaMax);
+        for( int i = 0; i < 10; i++) {
+            celda = mapa.sortearCeldaJugador();
+            distanciaX = celda.distanciaHorizontal(celdaMax);
+            distanciaY = celda.distanciaVertical(celdaMax);
 
-        resultado = ( distanciaX > 0);
-        assertTrue(resultado);
-        resultado = ( distanciaY > 0);
-        assertTrue(resultado);
-        celda = mapa.sortearCeldaJugador();
-        distanciaX = celda.distanciaHorizontal(celdaMax);
-        distanciaY = celda.distanciaVertical(celdaMax);
-
-        resultado = ( distanciaX > 0);
-        assertTrue(resultado);
-        resultado = ( distanciaY > 0);
-        assertTrue(resultado);
-
-        celda = mapa.sortearCeldaJugador();
-        distanciaX = celda.distanciaHorizontal(celdaMax);
-        distanciaY = celda.distanciaVertical(celdaMax);
-
-        resultado = ( distanciaX > 0);
-        assertTrue(resultado);
-        resultado = ( distanciaY > 0);
-        assertTrue(resultado);
+            resultado = (distanciaX > 0);
+            assertTrue(resultado);
+            resultado = (distanciaY > 0);
+            assertTrue(resultado);
+        }
     }
 
     @Test
@@ -404,30 +389,16 @@ class MapaTest {
         assertTrue(resultado);
 
         //Repito el test
-        celda = mapa.sortearMeta();
-        distanciaX = celdaMax.distanciaHorizontal(celda);
-        distanciaY = celdaMax.distanciaVertical(celda);
+        for( int i = 0; i < 10; i++) {
+            celda = mapa.sortearMeta();
+            distanciaX = celdaMax.distanciaHorizontal(celda);
+            distanciaY = celdaMax.distanciaVertical(celda);
 
-        resultado = ( distanciaX > 0);
-        assertTrue(resultado);
-        resultado = ( distanciaY > 0);
-        assertTrue(resultado);
-        celda = mapa.sortearMeta();
-        distanciaX = celdaMax.distanciaHorizontal(celda);
-        distanciaY = celdaMax.distanciaVertical(celda);
+            resultado = (distanciaX > 0);
+            assertTrue(resultado);
+            resultado = (distanciaY > 0);
+            assertTrue(resultado);
+        }
 
-        resultado = ( distanciaX > 0);
-        assertTrue(resultado);
-        resultado = ( distanciaY > 0);
-        assertTrue(resultado);
-
-        celda = mapa.sortearMeta();
-        distanciaX = celdaMax.distanciaHorizontal(celda);
-        distanciaY = celdaMax.distanciaVertical(celda);
-
-        resultado = ( distanciaX > 0);
-        assertTrue(resultado);
-        resultado = ( distanciaY > 0);
-        assertTrue(resultado);
     }
 }
