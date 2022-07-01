@@ -25,10 +25,9 @@ public abstract class Celda {
             Celda opuesto = celda.getCelda(direccion.opuesto());
             if( opuesto.equals( new CeldaBloqueadora() ) )
                 celda.setCelda( this, direccion.opuesto() );
-        }
-        catch( DireccionInvalida e){
-            //TODO: Completar.
-            // Sinceramente no se si hay algun caso posible que pase.
+        }catch( DireccionInvalida e){
+            //TODO: ¿Como pretenden que tratemos a las excepciones?
+            System.out.println("Se intentó conectar dos celdas que no pueden ser birdireccionales");
         }
 
     }
@@ -53,12 +52,10 @@ public abstract class Celda {
         return Objects.equals(coordenada, celda.coordenada);
     }
 
-    //TODO: Test
     public Integer distanciaVertical(Celda celda) {
         return coordenada.distanciaVertical(celda.coordenada);
     }
 
-    //TODO: Test
     public Integer distanciaHorizontal(Celda celda) {
         return coordenada.distanciaHorizontal(celda.coordenada);
     }

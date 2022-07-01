@@ -192,6 +192,7 @@ public class Mapa {
         Integer diferenciaY = esquinaSuperiorIzquierda.distanciaVertical( celda );
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
 
+        //como es el borde superior izquierdo siempre vamos a movernos para estas direcciones.
         while ( diferenciaX > 0 ){
             celdaSeleccionada = celdaSeleccionada.getCelda( Direccion.ESTE );
             diferenciaX -= 1;
