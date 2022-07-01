@@ -186,7 +186,6 @@ public class Mapa {
         return getCelda( coordenada );
     }
 
-    //TODO: Test.
     private Celda getCelda(Coordenada coordenada) {
         Celda celda = new CeldaInterna( new Comun(), coordenada);
         Integer diferenciaX = esquinaSuperiorIzquierda.distanciaHorizontal( celda );

@@ -186,4 +186,31 @@ class CoordenadaTest {
         assertThrows( CoordenadaInvalida.class, () -> new Coordenada(-1,1) );
 
     }
+
+    @Test
+    public void obtengoLaDistanciaADistintasCoordenadas(){
+        Coordenada coordenada = new Coordenada(0,0);
+
+        Integer longitud = coordenada.distanciaHorizontal( new Coordenada(0,0) );
+        assertEquals( 0, longitud);
+        longitud = coordenada.distanciaVertical( new Coordenada(0,0) );
+        assertEquals( 0, longitud);
+        longitud = coordenada.distanciaHorizontal( new Coordenada(3,0) );
+        assertEquals( 3, longitud);
+        longitud = coordenada.distanciaVertical( new Coordenada(0,5) );
+        assertEquals( 5, longitud);
+
+
+        coordenada = new Coordenada(2,2);
+
+        longitud = coordenada.distanciaHorizontal( new Coordenada(3,0) );
+        assertEquals( 1, longitud);
+        longitud = coordenada.distanciaVertical( new Coordenada(0,1) );
+        assertEquals( -1, longitud);
+        longitud = coordenada.distanciaHorizontal( new Coordenada(2,2) );
+        assertEquals( 0, longitud);
+        longitud = coordenada.distanciaVertical( new Coordenada(2,2) );
+        assertEquals( 0, longitud);
+
+    }
 }
