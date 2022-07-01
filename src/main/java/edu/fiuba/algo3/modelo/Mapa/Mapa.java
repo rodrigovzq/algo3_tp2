@@ -17,6 +17,7 @@ import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 
 // Clase con la responsabilidad de generar el escenario.
 public class Mapa {
+    public static final float PROPORCION_MAPA_APARICION = 0.25F;
     private Integer ancho;
     private Integer altura;
     private Celda esquinaSuperiorIzquierda;
@@ -179,11 +180,14 @@ public class Mapa {
     }
 
     public Celda sortearCeldaJugador() {
-        Integer fila = (int) (this.generador.sortearNumero() * this.altura);
-        Integer columna = (int) (this.generador.sortearNumero() * this.ancho);
-        Coordenada coordenada = new Coordenada( columna, fila);
-
-        return getCelda( coordenada );
+        Integer fila = (int) (this.generador.sortearNumero() * this.altura * PROPORCION_MAPA_APARICION);
+        Integer columna = (int) (this.generador.sortearNumero() * this.ancho * PROPORCION_MAPA_APARICION);
+        return getCelda( new Coordenada( columna, fila) );
+    }
+    public Celda sortearMeta() {
+        Integer fila = (int) (this.altura * ( 1- this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
+        Integer columna = (int) (this.ancho * ( 1- this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
+        return getCelda( new Coordenada( columna, fila) );
     }
 
     private Celda getCelda(Coordenada coordenada) {

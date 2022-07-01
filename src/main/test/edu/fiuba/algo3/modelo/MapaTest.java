@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
@@ -9,6 +10,7 @@ import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.*;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
@@ -335,9 +337,94 @@ class MapaTest {
         assertThrows( MapaInvalido.class, () -> new Mapa(0,0) );
         assertThrows( MapaInvalido.class, () -> new Mapa(-3,3) );
         assertThrows( MapaInvalido.class, () -> new Mapa(3,-3) );
-
-
-
     }
-    
+    @Test
+    public void LaCeldaJugadorSiempreSeSorteaEnUnaPrimeraPorcionDelMapa(){
+        Mapa mapa = new Mapa(20,20);
+        mapa.generarMapa();
+        Celda celda = mapa.sortearCeldaJugador();
+
+        Coordenada coordenada = new Coordenada( (int)(20 * 0.25F + 1), (int)(20 * 0.25F + 1));
+        Celda celdaMax = new CeldaInterna( new Comun() ,coordenada);
+
+        Integer distanciaX = celda.distanciaHorizontal(celdaMax);
+        Integer distanciaY = celda.distanciaVertical(celdaMax);
+
+        boolean resultado = ( distanciaX > 0);
+        assertTrue(resultado);
+        resultado = ( distanciaY > 0);
+        assertTrue(resultado);
+
+        //Repito el test
+        celda = mapa.sortearCeldaJugador();
+        distanciaX = celda.distanciaHorizontal(celdaMax);
+        distanciaY = celda.distanciaVertical(celdaMax);
+
+        resultado = ( distanciaX > 0);
+        assertTrue(resultado);
+        resultado = ( distanciaY > 0);
+        assertTrue(resultado);
+        celda = mapa.sortearCeldaJugador();
+        distanciaX = celda.distanciaHorizontal(celdaMax);
+        distanciaY = celda.distanciaVertical(celdaMax);
+
+        resultado = ( distanciaX > 0);
+        assertTrue(resultado);
+        resultado = ( distanciaY > 0);
+        assertTrue(resultado);
+
+        celda = mapa.sortearCeldaJugador();
+        distanciaX = celda.distanciaHorizontal(celdaMax);
+        distanciaY = celda.distanciaVertical(celdaMax);
+
+        resultado = ( distanciaX > 0);
+        assertTrue(resultado);
+        resultado = ( distanciaY > 0);
+        assertTrue(resultado);
+    }
+
+    @Test
+    public void LaCeldaMetaSiempreSeSorteaEnUnaPorcionDelMapa(){
+        Mapa mapa = new Mapa(20,20);
+        mapa.generarMapa();
+        Celda celda = mapa.sortearMeta();
+
+        Coordenada coordenada = new Coordenada( (int)(20 * ( 1 - 0.25F) - 1), (int)(20 * ( 1 - 0.25F)) - 1);
+        Celda celdaMax = new CeldaInterna( new Comun() ,coordenada);
+
+        Integer distanciaX = celdaMax.distanciaHorizontal(celda);
+        Integer distanciaY = celdaMax.distanciaVertical(celda);
+
+        boolean resultado = ( distanciaX > 0);
+        assertTrue(resultado);
+        resultado = ( distanciaY > 0);
+        assertTrue(resultado);
+
+        //Repito el test
+        celda = mapa.sortearMeta();
+        distanciaX = celdaMax.distanciaHorizontal(celda);
+        distanciaY = celdaMax.distanciaVertical(celda);
+
+        resultado = ( distanciaX > 0);
+        assertTrue(resultado);
+        resultado = ( distanciaY > 0);
+        assertTrue(resultado);
+        celda = mapa.sortearMeta();
+        distanciaX = celdaMax.distanciaHorizontal(celda);
+        distanciaY = celdaMax.distanciaVertical(celda);
+
+        resultado = ( distanciaX > 0);
+        assertTrue(resultado);
+        resultado = ( distanciaY > 0);
+        assertTrue(resultado);
+
+        celda = mapa.sortearMeta();
+        distanciaX = celdaMax.distanciaHorizontal(celda);
+        distanciaY = celdaMax.distanciaVertical(celda);
+
+        resultado = ( distanciaX > 0);
+        assertTrue(resultado);
+        resultado = ( distanciaY > 0);
+        assertTrue(resultado);
+    }
 }
