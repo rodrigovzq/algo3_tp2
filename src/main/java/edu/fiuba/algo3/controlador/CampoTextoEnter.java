@@ -27,7 +27,7 @@ public class CampoTextoEnter implements EventHandler<KeyEvent> {
                 campoTexto.setStyle("-fx-text-inner-color: #EF3030;");
             }else {
                 jugador.setNombre( campoTexto.getText() );
-                campoTexto.setStyle("-fx-text-inner-color: #10AF30;");
+                campoTexto.setStyle("-fx-text-inner-color: #7d9707;");
 
             }
         }

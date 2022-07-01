@@ -3,29 +3,51 @@ package edu.fiuba.algo3.vista.PantallasPrincipales;
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
 import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;
 import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorAuto;
-import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorCuatroPorCuatro;
-import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorMoto;
-import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorVehiculo;
 import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static javafx.scene.paint.Color.*;
 
 public class ContenedorConfiguracion {
-    VBox root = new VBox();
+
+    private final static Pair<String, String> EMPTY_PAIR = new Pair<>("", "");
+    private final ComboBox<Pair<String, String>> account = new ComboBox<>();
+    private Mapa mapaJuego;
+
     Jugador jugador;
     Stage stage;
-    private Mapa mapaJuego;
+
+    Label nombre = new Label("Nombre");
+    Label mapa = new Label("Mapas");
+    TextField campoNombre = new TextField();
+    GridPane panel = new GridPane();
+
+    Button botonCancelar = new Button("Cancelar");
+    Button botonJugar = new Button("Jugar");
+    Button boton10X20 = new Button("10x20");
+    Button boton20X30 = new Button("20X30");
+    Button boton30X30 = new Button("30X30");
+    Button boton30X40 = new Button("30X40");
+    HBox listaVehiculo;
+
 
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
@@ -37,33 +59,23 @@ public class ContenedorConfiguracion {
         this.iniciar();
 
         //TODO: ¿Que pasa si el usuario no elije nada y va directo a jugar?
-        // Es un estado valido, pero una mierda de juego jajaja
+        // hay dos opciones:
+        // opcion1 = por default el programa elige el mapa (creo que ya se hizo eso xD)
+        // opcion2 = el programa no se ejecuta hasta que el usuario eliga algo!!
+
     }
 
 
     private void iniciar(){
-        Button botonJugar = new Button("Jugar");
+
         //Se genera el mapa, le sortea una celda al jugador y DEBERIA cambiar la ventana a la del juego.
         botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
+        botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );//cambio de vista.
 
-        Button botonCancelar = new Button("Cancelar");
-        //Usamos la f. anonima para hacer el cambio de vista.
-        botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );
+        inicializarAparienciaLabelsPrincipal(nombre);
+        inicializarAparienciaLabelsPrincipal(mapa);
 
-        Label nombre = new Label("Nombre");
-        nombre.setFont(new Font(15));
-
-
-        Label vehiculo = new Label("Vehiculo");
-        vehiculo.setFont(new Font(15));
-
-
-        Label mapa = new Label("Mapas");
-        mapa.setFont(new Font(15));
-
-        TextField campoNombre = new TextField();
-        //CampoTextoEnter la gracia es que detecta el ENTER y "valida" si es valido el
-        //nombre
+        //CampoTextoEnter detecta el ENTER y "valida" si es valido el nombre
         //TODO: Validaciones nombres en CampoTextoEnter.
         CampoTextoEnter enterNombre = new CampoTextoEnter(campoNombre, this.jugador);
         enterNombre.setMensajeIncorrecto("Ingresá un nombre válido.");
@@ -71,80 +83,159 @@ public class ContenedorConfiguracion {
         campoNombre.setMinWidth(200);
         campoNombre.setPromptText("Ingrese un nombre");
 
+        listaVehiculo = emitirListaDeOpciones();
 
-        Group listaVehiculo = emitirOpcionesVehiculos();
+        inicializarAparienciaBotonesMapas(boton10X20);
+        inicializarAparienciaBotonesMapas(boton20X30);
+        inicializarAparienciaBotonesMapas(boton30X30);
+        inicializarAparienciaBotonesMapas(boton30X40);
 
-        //Cada selector de mapa, sabe setear el ancho y el alto del mapa
-        //NO se vuelve a generar el mapa en cada selector, se genera recien
-        //cuando el usuario clickea "Jugar".
-        Button boton10X20 = new Button("10x20"); ;
-        boton10X20.setOnAction(new SelectorMapa(mapaJuego, 10 ,20 ));
-        boton10X20.setCursor(Cursor.HAND);
-        boton10X20.setPrefSize(100,100);
+        controlBotonesMapa(); //CUIDADO: falta ver la forma de solo escoger un solo boton del mapa
+        iniciarTabulacionesDeLosBoxs();
 
-        Button boton20X30 = new Button("20X30");
-        boton20X30.setOnAction(new SelectorMapa(mapaJuego, 20 ,30 ));
-        boton20X30.setCursor(Cursor.HAND);
-        boton20X30.setPrefSize(100,100);
+        panel.setAlignment(Pos.CENTER);
+        panel.setBackground(new Background(new BackgroundFill(web("#172631"), new CornerRadii(0), new Insets(0))));
+        Scene config = new Scene(panel, 640,480);
+        this.stage.setScene( config );
+        this.stage.show();
+    }
 
-        Button boton30X30 = new Button("30X30");
-        boton30X30.setOnAction(new SelectorMapa(mapaJuego, 30 ,30 ));
-        boton30X30.setCursor(Cursor.HAND);
-        boton30X30.setPrefSize(100,100);
+    private void controlBotonesMapa() {
+        /*
+         * Cada selector de mapa, sabe setear el ancho y el alto del mapa
+         * NO se vuelve a generar el mapa en cada selector,
+         * se genera recien cuando el usuario clickea "Jugar".
+         * */
 
-        Button boton30X40 = new Button("30X40");
-        boton30X40.setOnAction(new SelectorMapa(mapaJuego, 30 ,40 ));
-        boton30X40.setCursor(Cursor.HAND);
-        boton30X40.setPrefSize(100,100);
+        boton10X20.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                boton10X20.setOnAction(new SelectorMapa(mapaJuego, 10 ,20 ));
+                boton10X20.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
-        HBox layout_nombre = new HBox();
-        HBox layout_vehiculo = new HBox();
-        HBox layout_mapas_1 = new HBox();
-        HBox layout_mapas2 = new HBox();
-        HBox layout_salir_jugar = new HBox();
+            }
+        });
 
-        layout_nombre.getChildren().addAll(nombre, campoNombre);
-        layout_nombre.setAlignment(Pos.CENTER);
+        boton20X30.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                boton20X30.setOnAction(new SelectorMapa(mapaJuego, 20 ,30 ));
+                boton20X30.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
-        layout_vehiculo.getChildren().addAll(vehiculo, listaVehiculo);
-        layout_vehiculo.setAlignment(Pos.CENTER);
+            }
+        });
 
-        layout_mapas_1.getChildren().addAll(boton10X20, boton20X30);
-        layout_mapas_1.setAlignment(Pos.CENTER);
+        boton30X30.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                boton30X30.setOnAction(new SelectorMapa(mapaJuego, 30 ,30 ));
+                boton30X30.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
-        layout_mapas2.getChildren().addAll(boton30X30, boton30X40);
-        layout_mapas2.setAlignment(Pos.CENTER);
+            }
+        });
 
-        layout_salir_jugar.getChildren().addAll(botonCancelar, botonJugar);
+        boton30X40.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                boton30X40.setOnAction(new SelectorMapa(mapaJuego, 30 ,40 ));
+                boton30X40.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
-        root.getChildren().addAll(layout_nombre,layout_vehiculo,mapa,layout_mapas_1,layout_mapas2, layout_salir_jugar);
+            }
+        });
+
+
+    }
+
+    private void iniciarTabulacionesDeLosBoxs() {
+
+        VBox rootVertical = new VBox();
+        HBox rootNombreJugador = new HBox();
+        HBox rootVehiculos = new HBox();
+        HBox rootBotonesDeVeinte = new HBox();
+        HBox rootBotonesDeTreinta = new HBox();
+        HBox rootBotonesLaterales = new HBox();
+
+        rootNombreJugador.getChildren().addAll(nombre, campoNombre);
+        rootNombreJugador.setAlignment(Pos.CENTER);
+        rootVehiculos.getChildren().add(listaVehiculo);
+        rootVehiculos.setAlignment(Pos.CENTER);
+        rootBotonesDeVeinte.getChildren().addAll(boton10X20, boton20X30);
+        rootBotonesDeVeinte.setAlignment(Pos.CENTER);
+        rootBotonesDeTreinta.getChildren().addAll(boton30X30, boton30X40);
+        rootBotonesDeTreinta.setAlignment(Pos.CENTER);
+        rootBotonesLaterales.getChildren().addAll(botonCancelar, botonJugar);
+        rootVertical.getChildren().addAll(rootNombreJugador,rootVehiculos,mapa,rootBotonesDeVeinte,rootBotonesDeTreinta,rootBotonesLaterales);
+        rootVertical.setAlignment(Pos.CENTER);
 
         HBox.setMargin(boton10X20,new Insets(10,10,10,10));
         HBox.setMargin(boton20X30,new Insets(15,10,10,10));
         HBox.setMargin(boton30X30,new Insets(15,10,10,10));
         HBox.setMargin(boton30X40,new Insets(15,10,10,10));
+        HBox.setMargin(botonCancelar,new Insets(10,100,10,10));
+        HBox.setMargin(botonJugar,new Insets(10,10,10,350));
 
-        HBox.setMargin(botonCancelar, new Insets(10,100,10,10));
-        HBox.setMargin(botonJugar, new Insets(10,10,10,350));
+        rootNombreJugador.setSpacing( 5.0d );
+        rootNombreJugador.setAlignment(Pos.CENTER );
+        rootNombreJugador.setPadding( new Insets(15) );
 
-        HBox.setMargin(nombre,new Insets(10,10,10,10));
-        HBox.setMargin(campoNombre,new Insets(10,10,10,10));
-        HBox.setMargin(vehiculo,new Insets(10,10,10,10));
-        HBox.setMargin(listaVehiculo,new Insets(10,10,10,10));
-        root.setAlignment(Pos.CENTER);
+        rootVehiculos.setSpacing( 5.0d );
+        rootVehiculos.setAlignment(Pos.CENTER );
+        rootVehiculos.setPadding( new Insets(2) );
 
-        Scene config = new Scene(root, 640,480);
+        panel.getChildren().add(rootVertical);
 
-        this.stage.setScene( config );
-        this.stage.show();
     }
 
-    private Group emitirOpcionesVehiculos() {
+    private void inicializarAparienciaBotonesMapas(Button boton) {
+
+        boton.setBackground(new Background(new BackgroundFill(TRANSPARENT, new CornerRadii(8), new Insets(0))));
+        boton.setTextFill(WHITE);
+        boton.setBorder(new Border(new BorderStroke(WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), BorderStroke.DEFAULT_WIDTHS)));
+        boton.setCursor(Cursor.HAND);
+        boton.setPrefSize(100,100);
+
+    }
+
+    private void inicializarAparienciaLabelsPrincipal(Label label) {
+        label.setFont(new Font(15));
+        label.setTextFill(WHITE);
+    }
+
+    //CUIDADO: hay que verificar si la funcionalidad anterior (está en la linea 236) es coherente con este modelo
+    private HBox emitirListaDeOpciones() {
+
         Menu fileMenu = new Menu("Vehiculo");
+        Label vehiculo = new Label("Vehiculo");
+        this.inicializarAparienciaLabelsPrincipal(vehiculo);
+        account.setPrefWidth(80);
+        Button saveButton = new Button("Guardar");
+
+        HBox hbox = new HBox(
+                vehiculo,
+                account,
+                saveButton);
+        hbox.setSpacing( 10.0d );
+        hbox.setAlignment(Pos.CENTER );
+        hbox.setPadding( new Insets(20) );
+
+        iniciarCombo();
+
+        saveButton.setOnAction( (evt) -> {
+            if( account.getValue().equals(EMPTY_PAIR ) ) {
+                System.out.println("No hay ningún elemento seleccionado");
+            } else {
+                System.out.println("guardando " + account.getValue());
+                // Basicamente cada selector sabe como inicializar el vehiculo del jugador
+                // y modificar el texto de fileMenu.
+                new SelectorAuto( fileMenu, this.jugador);
+            }
+        });
+
+        return hbox;
 
         // Basicamente cada selector sabe como inicializar el vehiculo del jugador
         // y modificar el texto de fileMenu.
-        SelectorVehiculo selectorItem1 = new SelectorAuto( fileMenu, this.jugador);
+        /*SelectorVehiculo selectorItem1 = new SelectorAuto( fileMenu, this.jugador);
         SelectorVehiculo selectorItem2 = new SelectorMoto( fileMenu, this.jugador);
         SelectorVehiculo selectorItem3 = new SelectorCuatroPorCuatro( fileMenu, this.jugador);
 
@@ -164,7 +255,37 @@ public class ContenedorConfiguracion {
         menuBar.setTranslateY(20);
 
         Group root = new Group(menuBar);
-        return root;
+        return root;*/
 
+
+    }
+    private void iniciarCombo() {
+
+        List<Pair<String,String>> accounts = new ArrayList<>();
+
+        accounts.add( new Pair<>("Auto", "AUTO") );
+        accounts.add( new Pair<>("Moto", "MOTO") );
+        accounts.add( new Pair<>("4X4", "CXC") );
+
+        account.getItems().add( EMPTY_PAIR );
+        account.getItems().addAll( accounts );
+        account.setValue( EMPTY_PAIR );
+
+        Callback<ListView<Pair<String,String>>, ListCell<Pair<String,String>>> factory =
+                (lv) ->
+                        new ListCell<Pair<String,String>>() {
+                            @Override
+                            protected void updateItem(Pair<String, String> item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if( empty ) {
+                                    setText("");
+                                } else {
+                                    setText( item.getKey() );
+                                }
+                            }
+                        };
+
+        account.setCellFactory( factory );
+        account.setButtonCell( factory.call( null ) );
     }
 }
