@@ -21,13 +21,13 @@ public class GeneradorObstaculo implements GeneradorEstadosAleatorio {
     @Override
     public boolean aplicar(Float probabilidad) throws ProbabilidadInvalida {
         if( probabilidad > 0)
-            return this.rng.nextDouble() <= probabilidad;
+            return this.sortearNumero() <= probabilidad;
         else
             throw new ProbabilidadInvalida();
     }
     @Override
     public EstadoCelda sortearEstadoCelda(){
-        Integer indice = (int) (this.rng.nextDouble() * NUM_OBSTACULOS);
+        Integer indice = (int) (this.sortearNumero() * NUM_OBSTACULOS);
         Obstaculo obstaculo = Obstaculo.values()[indice];
 
         if( obstaculo == Obstaculo.CONTROL_POLICIAL )

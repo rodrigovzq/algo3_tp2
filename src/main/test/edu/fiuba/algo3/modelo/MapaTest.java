@@ -342,7 +342,7 @@ class MapaTest {
         assertThrows( MapaInvalido.class, () -> new Mapa(3,-3) );
     }
     @Test
-    public void LaCeldaJugadorSiempreSeSorteaEnUnaPrimeraPorcionDelMapa(){
+    public void LaCeldaJugadorSiempreSeSorteaEnELCuartoCuartoDeMapa(){
         Mapa mapa = new Mapa(20,20);
         mapa.generarMapa();
         Celda celda = mapa.sortearCeldaJugador();
@@ -387,7 +387,7 @@ class MapaTest {
     }
 
     @Test
-    public void LaCeldaMetaSiempreSeSorteaEnUnaPorcionDelMapa(){
+    public void LaCeldaMetaSiempreSeSorteaEnELPrimerCuartoDelMapa(){
         Mapa mapa = new Mapa(20,20);
         mapa.generarMapa();
         Celda celda = mapa.sortearMeta();
