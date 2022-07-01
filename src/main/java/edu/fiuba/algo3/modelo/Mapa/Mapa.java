@@ -184,6 +184,8 @@ public class Mapa {
         Integer columna = (int) (this.generador.sortearNumero() * this.ancho * PROPORCION_MAPA_APARICION);
         return getCelda( new Coordenada( columna, fila) );
     }
+    //TODO: Llamar cuando se cree el juego. Agregar como observador de la celda sorteada
+    //al juego y a la vista de la meta.
     public Celda sortearMeta() {
         Integer fila = (int) (this.altura * ( 1- this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         Integer columna = (int) (this.ancho * ( 1- this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
