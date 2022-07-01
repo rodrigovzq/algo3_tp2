@@ -33,12 +33,6 @@ class MotoTest {
     }
 
     @Test
-    public void avanzarSobreUnControlPolicialPenalizaConUnaProbabilidad() {
-        // Inyectar la dependencia del que tiene la responsabilidad de sortea
-        // la probabilidad ?
-    }
-
-    @Test
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza() {
         Moto moto = new Moto();
 

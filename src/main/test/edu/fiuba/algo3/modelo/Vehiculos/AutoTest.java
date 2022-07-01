@@ -31,9 +31,7 @@ class AutoTest {
 
         assertEquals(esperado, resultado);
     }
-    @Test
-    public void avanzarSobreUnControlPolicialPolicialYNoSerDetenido(){
-    }
+
     @Test
     public void avanzarSobreUnaCeldaSinObstaculosNoPenaliza(){
         Auto auto = new Auto();
