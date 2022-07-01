@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
+import java.util.Objects;
+
 public abstract class Celda {
     private EstadoCelda estado;
     private Coordenada coordenada;
@@ -23,10 +25,9 @@ public abstract class Celda {
             Celda opuesto = celda.getCelda(direccion.opuesto());
             if( opuesto.equals( new CeldaBloqueadora() ) )
                 celda.setCelda( this, direccion.opuesto() );
-        }
-        catch( DireccionInvalida e){
-            //TODO: Completar.
-            // Sinceramente no se si hay algun caso posible que pase.
+        }catch( DireccionInvalida e){
+            //TODO: ¿Como pretenden que tratemos a las excepciones?
+            System.out.println("Se intentó conectar dos celdas que no pueden ser birdireccionales");
         }
 
     }
@@ -37,5 +38,25 @@ public abstract class Celda {
     @Override
     public String toString() {
         return coordenada.toString();
+    }
+
+    public void setEstado(EstadoCelda estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Celda celda = (Celda) o;
+        return Objects.equals(coordenada, celda.coordenada);
+    }
+
+    public Integer distanciaVertical(Celda celda) {
+        return coordenada.distanciaVertical(celda.coordenada);
+    }
+
+    public Integer distanciaHorizontal(Celda celda) {
+        return coordenada.distanciaHorizontal(celda.coordenada);
     }
 }

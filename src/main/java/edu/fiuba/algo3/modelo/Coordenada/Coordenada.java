@@ -76,8 +76,6 @@ public class Coordenada {
         return false;
     }
 
-//TODO: Encapsular en un determinarDireccion()? Va a tener Refactorizar el generarMapa()
-//tener en cuenta que sacamos provecho de un "bug" a la hora de generar el mapa.
     public Direccion determinarEsquina(Integer ancho, Integer altura) throws DireccionInvalida {
         if( this.posY == 0 && this.posX == 0){
             return Direccion.NOROESTE;
@@ -116,6 +114,14 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return "(" + posY + " , " + posX + ')';
+        return "(" + posX + " , " + posY + ')';
+    }
+
+
+    public Integer distanciaVertical(Coordenada coordenada) {
+        return coordenada.posY - this.posY;
+    }
+    public Integer distanciaHorizontal(Coordenada coordenada) {
+        return coordenada.posX - this.posX;
     }
 }

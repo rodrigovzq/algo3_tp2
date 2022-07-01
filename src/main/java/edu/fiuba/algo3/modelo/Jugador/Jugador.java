@@ -43,8 +43,7 @@ public class Jugador {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Jugador jugador = (Jugador) o;
-        //TODO: Debería comparar la posicion, pero rompe un test. MODIFICAR.
-        return Objects.equals(nombre, jugador.nombre) && Objects.equals(vehiculo, jugador.vehiculo) && Objects.equals(puntaje, jugador.puntaje);
+        return Objects.equals(nombre, jugador.nombre) && Objects.equals(posicion, jugador.posicion) && Objects.equals(vehiculo, jugador.vehiculo) && Objects.equals(puntaje, jugador.puntaje);
     }
 
     public void setVehiculo(IVehiculo vehiculo) {

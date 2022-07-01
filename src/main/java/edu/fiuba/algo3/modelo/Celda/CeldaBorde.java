@@ -43,15 +43,6 @@ public class CeldaBorde extends Celda {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CeldaBorde celda = (CeldaBorde) o;
-        return Objects.equals(celda1, celda.celda1) && Objects.equals(celda2, celda.celda2) && Objects.equals(celda3, celda.celda3);
-    }
-
-
-    @Override
     public void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida{
         if (direccion == direccion1  ) {
             this.celda1 = nuevaCelda;

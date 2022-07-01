@@ -50,12 +50,4 @@ public class CeldaEsquina extends Celda {
         this.setCeldaOpuesta( nuevaCelda, direccion);
 
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CeldaEsquina celda = (CeldaEsquina) o;
-        return Objects.equals(celdaVertical, celda.celdaVertical) && Objects.equals(celdaLateral, celda.celdaLateral);
-    }
 }

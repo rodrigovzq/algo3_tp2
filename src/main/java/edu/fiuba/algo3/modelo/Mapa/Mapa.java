@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.Mapa;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
+import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
@@ -8,6 +10,10 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorEstadosAleatorio;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorObstaculo;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorSorpresa;
+import edu.fiuba.algo3.modelo.Obstaculo.Comun;
 
 // Clase con la responsabilidad de generar el escenario.
 public class Mapa {
@@ -15,9 +21,17 @@ public class Mapa {
     private Integer altura;
     private Celda esquinaSuperiorIzquierda;
     private FabricaCelda fabrica;
+
+    private GeneradorEstadosAleatorio generador;
+
+    private final Float PROBABILIDAD_OBSTACULO = 0.5F;
+    private final Float PROBABILIDAD_SORPRESA = 0.5F;
     public Mapa(Integer ancho, Integer altura) throws MapaInvalido {
         this.ancho = ancho;
         this.altura = altura;
+        //ValorPorDefault
+        this.generador = new GeneradorObstaculo();
+
         if( !this.esValido() ){ throw new MapaInvalido(); }
     }
 
@@ -39,14 +53,13 @@ public class Mapa {
 
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
-        //dependiendo de la cantidad de filas, la ultima
-        //celda creada será una esquina.
-        Direccion esquinaFIN = this.direccionRecorridoFinal();
 
         Celda nuevaCelda;
         Celda filaAnteriorCelda = null;
         boolean setDirY = false;
-        boolean condCorte = false;
+        boolean esElBorde = false;
+        boolean esCeldaInterna = true;
+
         //Inicializo la primera fila.
         do{
             coord = new Coordenada(coord);
@@ -57,11 +70,11 @@ public class Mapa {
             anteriorCelda.setCelda(nuevaCelda, dirX);
             anteriorCelda = nuevaCelda;
 
-            condCorte = coord.esEsquina( this.ancho, this.altura);
-            if( condCorte )
-                condCorte = ( coord.determinarEsquina( this.ancho, this.altura) == Direccion.NORESTE ) ;
+            esElBorde = coord.esEsquina( this.ancho, this.altura);
+            if( esElBorde )
+                esElBorde = ( coord.determinarEsquina( this.ancho, this.altura) == Direccion.NORESTE ) ;
 
-        }while( !condCorte );
+        }while( !esElBorde );
 
         //Continua construyendo el resto de filas.
         do{
@@ -91,23 +104,21 @@ public class Mapa {
                 //Seteo verticalmente con la celda de la fila anterior.
                 filaAnteriorCelda.setCelda(nuevaCelda, dirY);
 
-                condCorte = ( coord.esEsquina(this.ancho, this.altura) || coord.esBorde(this.ancho, this.altura) );
-                if( condCorte ) {
-                    condCorte = coord.determinarBorde(this.ancho, this.altura) == dirX;
+                esCeldaInterna = esCeldaInterna(coord);
+                //Si no es celda interna chequeo si llegue al borde.
+                if( !esCeldaInterna ) {
+                    esElBorde = (coord.determinarBorde(this.ancho, this.altura) == dirX);
                 }
 
+                //Si es celda interna o no es EL borde, me muevo en la fila anterior.
                 //Cuando llego al borde hacia donde me dirijo, no puedo pedir la celda adyacente.
-                if(!condCorte)
+                if( !esElBorde || esCeldaInterna )
                     filaAnteriorCelda = filaAnteriorCelda.getCelda(dirX);
 
                 anteriorCelda = nuevaCelda;
-            }while( !condCorte );
+            }while( !esElBorde );
 
-            condCorte = coord.esEsquina( this.ancho, this.altura);
-            if( condCorte )
-                condCorte = ( coord.determinarEsquina( this.ancho, this.altura) == esquinaFIN ) ;
-
-        }while( !condCorte );
+        }while( !esFinRecorrido( coord ) );
 
     }
 
@@ -154,10 +165,10 @@ public class Mapa {
         return celda;
     }
 
-    //TODO: Borrar. Es solo para debugear.
-    public String asString(){
-        return "(" + this.ancho + " x " + this.altura + ")";
-    }
+    // Borrar. Es solo para debugear.
+    //public String asString(){
+    //    return "(" + this.ancho + " x " + this.altura + ")";
+    //}
 
     public void setAncho(Integer ancho) {
         this.ancho = ancho;
@@ -168,15 +179,79 @@ public class Mapa {
     }
 
     public Celda sortearCeldaJugador() {
-        //TODO: Sortear aleatoriamente una posicion del mapa.
-        return esquinaSuperiorIzquierda;
+        Integer fila = (int) (this.generador.sortearNumero() * this.altura);
+        Integer columna = (int) (this.generador.sortearNumero() * this.ancho);
+        Coordenada coordenada = new Coordenada( columna, fila);
+
+        return getCelda( coordenada );
+    }
+
+    private Celda getCelda(Coordenada coordenada) {
+        Celda celda = new CeldaInterna( new Comun(), coordenada);
+        Integer diferenciaX = esquinaSuperiorIzquierda.distanciaHorizontal( celda );
+        Integer diferenciaY = esquinaSuperiorIzquierda.distanciaVertical( celda );
+        Celda celdaSeleccionada = esquinaSuperiorIzquierda;
+
+        //como es el borde superior izquierdo siempre vamos a movernos para estas direcciones.
+        while ( diferenciaX > 0 ){
+            celdaSeleccionada = celdaSeleccionada.getCelda( Direccion.ESTE );
+            diferenciaX -= 1;
+        }
+        while( diferenciaY > 0 ){
+            celdaSeleccionada = celdaSeleccionada.getCelda( Direccion.SUR );
+            diferenciaY -= 1;
+        }
+
+        return celdaSeleccionada;
     }
 
     public void sortearEstadosMapa() {
-        //Enum de Estados y con el numeros sorteado se elije que tipo de celda es?
-        //Recorre el mapa desde la esquina izquierda
-        //y va sorteando para cada celda que estado le toca.
-        //dependiendo de que estado, va a tener que volver a sortear para que tipo le toca.
-        // Una vez sorteado el estado, setea el estado en la celda que esta.
+        Coordenada coordenada = new Coordenada(0,0);
+        Celda celdaSeleccionada = esquinaSuperiorIzquierda;
+        Direccion dirX = Direccion.ESTE;
+        Direccion dirY = Direccion.SUR;
+
+        EstadoCelda estado;
+
+        while( !esFinRecorrido(coordenada)){
+
+            estado = sortearEstadoCelda();
+
+            celdaSeleccionada.setEstado( estado );
+
+            if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
+                celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
+                coordenada.mover(dirX);
+            } else {
+                dirX = dirX.opuesto();
+                coordenada.mover(dirY);
+                celdaSeleccionada = celdaSeleccionada.getCelda(dirY);
+            }
+
+        }
+    }
+
+    private boolean esCeldaInterna(Coordenada coordenada) {
+        return !(coordenada.esEsquina(this.ancho, this.altura) || coordenada.esBorde(this.ancho, this.altura));
+    }
+
+    private boolean esFinRecorrido(Coordenada coordenada) {
+        boolean condCorte = false;
+        if( coordenada.esEsquina(this.ancho, this.altura ) )
+            condCorte = ( coordenada.determinarEsquina(this.ancho, this.altura) == direccionRecorridoFinal());
+        return condCorte;
+    }
+
+    private EstadoCelda sortearEstadoCelda() {
+        EstadoCelda estado = new Comun();
+        if( generador.aplicar( PROBABILIDAD_OBSTACULO ) ){
+            this.generador = new GeneradorObstaculo();
+            estado = generador.sortearEstadoCelda();
+        }else if( generador.aplicar( PROBABILIDAD_SORPRESA ) ) {
+            this.generador = new GeneradorSorpresa();
+            estado = generador.sortearEstadoCelda();
+        }
+
+        return estado;
     }
 }
