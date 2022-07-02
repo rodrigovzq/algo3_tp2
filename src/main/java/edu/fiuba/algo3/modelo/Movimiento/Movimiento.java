@@ -1,12 +1,18 @@
 package edu.fiuba.algo3.modelo.Movimiento;
 
+import edu.fiuba.algo3.modelo.Excepcion.MovimientoInvalido;
+import edu.fiuba.algo3.modelo.Impresora.Imprimible;
+
 import java.util.Objects;
 
-public class Movimiento {
+public class Movimiento implements Imprimible {
     private Integer cantidad;
 
     public Movimiento(Integer cantidad) {
-        this.cantidad = cantidad;
+        if( cantidad >= 0 )
+            this.cantidad = cantidad;
+        else
+            throw new MovimientoInvalido();
     }
 
     public Movimiento sumarMovimiento(Movimiento m) {
@@ -34,7 +40,7 @@ public class Movimiento {
     }
 
     @Override
-    public String toString() {
-        return  cantidad + " movimientos" ;
+    public String imprimir() {
+        return cantidad.toString();
     }
 }
