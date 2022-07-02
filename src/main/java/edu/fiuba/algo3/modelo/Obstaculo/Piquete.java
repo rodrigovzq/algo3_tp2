@@ -8,4 +8,9 @@ public class Piquete implements IObstaculo {
     public Evento avanzarEn(IVehiculo vehiculo) {
         return vehiculo.avanzarPiquete();
     }
+
+    @Override
+    public String imprimir() {
+        return Obstaculo.PIQUETE.name();
+    }
 }
