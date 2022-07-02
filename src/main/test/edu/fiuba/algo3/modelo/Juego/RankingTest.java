@@ -16,14 +16,14 @@ class RankingTest {
         Ranking rank = new Ranking();
 
         Jugador mockJugador = mock( Jugador.class );
-        when( mockJugador.toString()).thenReturn("J1,100");
+        when( mockJugador.imprimir()).thenReturn("J1;(0,0);Auto;100");
         rank.agregar( mockJugador );
         List<String> resultado = rank.devolverListaDeLosPrimerosDiez();
         List<String> esperado = new ArrayList<>();
         esperado.add("J1,100");
         assertEquals(esperado, resultado);
 
-        when( mockJugador.toString()).thenReturn("J2,200");
+        when( mockJugador.imprimir()).thenReturn("J2;(0,0);Auto;200");
         rank.agregar( mockJugador );
         resultado = rank.devolverListaDeLosPrimerosDiez();
         esperado = new ArrayList<>();
@@ -31,7 +31,7 @@ class RankingTest {
         esperado.add("J2,200");
         assertEquals(esperado, resultado);
 
-        when( mockJugador.toString()).thenReturn("J3,50");
+        when( mockJugador.imprimir()).thenReturn("J3;(0,0);Auto;50");
         rank.agregar( mockJugador );
         resultado = rank.devolverListaDeLosPrimerosDiez();
         esperado = new ArrayList<>();
@@ -40,7 +40,7 @@ class RankingTest {
         esperado.add("J2,200");
         assertEquals(esperado, resultado);
 
-        when( mockJugador.toString()).thenReturn("J4,75");
+        when( mockJugador.imprimir()).thenReturn("J4;(0,0);Auto;75");
         rank.agregar( mockJugador );
         resultado = rank.devolverListaDeLosPrimerosDiez();
         esperado = new ArrayList<>();
@@ -50,7 +50,7 @@ class RankingTest {
         esperado.add("J2,200");
         assertEquals(esperado, resultado);
 
-        when( mockJugador.toString()).thenReturn("J5,100");
+        when( mockJugador.imprimir()).thenReturn("J5;(0,0);Auto;100");
         rank.agregar( mockJugador );
         resultado = rank.devolverListaDeLosPrimerosDiez();
         esperado = new ArrayList<>();
@@ -68,7 +68,7 @@ class RankingTest {
         Ranking rank = new Ranking();
 
         Jugador mockJugador = mock( Jugador.class );
-        when( mockJugador.toString()).thenReturn("J1,100");
+        when( mockJugador.imprimir()).thenReturn("J1;(0,0);Auto;100");
         for( int i = 0; i < 10; i++)
             rank.agregar( mockJugador );
 
@@ -79,7 +79,7 @@ class RankingTest {
 
         assertEquals(esperado, resultado);
 
-        when( mockJugador.toString()).thenReturn("J2,50");
+        when( mockJugador.imprimir()).thenReturn("J2;(0,0);Auto;50");
         rank.agregar( mockJugador );
         resultado = rank.devolverListaDeLosPrimerosDiez();
         esperado = new ArrayList<>();
@@ -88,7 +88,7 @@ class RankingTest {
             esperado.add("J1,100");
         assertEquals(esperado, resultado);
 
-        when( mockJugador.toString()).thenReturn("J3,75");
+        when( mockJugador.imprimir()).thenReturn("J3;(0,0);Auto;75");
         rank.agregar( mockJugador );
         resultado = rank.devolverListaDeLosPrimerosDiez();
         esperado = new ArrayList<>();
@@ -96,6 +96,20 @@ class RankingTest {
         esperado.add("J3,75");
         for( int i = 0; i < 8; i++)
             esperado.add("J1,100");
+        assertEquals(esperado, resultado);
+    }
+
+    @Test
+    public void esCapazDeImprimirSuInformacionEnUnString(){
+        Ranking rank = new Ranking();
+        Jugador mockJugador = mock(Jugador.class);
+        when(mockJugador.imprimir()).thenReturn("Grupo3;(0,0);Auto;1000");
+        String esperado = "";
+        for(int i = 0; i < 10; i++) {
+            rank.agregar(mockJugador);
+            esperado += "Grupo3,1000\n";
+        }
+        String resultado = rank.imprimir();
         assertEquals(esperado, resultado);
     }
 }

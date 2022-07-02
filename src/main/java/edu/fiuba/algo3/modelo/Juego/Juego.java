@@ -39,7 +39,6 @@ public class Juego implements Observador {
     @Override
     public void actualizar() {
         this.ranking.agregar(jugador);
-        //TODO: Cerrar partida.
-        //Escribir archivo.
+//        this.impresora.imprimir( ranking );
     }
 }
