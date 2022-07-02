@@ -23,7 +23,7 @@ public class LectorScanner implements Lector{
     @Override
     public String leerLinea() {
        if( lectora.hasNextLine() ){
-           return lectora.nextLine();
+           return lectora.nextLine().trim();
        }else{
            return "";
        }

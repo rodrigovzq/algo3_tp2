@@ -9,19 +9,22 @@ import static org.mockito.Mockito.mock;
 
 class LectorScannerTest {
     @Test
-    public void leoUnLineaDeUnArchivoDeTest(){
+    public void leoLineasDeUnArchivo(){
         String pathTestFile = "saves/test.txt";
         LectorScanner lector = new LectorScanner(pathTestFile);
 
         String texto = lector.leerLinea();
-        String esperado = "Hola mundo!";
+        String esperado = "Hola mundo1!";
+        assertEquals(esperado, texto);
 
+        texto = lector.leerLinea();
+        esperado = "Hola mundo2!";
         assertEquals(esperado, texto);
     }
 
     @Test
-    public void leoUnLineaDeUnArchivoQueNoExiste(){
-        String pathTestFile = "saves/test1.txt";
+    public void leoUnaLineaDeUnArchivoQueNoExiste(){
+        String pathTestFile = "saves/testLecturaNoExiste.txt";
         LectorScanner lector = assertDoesNotThrow( () -> new LectorScanner(pathTestFile) );
 
         String texto = lector.leerLinea();

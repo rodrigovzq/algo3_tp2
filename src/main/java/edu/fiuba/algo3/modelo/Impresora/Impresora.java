@@ -1,4 +1,7 @@
 package edu.fiuba.algo3.modelo.Impresora;
 
-public class Impresora {
+public interface Impresora {
+    void escribirNuevaLinea(String s);
+
+    void finalizarEscritura();
 }
