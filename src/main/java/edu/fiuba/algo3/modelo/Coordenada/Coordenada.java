@@ -4,10 +4,14 @@ import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.CoordenadaInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
+import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 
 import java.util.Objects;
 
-public class Coordenada {
+public class Coordenada implements Imprimible {
+    public static final String SEPARADOR = ",";
+    public static final String DELIMITADOR_IZQ = "(";
+    public static final String DELIMITADOR_DER = ")";
     private Integer posY;
     private Integer posX;
     // El (0,0) es la esquina izquierda.
@@ -112,16 +116,16 @@ public class Coordenada {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "(" + posX + " , " + posY + ')';
-    }
-
-
     public Integer distanciaVertical(Coordenada coordenada) {
         return coordenada.posY - this.posY;
     }
     public Integer distanciaHorizontal(Coordenada coordenada) {
         return coordenada.posX - this.posX;
     }
+
+    @Override
+    public String imprimir() {
+        return DELIMITADOR_IZQ + posX + SEPARADOR + posY + DELIMITADOR_DER;
+    }
+
 }
