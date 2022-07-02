@@ -29,12 +29,18 @@ public class ImpresoraFile implements Impresora {
     @Override
     public void escribirNuevaLinea(String s) {
         this.impresora.append(s);
-
     }
 
     @Override
     public void finalizarEscritura() {
         this.impresora.close();
+    }
+
+    @Override
+    public void imprimir(Imprimible elemento) {
+        String resultado = elemento.imprimir();
+        this.escribirNuevaLinea(resultado);
+        this.finalizarEscritura();
     }
 
 }
