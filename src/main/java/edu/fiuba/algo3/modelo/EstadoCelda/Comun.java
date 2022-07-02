@@ -12,4 +12,9 @@ public class Comun implements EstadoCelda {
     public Evento avanzarEn(IVehiculo vehiculo) {
         return vehiculo.avanzarComun();
     }
+
+    @Override
+    public String imprimir() {
+        return "COMUN";
+    }
 }

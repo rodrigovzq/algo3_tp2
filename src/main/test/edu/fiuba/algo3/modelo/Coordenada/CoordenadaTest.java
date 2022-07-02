@@ -213,4 +213,18 @@ class CoordenadaTest {
         assertEquals( 0, longitud);
 
     }
+
+    @Test
+    public void esImprimible(){
+        Coordenada coordenada = new Coordenada(0,0);
+        for( int fila = 0; fila < 5; fila++ ){
+            coordenada.mover(Direccion.SUR);
+            for( int columna = 0; columna < 5; columna ++){
+                coordenada.mover(Direccion.ESTE);
+                String resultado = coordenada.imprimir();
+                String esperado = "("+ columna + ","+ fila +")";
+                assertEquals(esperado, resultado);
+            }
+        }
+    }
 }
