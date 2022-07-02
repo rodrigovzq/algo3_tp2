@@ -12,8 +12,11 @@ import java.util.List;
 public class Ranking{
     private List<String> ranking;
 
+    public Ranking(List<String> lista) {
+        this.ranking = lista;
+    }
     public Ranking() {
-        this.ranking = new ArrayList<String>();
+        this.ranking = new ArrayList<String>() ;
     }
 
     public void agregar(Jugador jugador) {

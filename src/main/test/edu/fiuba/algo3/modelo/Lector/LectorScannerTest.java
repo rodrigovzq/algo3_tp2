@@ -3,17 +3,15 @@ package edu.fiuba.algo3.modelo.Lector;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.nio.file.SecureDirectoryStream;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-class LectorTest {
+class LectorScannerTest {
     @Test
     public void leoUnLineaDeUnArchivoDeTest(){
         String pathTestFile = "saves/test.txt";
-        Lector lector = new Lector(pathTestFile);
+        LectorScanner lector = new LectorScanner(pathTestFile);
 
         String texto = lector.leerLinea();
         String esperado = "Hola mundo!";
@@ -24,7 +22,7 @@ class LectorTest {
     @Test
     public void leoUnLineaDeUnArchivoQueNoExiste(){
         String pathTestFile = "saves/test1.txt";
-        Lector lector = assertDoesNotThrow( () -> new Lector(pathTestFile) );
+        LectorScanner lector = assertDoesNotThrow( () -> new LectorScanner(pathTestFile) );
 
         String texto = lector.leerLinea();
         String esperado = "";
