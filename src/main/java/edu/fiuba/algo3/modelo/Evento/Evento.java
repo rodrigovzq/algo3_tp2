@@ -23,7 +23,7 @@ public class Evento {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Evento evento = (Evento) o;
-        return eventoPuntaje.equals(evento.eventoPuntaje) && eventoVehiculo.equals(evento.eventoVehiculo) && eventoPosicion.equals(evento.eventoPosicion);
+        return ( eventoPuntaje.equals(evento.eventoPuntaje) && eventoVehiculo.equals(evento.eventoVehiculo) && eventoPosicion.equals(evento.eventoPosicion) );
     }
 
     public Movimiento actualizarPuntaje(Movimiento puntaje) {
@@ -35,7 +35,7 @@ public class Evento {
     public Celda actualizarPosicion(Celda posicion) {
         return eventoPosicion.actualizarPosicion( posicion );
     }
-
+    //TODO: ¿Esto para que nos servía?
     public void setDireccion(Direccion direccion) {
         eventoPosicion.setDireccion(direccion);
     }

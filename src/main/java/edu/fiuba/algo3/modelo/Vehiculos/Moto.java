@@ -36,6 +36,11 @@ public class Moto implements IVehiculo {
     }
 
     @Override
+    public String imprimir() {
+        return "Moto";
+    }
+
+    @Override
     public  Evento avanzarPozo() {
         return new Evento( new Penalizacion(PENALIZACION_POZO),new NoCambiarVehiculo(), new Avanzar());
     }

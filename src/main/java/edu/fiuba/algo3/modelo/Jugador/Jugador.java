@@ -3,14 +3,16 @@ package edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
+import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 import java.util.Objects;
 
-public class Jugador {
-    public static final int MOVIMIENTOS_INICIALES = 0;
+public class Jugador implements Imprimible {
+    private final int MOVIMIENTOS_INICIALES = 0;
+    public static final String DELIMITADOR = ";";
     private String nombre;
     private Celda posicion;
     private IVehiculo vehiculo;
@@ -21,6 +23,10 @@ public class Jugador {
         this.posicion = posicion;
         this.vehiculo = vehiculo;
         this.puntaje = new Movimiento(MOVIMIENTOS_INICIALES);
+    }
+    @Override
+    public String imprimir() {
+        return nombre + DELIMITADOR + posicion.imprimir() + DELIMITADOR + vehiculo.imprimir() + DELIMITADOR + puntaje.imprimir();
     }
 
     public Evento avanzarHaciaLaDireccion(Direccion direccion){
@@ -56,12 +62,6 @@ public class Jugador {
 
     public void setPosicion(Celda posicion) {
         this.posicion = posicion;
-    }
-
-    //Primero el puntaje para que sea mas facil ordenar el ranking
-    @Override
-    public String toString() {
-        return  nombre + "," + puntaje;
     }
 }
 

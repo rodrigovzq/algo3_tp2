@@ -58,6 +58,11 @@ public class CuatroPorCuatro implements IVehiculo {
     }
 
     @Override
+    public String imprimir() {
+        return "4x4";
+    }
+
+    @Override
     public Evento avanzarPozo() {
         Evento evento = null;
 

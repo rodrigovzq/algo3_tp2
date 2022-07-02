@@ -2,9 +2,7 @@ package edu.fiuba.algo3.modelo.Celda;
 
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.Obstaculo.Comun;
-
-import java.util.Objects;
+import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
 
 public class CeldaInterna extends Celda {
 

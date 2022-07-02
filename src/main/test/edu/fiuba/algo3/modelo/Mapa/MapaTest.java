@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Mapa;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
@@ -9,8 +9,7 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.*;
-import edu.fiuba.algo3.modelo.Mapa.Mapa;
-import edu.fiuba.algo3.modelo.Obstaculo.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
@@ -271,57 +270,57 @@ class MapaTest {
         Celda esquinaNO = mapa.getEsquinaSuperiorIzquierda();
         Coordenada coord = new Coordenada(0,0);
 
-        String resultado = esquinaNO.toString();
-        String esperado = coord.toString();
+        String resultado = esquinaNO.imprimir().split(Celda.DELIMITADOR)[1];
+        String esperado = coord.imprimir();
 
         assertEquals(esperado, resultado);
 
         Celda bordeO = esquinaNO.getCelda(Direccion.SUR);
         coord.mover(Direccion.SUR);
-        resultado = bordeO.toString();
-        esperado = coord.toString();
+        resultado = bordeO.imprimir().split(Celda.DELIMITADOR)[1];
+        esperado = coord.imprimir();
         assertEquals(esperado, resultado);
 
         Celda esquinaSO = bordeO.getCelda(Direccion.SUR);
         coord.mover(Direccion.SUR);
-        resultado = esquinaSO.toString();
-        esperado = coord.toString();
+        resultado = esquinaSO.imprimir().split(Celda.DELIMITADOR)[1];
+        esperado = coord.imprimir();
         assertEquals(esperado, resultado);
 
         Celda bordeS = esquinaSO.getCelda(Direccion.ESTE);
         coord.mover(Direccion.ESTE);
-        resultado = bordeS.toString();
-        esperado = coord.toString();
+        resultado = bordeS.imprimir().split(Celda.DELIMITADOR)[1];
+        esperado = coord.imprimir();
         assertEquals(esperado, resultado);
 
         Celda centro = bordeO.getCelda(Direccion.ESTE);
         coord.mover(Direccion.NORTE);
-        resultado = centro.toString();
-        esperado = coord.toString();
+        resultado = centro.imprimir().split(Celda.DELIMITADOR)[1];
+        esperado = coord.imprimir();
         assertEquals(esperado, resultado);
 
         Celda bordeN = esquinaNO.getCelda(Direccion.ESTE);
         coord.mover(Direccion.NORTE);
-        resultado = bordeN.toString();
-        esperado = coord.toString();
+        resultado = bordeN.imprimir().split(Celda.DELIMITADOR)[1];
+        esperado = coord.imprimir();
         assertEquals(esperado, resultado);
 
         Celda esquinaNE = bordeN.getCelda(Direccion.ESTE);
         coord.mover(Direccion.ESTE);
-        resultado = esquinaNE.toString();
-        esperado = coord.toString();
+        resultado = esquinaNE.imprimir().split(Celda.DELIMITADOR)[1];
+        esperado = coord.imprimir();
         assertEquals(esperado, resultado);
 
         Celda bordeE = centro.getCelda(Direccion.ESTE);
         coord.mover(Direccion.SUR);
-        resultado = bordeE.toString();
-        esperado = coord.toString();
+        resultado = bordeE.imprimir().split(Celda.DELIMITADOR)[1];
+        esperado = coord.imprimir();
         assertEquals(esperado, resultado);
 
         Celda esquinaSE = bordeS.getCelda(Direccion.ESTE);
         coord.mover(Direccion.SUR);
-        resultado = esquinaSE.toString();
-        esperado = coord.toString();
+        resultado = esquinaSE.imprimir().split(Celda.DELIMITADOR)[1];
+        esperado = coord.imprimir();
         assertEquals(esperado, resultado);
 
 
@@ -400,5 +399,28 @@ class MapaTest {
             assertTrue(resultado);
         }
 
+    }
+
+    @Test
+    public void esImprimible(){
+        Mapa mapa = new Mapa(3,3);
+        mapa.generarMapa();
+
+        //TODO: ¿Como vamos a identificar en el archivo de texto donde tenemos la meta?
+        //Una solución va a ser ponerlo como atributo del juego.
+        String resultado = mapa.imprimir();
+        String esperado = "";
+
+        for(int i = 0; i < 3; i++){
+            esperado += "COMUN-COMUN-COMUN;\n";
+        }
+
+        assertEquals(esperado, resultado);
+
+        //Al sortear no podemos saber que se espera imprimir.
+        mapa.sortearEstadosMapa();
+
+        resultado = mapa.imprimir();
+        assertNotEquals(esperado, resultado);
     }
 }

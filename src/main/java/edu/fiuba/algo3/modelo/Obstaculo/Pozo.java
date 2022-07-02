@@ -8,4 +8,9 @@ public class Pozo implements IObstaculo {
     public Evento avanzarEn(IVehiculo vehiculo) {
         return vehiculo.avanzarPozo();
     }
+
+    @Override
+    public String imprimir() {
+        return Obstaculo.POZO.name();
+    }
 }

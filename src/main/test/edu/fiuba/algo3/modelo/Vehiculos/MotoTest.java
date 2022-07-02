@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import org.junit.jupiter.api.Test;
 
@@ -47,5 +48,11 @@ class MotoTest {
         Moto moto = new Moto();
 
         assertEquals( new Auto(), moto.siguiente());
+    }
+
+    @Test
+    public void esImprimible(){
+        Moto moto = new Moto();
+        assertEquals("Moto", moto.imprimir());
     }
 }

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Obstaculo;
 
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
+import edu.fiuba.algo3.modelo.Sorpresa.Sorpresa;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class ControlPolicial implements IObstaculo {
@@ -20,6 +21,11 @@ public class ControlPolicial implements IObstaculo {
         } else {
             return vehiculo.avanzarComun();
         }
+    }
+
+    @Override
+    public String imprimir() {
+        return Obstaculo.CONTROL_POLICIAL.name();
     }
 
 }

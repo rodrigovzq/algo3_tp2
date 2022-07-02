@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.Evento.EventoPuntaje;
 
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 
+import java.util.Objects;
+
 public class Penalizacion implements EventoPuntaje {
     private Movimiento penalizacion;
     public Penalizacion(Integer penalizacion) {

@@ -47,6 +47,11 @@ public class Auto implements IVehiculo {
     }
 
     @Override
+    public String imprimir() {
+        return "Auto";
+    }
+
+    @Override
     public boolean equals(Object o){
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

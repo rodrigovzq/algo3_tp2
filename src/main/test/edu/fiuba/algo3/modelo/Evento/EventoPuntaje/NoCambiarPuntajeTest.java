@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo.Evento.EventoPuntaje;
+package edu.fiuba.algo3.modelo.Evento.EventoPuntaje;
 
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.NoCambiarPuntaje;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NoCambiarPuntajeTest {
     @Test
-    public void actulizoElPuntajeYElMovimientoNoFueAfectado(){
+    public void actualizarElPuntajeYElMovimientoNoFueAfectado(){
         Movimiento puntaje = new Movimiento(0);
         NoCambiarPuntaje cambioPuntaje = new NoCambiarPuntaje();
 
@@ -16,5 +16,12 @@ class NoCambiarPuntajeTest {
         Movimiento esperado = puntaje;
 
         assertEquals(esperado, resultado);
+    }
+    @Test
+    public void comparacionEntreDosEventosNoCambiarPuntaje(){
+        NoCambiarPuntaje evento1 = new NoCambiarPuntaje();
+        NoCambiarPuntaje evento2 = new NoCambiarPuntaje();
+        assertEquals(evento1, evento2);
+
     }
 }

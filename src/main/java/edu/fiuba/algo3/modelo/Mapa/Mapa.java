@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.Mapa;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
-import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
@@ -13,11 +13,14 @@ import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorEstadosAleatorio;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorObstaculo;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorSorpresa;
-import edu.fiuba.algo3.modelo.Obstaculo.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 
 // Clase con la responsabilidad de generar el escenario.
-public class Mapa {
+public class Mapa implements Imprimible {
     public static final float PROPORCION_MAPA_APARICION = 0.25F;
+    private static final String DELIMITADOR_COLUMNA = "-";
+    private static final String DELIMITADOR_FILA = ";\n";
     private Integer ancho;
     private Integer altura;
     private Celda esquinaSuperiorIzquierda;
@@ -259,5 +262,30 @@ public class Mapa {
         }
 
         return estado;
+    }
+
+    public String imprimir() {
+        Coordenada coordenada = new Coordenada(0,0);
+        Celda celdaSeleccionada = esquinaSuperiorIzquierda;
+        Direccion dirX = Direccion.ESTE;
+        Direccion dirY = Direccion.SUR;
+
+        String resultado = "";
+        while( !esFinRecorrido(coordenada)){
+            resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0];
+            if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
+                celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
+                coordenada.mover(dirX);
+                resultado += this.DELIMITADOR_COLUMNA;
+            } else {
+                dirX = dirX.opuesto();
+                coordenada.mover(dirY);
+                celdaSeleccionada = celdaSeleccionada.getCelda(dirY);
+                resultado += this.DELIMITADOR_FILA;
+            }
+
+        }
+        resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0] + this.DELIMITADOR_FILA;
+        return resultado;
     }
 }

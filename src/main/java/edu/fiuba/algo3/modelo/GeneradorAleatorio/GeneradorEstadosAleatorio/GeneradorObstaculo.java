@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio;
 
-import edu.fiuba.algo3.modelo.Celda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Excepcion.ObstaculoInvalido;
 import edu.fiuba.algo3.modelo.Excepcion.ProbabilidadInvalida;
-import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorDemora;
 import edu.fiuba.algo3.modelo.Obstaculo.ControlPolicial;
 import edu.fiuba.algo3.modelo.Obstaculo.Obstaculo;

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Coordenada;
 
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
@@ -212,5 +212,25 @@ class CoordenadaTest {
         longitud = coordenada.distanciaVertical( new Coordenada(2,2) );
         assertEquals( 0, longitud);
 
+    }
+
+    @Test
+    public void esImprimible(){
+        Coordenada coordenada = new Coordenada(0,0);
+        String resultado = coordenada.imprimir();
+        String esperado = "(0,0)";
+        assertEquals(esperado, resultado);
+        for( int fila = 1; fila < 5; fila++ ){
+            coordenada.mover(Direccion.SUR);
+            for( int columna = 1; columna < 5; columna ++){
+                coordenada.mover(Direccion.ESTE);
+                resultado = coordenada.imprimir();
+                esperado = "("+ columna + ","+ fila +")";
+                assertEquals(esperado, resultado);
+            }
+            for( int columna = 1; columna < 5; columna ++){
+                coordenada.mover(Direccion.OESTE);
+            }
+        }
     }
 }

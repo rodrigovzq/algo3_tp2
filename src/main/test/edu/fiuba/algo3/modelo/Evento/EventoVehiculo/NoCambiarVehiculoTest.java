@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo.Evento.EventoVehiculo;
+package edu.fiuba.algo3.modelo.Evento.EventoVehiculo;
 
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;

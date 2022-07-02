@@ -1,11 +1,10 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo.Evento.EventoPosicion;
+package edu.fiuba.algo3.modelo.Evento.EventoPosicion;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
-import edu.fiuba.algo3.modelo.Obstaculo.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -103,5 +102,12 @@ class AvanzarTest {
 
         assertEquals(esperado, resultado);
 
+    }
+
+    @Test
+    public void comparacionEntreDosEventosAvanzar(){
+        Avanzar avanzar1 = new Avanzar();
+        Avanzar avanzar2 = new Avanzar();
+        assertEquals(avanzar1, avanzar2);
     }
 }
