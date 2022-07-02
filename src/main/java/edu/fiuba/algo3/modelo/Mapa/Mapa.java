@@ -21,6 +21,7 @@ public class Mapa implements Imprimible {
     public static final float PROPORCION_MAPA_APARICION = 0.25F;
     private static final String DELIMITADOR_COLUMNA = "-";
     private static final String DELIMITADOR_FILA = ";\n";
+    private static final String DELIMITADOR_TAMANIO = "," ;
     private Integer ancho;
     private Integer altura;
     private Celda esquinaSuperiorIzquierda;
@@ -270,7 +271,8 @@ public class Mapa implements Imprimible {
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
 
-        String resultado = "";
+        String resultado = this.ancho + DELIMITADOR_TAMANIO + this.altura;
+        resultado += DELIMITADOR_FILA;
         while( !esFinRecorrido(coordenada)){
             resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0];
             if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
