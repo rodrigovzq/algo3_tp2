@@ -26,7 +26,7 @@ public class Jugador implements Imprimible {
     }
     @Override
     public String imprimir() {
-        return nombre + DELIMITADOR + posicion + DELIMITADOR + vehiculo + DELIMITADOR + puntaje;
+        return nombre + DELIMITADOR + posicion.imprimir() + DELIMITADOR + vehiculo.imprimir() + DELIMITADOR + puntaje.imprimir();
     }
 
     public Evento avanzarHaciaLaDireccion(Direccion direccion){
