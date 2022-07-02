@@ -6,41 +6,37 @@ import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CasosDeUsosEntrega4Tests {
     @Test
-    public void seGeneraUnMapaAleatoriamenteMeMuevoEnCirculoConElAutoYTengoMasMovimientosQueAvances(){
+    public void seGeneraUnMapaAleatoriamenteMeMuevoEnDiagonalConLaMotoYTengoMasMovimientosQueAvances(){
         //TODO: Mockear. Para quitar lo estocástico.
         //TODO: Testear generadores aleatorios.
         Mapa mapa = new Mapa( 20, 20);
         mapa.generarMapa();
         Celda posicionJugador = mapa.sortearCeldaJugador();
-        Jugador jugador1 = new Jugador( "Grupo3", posicionJugador, new Auto());
-        Jugador jugador2 = new Jugador( "Grupo3", posicionJugador, new Auto());
+        Jugador jugador1 = new Jugador( "Grupo3", posicionJugador, new Moto());
+        Jugador jugador2 = new Jugador( "Grupo3", posicionJugador, new Moto());
 
-        Evento ev = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE);
-        jugador1.actualizar( ev );
-        ev = jugador1.avanzarHaciaLaDireccion(Direccion.SUR);
-        jugador1.actualizar( ev );
-        ev = jugador1.avanzarHaciaLaDireccion(Direccion.OESTE);
-        jugador1.actualizar( ev );
-        ev = jugador1.avanzarHaciaLaDireccion(Direccion.NORTE);
-        jugador1.actualizar( ev );
+        for(int i = 0; i < 4; i++) {
+            Evento ev = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE);
+            jugador1.actualizar(ev);
+            ev = jugador1.avanzarHaciaLaDireccion(Direccion.SUR);
+            jugador1.actualizar(ev);
+        }
 
         mapa.sortearEstadosMapa();
 
-        ev = jugador2.avanzarHaciaLaDireccion(Direccion.ESTE);
-        jugador2.actualizar( ev );
-        ev = jugador2.avanzarHaciaLaDireccion(Direccion.SUR);
-        jugador2.actualizar( ev );
-        ev = jugador2.avanzarHaciaLaDireccion(Direccion.OESTE);
-        jugador2.actualizar( ev );
-        ev = jugador2.avanzarHaciaLaDireccion(Direccion.NORTE);
-        jugador2.actualizar( ev );
-
+        for(int i = 0; i < 4; i++) {
+            Evento ev = jugador2.avanzarHaciaLaDireccion(Direccion.ESTE);
+            jugador2.actualizar( ev );
+            ev = jugador2.avanzarHaciaLaDireccion(Direccion.SUR);
+            jugador2.actualizar(ev);
+        }
         assertNotEquals(jugador2, jugador1);
     }
 

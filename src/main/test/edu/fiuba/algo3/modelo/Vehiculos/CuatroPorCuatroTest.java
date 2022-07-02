@@ -85,4 +85,10 @@ class CuatroPorCuatroTest {
 
         assertEquals( new CuatroPorCuatro(), auto.siguiente());
     }
+
+    @Test
+    public void esImprimible(){
+        CuatroPorCuatro cxc = new CuatroPorCuatro();
+        assertEquals("4x4", cxc.imprimir());
+    }
 }

@@ -1,12 +1,15 @@
 package edu.fiuba.algo3.modelo.Celda;
 
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
-import edu.fiuba.algo3.modelo.Obstaculo.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class CeldaInternaTest {
     @Test
@@ -85,6 +88,20 @@ class CeldaInternaTest {
         assertEquals(1, celda.distanciaVertical(sur));
         assertEquals(0, celda.distanciaVertical(este));
         assertEquals(0, celda.distanciaVertical(oeste));
+    }
+    //Vale para todas las celdas ya que es un metodo implementado en Celda que es abstracta.
+    @Test
+    public void esImprimible(){
+        Coordenada mockCoordenada = mock( Coordenada.class );
+        EstadoCelda mockEstadoCelda = mock( EstadoCelda.class );
+        Celda celda = new CeldaInterna( mockEstadoCelda, mockCoordenada );
+
+        when(mockEstadoCelda.imprimir()).thenReturn("MOCK_ESTADO_CELDA");
+        when(mockCoordenada.imprimir()).thenReturn("(posX,posY)");
+        String resultado = celda.imprimir();
+        String esperado = "MOCK_ESTADO_CELDA-(posX,posY)";
+
+        assertEquals(esperado, resultado);
     }
 
 }

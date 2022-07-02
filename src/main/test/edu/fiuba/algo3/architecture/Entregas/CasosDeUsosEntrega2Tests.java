@@ -2,7 +2,7 @@ package edu.fiuba.algo3.architecture.Entregas;
 
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
-import edu.fiuba.algo3.modelo.Obstaculo.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 import edu.fiuba.algo3.modelo.Sorpresa.Desfavorable;
 import edu.fiuba.algo3.modelo.Sorpresa.Favorable;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;

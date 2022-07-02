@@ -41,4 +41,10 @@ class AutoTest {
 
         assertEquals(esperado, resultado);
     }
+
+    @Test
+    public void esImprimible(){
+        Auto auto = new Auto();
+        assertEquals("Auto", auto.imprimir());
+    }
 }

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo.Evento.EventoPuntaje;
+package edu.fiuba.algo3.modelo.Evento.EventoPuntaje;
 
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
@@ -16,5 +16,16 @@ class PenalizacionTest {
         Movimiento esperado = new Movimiento(5);
 
         assertEquals(esperado, resultado);
+    }
+
+    @Test
+    public void comparacionEntreDosEventosPenalizacion(){
+        Penalizacion evento1 = new Penalizacion(2);
+        Penalizacion evento2 = new Penalizacion(2);
+        assertEquals(evento1, evento2);
+
+        evento1 = new Penalizacion(6);
+        evento2 = new Penalizacion(4);
+        assertNotEquals(evento1, evento2);
     }
 }

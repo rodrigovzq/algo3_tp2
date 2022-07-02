@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Celda.Obstaculo.Evento.EventoPuntaje;
+package edu.fiuba.algo3.modelo.Evento.EventoPuntaje;
 
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.DescuentoPorcentaje;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
@@ -16,5 +16,16 @@ class DescuentoPorcentajeTest {
         Movimiento esperado = new Movimiento(5);
 
         assertEquals(esperado, resultado);
+    }
+
+    @Test
+    public void comparacionEntreDosEventosDescuento(){
+        DescuentoPorcentaje evento1 = new DescuentoPorcentaje(2.0F);
+        DescuentoPorcentaje evento2 = new DescuentoPorcentaje(2.0F);
+        assertEquals(evento1, evento2);
+
+        evento1 = new DescuentoPorcentaje(6.0F);
+        evento2 = new DescuentoPorcentaje(4.0F);
+        assertNotEquals(evento1, evento2);
     }
 }
