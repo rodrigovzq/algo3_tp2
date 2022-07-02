@@ -409,7 +409,7 @@ class MapaTest {
         //TODO: ¿Como vamos a identificar en el archivo de texto donde tenemos la meta?
         //Una solución va a ser ponerlo como atributo del juego.
         String resultado = mapa.imprimir();
-        String esperado = "";
+        String esperado = "3x3;\n";
 
         for(int i = 0; i < 3; i++){
             esperado += "COMUN-COMUN-COMUN;\n";
