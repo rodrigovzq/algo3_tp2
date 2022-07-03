@@ -27,7 +27,6 @@ import java.util.List;
 import static javafx.scene.paint.Color.*;
 
 public class ContenedorConfiguracion {
-
     private final static Pair<String, String> EMPTY_PAIR = new Pair<>("", "");
     private final ComboBox<Pair<String, String>> account = new ComboBox<>();
     private Mapa mapaJuego;
