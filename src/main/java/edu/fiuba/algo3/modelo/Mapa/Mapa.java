@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
@@ -15,6 +16,9 @@ import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.Gener
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorSorpresa;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // Clase con la responsabilidad de generar el escenario.
 public class Mapa implements Imprimible {
@@ -37,6 +41,16 @@ public class Mapa implements Imprimible {
         //ValorPorDefault
         this.generador = new GeneradorObstaculo();
 
+        if( !this.esValido() ){ throw new MapaInvalido(); }
+    }
+
+    public Mapa(Integer ancho, Integer altura, List<IEstadoCelda> estados) throws MapaInvalido {
+        this.ancho = ancho;
+        this.altura = altura;
+        //ValorPorDefault
+        this.generador = new GeneradorObstaculo();
+        generarMapa();
+        setEstadosMapa(estados);
         if( !this.esValido() ){ throw new MapaInvalido(); }
     }
 
@@ -216,17 +230,26 @@ public class Mapa implements Imprimible {
     }
 
     public void sortearEstadosMapa() {
+        List<IEstadoCelda> lista = new ArrayList<>();
+        for(int i = 0; i < this.ancho; i++)
+            for(int j = 0; j < this.altura; j++) {
+                lista.add( sortearEstadoCelda() );
+            }
+
+        setEstadosMapa(lista);
+    }
+
+    private void setEstadosMapa(List<IEstadoCelda> estados){
         Coordenada coordenada = new Coordenada(0,0);
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
 
-        EstadoCelda estado;
+        IEstadoCelda estado;
 
         while( !esFinRecorrido(coordenada)){
 
-            estado = sortearEstadoCelda();
-
+            estado = estados.remove(0);
             celdaSeleccionada.setEstado( estado );
 
             if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
@@ -252,8 +275,8 @@ public class Mapa implements Imprimible {
         return condCorte;
     }
 
-    private EstadoCelda sortearEstadoCelda() {
-        EstadoCelda estado = new Comun();
+    private IEstadoCelda sortearEstadoCelda() {
+        IEstadoCelda estado = new Comun();
         if( generador.aplicar( PROBABILIDAD_OBSTACULO ) ){
             this.generador = new GeneradorObstaculo();
             estado = generador.sortearEstadoCelda();
