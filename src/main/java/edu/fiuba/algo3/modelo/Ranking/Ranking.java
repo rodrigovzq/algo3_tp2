@@ -13,7 +13,7 @@ import java.util.Objects;
 //a tener una forma de compararse. Acá estoy forzando que sea strings.
 public class Ranking implements Imprimible {
     public static final String DELIMITADOR = ",";
-    private List<Puntaje> ranking;
+    private final List<Puntaje> ranking;
 
     public Ranking(List<Puntaje> lista) {
         this.ranking = lista;
@@ -38,7 +38,7 @@ public class Ranking implements Imprimible {
     }
 
     public List<Puntaje> devolverListaDeLosPrimerosDiez() {
-        Integer largo = ( ranking.size() > 10 )? 10:ranking.size();
+        Integer largo = Math.min( 10 , ranking.size());
         return this.ranking.subList(0,largo);
     }
 
@@ -56,7 +56,7 @@ public class Ranking implements Imprimible {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ranking that = (Ranking) o;
-        boolean resultado = (ranking.size() == that.ranking.size())? true : false;
+        boolean resultado = (ranking.size() == that.ranking.size());
         if( resultado ){
             for (int i = 0; i < ranking.size(); i++)
                 resultado &= this.ranking.get(i).equals(that.ranking.get(i));

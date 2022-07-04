@@ -26,7 +26,7 @@ public class Puntaje implements Imprimible {
 
     @Override
     public String imprimir(){
-        return nombre + this.DELIMITADOR + puntaje;
+        return nombre + DELIMITADOR + puntaje;
     }
 
     public int compareTo(Puntaje p2){
