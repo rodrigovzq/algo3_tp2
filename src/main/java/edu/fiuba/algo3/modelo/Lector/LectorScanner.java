@@ -29,6 +29,17 @@ public class LectorScanner implements Lector{
        }
     }
 
+    @Override
+    public String leerTodoElArchivo(){
+        String resultado = "";
+        String linea = leerLinea();
+        while( !linea.equals("") ){
+            resultado += linea + "\n";
+            linea = leerLinea();
+        }
+        return resultado;
+    }
+
     private boolean crearNuevoArchivo(){
         try {
             return file.createNewFile();
