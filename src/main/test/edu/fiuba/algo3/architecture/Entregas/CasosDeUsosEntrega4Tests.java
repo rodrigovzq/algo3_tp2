@@ -29,7 +29,7 @@ public class CasosDeUsosEntrega4Tests {
             jugador1.actualizar(ev);
         }
 
-        mapa.sortearEstadosMapa();
+        mapa.setEstadosMapa();
 
         for(int i = 0; i < 10; i++) {
             Evento ev = jugador2.avanzarHaciaLaDireccion(Direccion.ESTE);
