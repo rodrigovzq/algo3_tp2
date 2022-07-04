@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
 
 public class ParserRanking implements Parser {
     //Solo acepta nombres con 1 o 2 palabras
-    public static final String PATRON_NOMBRE = "(\\w+\\s{0,1}\\w*)";
+    private final String PATRON_NOMBRE = "(\\w+\\s?\\w*)";
 
     //Solo acepta puntajes numericos
-    public static final String PATRON_PUNTAJE = "(\\d+)+";
+    private final String PATRON_PUNTAJE = "(\\d+)+";
     private final String texto;
 
     public ParserRanking(String filePath) {
@@ -21,14 +21,14 @@ public class ParserRanking implements Parser {
 
     @Override
     public Ranking parsear() {
-        String patron_grupo = "(" + "(" + PATRON_NOMBRE + ")" + Ranking.DELIMITADOR + "(" + PATRON_PUNTAJE + ")" + ")";
+        String patron_grupo = PATRON_NOMBRE + Ranking.DELIMITADOR  + PATRON_PUNTAJE;
         Pattern patron = Pattern.compile( patron_grupo );
         Matcher matcher = patron.matcher(this.texto);
         Ranking resultado = new Ranking();
 
         while( matcher.find() ){
-            String nombre = matcher.group(2);
-            String mov = matcher.group(4);
+            String nombre = matcher.group(1);
+            String mov = matcher.group(2);
             Integer movimientos = Integer.parseInt(mov);
             Puntaje puntaje = new Puntaje( nombre , movimientos );
             resultado.agregar( puntaje );
