@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.Celda;
 
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
-import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import org.junit.jupiter.api.Test;
@@ -93,7 +93,7 @@ class CeldaInternaTest {
     @Test
     public void esImprimible(){
         Coordenada mockCoordenada = mock( Coordenada.class );
-        EstadoCelda mockEstadoCelda = mock( EstadoCelda.class );
+        IEstadoCelda mockEstadoCelda = mock( IEstadoCelda.class );
         Celda celda = new CeldaInterna( mockEstadoCelda, mockCoordenada );
 
         when(mockEstadoCelda.imprimir()).thenReturn("MOCK_ESTADO_CELDA");
