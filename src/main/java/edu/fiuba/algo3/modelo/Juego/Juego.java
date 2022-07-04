@@ -4,10 +4,9 @@ import edu.fiuba.algo3.modelo.Impresora.Impresora;
 import edu.fiuba.algo3.modelo.Impresora.ImpresoraFile;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Lector.Lector;
-import edu.fiuba.algo3.modelo.Lector.LectorScanner;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
-import edu.fiuba.algo3.modelo.Observable;
 import edu.fiuba.algo3.modelo.Observador;
+import edu.fiuba.algo3.modelo.Ranking.Ranking;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +18,10 @@ public class Juego implements Observador {
     private final Jugador jugador;
     private final Ranking ranking;
 
-    public Juego( Jugador jugador) {
+    public Juego( Jugador jugador, Ranking ranking) {
         this.jugador = jugador;
+        this.ranking = ranking;
         this.impresora = new ImpresoraFile("saves/ranking.txt");
-        this.lector = new LectorScanner("saves/ranking.txt");
-        List<String> lista = this.lecturaPuntaje();
-        this.ranking = new Ranking(lista);
     }
 
     private List<String> lecturaPuntaje() {
