@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.controlador;
 
+import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Impresora.Impresora;
+import edu.fiuba.algo3.modelo.Impresora.ImpresoraFile;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
@@ -27,12 +30,20 @@ public class iniciarJuegoControlador implements EventHandler<ActionEvent> {
         this.mapa.generarMapa();
 
         System.out.println("Posicionando jugador...");
-        this.jugador.setPosicion( mapa.sortearCeldaJugador() ) ;
+        this.jugador.setPosicion( mapa.getCeldaJugador() ) ;
 
-        System.out.println("Creando jugador...");
-        System.out.println( this.jugador.toString());
+        System.out.println("Posicionando meta...");
+        Celda meta = mapa.getMeta();
 
-        //TODO: Cambiar de pantalla al juego.
+        //Agregar observador al Juego
+        //meta.agregarObservador( juego )
+
+        System.out.println("Guardando partida...");
+        new ImpresoraFile( "saves/jugador.txt").imprimir(jugador);
+        new ImpresoraFile( "saves/mapa.txt").imprimir(mapa);
+
+
+        //TODO: Cambiar de pantalla al juego, al iniciar el juego, usamos los parser.
         //TODO: HACER JUEGO.
     }
 
