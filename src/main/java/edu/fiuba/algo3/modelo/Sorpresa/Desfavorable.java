@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.AumentoPorcentaje;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
-public class Desfavorable implements EstadoCelda {
+public class Desfavorable implements ISorpresa {
     private final float PORCENTAJE = 25.0F;
 
     @Override

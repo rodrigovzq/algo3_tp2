@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.SiguienteVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
-public class CambioVehiculo implements EstadoCelda {
+public class CambioVehiculo implements ISorpresa {
     @Override
     public Evento avanzarEn(IVehiculo vehiculo) {
         return new Evento(new SinPenalizar(), new SiguienteVehiculo(), new Avanzar());
