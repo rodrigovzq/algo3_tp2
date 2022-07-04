@@ -14,8 +14,8 @@ class ParserJugadorTest {
     public void leeDeUnArchivoYDevuelveElJugador(){
         String pathFileTest = "saves/test/jugador_test.txt";
         ParserJugador parser = new ParserJugador( pathFileTest );
-
-        Jugador resultado = parser.parsear();
+        parser.parsear();
+        Jugador resultado = parser.getEntidadParseada();
         //TODO: De alguna forma hay que inicializarlo con una celda de mapa
         Jugador esperado = new Jugador("Test", new CeldaInterna(new Comun(), new Coordenada(3,4)),new Auto(),100);
 

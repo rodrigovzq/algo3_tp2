@@ -11,9 +11,9 @@ class ParserMapaTest {
     public void leerDeUnArchivoYSeGeneraElMapa(){
         String pathFile = "saves/test/mapa_test.txt";
         Parser parser = new ParserMapa( pathFile );
-
-        String resultado = parser.parsear().imprimir();
-        String esperado = "3,3;\nCOMUN-FAVORABLE-DESFAVORABLE;\nCAMBIO_VEHICULO-POZO-PIQUETE;\nCONTROL_POLICIAL-COMUN-COMUN;\n";
+        parser.parsear();
+        String resultado = parser.getEntidadParseada().imprimir();
+        String esperado = "3x3;\n(1,1);\n(2,2);\nCOMUN-FAVORABLE-DESFAVORABLE;\nCAMBIO_VEHICULO-POZO-PIQUETE;\nCONTROL_POLICIAL-COMUN-COMUN;\n";
 
         assertEquals(esperado, resultado);
     }

@@ -13,7 +13,8 @@ class ParserRankingTest {
     public void leeDeUnArchivoYDevuelveUnRanking(){
         String pathFileTest = "saves/test/ranking_test.txt";
         ParserRanking parser = new ParserRanking( pathFileTest );
-        Ranking resultado = parser.parsear();
+        parser.parsear();
+        Ranking resultado = parser.getEntidadParseada();
 
         Ranking esperado = new Ranking();
         Jugador mockJugador = mock( Jugador.class );
