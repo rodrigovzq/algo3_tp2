@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.Lector;
 
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class LectorScanner implements Lector{
         try {
             this.lectora = new Scanner(this.file);
         } catch (FileNotFoundException e) {
-            System.out.println("Lectura: problema al cargar el archivo.");
+            throw new ArchivoMalformado();
 
         }
     }
