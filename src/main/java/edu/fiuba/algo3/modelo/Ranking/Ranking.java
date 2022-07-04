@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Juego;
+package edu.fiuba.algo3.modelo.Ranking;
 
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
