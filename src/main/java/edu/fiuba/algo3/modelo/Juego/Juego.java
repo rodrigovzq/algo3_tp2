@@ -21,7 +21,6 @@ public class Juego implements Observador {
     public Juego( Jugador jugador, Ranking ranking) {
         this.jugador = jugador;
         this.ranking = ranking;
-        this.impresora = new ImpresoraFile("saves/ranking.txt");
     }
 
     private List<String> lecturaPuntaje() {
