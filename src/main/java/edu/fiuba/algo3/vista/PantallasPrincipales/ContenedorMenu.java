@@ -2,6 +2,9 @@ package edu.fiuba.algo3.vista.PantallasPrincipales;
 
 import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoBoton;
 import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoVentana;
+import edu.fiuba.algo3.controlador.Musica.ControladorMusica;
+import edu.fiuba.algo3.controlador.Musica.Musica;
+import edu.fiuba.algo3.controlador.Musica.ReproductorMusica;
 import edu.fiuba.algo3.vista.Ventanas.VentanaPopUp;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,6 +17,7 @@ import javafx.stage.Stage;
 public class ContenedorMenu {
 
     private Stage stage;
+
     Button botonJugar = new Button("Jugar");
     Button botonRanking = new Button("Ranking");
     Button botonSalir = new Button("Salir");
@@ -22,11 +26,17 @@ public class ContenedorMenu {
     GridPane panel = new GridPane();
 
 
+
+
     public ContenedorMenu(Stage stage) {
         this.stage = stage;
         this.iniciar();
+
     }
+
+
     private void iniciar(){
+
 
         botonJugar.setOnAction( e -> new ContenedorConfiguracion( this.stage )  );
         botonRanking.setOnAction( e -> new ContenedorRanking( this.stage ));
@@ -67,5 +77,7 @@ public class ContenedorMenu {
         this.stage.setScene(menu);
         this.stage.show();
     }
+
+
 
 }

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista.PantallasPrincipales;
 
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
+import edu.fiuba.algo3.controlador.Musica.Musica;
 import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;
 import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorAuto;
 import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
@@ -48,7 +49,11 @@ public class ContenedorConfiguracion {
     HBox listaVehiculo;
 
 
+
     public ContenedorConfiguracion(Stage stage) {
+
+
+
         this.stage = stage;
         //Valor default de mapa.
         this.mapaJuego = new Mapa(2,2);
@@ -66,6 +71,7 @@ public class ContenedorConfiguracion {
 
 
     private void iniciar(){
+
 
         //Se genera el mapa, le sortea una celda al jugador y DEBERIA cambiar la ventana a la del juego.
         botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
