@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.Sorpresa;
 
-import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.AumentoPorcentaje;
