@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio;
 
-import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Excepcion.ProbabilidadInvalida;
 import edu.fiuba.algo3.modelo.Obstaculo.Obstaculo;
 
@@ -20,7 +20,7 @@ public class GeneradorObstaculo implements GeneradorEstadosAleatorio {
             throw new ProbabilidadInvalida();
     }
     @Override
-    public EstadoCelda sortearEstadoCelda(){
+    public IEstadoCelda sortearEstadoCelda(){
         Integer indice = (int) (this.sortearNumero() * NUM_OBSTACULOS);
         Obstaculo obstaculo = Obstaculo.values()[indice];
         return obstaculo.crear();

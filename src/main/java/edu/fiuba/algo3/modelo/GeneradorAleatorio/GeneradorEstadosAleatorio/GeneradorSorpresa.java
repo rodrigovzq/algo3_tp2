@@ -1,11 +1,7 @@
 package edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio;
 
-import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Excepcion.ProbabilidadInvalida;
-import edu.fiuba.algo3.modelo.Excepcion.SorpresaInvalida;
-import edu.fiuba.algo3.modelo.Sorpresa.CambioVehiculo;
-import edu.fiuba.algo3.modelo.Sorpresa.Desfavorable;
-import edu.fiuba.algo3.modelo.Sorpresa.Favorable;
 import edu.fiuba.algo3.modelo.Sorpresa.Sorpresa;
 
 import java.util.Random;
@@ -25,7 +21,7 @@ public class GeneradorSorpresa implements GeneradorEstadosAleatorio {
     }
 
     @Override
-    public EstadoCelda sortearEstadoCelda(){
+    public IEstadoCelda sortearEstadoCelda(){
         Integer indice = (int) (sortearNumero() * NUM_SORPRESA);
         Sorpresa sorpresa = Sorpresa.values()[indice];
         return sorpresa.crear();
