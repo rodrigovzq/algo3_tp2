@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Parser;
 
+import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Ranking.Puntaje;
 import edu.fiuba.algo3.modelo.Ranking.Ranking;
 import edu.fiuba.algo3.modelo.Lector.LectorScanner;
@@ -15,16 +16,16 @@ public class ParserRanking implements Parser {
     private final String PATRON_PUNTAJE = "(\\d+)+";
     private final String texto;
 
+    Ranking resultado = new Ranking();
     public ParserRanking(String filePath) {
         this.texto = new LectorScanner(filePath).leerTodoElArchivo();
     }
 
     @Override
-    public Ranking parsear() {
+    public void parsear() {
         String patron_grupo = PATRON_NOMBRE + Ranking.DELIMITADOR  + PATRON_PUNTAJE;
         Pattern patron = Pattern.compile( patron_grupo );
         Matcher matcher = patron.matcher(this.texto);
-        Ranking resultado = new Ranking();
 
         while( matcher.find() ){
             String nombre = matcher.group(1);
@@ -33,7 +34,10 @@ public class ParserRanking implements Parser {
             Puntaje puntaje = new Puntaje( nombre , movimientos );
             resultado.agregar( puntaje );
         }
+    }
 
+    @Override
+    public Ranking getEntidadParseada() {
         return resultado;
     }
 }
