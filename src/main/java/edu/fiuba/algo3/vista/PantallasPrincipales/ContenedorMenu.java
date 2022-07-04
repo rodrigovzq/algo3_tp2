@@ -5,6 +5,7 @@ import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoVentana;
 import edu.fiuba.algo3.controlador.Musica.ControladorMusica;
 import edu.fiuba.algo3.controlador.Musica.Musica;
 import edu.fiuba.algo3.controlador.Musica.ReproductorMusica;
+import edu.fiuba.algo3.controlador.VerificarRenaudarPartida;
 import edu.fiuba.algo3.vista.Ventanas.VentanaPopUp;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -37,8 +38,8 @@ public class ContenedorMenu {
 
     private void iniciar(){
 
-
-        botonJugar.setOnAction( e -> new ContenedorConfiguracion( this.stage )  );
+        VerificarRenaudarPartida verificarPartida = new VerificarRenaudarPartida( this.stage );
+        botonJugar.setOnAction( verificarPartida );
         botonRanking.setOnAction( e -> new ContenedorRanking( this.stage ));
         //TODO: La idea es que sea una ventana Pop Up que muestre las instrucciones.
         botonInstruciones.setOnAction( e -> ContenedorInstrucciones.mostrar());
