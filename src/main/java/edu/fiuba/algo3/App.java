@@ -1,9 +1,7 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.controlador.Musica.ControladorMusica;
 import edu.fiuba.algo3.controlador.Musica.Musica;
-import edu.fiuba.algo3.controlador.Musica.ReproductorMusica;
-import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorMenu;
+import edu.fiuba.algo3.vista.GanadorVista;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -29,10 +27,11 @@ public class App extends Application {
         Musica musica = new Musica();
         musica.play(rutaMusica,"pantallasPrincipales.mp3");
 
+        GanadorVista victoria = new GanadorVista(stage);
+        victoria.mostrar();
 
 
-
-        ContenedorMenu menu = new ContenedorMenu(stage);
+        //ContenedorMenu menu = new ContenedorMenu(stage);
     }
 
     public static void main(String[] args) {
