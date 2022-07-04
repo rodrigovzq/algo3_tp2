@@ -28,15 +28,7 @@ public class GeneradorSorpresa implements GeneradorEstadosAleatorio {
     public EstadoCelda sortearEstadoCelda(){
         Integer indice = (int) (sortearNumero() * NUM_SORPRESA);
         Sorpresa sorpresa = Sorpresa.values()[indice];
-
-        if( sorpresa == Sorpresa.FAVORABLE )
-            return new Favorable();
-        else if( sorpresa == Sorpresa.DESFAVORABLE )
-            return new Desfavorable();
-        else if( sorpresa == Sorpresa.CAMBIO_VEHICULO )
-            return new CambioVehiculo();
-        else
-            throw new SorpresaInvalida();
+        return sorpresa.crear();
     }
 
     @Override

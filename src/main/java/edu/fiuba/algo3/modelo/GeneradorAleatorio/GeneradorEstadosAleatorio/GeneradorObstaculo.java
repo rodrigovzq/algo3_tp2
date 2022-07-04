@@ -1,13 +1,8 @@
 package edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio;
 
 import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
-import edu.fiuba.algo3.modelo.Excepcion.ObstaculoInvalido;
 import edu.fiuba.algo3.modelo.Excepcion.ProbabilidadInvalida;
-import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorDemora;
-import edu.fiuba.algo3.modelo.Obstaculo.ControlPolicial;
 import edu.fiuba.algo3.modelo.Obstaculo.Obstaculo;
-import edu.fiuba.algo3.modelo.Obstaculo.Piquete;
-import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 
 import java.util.Random;
 
@@ -28,15 +23,7 @@ public class GeneradorObstaculo implements GeneradorEstadosAleatorio {
     public EstadoCelda sortearEstadoCelda(){
         Integer indice = (int) (this.sortearNumero() * NUM_OBSTACULOS);
         Obstaculo obstaculo = Obstaculo.values()[indice];
-
-        if( obstaculo == Obstaculo.CONTROL_POLICIAL )
-            return new ControlPolicial( new GeneradorDemora() );
-        else if( obstaculo == Obstaculo.PIQUETE )
-            return new Piquete();
-        else if( obstaculo == Obstaculo.POZO )
-            return new Pozo();
-        else
-            throw new ObstaculoInvalido();
+        return obstaculo.crear();
     }
 
     @Override
