@@ -374,7 +374,7 @@ class MapaTest {
     public void LaCeldaMetaSiempreSeSorteaEnELPrimerCuartoDelMapa(){
         Mapa mapa = new Mapa(20,20);
         mapa.generarMapa();
-        Celda celda = mapa.sortearMeta();
+        Celda celda = mapa.getMeta();
 
         Coordenada coordenada = new Coordenada( (int)(20 * ( 1 - 0.25F) - 1), (int)(20 * ( 1 - 0.25F)) - 1);
         Celda celdaMax = new CeldaInterna( new Comun() ,coordenada);
@@ -386,19 +386,6 @@ class MapaTest {
         assertTrue(resultado);
         resultado = ( distanciaY > 0);
         assertTrue(resultado);
-
-        //Repito el test
-        for( int i = 0; i < 10; i++) {
-            celda = mapa.sortearMeta();
-            distanciaX = celdaMax.distanciaHorizontal(celda);
-            distanciaY = celdaMax.distanciaVertical(celda);
-
-            resultado = (distanciaX > 0);
-            assertTrue(resultado);
-            resultado = (distanciaY > 0);
-            assertTrue(resultado);
-        }
-
     }
 
     @Test
@@ -409,7 +396,7 @@ class MapaTest {
         //TODO: ¿Como vamos a identificar en el archivo de texto donde tenemos la meta?
         //Una solución va a ser ponerlo como atributo del juego.
         String resultado = mapa.imprimir();
-        String esperado = "3,3;\n";
+        String esperado = "3x3;\n";
 
         for(int i = 0; i < 3; i++){
             esperado += "COMUN-COMUN-COMUN;\n";
@@ -418,7 +405,7 @@ class MapaTest {
         assertEquals(esperado, resultado);
 
         //Al sortear no podemos saber que se espera imprimir.
-        mapa.sortearEstadosMapa();
+        mapa.setEstadosMapa();
 
         resultado = mapa.imprimir();
         assertNotEquals(esperado, resultado);
