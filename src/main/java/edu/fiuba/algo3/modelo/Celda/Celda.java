@@ -48,7 +48,7 @@ public abstract class Celda extends Observable implements Imprimible {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Celda celda = (Celda) o;
-        return Objects.equals(coordenada, celda.coordenada);
+        return coordenada.equals( celda.coordenada );
     }
 
     public Integer distanciaVertical(Celda celda) {
