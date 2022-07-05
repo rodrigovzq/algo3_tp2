@@ -19,6 +19,7 @@ import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 // Clase con la responsabilidad de generar el escenario.
 public class Mapa implements Imprimible {
@@ -338,5 +339,18 @@ public class Mapa implements Imprimible {
         Celda posicion = ( this.posicionJugador == null )? sortearCeldaJugador():posicionJugador;
         this.posicionJugador = posicion;
         return posicion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mapa mapa = (Mapa) o;
+        return ancho.equals(mapa.ancho) && altura.equals(mapa.altura) && PROBABILIDAD_OBSTACULO.equals(mapa.PROBABILIDAD_OBSTACULO) && PROBABILIDAD_SORPRESA.equals(mapa.PROBABILIDAD_SORPRESA) && Objects.equals(meta, mapa.meta);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ancho, altura, PROBABILIDAD_OBSTACULO, PROBABILIDAD_SORPRESA, meta);
     }
 }
