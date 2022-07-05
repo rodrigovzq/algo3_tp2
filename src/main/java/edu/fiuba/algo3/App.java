@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.vista.MapaVista;
 import edu.fiuba.algo3.controlador.Musica.ControladorMusica;
 import edu.fiuba.algo3.controlador.Musica.Musica;
 import edu.fiuba.algo3.controlador.Musica.ReproductorMusica;
