@@ -28,6 +28,7 @@ public class iniciarJuegoControlador implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         System.out.println("Generando mapa...");
         this.mapa.generarMapa();
+        this.mapa.setEstadosMapa();
 
         System.out.println("Posicionando jugador...");
         this.jugador.setPosicion( mapa.getCeldaJugador() ) ;

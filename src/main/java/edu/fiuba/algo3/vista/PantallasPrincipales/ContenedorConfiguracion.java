@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.vista.PantallasPrincipales;
 
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
-import edu.fiuba.algo3.controlador.Musica.Musica;
 import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;
-import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorAuto;
+import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorVehiculo;
 import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
@@ -206,7 +205,6 @@ public class ContenedorConfiguracion {
         label.setTextFill(WHITE);
     }
 
-    //CUIDADO: hay que verificar si la funcionalidad anterior (está en la linea 236) es coherente con este modelo
     private HBox emitirListaDeOpciones() {
 
         Menu fileMenu = new Menu("Vehiculo");
@@ -230,47 +228,22 @@ public class ContenedorConfiguracion {
                 System.out.println("No hay ningún elemento seleccionado");
             } else {
                 System.out.println("guardando " + account.getValue());
-                // Basicamente cada selector sabe como inicializar el vehiculo del jugador
-                // y modificar el texto de fileMenu.
-                new SelectorAuto( fileMenu, this.jugador);
+
+                String seleccionado = account.getValue().getValue();
+                EventHandler handler = new SelectorVehiculo( fileMenu, seleccionado , this.jugador);
+                handler.handle(evt);
             }
         });
 
         return hbox;
-
-        // Basicamente cada selector sabe como inicializar el vehiculo del jugador
-        // y modificar el texto de fileMenu.
-        /*SelectorVehiculo selectorItem1 = new SelectorAuto( fileMenu, this.jugador);
-        SelectorVehiculo selectorItem2 = new SelectorMoto( fileMenu, this.jugador);
-        SelectorVehiculo selectorItem3 = new SelectorCuatroPorCuatro( fileMenu, this.jugador);
-
-        MenuItem item1 = new MenuItem("Auto");
-        item1.setOnAction( selectorItem1 );
-
-        MenuItem item2 = new MenuItem("Moto");
-        item2.setOnAction( selectorItem2 );
-
-        MenuItem item3 = new MenuItem("4 X 4");
-        item3.setOnAction( selectorItem3 );
-
-        fileMenu.getItems().addAll(item1, item2, item3);
-        MenuBar menuBar = new MenuBar(fileMenu);
-
-        menuBar.setTranslateX(200);
-        menuBar.setTranslateY(20);
-
-        Group root = new Group(menuBar);
-        return root;*/
-
-
     }
     private void iniciarCombo() {
 
         List<Pair<String,String>> accounts = new ArrayList<>();
 
-        accounts.add( new Pair<>("Auto", "AUTO") );
-        accounts.add( new Pair<>("Moto", "MOTO") );
-        accounts.add( new Pair<>("4X4", "CXC") );
+        accounts.add( new Pair<>("Auto", "Auto") );
+        accounts.add( new Pair<>("Moto", "Moto") );
+        accounts.add( new Pair<>("4X4", "CuatroPorCuatro") );
 
         account.getItems().add( EMPTY_PAIR );
         account.getItems().addAll( accounts );

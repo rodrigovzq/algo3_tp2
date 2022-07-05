@@ -31,6 +31,9 @@ public class VerificarRenaudarPartida implements EventHandler<ActionEvent> {
                 //TODO: inicializar partida
                 System.out.println("Iniciar partida.");
                 //Habria que llamar al mismo controlador que usa el Juego post configurar.
+            }else{
+                fileJugador.delete();
+                fileMapa.delete();
             }
         }
 

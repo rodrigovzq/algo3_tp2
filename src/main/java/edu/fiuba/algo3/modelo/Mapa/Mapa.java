@@ -330,7 +330,7 @@ public class Mapa implements Imprimible {
 
     public Celda getMeta() {
         Celda meta = ( this.meta == null )? sortearMeta():this.meta;
-        meta.setEstado(new Comun());
+        this.meta = meta;
         return meta;
     }
 

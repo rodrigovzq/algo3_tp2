@@ -1,1 +1,1 @@
-Fer;(2,2);CuatroPorCuatro;192;
+asdf;(1,0);CuatroPorCuatro;0
