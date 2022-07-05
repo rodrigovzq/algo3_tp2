@@ -78,7 +78,7 @@ public class ParserMapa implements Parser{
     }
 
     @Override
-    public Imprimible getEntidadParseada() {
+    public Mapa getEntidadParseada() {
         Coordenada coordJugador = new Coordenada(posicionJugadorX,posicionJugadorY);
         Coordenada coordMeta = new Coordenada(posicionMetaX,posicionMetaY);
         Mapa mapa = new Mapa(anchoMapa, altoMapa, coordJugador, coordMeta, estadosMapa);

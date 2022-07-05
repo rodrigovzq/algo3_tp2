@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Juego;
 
+import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Impresora.Impresora;
 import edu.fiuba.algo3.modelo.Impresora.ImpresoraFile;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
@@ -10,28 +11,23 @@ import edu.fiuba.algo3.modelo.Ranking.Ranking;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO: Inutil
 public class Juego implements Observador {
 
     private Lector lector;
     private Impresora impresora;
     private final Jugador jugador;
     private final Ranking ranking;
+    private final Mapa mapa;
 
-    public Juego( Jugador jugador, Ranking ranking) {
+    public Juego( Jugador jugador, Mapa mapa, Ranking ranking) {
         this.jugador = jugador;
         this.ranking = ranking;
-    }
-
-    private List<String> lecturaPuntaje() {
-        String puntaje;
-        List<String> lista = new ArrayList<String>();
-        do {
-            puntaje = this.lector.leerLinea();
-            lista.add(puntaje);
-        }while( puntaje != "" );
-
-        return lista;
+        this.jugador.setPosicion( mapa.getCeldaJugador() );
+        this.mapa = mapa;
+        Celda meta = mapa.getMeta();
+        //Agregar observador al Juego
+        //meta.agregarObservador( this )
     }
 
     //Al llegar a la meta, se le notifica que debe agregar al jugador.
@@ -48,15 +44,11 @@ public class Juego implements Observador {
 
     public void guardarMapa(){
         this.impresora = new ImpresoraFile("saves/mapa.txt");
+        this.impresora.imprimir( mapa );
     }
     public void guardarJugador(){
         this.impresora = new ImpresoraFile("saves/jugador.txt");
         this.impresora.imprimir( jugador );
-    }
-    //TODO: ¿O es más correcto que el juego tenga una instancia del Mapa?
-    public void guardarMapa( Mapa mapa ){
-        this.impresora = new ImpresoraFile("saves/jugador.txt");
-        this.impresora.imprimir( mapa );
     }
 
     //TODO: Guardar meta!!

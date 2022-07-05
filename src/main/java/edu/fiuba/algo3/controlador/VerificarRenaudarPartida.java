@@ -28,17 +28,18 @@ public class VerificarRenaudarPartida implements EventHandler<ActionEvent> {
             //  pop up - preguntar si quiere renaudar la partida
             boolean resultado = VentanaConfirmacion.mostrar( "Renaudar partida", "Tiene una partida guardada ¿Desea renaudar la partida?");
             if( resultado ) {
-                //TODO: inicializar partida
-                System.out.println("Iniciar partida.");
-                //Habria que llamar al mismo controlador que usa el Juego post configurar.
+                EventHandler<ActionEvent> handler = new IniciarJuegoControlador(this.stage);
+                handler.handle(actionEvent);
             }else{
                 fileJugador.delete();
                 fileMapa.delete();
+                new ContenedorConfiguracion(this.stage);
             }
+        }else{
+            //si no entró, mando a Configuracion
+            new ContenedorConfiguracion(this.stage);
         }
 
-        //si no entró, mando a Configuracion
-        new ContenedorConfiguracion(this.stage);
 
     }
 }

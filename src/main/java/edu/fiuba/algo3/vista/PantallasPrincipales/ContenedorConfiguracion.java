@@ -3,7 +3,7 @@ package edu.fiuba.algo3.vista.PantallasPrincipales;
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
 import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;
 import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorVehiculo;
-import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
+import edu.fiuba.algo3.controlador.IniciarJuegoControlador;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
@@ -73,7 +73,7 @@ public class ContenedorConfiguracion {
 
 
         //Se genera el mapa, le sortea una celda al jugador y DEBERIA cambiar la ventana a la del juego.
-        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
+        botonJugar.setOnAction( new IniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );//cambio de vista.
 
         inicializarAparienciaLabelsPrincipal(nombre);
