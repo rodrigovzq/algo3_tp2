@@ -18,6 +18,9 @@ public abstract class Celda extends Observable implements Imprimible {
         this.coordenada = coordenada;
     }
 
+    public abstract Celda getCelda(Direccion direccion) throws DireccionInvalida;
+    public abstract void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida;
+
     public Evento avanzarEn(IVehiculo vehiculo){
         return estado.avanzarEn( vehiculo );
     }
@@ -33,9 +36,6 @@ public abstract class Celda extends Observable implements Imprimible {
         }
 
     }
-
-    public abstract Celda getCelda(Direccion direccion) throws DireccionInvalida;
-    public abstract void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida;
     public void setEstado(IEstadoCelda estado) {
         this.estado = estado;
     }

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.EstadoCelda;
 
-import edu.fiuba.algo3.modelo.Obstaculo.IObstaculo;
+import edu.fiuba.algo3.modelo.Excepcion.EstadoCeldaInvalido;
 import edu.fiuba.algo3.modelo.Obstaculo.Obstaculo;
 import edu.fiuba.algo3.modelo.Sorpresa.Sorpresa;
 

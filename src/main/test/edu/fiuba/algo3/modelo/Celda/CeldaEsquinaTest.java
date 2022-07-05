@@ -50,4 +50,10 @@ class CeldaEsquinaTest {
         assertEquals(celda, este .getCelda( Direccion.OESTE ) );
     }
 
+
+    @Test
+    public void elCalculoDeLaDistanciaEntreCeldasEsDelegadoACoordenada(){
+
+    }
+
 }
