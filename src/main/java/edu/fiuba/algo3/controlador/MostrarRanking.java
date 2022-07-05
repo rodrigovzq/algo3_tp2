@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.modelo.Parser.Parser;
 import edu.fiuba.algo3.modelo.Parser.ParserRanking;
 import edu.fiuba.algo3.modelo.Ranking.Puntaje;
 import edu.fiuba.algo3.modelo.Ranking.Ranking;
@@ -13,10 +12,10 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class mostrarRanking implements EventHandler<ActionEvent> {
+public class MostrarRanking implements EventHandler<ActionEvent> {
     private final Stage stage;
 
-    public mostrarRanking(Stage stage) {
+    public MostrarRanking(Stage stage) {
         this.stage = stage;
     }
 

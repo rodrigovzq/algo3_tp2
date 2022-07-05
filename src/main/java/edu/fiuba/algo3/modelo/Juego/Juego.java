@@ -51,5 +51,10 @@ public class Juego implements Observador {
         this.impresora.imprimir( jugador );
     }
 
+    public void guardarPartida(){
+        guardarJugador();
+        guardarMapa();
+        guardarRanking();
+    }
     //TODO: Guardar meta!!
 }
