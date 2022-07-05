@@ -26,15 +26,9 @@ public abstract class Celda extends Observable implements Imprimible {
     }
 
     public void setCeldaOpuesta( Celda celda, Direccion direccion){
-        try{
-            Celda opuesto = celda.getCelda(direccion.opuesto());
-            if( opuesto.equals( new CeldaBloqueadora() ) )
-                celda.setCelda( this, direccion.opuesto() );
-        }catch( DireccionInvalida e){
-            //TODO: ¿Como pretenden que tratemos a las excepciones?
-            System.out.println("Se intentó conectar dos celdas que no pueden ser birdireccionales");
-        }
-
+        Celda opuesto = celda.getCelda(direccion.opuesto());
+        if( opuesto.equals( new CeldaBloqueadora() ) )
+            celda.setCelda( this, direccion.opuesto() );
     }
     public void setEstado(IEstadoCelda estado) {
         this.estado = estado;

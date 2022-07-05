@@ -32,6 +32,7 @@ public class CeldaEsquina extends Celda {
         } else{
             throw new DireccionInvalida("getCelda :");
         }
+
         return celdaAdyacente;
     }
 
