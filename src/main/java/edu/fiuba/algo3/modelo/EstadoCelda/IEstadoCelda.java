@@ -6,4 +6,5 @@ import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public interface IEstadoCelda extends Imprimible {
     Evento avanzarEn(IVehiculo vehiculo);
+    IEstadoCelda siguiente();
 }

@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.modelo.Sorpresa;
 
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
-import edu.fiuba.algo3.modelo.Evento.EventoPosicion.EventoPosicion;
-import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.EventoPuntaje;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
-import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.EventoVehiculo;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.SiguienteVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import org.junit.jupiter.api.Test;
@@ -36,6 +35,13 @@ class CambioVehiculoTest {
         CambioVehiculo sorpresa2 = new CambioVehiculo();
 
         assertEquals(sorpresa1, sorpresa2);
+    }
+
+    @Test
+    public void laSorpresaCambioVehiculoAlConsumirseDevuelveElEstadoDeCeldaComun(){
+        CambioVehiculo sorpresa = new CambioVehiculo();
+        IEstadoCelda estado = sorpresa.siguiente();
+        assertEquals( new Comun(), estado );
     }
 
 }

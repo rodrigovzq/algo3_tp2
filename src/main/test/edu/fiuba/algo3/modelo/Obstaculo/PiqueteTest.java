@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.Obstaculo;
 
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +24,13 @@ class PiqueteTest {
         IVehiculo mockVehiculo = mock( IVehiculo.class );
         piquete.avanzarEn(mockVehiculo);
         verify(mockVehiculo).avanzarPiquete();
+    }
+
+    @Test
+    public void alPedirElSiguienteSeDevuelveAsiMismo(){
+        Piquete obstaculo = new Piquete();
+        IEstadoCelda estado = obstaculo.siguiente();
+
+        assertEquals( obstaculo, estado );
     }
 }

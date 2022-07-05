@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.Obstaculo;
 
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import org.junit.jupiter.api.Test;
@@ -47,5 +49,12 @@ class ControlPolicialTest {
       String esperado = "CONTROL_POLICIAL";
       assertEquals(esperado, resultado);
   }
+    @Test
+    public void alPedirElSiguienteSeDevuelveAsiMismo(){
+        GeneradorAleatorio mockGenerador = mock(GeneradorAleatorio.class);
+        ControlPolicial obstaculo = new ControlPolicial( mockGenerador );
+        IEstadoCelda estado = obstaculo.siguiente();
 
+        assertEquals( obstaculo, estado );
+    }
 }

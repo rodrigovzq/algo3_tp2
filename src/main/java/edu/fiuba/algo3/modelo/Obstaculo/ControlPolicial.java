@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Obstaculo;
 
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
@@ -30,4 +31,8 @@ public class ControlPolicial implements IObstaculo {
         return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
     }
 
+    @Override
+    public IEstadoCelda siguiente() {
+        return this;
+    }
 }

@@ -13,4 +13,14 @@ public class Comun implements IEstadoCelda {
     public String imprimir() {
         return "COMUN";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
+
+    @Override
+    public IEstadoCelda siguiente() {
+        return this;
+    }
 }

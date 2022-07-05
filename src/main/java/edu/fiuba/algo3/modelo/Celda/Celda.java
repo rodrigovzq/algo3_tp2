@@ -22,7 +22,9 @@ public abstract class Celda extends Observable implements Imprimible {
     public abstract void setCelda(Celda nuevaCelda, Direccion direccion) throws DireccionInvalida;
 
     public Evento avanzarEn(IVehiculo vehiculo){
-        return estado.avanzarEn( vehiculo );
+        Evento evento = estado.avanzarEn( vehiculo );
+        estado = estado.siguiente();
+        return evento;
     }
 
     public void setCeldaOpuesta( Celda celda, Direccion direccion){

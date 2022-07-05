@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.modelo.Sorpresa;
 
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
-import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.AumentoPorcentaje;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.DescuentoPorcentaje;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
@@ -37,5 +38,12 @@ class FavorableTest {
         assertEquals(sorpresa1, sorpresa2);
     }
 
+    @Test
+    public void laSorpresaFavorableAlConsumirseDevuelveElEstadoDeCeldaComun(){
+        Desfavorable sorpresa = new Desfavorable();
+        IEstadoCelda estado = sorpresa.siguiente();
+        assertEquals( new Comun(), estado );
+
+    }
 
 }

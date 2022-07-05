@@ -16,7 +16,6 @@ class ComunTest {
         String esperado = "COMUN";
         assertEquals(esperado, resultado);
     }
-
     @Test
     public void alAvanzarPorUnPiqueteElVehiculoDecideQueEventoLanzar(){
         Comun comun = new Comun();
@@ -24,4 +23,18 @@ class ComunTest {
         comun.avanzarEn(mockVehiculo);
         verify(mockVehiculo).avanzarComun();
     }
+    @Test
+    public void dosEstadosComunesSonIgualesConSerDeLaMismaClase(){
+        Comun comun1 = new Comun();
+        Comun comun2 = new Comun();
+        assertEquals( comun1, comun2 );
+    }
+    @Test
+    public void alPedirElSiguienteSeDevuelveAsiMismo(){
+        Comun comun = new Comun();
+        IEstadoCelda estado = comun.siguiente();
+
+        assertEquals( comun, estado );
+    }
+
 }
