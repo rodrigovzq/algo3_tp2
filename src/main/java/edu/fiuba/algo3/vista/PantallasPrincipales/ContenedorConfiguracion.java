@@ -50,15 +50,12 @@ public class ContenedorConfiguracion {
 
 
     public ContenedorConfiguracion(Stage stage) {
-
-
-
         this.stage = stage;
         //Valor default de mapa.
-        this.mapaJuego = new Mapa(2,2);
+        this.mapaJuego = new Mapa(10,20);
         this.mapaJuego.generarMapa();
         //Valor default del jugador.
-        this.jugador = new Jugador("", mapaJuego.sortearCeldaJugador(), new Auto());
+        this.jugador = new Jugador("DefaultName", null , new Auto());
         this.iniciar();
 
         //TODO: ¿Que pasa si el usuario no elije nada y va directo a jugar?
@@ -70,8 +67,6 @@ public class ContenedorConfiguracion {
 
 
     private void iniciar(){
-
-
         //Se genera el mapa, le sortea una celda al jugador y DEBERIA cambiar la ventana a la del juego.
         botonJugar.setOnAction( new IniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );//cambio de vista.
