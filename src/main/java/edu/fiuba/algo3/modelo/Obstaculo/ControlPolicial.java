@@ -25,5 +25,9 @@ public class ControlPolicial implements IObstaculo {
     public String imprimir() {
         return Obstaculo.CONTROL_POLICIAL.name();
     }
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
 
 }

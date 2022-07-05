@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Obstaculo;
 
+import edu.fiuba.algo3.modelo.Excepcion.ObstaculoInvalido;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorDemora;
 
 public enum Obstaculo {
@@ -17,7 +18,11 @@ public enum Obstaculo {
     };
 
     public static IObstaculo crearObstaculoDesdeString(String s){
-        return valueOf( s.toUpperCase() ).crear();
+        try {
+            return valueOf(s.toUpperCase()).crear();
+        }catch(IllegalArgumentException e){
+            throw new ObstaculoInvalido();
+        }
     }
 
     public abstract IObstaculo crear();
