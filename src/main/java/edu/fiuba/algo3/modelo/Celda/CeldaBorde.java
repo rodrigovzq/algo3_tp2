@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.Celda;
 
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
-import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 
 public class CeldaBorde extends Celda {
@@ -14,7 +14,7 @@ public class CeldaBorde extends Celda {
     private Direccion direccion2;
     private Direccion direccion3;
     
-    public CeldaBorde(EstadoCelda estado, Coordenada coordenada, Direccion direccion1, Direccion direccion2, Direccion direccion3) {
+    public CeldaBorde(IEstadoCelda estado, Coordenada coordenada, Direccion direccion1, Direccion direccion2, Direccion direccion3) {
         super( estado, coordenada );
         Celda celdaNula = new CeldaBloqueadora();
         this.celda1 = celdaNula;

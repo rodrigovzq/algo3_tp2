@@ -29,4 +29,13 @@ class FavorableTest {
         assertEquals(esperado, resultado);
     }
 
+    @Test
+    public void dosSorpresasFavorablesSonIgualesConSerDeLaMismaClase(){
+        Favorable sorpresa1 = new Favorable();
+        Favorable sorpresa2 = new Favorable();
+
+        assertEquals(sorpresa1, sorpresa2);
+    }
+
+
 }

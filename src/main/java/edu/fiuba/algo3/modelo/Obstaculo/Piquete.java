@@ -13,4 +13,8 @@ public class Piquete implements IObstaculo {
     public String imprimir() {
         return Obstaculo.PIQUETE.name();
     }
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
 }

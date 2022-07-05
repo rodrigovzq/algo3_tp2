@@ -13,4 +13,8 @@ public class Pozo implements IObstaculo {
     public String imprimir() {
         return Obstaculo.POZO.name();
     }
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
 }

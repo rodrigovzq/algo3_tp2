@@ -22,16 +22,16 @@ public class CasosDeUsosEntrega4Tests {
         Jugador jugador1 = new Jugador( "Grupo3", posicionJugador, new Moto());
         Jugador jugador2 = new Jugador( "Grupo3", posicionJugador, new Moto());
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 10; i++) {
             Evento ev = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE);
             jugador1.actualizar(ev);
             ev = jugador1.avanzarHaciaLaDireccion(Direccion.SUR);
             jugador1.actualizar(ev);
         }
 
-        mapa.sortearEstadosMapa();
+        mapa.setEstadosMapa();
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 10; i++) {
             Evento ev = jugador2.avanzarHaciaLaDireccion(Direccion.ESTE);
             jugador2.actualizar( ev );
             ev = jugador2.avanzarHaciaLaDireccion(Direccion.SUR);

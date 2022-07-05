@@ -13,7 +13,7 @@ class JugadorTest {
     @Test
     public void elJugadorEsCapazDeImprimirEnUnStringSuInformacion(){
         Celda mockCelda = mock( Celda.class );
-        when( mockCelda.imprimir()).thenReturn("(0,0)");
+        when( mockCelda.imprimir()).thenReturn("ESTADO-(0,0)");
         IVehiculo mockVehiculo = mock( IVehiculo.class );
         when( mockVehiculo.imprimir()).thenReturn("Auto");
         Jugador jugador = new Jugador("Grupo3", mockCelda, mockVehiculo );
@@ -23,6 +23,41 @@ class JugadorTest {
 
         assertEquals(esperado, resultado);
     }
-    //El resto de test son realizados en las Entregas.
+
+    @Test
+    public void elVehiculoEsSeteable(){
+        Celda mockCelda = mock( Celda.class );
+        IVehiculo mockVehiculo = mock( IVehiculo.class );
+        Jugador jugador = new Jugador("Grupo3", mockCelda, mockVehiculo );
+
+        IVehiculo mockNuevoVehiculo = mock( IVehiculo.class );
+        jugador.setVehiculo( mockNuevoVehiculo );
+        Jugador esperado = new Jugador( "Grupo3", mockCelda, mockNuevoVehiculo);
+
+        assertEquals( esperado, jugador);
+    }
+    @Test
+    public void elNombreEsSeteable(){
+        Celda mockCelda = mock( Celda.class );
+        IVehiculo mockVehiculo = mock( IVehiculo.class );
+        Jugador jugador = new Jugador("Grupo3", mockCelda, mockVehiculo );
+
+        jugador.setNombre( "3-Grupo" );
+        Jugador esperado = new Jugador( "3-Grupo", mockCelda, mockVehiculo);
+
+        assertEquals( esperado, jugador);
+    }
+    @Test
+    public void laPosicionEsSeteable(){
+        Celda mockCelda = mock( Celda.class );
+        IVehiculo mockVehiculo = mock( IVehiculo.class );
+        Jugador jugador = new Jugador("Grupo3", mockCelda, mockVehiculo );
+
+        Celda mockNuevaCelda = mock( Celda.class );
+        jugador.setPosicion( mockNuevaCelda );
+        Jugador esperado = new Jugador( "Grupo3", mockNuevaCelda, mockVehiculo);
+
+        assertEquals( esperado, jugador);
+    }
 
 }

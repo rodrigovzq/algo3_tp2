@@ -21,6 +21,13 @@
             <artifactId>javafx-controls</artifactId>
             <version>${javafx-version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-media -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>19-ea+8</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -121,6 +128,7 @@
                 <version>${maven-surefire-version}</version>
 
                 <configuration>
+                    <!--suppress UnresolvedMavenProperty -->
                     <argLine>${argLine} -XX:MaxPermSize=256m</argLine>
                 </configuration>
             </plugin>

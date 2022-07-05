@@ -24,9 +24,15 @@ public class Jugador implements Imprimible {
         this.vehiculo = vehiculo;
         this.puntaje = new Movimiento(MOVIMIENTOS_INICIALES);
     }
+    public Jugador(String nombre, Celda posicion, IVehiculo vehiculo, Integer movimientos) {
+        this.nombre = nombre;
+        this.posicion = posicion;
+        this.vehiculo = vehiculo;
+        this.puntaje = new Movimiento(movimientos);
+    }
     @Override
     public String imprimir() {
-        return nombre + DELIMITADOR + posicion.imprimir() + DELIMITADOR + vehiculo.imprimir() + DELIMITADOR + puntaje.imprimir();
+        return nombre + DELIMITADOR + posicion.imprimir().split(Celda.DELIMITADOR)[1] + DELIMITADOR + vehiculo.imprimir() + DELIMITADOR + puntaje.imprimir();
     }
 
     public Evento avanzarHaciaLaDireccion(Direccion direccion){
@@ -49,7 +55,7 @@ public class Jugador implements Imprimible {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Jugador jugador = (Jugador) o;
-        return Objects.equals(nombre, jugador.nombre) && Objects.equals(posicion, jugador.posicion) && Objects.equals(vehiculo, jugador.vehiculo) && Objects.equals(puntaje, jugador.puntaje);
+        return nombre.equals( jugador.nombre ) && posicion.equals( jugador.posicion) && vehiculo.equals( jugador.vehiculo) && puntaje.equals(jugador.puntaje);
     }
 
     public void setVehiculo(IVehiculo vehiculo) {

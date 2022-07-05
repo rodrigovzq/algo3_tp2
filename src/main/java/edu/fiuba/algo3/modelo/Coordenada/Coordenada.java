@@ -46,7 +46,7 @@ public class Coordenada implements Imprimible {
         }
 
         if( posX < 0 || posY < 0)
-            throw new PosicionInvalida();
+            throw new CoordenadaInvalida();
 
     }
 

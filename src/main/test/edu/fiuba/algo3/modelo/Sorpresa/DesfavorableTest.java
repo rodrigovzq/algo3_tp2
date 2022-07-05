@@ -30,4 +30,11 @@ class DesfavorableTest {
         Evento esperado = new Evento(new AumentoPorcentaje(25.0F), new NoCambiarVehiculo(), new Avanzar());
         assertEquals(esperado, resultado);
     }
+    @Test
+    public void dosSorpresasDesfavorablesSonIgualesConSerDeLaMismaClase(){
+        Desfavorable sorpresa1 = new Desfavorable();
+        Desfavorable sorpresa2 = new Desfavorable();
+
+        assertEquals(sorpresa1, sorpresa2);
+    }
 }

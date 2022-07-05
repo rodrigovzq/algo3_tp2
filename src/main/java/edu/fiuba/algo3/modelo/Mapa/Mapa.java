@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.CeldaInterna;
 import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCelda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaBorde;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
@@ -16,12 +17,17 @@ import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.Gener
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 // Clase con la responsabilidad de generar el escenario.
 public class Mapa implements Imprimible {
     public static final float PROPORCION_MAPA_APARICION = 0.25F;
     private static final String DELIMITADOR_COLUMNA = "-";
     private static final String DELIMITADOR_FILA = ";\n";
-    private static final String DELIMITADOR_TAMANIO = "," ;
+    private static final String DELIMITADOR_TAMANIO = "x";
+    private Celda posicionJugador;
     private Integer ancho;
     private Integer altura;
     private Celda esquinaSuperiorIzquierda;
@@ -31,11 +37,29 @@ public class Mapa implements Imprimible {
 
     private final Float PROBABILIDAD_OBSTACULO = 0.5F;
     private final Float PROBABILIDAD_SORPRESA = 0.5F;
+    private Celda meta;
+
     public Mapa(Integer ancho, Integer altura) throws MapaInvalido {
+        this.ancho = ancho;
+        this.altura = altura;
+        this.meta = null;
+        this.posicionJugador = null;
+        //ValorPorDefault
+        this.generador = new GeneradorObstaculo();
+
+        if( !this.esValido() ){ throw new MapaInvalido(); }
+    }
+
+    public Mapa(Integer ancho, Integer altura, Coordenada posJugador, Coordenada posMeta, List<IEstadoCelda> estados) throws MapaInvalido {
         this.ancho = ancho;
         this.altura = altura;
         //ValorPorDefault
         this.generador = new GeneradorObstaculo();
+        generarMapa();
+
+        this.posicionJugador = getCelda(posJugador);
+        this.meta = getCelda(posMeta);
+        setEstadosMapa(estados);
 
         if( !this.esValido() ){ throw new MapaInvalido(); }
     }
@@ -169,12 +193,6 @@ public class Mapa implements Imprimible {
         }
         return celda;
     }
-
-    // Borrar. Es solo para debugear.
-    //public String asString(){
-    //    return "(" + this.ancho + " x " + this.altura + ")";
-    //}
-
     public void setAncho(Integer ancho) {
         this.ancho = ancho;
     }
@@ -188,9 +206,8 @@ public class Mapa implements Imprimible {
         Integer columna = (int) (this.generador.sortearNumero() * this.ancho * PROPORCION_MAPA_APARICION);
         return getCelda( new Coordenada( columna, fila) );
     }
-    //TODO: Llamar cuando se cree el juego. Agregar como observador de la celda sorteada
-    //al juego y a la vista de la meta.
-    public Celda sortearMeta() {
+
+    private Celda sortearMeta() {
         Integer fila = (int) (this.altura * ( 1- this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         Integer columna = (int) (this.ancho * ( 1- this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         return getCelda( new Coordenada( columna, fila) );
@@ -215,18 +232,26 @@ public class Mapa implements Imprimible {
         return celdaSeleccionada;
     }
 
-    public void sortearEstadosMapa() {
+    private List<IEstadoCelda> sortearEstadosMapa() {
+        List<IEstadoCelda> lista = new ArrayList<>();
+        for(int i = 0; i < this.ancho; i++)
+            for(int j = 0; j < this.altura; j++) {
+                lista.add( sortearEstadoCelda() );
+            }
+        return lista;
+    }
+
+    private void setEstadosMapa(List<IEstadoCelda> estados){
         Coordenada coordenada = new Coordenada(0,0);
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
 
-        EstadoCelda estado;
+        IEstadoCelda estado;
 
         while( !esFinRecorrido(coordenada)){
 
-            estado = sortearEstadoCelda();
-
+            estado = estados.remove(0);
             celdaSeleccionada.setEstado( estado );
 
             if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
@@ -241,6 +266,10 @@ public class Mapa implements Imprimible {
         }
     }
 
+    public void setEstadosMapa(){
+        setEstadosMapa( this.sortearEstadosMapa() );
+    }
+
     private boolean esCeldaInterna(Coordenada coordenada) {
         return !(coordenada.esEsquina(this.ancho, this.altura) || coordenada.esBorde(this.ancho, this.altura));
     }
@@ -252,8 +281,8 @@ public class Mapa implements Imprimible {
         return condCorte;
     }
 
-    private EstadoCelda sortearEstadoCelda() {
-        EstadoCelda estado = new Comun();
+    private IEstadoCelda sortearEstadoCelda() {
+        IEstadoCelda estado = new Comun();
         if( generador.aplicar( PROBABILIDAD_OBSTACULO ) ){
             this.generador = new GeneradorObstaculo();
             estado = generador.sortearEstadoCelda();
@@ -273,6 +302,15 @@ public class Mapa implements Imprimible {
 
         String resultado = this.ancho + DELIMITADOR_TAMANIO + this.altura;
         resultado += DELIMITADOR_FILA;
+        if( posicionJugador != null) {
+            resultado += this.posicionJugador.imprimir().split(Celda.DELIMITADOR)[1];
+            resultado += DELIMITADOR_FILA;
+        }
+        if( this.meta != null) {
+            resultado += this.meta.imprimir().split(Celda.DELIMITADOR)[1];
+            resultado += DELIMITADOR_FILA;
+        }
+
         while( !esFinRecorrido(coordenada)){
             resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0];
             if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
@@ -289,5 +327,30 @@ public class Mapa implements Imprimible {
         }
         resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0] + this.DELIMITADOR_FILA;
         return resultado;
+    }
+
+    public Celda getMeta() {
+        Celda meta = ( this.meta == null )? sortearMeta():this.meta;
+        this.meta = meta;
+        return meta;
+    }
+
+    public Celda getCeldaJugador(){
+        Celda posicion = ( this.posicionJugador == null )? sortearCeldaJugador():posicionJugador;
+        this.posicionJugador = posicion;
+        return posicion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mapa mapa = (Mapa) o;
+        return ancho.equals(mapa.ancho) && altura.equals(mapa.altura) && PROBABILIDAD_OBSTACULO.equals(mapa.PROBABILIDAD_OBSTACULO) && PROBABILIDAD_SORPRESA.equals(mapa.PROBABILIDAD_SORPRESA) && Objects.equals(meta, mapa.meta);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ancho, altura, PROBABILIDAD_OBSTACULO, PROBABILIDAD_SORPRESA, meta);
     }
 }

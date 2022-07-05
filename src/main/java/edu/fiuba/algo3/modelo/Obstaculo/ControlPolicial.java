@@ -2,13 +2,11 @@ package edu.fiuba.algo3.modelo.Obstaculo;
 
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
-import edu.fiuba.algo3.modelo.Sorpresa.Sorpresa;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class ControlPolicial implements IObstaculo {
 
-    private final float PROBABILIDAD_DE_SER_DEMORADO_AUTO = 0.8f;
-    private GeneradorAleatorio generador;
+    private final GeneradorAleatorio generador;
     public ControlPolicial(GeneradorAleatorio generador) {
         this.generador = generador;
     }
@@ -26,6 +24,10 @@ public class ControlPolicial implements IObstaculo {
     @Override
     public String imprimir() {
         return Obstaculo.CONTROL_POLICIAL.name();
+    }
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
     }
 
 }

@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.Impresora;
 
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
+
 import java.io.*;
 
 public class ImpresoraFile implements Impresora {
@@ -12,9 +14,10 @@ public class ImpresoraFile implements Impresora {
         this.crearNuevoArchivo();
         try {
             this.impresora = new PrintWriter(file);
-        } catch (IOException e) {
-            System.out.println("Ocurrió un error al escribir el archivo.");
+        } catch (FileNotFoundException e) {
+            throw new ArchivoInexistente();
         }
+
     }
 
     private boolean crearNuevoArchivo() {

@@ -2,8 +2,8 @@ package edu.fiuba.algo3.vista.PantallasPrincipales;
 
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
 import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;
-import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorAuto;
-import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
+import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorVehiculo;
+import edu.fiuba.algo3.controlador.IniciarJuegoControlador;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
@@ -27,7 +27,6 @@ import java.util.List;
 import static javafx.scene.paint.Color.*;
 
 public class ContenedorConfiguracion {
-
     private final static Pair<String, String> EMPTY_PAIR = new Pair<>("", "");
     private final ComboBox<Pair<String, String>> account = new ComboBox<>();
     private Mapa mapaJuego;
@@ -49,13 +48,14 @@ public class ContenedorConfiguracion {
     HBox listaVehiculo;
 
 
+
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
         //Valor default de mapa.
-        this.mapaJuego = new Mapa(2,2);
+        this.mapaJuego = new Mapa(10,20);
         this.mapaJuego.generarMapa();
         //Valor default del jugador.
-        this.jugador = new Jugador("", mapaJuego.sortearCeldaJugador(), new Auto());
+        this.jugador = new Jugador("DefaultName", null , new Auto());
         this.iniciar();
 
         //TODO: ¿Que pasa si el usuario no elije nada y va directo a jugar?
@@ -67,9 +67,8 @@ public class ContenedorConfiguracion {
 
 
     private void iniciar(){
-
         //Se genera el mapa, le sortea una celda al jugador y DEBERIA cambiar la ventana a la del juego.
-        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
+        botonJugar.setOnAction( new IniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );//cambio de vista.
 
         inicializarAparienciaLabelsPrincipal(nombre);
@@ -201,7 +200,6 @@ public class ContenedorConfiguracion {
         label.setTextFill(WHITE);
     }
 
-    //CUIDADO: hay que verificar si la funcionalidad anterior (está en la linea 236) es coherente con este modelo
     private HBox emitirListaDeOpciones() {
 
         Menu fileMenu = new Menu("Vehiculo");
@@ -225,47 +223,22 @@ public class ContenedorConfiguracion {
                 System.out.println("No hay ningún elemento seleccionado");
             } else {
                 System.out.println("guardando " + account.getValue());
-                // Basicamente cada selector sabe como inicializar el vehiculo del jugador
-                // y modificar el texto de fileMenu.
-                new SelectorAuto( fileMenu, this.jugador);
+
+                String seleccionado = account.getValue().getValue();
+                EventHandler handler = new SelectorVehiculo( fileMenu, seleccionado , this.jugador);
+                handler.handle(evt);
             }
         });
 
         return hbox;
-
-        // Basicamente cada selector sabe como inicializar el vehiculo del jugador
-        // y modificar el texto de fileMenu.
-        /*SelectorVehiculo selectorItem1 = new SelectorAuto( fileMenu, this.jugador);
-        SelectorVehiculo selectorItem2 = new SelectorMoto( fileMenu, this.jugador);
-        SelectorVehiculo selectorItem3 = new SelectorCuatroPorCuatro( fileMenu, this.jugador);
-
-        MenuItem item1 = new MenuItem("Auto");
-        item1.setOnAction( selectorItem1 );
-
-        MenuItem item2 = new MenuItem("Moto");
-        item2.setOnAction( selectorItem2 );
-
-        MenuItem item3 = new MenuItem("4 X 4");
-        item3.setOnAction( selectorItem3 );
-
-        fileMenu.getItems().addAll(item1, item2, item3);
-        MenuBar menuBar = new MenuBar(fileMenu);
-
-        menuBar.setTranslateX(200);
-        menuBar.setTranslateY(20);
-
-        Group root = new Group(menuBar);
-        return root;*/
-
-
     }
     private void iniciarCombo() {
 
         List<Pair<String,String>> accounts = new ArrayList<>();
 
-        accounts.add( new Pair<>("Auto", "AUTO") );
-        accounts.add( new Pair<>("Moto", "MOTO") );
-        accounts.add( new Pair<>("4X4", "CXC") );
+        accounts.add( new Pair<>("Auto", "Auto") );
+        accounts.add( new Pair<>("Moto", "Moto") );
+        accounts.add( new Pair<>("4X4", "CuatroPorCuatro") );
 
         account.getItems().add( EMPTY_PAIR );
         account.getItems().addAll( accounts );

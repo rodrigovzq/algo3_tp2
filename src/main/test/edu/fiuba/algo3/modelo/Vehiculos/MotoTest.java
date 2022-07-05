@@ -1,4 +1,4 @@
-package UnitTest.Vehiculos;
+package edu.fiuba.algo3.modelo.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
@@ -54,5 +54,37 @@ class MotoTest {
     public void esImprimible(){
         Moto moto = new Moto();
         assertEquals("Moto", moto.imprimir());
+    }
+
+    @Test
+    public void laProbabilidadDeSerDetenidoPorUnControlPolicialEsObtenible() {
+        Moto moto = new Moto();
+
+        Float resultado = moto.obtenerProbabilidadDeSerDetenido();
+        Float esperado = 0.8F;
+
+        assertEquals(esperado, resultado);
+    }
+
+    @Test
+    public void dosMotosSonIgualesConSerDeLaMismaClase() {
+        Moto moto1 = new Moto();
+        Moto moto2 = new Moto();
+
+        assertEquals(moto1, moto2);
+        assertEquals(moto1, moto1);
+
+        moto2 = null;
+        assertNotEquals(moto1, moto2);
+    }
+
+    @Test
+    public void avanzarSobreUnControlPolicialSignificaSerDetenidoYPenalizaTresMovimientos() {
+        Moto moto = new Moto();
+
+        Evento resultado = moto.avanzarControlPolicial();
+        Evento esperado =  new Evento( new Penalizacion(3),new NoCambiarVehiculo(), new Avanzar());
+
+        assertEquals(esperado, resultado);
     }
 }

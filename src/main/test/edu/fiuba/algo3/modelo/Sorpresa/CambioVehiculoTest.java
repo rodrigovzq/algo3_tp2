@@ -30,5 +30,12 @@ class CambioVehiculoTest {
         Evento esperado =  new Evento(new SinPenalizar(), new SiguienteVehiculo(), new Avanzar());
         assertEquals(esperado,resultado);
     }
+    @Test
+    public void dosSorpresasFavorablesSonIgualesConSerDeLaMismaClase(){
+        CambioVehiculo sorpresa1 = new CambioVehiculo();
+        CambioVehiculo sorpresa2 = new CambioVehiculo();
+
+        assertEquals(sorpresa1, sorpresa2);
+    }
 
 }
