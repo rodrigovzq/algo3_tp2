@@ -19,4 +19,8 @@ public class Favorable implements ISorpresa {
     public String imprimir() {
         return Sorpresa.FAVORABLE.name();
     }
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
 }

@@ -11,6 +11,12 @@ public class CambioVehiculo implements ISorpresa {
     public Evento avanzarEn(IVehiculo vehiculo) {
         return new Evento(new SinPenalizar(), new SiguienteVehiculo(), new Avanzar());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
+
     @Override
     public String imprimir() {
         return Sorpresa.CAMBIO_VEHICULO.name();

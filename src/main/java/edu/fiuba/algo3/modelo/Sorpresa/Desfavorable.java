@@ -17,4 +17,8 @@ public class Desfavorable implements ISorpresa {
     public String imprimir() {
         return Sorpresa.DESFAVORABLE.name();
     }
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
 }

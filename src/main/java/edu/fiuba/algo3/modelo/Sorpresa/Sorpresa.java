@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.Sorpresa;
 
+import edu.fiuba.algo3.modelo.Excepcion.ObstaculoInvalido;
+import edu.fiuba.algo3.modelo.Excepcion.SorpresaInvalida;
+
 public enum Sorpresa {
     FAVORABLE{
         @Override
@@ -15,7 +18,11 @@ public enum Sorpresa {
     };
 
     public static ISorpresa crearSorpresaDesdeString(String s){
-        return valueOf( s.toUpperCase() ).crear();
+        try {
+            return valueOf(s.toUpperCase()).crear();
+        }catch(IllegalArgumentException e){
+            throw new SorpresaInvalida();
+        }
     }
 
     public abstract ISorpresa crear();
