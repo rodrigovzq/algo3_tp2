@@ -22,5 +22,4 @@ class SorpresaTest {
 
         assertThrows( SorpresaInvalida.class, ()->Sorpresa.crearSorpresaDesdeString("CambioVehiculo"));
     }
-
 }
