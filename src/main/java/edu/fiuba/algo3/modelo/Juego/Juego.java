@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 //TODO: Inutil
 public class Juego implements Observador {
+    public static final String PATH_MAPA_TXT = "saves/mapa.txt";
+    public static final String PATH_JUGADOR_TXT = "saves/jugador.txt";
+    public static final String PATH_RANKING_TXT = "saves/ranking.txt";
     private Impresora impresora;
     private final Jugador jugador;
     private final Ranking ranking;
@@ -22,6 +25,7 @@ public class Juego implements Observador {
         this.jugador = jugador;
         this.ranking = ranking;
         this.mapa = mapa;
+
         this.jugador.setPosicion( this.mapa.getCeldaJugador() );
         Celda meta = mapa.getMeta();
         //Agregar observador al Juego
@@ -36,16 +40,16 @@ public class Juego implements Observador {
     }
 
     private void guardarRanking() {
-        this.impresora = new ImpresoraFile("saves/ranking.txt.txt");
+        this.impresora = new ImpresoraFile(PATH_RANKING_TXT);
         this.impresora.imprimir( ranking );
     }
 
     private void guardarMapa(){
-        this.impresora = new ImpresoraFile("saves/mapa.txt");
+        this.impresora = new ImpresoraFile(PATH_MAPA_TXT);
         this.impresora.imprimir( mapa );
     }
     public void guardarJugador(){
-        this.impresora = new ImpresoraFile("saves/jugador.txt");
+        this.impresora = new ImpresoraFile(PATH_JUGADOR_TXT);
         this.impresora.imprimir( jugador );
     }
 
