@@ -19,7 +19,7 @@ class RankingTest {
         when( mockJugador.imprimir()).thenReturn("J1;(0,0);Auto;100");
         Puntaje puntaje = new Puntaje(mockJugador);
         rank.agregar( puntaje );
-        List<Puntaje> puntajes = rank.devolverListaDeLosPrimerosDiez();
+        List<Puntaje> puntajes = rank.devolverListaDeLosPrimeros( 10 );
         List<String> esperado = new ArrayList<>();
         esperado.add("J1,100");
 
@@ -32,7 +32,7 @@ class RankingTest {
         when( mockJugador.imprimir()).thenReturn("J2;(0,0);Auto;200");
         puntaje = new Puntaje(mockJugador);
         rank.agregar( puntaje );
-        puntajes = rank.devolverListaDeLosPrimerosDiez();
+        puntajes = rank.devolverListaDeLosPrimeros( 10 );
         esperado = new ArrayList<>();
         esperado.add("J1,100");
         esperado.add("J2,200");
@@ -46,7 +46,7 @@ class RankingTest {
         when( mockJugador.imprimir()).thenReturn("J3;(0,0);Auto;50");
         puntaje = new Puntaje(mockJugador);
         rank.agregar( puntaje );
-        puntajes = rank.devolverListaDeLosPrimerosDiez();
+        puntajes = rank.devolverListaDeLosPrimeros( 10 );
         esperado = new ArrayList<>();
         esperado.add("J3,50");
         esperado.add("J1,100");
@@ -61,7 +61,7 @@ class RankingTest {
         when( mockJugador.imprimir()).thenReturn("J4;(0,0);Auto;75");
         puntaje = new Puntaje(mockJugador);
         rank.agregar( puntaje );
-        puntajes = rank.devolverListaDeLosPrimerosDiez();
+        puntajes = rank.devolverListaDeLosPrimeros( 10 );
         esperado = new ArrayList<>();
         esperado.add("J3,50");
         esperado.add("J4,75");
@@ -77,7 +77,7 @@ class RankingTest {
         when( mockJugador.imprimir()).thenReturn("J5;(0,0);Auto;100");
         puntaje = new Puntaje(mockJugador);
         rank.agregar( puntaje );
-        puntajes = rank.devolverListaDeLosPrimerosDiez();
+        puntajes = rank.devolverListaDeLosPrimeros( 10 );
         esperado = new ArrayList<>();
         esperado.add("J3,50");
         esperado.add("J4,75");
@@ -103,7 +103,7 @@ class RankingTest {
         for( int i = 0; i < 10; i++)
             rank.agregar( puntaje );
 
-        List<Puntaje> puntajes = rank.devolverListaDeLosPrimerosDiez();
+        List<Puntaje> puntajes = rank.devolverListaDeLosPrimeros( 10 );
         List<String> esperado = new ArrayList<>();
         for( int i = 0; i < 10; i++)
             esperado.add("J1,100");
@@ -117,7 +117,7 @@ class RankingTest {
         when( mockJugador.imprimir()).thenReturn("J2;(0,0);Auto;50");
         puntaje = new Puntaje(mockJugador);
         rank.agregar( puntaje );
-        puntajes = rank.devolverListaDeLosPrimerosDiez();
+        puntajes = rank.devolverListaDeLosPrimeros( 10 );
         esperado = new ArrayList<>();
         esperado.add("J2,50");
         for( int i = 0; i < 9; i++)
@@ -132,7 +132,7 @@ class RankingTest {
         when( mockJugador.imprimir()).thenReturn("J3;(0,0);Auto;75");
         puntaje = new Puntaje(mockJugador);
         rank.agregar( puntaje );
-        puntajes = rank.devolverListaDeLosPrimerosDiez();
+        puntajes = rank.devolverListaDeLosPrimeros( 10 );
         esperado = new ArrayList<>();
         esperado.add("J2,50");
         esperado.add("J3,75");

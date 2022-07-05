@@ -37,8 +37,8 @@ public class Ranking implements Imprimible {
 
     }
 
-    public List<Puntaje> devolverListaDeLosPrimerosDiez() {
-        Integer largo = Math.min( 10 , ranking.size());
+    public List<Puntaje> devolverListaDeLosPrimeros( Integer cantidad ) {
+        Integer largo = Math.min( cantidad , ranking.size());
         return this.ranking.subList(0,largo);
     }
 

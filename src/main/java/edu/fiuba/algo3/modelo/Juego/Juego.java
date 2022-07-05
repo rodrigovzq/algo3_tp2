@@ -42,7 +42,7 @@ public class Juego implements Observador {
     }
 
     private void guardarRanking() {
-        this.impresora = new ImpresoraFile("saves/ranking.txt");
+        this.impresora = new ImpresoraFile("saves/ranking.txt.txt");
         this.impresora.imprimir( ranking );
     }
 

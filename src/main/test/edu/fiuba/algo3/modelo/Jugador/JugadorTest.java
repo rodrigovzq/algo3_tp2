@@ -13,7 +13,7 @@ class JugadorTest {
     @Test
     public void elJugadorEsCapazDeImprimirEnUnStringSuInformacion(){
         Celda mockCelda = mock( Celda.class );
-        when( mockCelda.imprimir()).thenReturn("(0,0)");
+        when( mockCelda.imprimir()).thenReturn("ESTADO-(0,0)");
         IVehiculo mockVehiculo = mock( IVehiculo.class );
         when( mockVehiculo.imprimir()).thenReturn("Auto");
         Jugador jugador = new Jugador("Grupo3", mockCelda, mockVehiculo );

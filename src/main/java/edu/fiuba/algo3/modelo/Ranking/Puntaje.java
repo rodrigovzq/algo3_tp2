@@ -7,7 +7,7 @@ import java.util.Objects;
 
 //TODO: Test
 public class Puntaje implements Imprimible {
-    private static final String DELIMITADOR = ",";
+    public static final String DELIMITADOR = ",";
     private final String nombre;
     private final Integer puntaje;
 

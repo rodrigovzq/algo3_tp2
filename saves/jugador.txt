@@ -1,1 +1,1 @@
-asdf;(1,0);CuatroPorCuatro;0
+Grupo3;(0,1);CuatroPorCuatro;0
