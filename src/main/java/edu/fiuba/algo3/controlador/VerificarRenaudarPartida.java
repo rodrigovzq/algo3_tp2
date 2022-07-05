@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controlador;
 
+import edu.fiuba.algo3.modelo.Juego.Juego;
 import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorConfiguracion;
 import edu.fiuba.algo3.vista.Ventanas.VentanaConfirmacion;
 import javafx.event.ActionEvent;
@@ -17,12 +18,11 @@ public class VerificarRenaudarPartida implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        String pathJugador = "saves/jugador.txt";
-        String pathMapa = "saves/mapa.txt";
+        String pathJugador = Juego.PATH_JUGADOR_TXT;
+        String pathMapa = Juego.PATH_MAPA_TXT;
         File fileJugador = new File( pathJugador );
         File fileMapa = new File( pathMapa );
 
-        boolean config = false;
         //if: existen los archivos jugador.txt y mapa.txt
         if( fileJugador.exists() && fileMapa.exists() ){
             //  pop up - preguntar si quiere renaudar la partida

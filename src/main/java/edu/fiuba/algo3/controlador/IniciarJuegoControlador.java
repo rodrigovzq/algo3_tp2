@@ -15,7 +15,9 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
+
     private final Stage stage;
+    private final boolean config;
     private Mapa mapa;
     Jugador jugador;
 
@@ -26,13 +28,12 @@ public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
         this.stage = stage;
         this.jugador = jugador;
         this.mapa = mapa;
-
-        cargarConfiguracion();
+        this.config = true;
     }
 
     public IniciarJuegoControlador(Stage stage) {
         this.stage = stage;
-        cargarPartidaRenaudada();
+        this.config = false;
     }
 
     private void cargarConfiguracion() {
@@ -42,19 +43,26 @@ public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
     }
 
     private void cargarPartidaRenaudada() {
-        ParserMapa parserM = new ParserMapa("saves/mapa.txt");
+
+        ParserMapa parserM = new ParserMapa(Juego.PATH_MAPA_TXT);
         parserM.parsear();
         System.out.println("Generando mapa...");
         this.mapa = parserM.getEntidadParseada();
 
-        ParserJugador parserJ = new ParserJugador("saves/jugador.txt");
+        ParserJugador parserJ = new ParserJugador(Juego.PATH_JUGADOR_TXT);
         parserJ.parsear();
         this.jugador = parserJ.getEntidadParseada();
     }
 
     @Override
     public void handle(ActionEvent event) {
-        ParserRanking parserJ = new ParserRanking("saves/jugador.txt");
+        if( config ){
+            cargarConfiguracion();
+        }else{
+            cargarPartidaRenaudada();
+        }
+
+        ParserRanking parserJ = new ParserRanking(Juego.PATH_RANKING_TXT);
         parserJ.parsear();
         Ranking ranking = parserJ.getEntidadParseada();
 
