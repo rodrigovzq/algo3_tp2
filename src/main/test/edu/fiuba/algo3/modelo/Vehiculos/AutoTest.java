@@ -1,4 +1,4 @@
-package UnitTest.Vehiculos;
+package edu.fiuba.algo3.modelo.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
