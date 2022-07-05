@@ -61,8 +61,7 @@ public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
         Juego juego = new Juego(this.jugador, this.mapa, ranking);
 
         System.out.println("Guardando partida...");
-        juego.guardarMapa();
-        juego.guardarJugador();
+        juego.guardarPartida();
 
         new ContenedorJuego(this.stage, juego);
     }

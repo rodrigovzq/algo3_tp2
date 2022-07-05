@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 //TODO: Inutil
 public class Juego implements Observador {
-
-    private Lector lector;
     private Impresora impresora;
     private final Jugador jugador;
     private final Ranking ranking;
@@ -23,8 +21,8 @@ public class Juego implements Observador {
     public Juego( Jugador jugador, Mapa mapa, Ranking ranking) {
         this.jugador = jugador;
         this.ranking = ranking;
-        this.jugador.setPosicion( mapa.getCeldaJugador() );
         this.mapa = mapa;
+        this.jugador.setPosicion( this.mapa.getCeldaJugador() );
         Celda meta = mapa.getMeta();
         //Agregar observador al Juego
         //meta.agregarObservador( this )
@@ -42,7 +40,7 @@ public class Juego implements Observador {
         this.impresora.imprimir( ranking );
     }
 
-    public void guardarMapa(){
+    private void guardarMapa(){
         this.impresora = new ImpresoraFile("saves/mapa.txt");
         this.impresora.imprimir( mapa );
     }
