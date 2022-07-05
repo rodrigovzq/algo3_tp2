@@ -13,9 +13,13 @@ public enum Vehiculo {
         @Override
         public IVehiculo crear(){ return new CuatroPorCuatro();}
     };
-
     public abstract IVehiculo crear();
     public static IVehiculo crearVehiculoDesdeString(String s){
-        return valueOf( s.toUpperCase() ).crear();
+        try{
+            return valueOf( s.toUpperCase() ).crear();
+        }catch (IllegalArgumentException e){
+            //TODO: Caso posible: Puede que esté malformado el archivo y entrar aca.
+            throw new VehiculoInvalido();
+        }
     }
 }
