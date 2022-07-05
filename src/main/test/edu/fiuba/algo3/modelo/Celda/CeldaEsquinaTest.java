@@ -2,12 +2,14 @@ package edu.fiuba.algo3.modelo.Celda;
 
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class CeldaEsquinaTest {
     @Test
@@ -52,8 +54,13 @@ class CeldaEsquinaTest {
 
 
     @Test
-    public void elCalculoDeLaDistanciaEntreCeldasEsDelegadoACoordenada(){
-
+    public void noPuedeSetearseOpuestosALasDireccionesDisponibles(){
+        IEstadoCelda estado = mock(IEstadoCelda.class);
+        Coordenada coord = mock(Coordenada.class);
+        Celda celda1 = new CeldaEsquina(estado, coord, Direccion.NORTE, Direccion.OESTE);
+        Celda celda2 = new CeldaEsquina(estado, coord, Direccion.NORTE, Direccion.OESTE);
+        assertThrows(DireccionInvalida.class, ()-> celda1.setCeldaOpuesta(celda2,Direccion.NORTE));
+        assertThrows(DireccionInvalida.class, ()-> celda1.setCeldaOpuesta(celda2,Direccion.OESTE));
     }
 
 }

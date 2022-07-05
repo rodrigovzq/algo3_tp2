@@ -410,4 +410,38 @@ class MapaTest {
         resultado = mapa.imprimir();
         assertNotEquals(esperado, resultado);
     }
+
+    @Test
+    public void elAnchoEsSeteable(){
+        Mapa mapa = new Mapa(3,3);
+        mapa.setAncho(4);
+
+        assertEquals(new Mapa(4,3),mapa);
+    }
+    @Test
+    public void laAlturaEsSeteable(){
+        Mapa mapa = new Mapa(3,3);
+        mapa.setAltura(4);
+
+        assertEquals(new Mapa(3,4),mapa);
+    }
+
+    @Test
+    public void laCeldaDelJugadorSeSorteaUnaUnicaVez(){
+        Mapa mapa = new Mapa(3,3);
+        mapa.generarMapa();
+        Celda jugador1 = mapa.getCeldaJugador();
+        Celda jugador2 = mapa.getCeldaJugador();
+
+        assertEquals(jugador1,jugador2);
+    }
+    @Test
+    public void laMetaSeSorteaUnaUnicaVez(){
+        Mapa mapa = new Mapa(3,3);
+        mapa.generarMapa();
+        Celda meta1 = mapa.getMeta();
+        Celda meta2 = mapa.getMeta();
+
+        assertEquals(meta1,meta2);
+    }
 }

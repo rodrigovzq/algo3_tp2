@@ -68,8 +68,8 @@ class CoordenadaTest {
         esperado = new Coordenada(0,0);
         assertEquals(esperado, coord);
 
-        assertThrows( PosicionInvalida.class, () -> coord.mover(Direccion.NORTE));
-        assertThrows( PosicionInvalida.class, () -> coord.mover(Direccion.OESTE));
+        assertThrows( CoordenadaInvalida.class, () -> coord.mover(Direccion.NORTE));
+        assertThrows( CoordenadaInvalida.class, () -> coord.mover(Direccion.OESTE));
     }
     @Test
     public void creoUnaCoordenadaYEsCapazDeReconocerSiEsUnaEsquinaPasandoleElTamanioDelMapa(){
