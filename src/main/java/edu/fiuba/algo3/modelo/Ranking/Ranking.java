@@ -13,6 +13,7 @@ import java.util.Objects;
 //a tener una forma de compararse. Acá estoy forzando que sea strings.
 public class Ranking implements Imprimible {
     public static final String DELIMITADOR = ",";
+    public static final String DELIMITADOR_FIN = ";\n";
     private final List<Puntaje> ranking;
 
     public Ranking(List<Puntaje> lista) {
@@ -46,7 +47,7 @@ public class Ranking implements Imprimible {
     public String imprimir() {
         String resultado = "";
         for(Puntaje puntaje : ranking){
-            resultado += puntaje.imprimir() + "\n";
+            resultado += puntaje.imprimir() + DELIMITADOR_FIN;
         }
         return resultado;
     }

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Parser;
 
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Ranking.Puntaje;
 import edu.fiuba.algo3.modelo.Ranking.Ranking;
@@ -23,16 +24,21 @@ public class ParserRanking implements Parser {
 
     @Override
     public void parsear() {
-        String patron_grupo = PATRON_NOMBRE + Ranking.DELIMITADOR  + PATRON_PUNTAJE;
+        String patron_grupo = PATRON_NOMBRE + Ranking.DELIMITADOR  + PATRON_PUNTAJE + Ranking.DELIMITADOR_FIN;
         Pattern patron = Pattern.compile( patron_grupo );
         Matcher matcher = patron.matcher(this.texto);
-
-        while( matcher.find() ){
-            String nombre = matcher.group(1);
-            String mov = matcher.group(2);
-            Integer movimientos = Integer.parseInt(mov);
-            Puntaje puntaje = new Puntaje( nombre , movimientos );
-            resultado.agregar( puntaje );
+        if( !this.texto.equals("")) {
+            if(matcher.find()) {
+                do {
+                    String nombre = matcher.group(1);
+                    String mov = matcher.group(2);
+                    Integer movimientos = Integer.parseInt(mov);
+                    Puntaje puntaje = new Puntaje(nombre, movimientos);
+                    resultado.agregar(puntaje);
+                } while (matcher.find());
+            }else{
+                throw new ArchivoMalformado();
+            }
         }
     }
 

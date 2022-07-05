@@ -38,7 +38,6 @@ public class ParserJugador implements Parser {
         Pattern patron = Pattern.compile( patron_grupo );
         Matcher matcher = patron.matcher(this.texto);
 
-        //En caso de que exista el archivo y este bien formado
         if( matcher.find() ){
             nombre = matcher.group(1);
             posX =  matcher.group(2);
@@ -48,7 +47,6 @@ public class ParserJugador implements Parser {
         }else{
             throw new ArchivoMalformado();
         }
-
 
     }
 

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Parser;
 
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
 import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import org.junit.jupiter.api.Test;
@@ -19,9 +20,10 @@ class ParserMapaTest {
     }
 
     @Test
-    public void verificaQueEsteBienFormadoElArchivo(){
-        assertThrows(ArchivoMalformado.class, () -> new ParserMapa( "saves/fail/mapa_test.txt"));
-        assertDoesNotThrow(() -> new ParserMapa( "saves/test/mapa_test.txt"));
+    public void verificaQueEsteBienFormadoElArchivoAlParsear(){
+        assertThrows(ArchivoMalformado.class, () -> new ParserMapa( "saves/test/fail/mapa_test.txt").parsear() );
+        assertThrows(ArchivoInexistente.class, () -> new ParserMapa( "saves/fail/mapa_test.txt").parsear() );
+        assertDoesNotThrow(() -> new ParserMapa( "saves/test/mapa_test.txt").parsear() );
     }
 
 }

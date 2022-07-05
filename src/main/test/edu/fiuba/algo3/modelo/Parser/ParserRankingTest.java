@@ -1,10 +1,12 @@
 package edu.fiuba.algo3.modelo.Parser;
 
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
 import edu.fiuba.algo3.modelo.Ranking.Ranking;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,6 +25,12 @@ class ParserRankingTest {
             esperado.agregar(mockJugador);
 
         assertEquals(esperado, resultado);
+    }
+    @Test
+    public void verificaQueEsteBienFormadoElArchivoAlParsear(){
+        assertThrows(ArchivoMalformado.class, () -> new ParserRanking( "saves/test/fail/ranking_test.txt").parsear() );
+        assertThrows(ArchivoInexistente.class, () -> new ParserRanking( "saves/fail/ranking_test.txt").parsear() );
+        assertDoesNotThrow(() -> new ParserRanking( "saves/test/ranking_test.txt").parsear() );
     }
 
 }

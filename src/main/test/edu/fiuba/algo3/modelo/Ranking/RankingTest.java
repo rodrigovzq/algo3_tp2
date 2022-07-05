@@ -154,7 +154,7 @@ class RankingTest {
         String esperado = "";
         for(int i = 0; i < 10; i++) {
             rank.agregar(mockJugador);
-            esperado += "Grupo3,1000\n";
+            esperado += "Grupo3,1000;\n";
         }
 
         String resultado = rank.imprimir();
