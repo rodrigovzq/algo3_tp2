@@ -38,7 +38,7 @@ public class MapaVista implements Observador {
     Button botonInstrucciones = new Button("Instrucciones");
     Button botonSalir = new Button("Salir");
 
-    public MapaVista(Mapa mapa,Stage stage) {
+    public MapaVista(Mapa mapa, Stage stage) {
         this.vista = new GridPane();
         this.mapa = mapa;
         mapa.agregarObservador(this);
@@ -69,10 +69,10 @@ public class MapaVista implements Observador {
 
         var g = niebla.getGraphicsContext2D();
         g.setFill(Color.BLACK);
-        g.fillRect(0,0,55 * mapa.getAncho() + 5, 55 * mapa.getAltura() + 5);
-        g.clearRect(420,275,55*4,55*4);
+        g.fillRect(0, 0, 55 * mapa.getAncho() + 5, 55 * mapa.getAltura() + 5);
+        g.clearRect(420, 275, 55 * 4, 55 * 4);
 
-         contenedor.getChildren().addAll(figuras, niebla);
+        contenedor.getChildren().addAll(figuras, niebla);
         contenedor.setAlignment(Pos.CENTER);
         panelGlobal.setCenter(contenedor);
         panelGlobal.setTop(cajaBotones);
@@ -109,7 +109,7 @@ public class MapaVista implements Observador {
                 Celda celda = mapa.getCelda(new Coordenada(i, j));
                 Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.imprimir() + ".png");
                 GraphicsContext contexto = figuras.getGraphicsContext2D();
-                contexto.drawImage(icono, 52.5*(i+1), 49*(j+1),20,20); // TODO: AJUSTAR ESTOS VALORES
+                contexto.drawImage(icono, 52.5 * (i + 1), 49 * (j + 1), 20, 20); // TODO: AJUSTAR ESTOS VALORES
             }
         }
     }
