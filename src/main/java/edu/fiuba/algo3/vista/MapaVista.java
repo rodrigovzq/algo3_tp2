@@ -1,87 +1,97 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoBoton;
-import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoVentana;
-import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorInstrucciones;
-import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorMenu;
+import edu.fiuba.algo3.controlador.TecladoControlador;
+import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
+import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Mapa.Mapa;
+import edu.fiuba.algo3.modelo.Observador;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.shape.StrokeLineJoin;
-import javafx.scene.shape.StrokeType;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class MapaVista {
+import java.util.Objects;
 
-    BorderPane panelGlobal = new BorderPane();
-    GridPane mapa = new GridPane();
-    private Stage stage;
-    HBox cajaBotones;
+public class MapaVista extends StackPane implements Observador {
 
-
-    Button botonVolverMenu = new Button( "Volver al menu");
-    Button botonInstrucciones = new Button( "Instrucciones");
-    Button botonSalir = new Button( "Salir");
-
-    public void mostrarMapa(Stage stage) {
-
-        this.stage = stage;
-
-        cajaBotones = emitirBotonesSugerencia();
-        cajaBotones.setSpacing(30.0d);
-        cajaBotones.setAlignment(Pos.TOP_CENTER);
-        HBox.setMargin(botonVolverMenu,new Insets(10,10,10,10));
-        HBox.setMargin(botonInstrucciones,new Insets(10,10,10,10));
-        HBox.setMargin(botonSalir,new Insets(10,10,10,10));
-        panelGlobal.setTop(cajaBotones);
-        mapa.setHgap(2);   // separación entre columnas
-        mapa.setVgap(2);   // separación entre filas
-        mapa.setPadding(new Insets(15, 15, 15, 15));
+    private Mapa mapa;
+    private BorderPane panelGlobal = new BorderPane();
+    private GridPane vista;
+    private Canvas figuras;
+    private PorcionMapaVista niebla;
 
 
-        int filas = 8;
-        int columnas = 8;
-        Background gris = new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, Insets.EMPTY));
-        BorderStroke blanco = new BorderStroke(Color.WHITE, new BorderStrokeStyle(StrokeType.OUTSIDE, StrokeLineJoin.BEVEL, StrokeLineCap.SQUARE,3.0,1.0,null), null, new BorderWidths(8.0));
-        Border b = new Border(blanco);
-        for(int i = 0; i < filas; i++) {
-            for(int j = 0; j < columnas; j++) {
-                StackPane manzana = new StackPane();
-//              manzana.setFill(Color.GRAY);
-//              manzana.setStroke(Color.WHITE);
-//              manzana.setStrokeWidth(3.0);
-                manzana.prefWidthProperty().bind(mapa.widthProperty().divide(columnas));
-                manzana.prefHeightProperty().bind(mapa.heightProperty().divide(filas));
-                manzana.setBackground(gris);
-                manzana.setBorder(b);
-                mapa.add(manzana,i,j);
+    public MapaVista(Mapa mapa, PorcionMapaVista porcion, Stage stage) {
+        this.vista = new GridPane();
+        this.mapa = mapa;
+        mapa.agregarObservador(this);
+        for (int i = 0; i < mapa.getAncho(); i++) {
+            for (int j = 0; j < mapa.getAltura(); j++) {
+                Rectangle manzana = new Rectangle(50, 50, Color.GREY);
+                manzana.setStroke(Color.WHITE);
+                manzana.setStrokeWidth(5);
+                this.vista.add(manzana, i, j);
             }
         }
+        this.vista.setPadding(new Insets(15, 15, 15, 15));
+        this.vista.setAlignment(Pos.CENTER);
+        this.niebla = porcion;
 
+        figuras = new Canvas(55 * mapa.getAncho() + 5, 55 * mapa.getAltura() + 5);
 
-        panelGlobal.setCenter(mapa);
-        panelGlobal.setBackground(new Background(new BackgroundFill(Color.web("#24333e"), new CornerRadii(0), new Insets(0))));
+        getChildren().addAll(vista, figuras, niebla);
+        setAlignment(Pos.CENTER);
 
-        stage.setScene(new Scene(panelGlobal, 400,400));
-        stage.show();
+        dibujar();
     }
 
-    private HBox emitirBotonesSugerencia() {
+    @Override
+    public void actualizar() {
+        dibujar();
+    }
 
-        HBox cajaHorizontal = new HBox();
+    public void agregarVistaEnMapa(Image icono, Coordenada coordenada) {
+        GraphicsContext contexto = figuras.getGraphicsContext2D();
+        contexto.drawImage(icono, 52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), 23, 23);
+    }
 
-        botonVolverMenu.setOnAction( e -> new ContenedorMenu(this.stage) );
-        botonInstrucciones.setOnAction( e -> new ContenedorInstrucciones().mostrar() );
-        CerrarJuegoVentana cerrarVentana = new CerrarJuegoVentana( botonSalir );
-        CerrarJuegoBoton cerrarBoton = new CerrarJuegoBoton( this.stage );
-        stage.setOnCloseRequest( cerrarVentana );
-        botonSalir.setOnAction( cerrarBoton );
+    public void limpiarRectangulo(Coordenada coordenada, double ancho, double alto) {
+        GraphicsContext contexto = figuras.getGraphicsContext2D();
+        contexto.clearRect(52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), ancho, alto);
+    }
 
-        cajaHorizontal.getChildren().addAll(botonVolverMenu,botonInstrucciones,botonSalir);
-        return cajaHorizontal;
+    private void dibujar() {
+        GraphicsContext contexto = figuras.getGraphicsContext2D();
+        for (int i = 0; i < mapa.getAncho(); i++) {
+            for (int j = 0; j < mapa.getAltura(); j++) {
+                Celda celda = mapa.getCelda(new Coordenada(i, j));
+                if (!Objects.equals(celda.getEstadoCelda(), EstadoCelda.COMUN.name())) {
+                    Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.getEstadoCelda() + ".png");
+                    contexto.drawImage(icono, 52.5 * (i + 1), 49 * (j + 1), 19, 19); // TODO: AJUSTAR ESTOS VALORES
+                }
+            }
+        }
+    }
+
+    public void redibujarEn(Coordenada coordenada) {
+        Celda celda = mapa.getCelda(coordenada);
+        if (!Objects.equals(celda.getEstadoCelda(), EstadoCelda.COMUN.name())) {
+            Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.getEstadoCelda() + ".png");
+            GraphicsContext contexto = figuras.getGraphicsContext2D();
+            contexto.drawImage(icono, 52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), 19, 19); // TODO: AJUSTAR ESTOS VALORESs
+        }
+    }
+
+    public void accion(Jugador j) {
+        panelGlobal.setOnKeyPressed(new TecladoControlador(j));
     }
 }

@@ -56,4 +56,11 @@ public abstract class Celda extends Observable implements Imprimible {
     public String imprimir() {
         return estado.imprimir() + this.DELIMITADOR + coordenada.imprimir();
     }
+
+    public String getEstadoCelda() {
+        return estado.imprimir();
+    }
+    public Coordenada getCoordenada() {
+        return coordenada;
+    }
 }

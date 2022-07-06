@@ -16,13 +16,14 @@ import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.Gener
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorSorpresa;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
+import edu.fiuba.algo3.modelo.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 // Clase con la responsabilidad de generar el escenario.
-public class Mapa implements Imprimible {
+public class Mapa extends Observable implements Imprimible {
     public static final float PROPORCION_MAPA_APARICION = 0.25F;
     private static final String DELIMITADOR_COLUMNA = "-";
     private static final String DELIMITADOR_FILA = ";\n";
@@ -47,7 +48,9 @@ public class Mapa implements Imprimible {
         //ValorPorDefault
         this.generador = new GeneradorObstaculo();
 
-        if( !this.esValido() ){ throw new MapaInvalido(); }
+        if (!this.esValido()) {
+            throw new MapaInvalido();
+        }
     }
 
     public Mapa(Integer ancho, Integer altura, Coordenada posJugador, Coordenada posMeta, List<IEstadoCelda> estados) throws MapaInvalido {
@@ -61,11 +64,13 @@ public class Mapa implements Imprimible {
         this.meta = getCelda(posMeta);
         setEstadosMapa(estados);
 
-        if( !this.esValido() ){ throw new MapaInvalido(); }
+        if (!this.esValido()) {
+            throw new MapaInvalido();
+        }
     }
 
     private boolean esValido() {
-        if( this.altura < 2 || this.ancho < 2)
+        if (this.altura < 2 || this.ancho < 2)
             return false;
         return true;
     }
@@ -75,9 +80,9 @@ public class Mapa implements Imprimible {
     }
 
     //La implementacion del metodo generarMapa está acoplada con la entidad Coordenada
-    public void generarMapa(){
-        Coordenada coord = new Coordenada( 0 , 0);
-        Celda anteriorCelda = this.generarEsquinaMapa( coord );
+    public void generarMapa() {
+        Coordenada coord = new Coordenada(0, 0);
+        Celda anteriorCelda = this.generarEsquinaMapa(coord);
         esquinaSuperiorIzquierda = anteriorCelda;
 
         Direccion dirX = Direccion.ESTE;
@@ -90,23 +95,23 @@ public class Mapa implements Imprimible {
         boolean esCeldaInterna = true;
 
         //Inicializo la primera fila.
-        do{
+        do {
             coord = new Coordenada(coord);
             coord.mover(dirX);
 
-            nuevaCelda = this.generarNuevaCelda( coord );
+            nuevaCelda = this.generarNuevaCelda(coord);
             //Seteo en el sentido X la nueva Celda.
             anteriorCelda.setCelda(nuevaCelda, dirX);
             anteriorCelda = nuevaCelda;
 
-            esElBorde = coord.esEsquina( this.ancho, this.altura);
-            if( esElBorde )
-                esElBorde = ( coord.determinarEsquina( this.ancho, this.altura) == Direccion.NORESTE ) ;
+            esElBorde = coord.esEsquina(this.ancho, this.altura);
+            if (esElBorde)
+                esElBorde = (coord.determinarEsquina(this.ancho, this.altura) == Direccion.NORESTE);
 
-        }while( !esElBorde );
+        } while (!esElBorde);
 
         //Continua construyendo el resto de filas.
-        do{
+        do {
             //Cuando llega al final de una fila.
             dirX = dirX.opuesto(); //Recorremos al reves.
 
@@ -119,14 +124,14 @@ public class Mapa implements Imprimible {
             //Seteo el "pivot" de la fila de arriba. (Permite conectar verticalmente las celdas)
             filaAnteriorCelda = anteriorCelda;
 
-            do{
-                if( setDirY ) {
+            do {
+                if (setDirY) {
                     setDirY = false;
-                    nuevaCelda = this.generarNuevaCelda( coord );
-                }else {
+                    nuevaCelda = this.generarNuevaCelda(coord);
+                } else {
                     coord = new Coordenada(coord);
                     coord.mover(dirX);
-                    nuevaCelda = this.generarNuevaCelda( coord );
+                    nuevaCelda = this.generarNuevaCelda(coord);
                     anteriorCelda.setCelda(nuevaCelda, dirX);
                 }
 
@@ -135,64 +140,66 @@ public class Mapa implements Imprimible {
 
                 esCeldaInterna = esCeldaInterna(coord);
                 //Si no es celda interna chequeo si llegue al borde.
-                if( !esCeldaInterna ) {
+                if (!esCeldaInterna) {
                     esElBorde = (coord.determinarBorde(this.ancho, this.altura) == dirX);
                 }
 
                 //Si es celda interna o no es EL borde, me muevo en la fila anterior.
                 //Cuando llego al borde hacia donde me dirijo, no puedo pedir la celda adyacente.
-                if( !esElBorde || esCeldaInterna )
+                if (!esElBorde || esCeldaInterna)
                     filaAnteriorCelda = filaAnteriorCelda.getCelda(dirX);
 
                 anteriorCelda = nuevaCelda;
-            }while( !esElBorde );
+            } while (!esElBorde);
 
-        }while( !esFinRecorrido( coord ) );
-
+        } while (!esFinRecorrido(coord));
+        notificarATodos();
     }
 
     private Direccion direccionRecorridoFinal() {
         Direccion esquinaFIN = Direccion.SUDOESTE;
-        if( this.altura % 2 == 1 )
+        if (this.altura % 2 == 1)
             esquinaFIN = Direccion.SUDESTE;
         return esquinaFIN;
     }
 
 
-    private Celda generarEsquinaMapa( Coordenada coordenada){
+    private Celda generarEsquinaMapa(Coordenada coordenada) {
         Celda nuevaCelda;
         fabrica = new FabricaCeldaEsquina();
-        Direccion dir = coordenada.determinarEsquina( this.ancho, this.altura );
+        Direccion dir = coordenada.determinarEsquina(this.ancho, this.altura);
         nuevaCelda = fabrica.crearCelda(dir, coordenada);
 
         return nuevaCelda;
     }
-    private Celda generarBordeMapa( Coordenada coordenada ){
+
+    private Celda generarBordeMapa(Coordenada coordenada) {
         Celda nuevaCelda;
         fabrica = new FabricaCeldaBorde();
-        Direccion dir = coordenada.determinarBorde( this.ancho, this.altura);
-        nuevaCelda = fabrica.crearCelda( dir, coordenada);
+        Direccion dir = coordenada.determinarBorde(this.ancho, this.altura);
+        nuevaCelda = fabrica.crearCelda(dir, coordenada);
 
         return nuevaCelda;
     }
 
-    private Celda generarInternaMapa(Coordenada coordenada){
+    private Celda generarInternaMapa(Coordenada coordenada) {
         fabrica = new FabricaCeldaInterna();
         Celda nuevaCelda = fabrica.crearCelda(Direccion.ESTE, coordenada); //no importa la direccion
         return nuevaCelda;
     }
 
-    public Celda generarNuevaCelda( Coordenada coordenada ){
+    public Celda generarNuevaCelda(Coordenada coordenada) {
         Celda celda;
-        if( coordenada.esEsquina( this.ancho , this.altura ) ){
-            celda = this.generarEsquinaMapa( coordenada );
-        }else if( coordenada.esBorde( this.ancho , this.altura ) ){
-            celda = this.generarBordeMapa( coordenada );
-        }else{
-            celda = this.generarInternaMapa( coordenada );
+        if (coordenada.esEsquina(this.ancho, this.altura)) {
+            celda = this.generarEsquinaMapa(coordenada);
+        } else if (coordenada.esBorde(this.ancho, this.altura)) {
+            celda = this.generarBordeMapa(coordenada);
+        } else {
+            celda = this.generarInternaMapa(coordenada);
         }
         return celda;
     }
+
     public void setAncho(Integer ancho) {
         this.ancho = ancho;
     }
@@ -201,31 +208,39 @@ public class Mapa implements Imprimible {
         this.altura = altura;
     }
 
+    public int getAncho() {
+        return this.ancho;
+    }
+
+    public int getAltura() {
+        return this.altura;
+    }
+
     public Celda sortearCeldaJugador() {
         Integer fila = (int) (this.generador.sortearNumero() * this.altura * PROPORCION_MAPA_APARICION);
         Integer columna = (int) (this.generador.sortearNumero() * this.ancho * PROPORCION_MAPA_APARICION);
-        return getCelda( new Coordenada( columna, fila) );
+        return getCelda(new Coordenada(columna, fila));
     }
 
     private Celda sortearMeta() {
-        Integer fila = (int) (this.altura * ( 1- this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
-        Integer columna = (int) (this.ancho * ( 1- this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
-        return getCelda( new Coordenada( columna, fila) );
+        Integer fila = (int) (this.altura * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
+        Integer columna = (int) (this.ancho * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
+        return getCelda(new Coordenada(columna, fila));
     }
 
-    private Celda getCelda(Coordenada coordenada) {
-        Celda celda = new CeldaInterna( new Comun(), coordenada);
-        Integer diferenciaX = esquinaSuperiorIzquierda.distanciaHorizontal( celda );
-        Integer diferenciaY = esquinaSuperiorIzquierda.distanciaVertical( celda );
+    public Celda getCelda(Coordenada coordenada) {
+        Celda celda = new CeldaInterna(new Comun(), coordenada);
+        Integer diferenciaX = esquinaSuperiorIzquierda.distanciaHorizontal(celda);
+        Integer diferenciaY = esquinaSuperiorIzquierda.distanciaVertical(celda);
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
 
         //como es el borde superior izquierdo siempre vamos a movernos para estas direcciones.
-        while ( diferenciaX > 0 ){
-            celdaSeleccionada = celdaSeleccionada.getCelda( Direccion.ESTE );
+        while (diferenciaX > 0) {
+            celdaSeleccionada = celdaSeleccionada.getCelda(Direccion.ESTE);
             diferenciaX -= 1;
         }
-        while( diferenciaY > 0 ){
-            celdaSeleccionada = celdaSeleccionada.getCelda( Direccion.SUR );
+        while (diferenciaY > 0) {
+            celdaSeleccionada = celdaSeleccionada.getCelda(Direccion.SUR);
             diferenciaY -= 1;
         }
 
@@ -234,27 +249,27 @@ public class Mapa implements Imprimible {
 
     private List<IEstadoCelda> sortearEstadosMapa() {
         List<IEstadoCelda> lista = new ArrayList<>();
-        for(int i = 0; i < this.ancho; i++)
-            for(int j = 0; j < this.altura; j++) {
-                lista.add( sortearEstadoCelda() );
+        for (int i = 0; i < this.ancho; i++)
+            for (int j = 0; j < this.altura; j++) {
+                lista.add(sortearEstadoCelda());
             }
         return lista;
     }
 
-    private void setEstadosMapa(List<IEstadoCelda> estados){
-        Coordenada coordenada = new Coordenada(0,0);
+    private void setEstadosMapa(List<IEstadoCelda> estados) {
+        Coordenada coordenada = new Coordenada(0, 0);
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
 
         IEstadoCelda estado;
 
-        while( !esFinRecorrido(coordenada)){
+        while (!esFinRecorrido(coordenada)) {
 
             estado = estados.remove(0);
-            celdaSeleccionada.setEstado( estado );
+            celdaSeleccionada.setEstado(estado);
 
-            if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
+            if (esCeldaInterna(coordenada) || !(coordenada.determinarBorde(this.ancho, this.altura) == dirX)) {
                 celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
                 coordenada.mover(dirX);
             } else {
@@ -266,8 +281,9 @@ public class Mapa implements Imprimible {
         }
     }
 
-    public void setEstadosMapa(){
-        setEstadosMapa( this.sortearEstadosMapa() );
+    public void setEstadosMapa() {
+        setEstadosMapa(this.sortearEstadosMapa());
+        notificarATodos();
     }
 
     private boolean esCeldaInterna(Coordenada coordenada) {
@@ -276,17 +292,17 @@ public class Mapa implements Imprimible {
 
     private boolean esFinRecorrido(Coordenada coordenada) {
         boolean condCorte = false;
-        if( coordenada.esEsquina(this.ancho, this.altura ) )
-            condCorte = ( coordenada.determinarEsquina(this.ancho, this.altura) == direccionRecorridoFinal());
+        if (coordenada.esEsquina(this.ancho, this.altura))
+            condCorte = (coordenada.determinarEsquina(this.ancho, this.altura) == direccionRecorridoFinal());
         return condCorte;
     }
 
     private IEstadoCelda sortearEstadoCelda() {
         IEstadoCelda estado = new Comun();
-        if( generador.aplicar( PROBABILIDAD_OBSTACULO ) ){
+        if (generador.aplicar(PROBABILIDAD_OBSTACULO)) {
             this.generador = new GeneradorObstaculo();
             estado = generador.sortearEstadoCelda();
-        }else if( generador.aplicar( PROBABILIDAD_SORPRESA ) ) {
+        } else if (generador.aplicar(PROBABILIDAD_SORPRESA)) {
             this.generador = new GeneradorSorpresa();
             estado = generador.sortearEstadoCelda();
         }
@@ -295,25 +311,25 @@ public class Mapa implements Imprimible {
     }
 
     public String imprimir() {
-        Coordenada coordenada = new Coordenada(0,0);
+        Coordenada coordenada = new Coordenada(0, 0);
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
 
         String resultado = this.ancho + DELIMITADOR_TAMANIO + this.altura;
         resultado += DELIMITADOR_FILA;
-        if( posicionJugador != null) {
+        if (posicionJugador != null) {
             resultado += this.posicionJugador.imprimir().split(Celda.DELIMITADOR)[1];
             resultado += DELIMITADOR_FILA;
         }
-        if( this.meta != null) {
+        if (this.meta != null) {
             resultado += this.meta.imprimir().split(Celda.DELIMITADOR)[1];
             resultado += DELIMITADOR_FILA;
         }
 
-        while( !esFinRecorrido(coordenada)){
+        while (!esFinRecorrido(coordenada)) {
             resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0];
-            if ( esCeldaInterna(coordenada) || !( coordenada.determinarBorde(this.ancho, this.altura) == dirX )) {
+            if (esCeldaInterna(coordenada) || !(coordenada.determinarBorde(this.ancho, this.altura) == dirX)) {
                 celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
                 coordenada.mover(dirX);
                 resultado += this.DELIMITADOR_COLUMNA;
@@ -330,13 +346,13 @@ public class Mapa implements Imprimible {
     }
 
     public Celda getMeta() {
-        Celda meta = ( this.meta == null )? sortearMeta():this.meta;
+        Celda meta = (this.meta == null) ? sortearMeta() : this.meta;
         this.meta = meta;
         return meta;
     }
 
-    public Celda getCeldaJugador(){
-        Celda posicion = ( this.posicionJugador == null )? sortearCeldaJugador():posicionJugador;
+    public Celda getCeldaJugador() {
+        Celda posicion = (this.posicionJugador == null) ? sortearCeldaJugador() : posicionJugador;
         this.posicionJugador = posicion;
         return posicion;
     }
