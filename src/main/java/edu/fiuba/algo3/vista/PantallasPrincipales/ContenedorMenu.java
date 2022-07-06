@@ -30,7 +30,6 @@ public class ContenedorMenu {
     public ContenedorMenu(Stage stage) {
         this.stage = stage;
         this.iniciar();
-
     }
 
 

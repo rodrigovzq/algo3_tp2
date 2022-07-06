@@ -32,6 +32,14 @@ public class Juego implements Observador {
         //meta.agregarObservador( this )
     }
 
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public Mapa getMapa() {
+        return mapa;
+    }
+
     //Al llegar a la meta, se le notifica que debe agregar al jugador.
     @Override
     public void actualizar() {

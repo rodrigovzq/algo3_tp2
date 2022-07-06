@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.PantallasPrincipales;
 
+import edu.fiuba.algo3.controlador.TecladoControlador;
 import edu.fiuba.algo3.modelo.Juego.Juego;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
@@ -10,8 +11,7 @@ import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
-import edu.fiuba.algo3.vista.JugadorVista;
-import edu.fiuba.algo3.vista.MapaVista;
+import edu.fiuba.algo3.vista.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -20,19 +20,31 @@ public class ContenedorJuego {
     private Stage stage;
     private MapaVista mapaVista;
     private JugadorVista jugadorVista;
+    private Juego juego;
     public ContenedorJuego(Stage stage, Juego juego) {
-
         this.stage = stage;
+        this.juego = juego;
+        this.iniciar();
+    }
 
+    public void iniciar(){
         VBox layout = new VBox();
-        //TODO: Implementar contenido de la ventana del juego
-            //  Va a estar compuesta por JugadorVista, PuntajeVista, Mapavista
-            //y un par de botones para volver al menu, ver intrucciones etc.
 
-        //
-        Scene contenido = new Scene( layout );
-        this.stage.setScene( contenido );
+        Mapa m = juego.getMapa();
+        Jugador j = juego.getJugador();
 
+        PorcionMapaVista porcionVista = new PorcionMapaVista(m, j);
+        MapaVista mapaVista = new MapaVista(m,porcionVista,stage);
+        JugadorVista jugadorVista = new JugadorVista(j, mapaVista);
+        CajaMapaVista cajaMapaVista = new CajaMapaVista(new PuntajeVista(j), stage);
+        JuegoVista juegoVista = new JuegoVista(cajaMapaVista, stage);
+        juegoVista.setCenter(mapaVista);
+        juegoVista.setOnKeyPressed(new TecladoControlador(j));
+        stage.setResizable(false);
+        stage.setMaximized(true);
+
+        stage.setScene(new Scene(juegoVista, 435, 472));
+        stage.show();
         //Opciones
         //Salir -> Preguntar si quiere guardar la partida. NO: deja el archivo que estaba. SI: sobreescribe mapa.txt y jugador.txt.
         //Instrucciones -> Lo mismo que en el menu.
@@ -42,6 +54,5 @@ public class ContenedorJuego {
         //Cosas que pueden pasar:
         //Llegar a un borde -> Mostrar visualmente con algo que no puede pasar.
         //Ganar -> Mostrar menu de victoria. (Se guarda el ranking y ¿se borran los txt?)
-
     }
 }
