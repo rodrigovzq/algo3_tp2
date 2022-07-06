@@ -38,6 +38,5 @@ public class JugadorVista implements Observador {
     @Override
     public void actualizar() {
         moverJugador();
-        mapa.modificarPuntaje(jugador.getPuntaje());
     }
 }
