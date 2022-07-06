@@ -31,6 +31,8 @@ public class MapaVista implements Observador {
     private StackPane contenedor; // Se le puede colocar la capa que oculta arriba a partir de este pane
     private Canvas figuras;
 
+    private Canvas niebla;
+
     private PuntajeVista puntaje = new PuntajeVista();
     Button botonVolverMenu = new Button("Volver al menu");
     Button botonInstrucciones = new Button("Instrucciones");
@@ -63,7 +65,14 @@ public class MapaVista implements Observador {
 
         contenedor = new StackPane(vista);
         figuras = new Canvas(55 * mapa.getAncho() + 5, 55 * mapa.getAltura() + 5);
-        contenedor.getChildren().add(figuras);
+        niebla = new Canvas(55 * mapa.getAncho() + 5, 55 * mapa.getAltura() + 5);
+
+        var g = niebla.getGraphicsContext2D();
+        g.setFill(Color.BLACK);
+        g.fillRect(0,0,55 * mapa.getAncho() + 5, 55 * mapa.getAltura() + 5);
+        g.clearRect(420,275,55*4,55*4);
+
+         contenedor.getChildren().addAll(figuras, niebla);
         contenedor.setAlignment(Pos.CENTER);
         panelGlobal.setCenter(contenedor);
         panelGlobal.setTop(cajaBotones);
