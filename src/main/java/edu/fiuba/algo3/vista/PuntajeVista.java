@@ -19,6 +19,6 @@ public class PuntajeVista extends Label {
     }
 
     public void actualizar(Movimiento nuevoPuntaje) {
-        this.setText("Puntaje" + nuevoPuntaje.imprimir());
+        this.setText("Puntaje: " + nuevoPuntaje.imprimir());
     }
 }

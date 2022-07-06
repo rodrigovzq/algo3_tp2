@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
@@ -70,6 +71,18 @@ public class Jugador extends Observable implements Imprimible {
 
     public void setPosicion(Celda posicion) {
         this.posicion = posicion;
+    }
+
+    public Coordenada getPosicion() {
+        return posicion.getCoordenada();
+    }
+
+    public IVehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public Movimiento getPuntaje() {
+        return puntaje;
     }
 }
 
