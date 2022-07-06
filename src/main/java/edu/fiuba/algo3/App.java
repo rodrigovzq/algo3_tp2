@@ -39,8 +39,9 @@ public class App extends Application {
 
         stage.setTitle("Juego GPS Challenge");
         //ContenedorMenu menu = new ContenedorMenu(stage);
-        Mapa m = new Mapa(15,15);
+        Mapa m = new Mapa(25,16);
         m.generarMapa();
+        m.
         Jugador j = new Jugador("Jugador 1", m.getCeldaJugador(), new Moto());
         PorcionMapaVista p = new PorcionMapaVista(m, j);
         MapaVista mapa = new MapaVista(m,p,stage);

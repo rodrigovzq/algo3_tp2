@@ -356,6 +356,7 @@ public class Mapa extends Observable implements Imprimible {
         return posicion;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

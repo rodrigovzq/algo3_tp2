@@ -5,6 +5,7 @@ import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoVentana;
 import edu.fiuba.algo3.controlador.TecladoControlador;
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
+import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
@@ -71,15 +72,6 @@ public class MapaVista implements Observador {
         contenedor = new StackPane(vista);
         figuras = new Canvas(55 * mapa.getAncho() + 5, 55 * mapa.getAltura() + 5);
 
-
-        for (int i = 0; i < mapa.getAncho(); i++) {
-            for (int j = 0; j < mapa.getAltura(); j++) {
-                Celda celda = mapa.getCelda(new Coordenada(i, j));
-                Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/POZO.png");
-                GraphicsContext contexto = figuras.getGraphicsContext2D();
-                contexto.drawImage(icono, 52.5 * (i + 1), 49 * (j + 1), 20, 20); // TODO: AJUSTAR ESTOS VALORES
-            }
-        }
         contenedor.getChildren().addAll(figuras, niebla);
         contenedor.setAlignment(Pos.CENTER);
         panelGlobal.setCenter(contenedor);
@@ -120,26 +112,34 @@ public class MapaVista implements Observador {
         GraphicsContext contexto = figuras.getGraphicsContext2D();
         contexto.clearRect(52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), ancho, alto);
     }
+
     public void modificarPuntaje(Movimiento movimientos) {
         puntaje.actualizar(movimientos);
     }
+
     public void dibujar() {
         GraphicsContext contexto = figuras.getGraphicsContext2D();
         for (int i = 0; i < mapa.getAncho(); i++) {
             for (int j = 0; j < mapa.getAltura(); j++) {
                 Celda celda = mapa.getCelda(new Coordenada(i, j));
-                Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.imprimir() + ".png");
-                contexto.drawImage(icono, 52.5 * (i + 1), 49 * (j + 1), 20, 20); // TODO: AJUSTAR ESTOS VALORES
+                if (celda.imprimir() != EstadoCelda.COMUN.name()) {
+                    Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.imprimir() + ".png");
+                    contexto.drawImage(icono, 52.5 * (i + 1), 49 * (j + 1), 20, 20); // TODO: AJUSTAR ESTOS VALORES
+                }
             }
         }
     }
 
     public void redibujarEn(Coordenada coordenada) {
         Celda celda = mapa.getCelda(coordenada);
-        Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/POZO.png");
-        GraphicsContext contexto = figuras.getGraphicsContext2D();
-        contexto.drawImage(icono, 52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), 20, 20); // TODO: AJUSTAR ESTOS VALORES
+        if (celda.imprimir() != EstadoCelda.COMUN.name()) {
+            Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.imprimir() + ".png");
+            GraphicsContext contexto = figuras.getGraphicsContext2D();
+
+            contexto.drawImage(icono, 52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), 20, 20); // TODO: AJUSTAR ESTOS VALORESs
+        }
     }
+
     public void accion(Jugador j) {
         panelGlobal.setOnKeyPressed(new TecladoControlador(j));
     }
