@@ -1,12 +1,18 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Vehiculos.Moto;
+import edu.fiuba.algo3.vista.JugadorVista;
 import edu.fiuba.algo3.vista.MapaVista;
 import edu.fiuba.algo3.controlador.Musica.ControladorMusica;
 import edu.fiuba.algo3.controlador.Musica.Musica;
 import edu.fiuba.algo3.controlador.Musica.ReproductorMusica;
 import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorMenu;
+import edu.fiuba.algo3.vista.PorcionMapaVista;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -35,7 +41,11 @@ public class App extends Application {
         //ContenedorMenu menu = new ContenedorMenu(stage);
         Mapa m = new Mapa(15,15);
         m.generarMapa();
-        MapaVista mapa = new MapaVista(m,stage);
+        Jugador j = new Jugador("Jugador 1", m.getCeldaJugador(), new Moto());
+        PorcionMapaVista p = new PorcionMapaVista(m, j);
+        MapaVista mapa = new MapaVista(m,p,stage);
+        JugadorVista v = new JugadorVista(j, mapa);
+        mapa.accion(j);
         stage.setResizable(false);
         stage.setMaximized(true);
         //ContenedorMenu menu = new ContenedorMenu(stage);
