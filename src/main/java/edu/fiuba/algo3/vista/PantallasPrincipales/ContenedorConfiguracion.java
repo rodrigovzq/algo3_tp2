@@ -41,10 +41,10 @@ public class ContenedorConfiguracion {
 
     Button botonCancelar = new Button("Cancelar");
     Button botonJugar = new Button("Jugar");
-    Button boton10x10 = new Button("10x20");
-    Button boton20x10 = new Button("20X30");
-    Button boton30x10 = new Button("30X30");
-    Button boton30x16 = new Button("16X30");
+    Button boton10x10 = new Button("10x10");
+    Button boton20x10 = new Button("20X10");
+    Button boton30x10 = new Button("30X10");
+    Button boton30x16 = new Button("30X16");
     HBox listaVehiculo;
 
 
