@@ -69,5 +69,7 @@ public class Jugador implements Imprimible {
     public void setPosicion(Celda posicion) {
         this.posicion = posicion;
     }
+
+    public Celda getPosicion(){ return posicion;}
 }
 

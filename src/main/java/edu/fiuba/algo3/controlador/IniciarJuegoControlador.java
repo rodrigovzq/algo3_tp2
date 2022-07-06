@@ -52,6 +52,9 @@ public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
         ParserJugador parserJ = new ParserJugador(Juego.PATH_JUGADOR_TXT);
         parserJ.parsear();
         this.jugador = parserJ.getEntidadParseada();
+
+        // Se debería actualizar a la hora de guardar la partida
+        this.mapa.setPosicionJugador( this.jugador.getPosicion() );
     }
 
     @Override

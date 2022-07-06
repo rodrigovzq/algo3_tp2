@@ -349,8 +349,7 @@ public class Mapa implements Imprimible {
         return ancho.equals(mapa.ancho) && altura.equals(mapa.altura) && PROBABILIDAD_OBSTACULO.equals(mapa.PROBABILIDAD_OBSTACULO) && PROBABILIDAD_SORPRESA.equals(mapa.PROBABILIDAD_SORPRESA) && Objects.equals(meta, mapa.meta);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(ancho, altura, PROBABILIDAD_OBSTACULO, PROBABILIDAD_SORPRESA, meta);
+    public void setPosicionJugador(Celda posicionJugador) {
+        this.posicionJugador = posicionJugador;
     }
 }
