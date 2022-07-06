@@ -52,7 +52,7 @@ public class ContenedorConfiguracion {
     public ContenedorConfiguracion(Stage stage) {
         this.stage = stage;
         //Valor default de mapa.
-        this.mapaJuego = new Mapa(10,20);
+        this.mapaJuego = new Mapa(10,10);
         this.mapaJuego.generarMapa();
         //Valor default del jugador.
         this.jugador = new Jugador("DefaultName", null , new Auto());
