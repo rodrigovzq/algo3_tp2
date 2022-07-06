@@ -1,16 +1,18 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
+import edu.fiuba.algo3.modelo.Observable;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 import java.util.Objects;
 
-public class Jugador implements Imprimible {
+public class Jugador extends Observable implements Imprimible {
     private final int MOVIMIENTOS_INICIALES = 0;
     public static final String DELIMITADOR = ";";
     private String nombre;
@@ -47,7 +49,8 @@ public class Jugador implements Imprimible {
     public void actualizar(Evento resultado) {
         this.puntaje = resultado.actualizarPuntaje( this.puntaje );
         this.vehiculo = resultado.actualizarVehiculo( this.vehiculo );
-        this.posicion = resultado.actualizarPosicion( this.posicion );    
+        this.posicion = resultado.actualizarPosicion( this.posicion );
+        notificarATodos();
     }
 
     @Override
@@ -70,6 +73,14 @@ public class Jugador implements Imprimible {
         this.posicion = posicion;
     }
 
-    public Celda getPosicion(){ return posicion;}
+    public Coordenada getPosicion() {
+        return posicion.getCoordenada();
+    }
+    public IVehiculo getVehiculo() {
+        return vehiculo;
+    }
+    public Movimiento getPuntaje() {
+        return puntaje;
+    }
 }
 

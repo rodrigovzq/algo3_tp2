@@ -128,4 +128,11 @@ public class Coordenada implements Imprimible {
         return DELIMITADOR_IZQ + posX + SEPARADOR + posY + DELIMITADOR_DER;
     }
 
+    public Integer getPosX() {
+        return posX;
+    }
+
+    public Integer getPosY() {
+        return posY;
+    }
 }
