@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaEsquina;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.EstadoCelda.Meta;
 import edu.fiuba.algo3.modelo.Excepcion.MapaInvalido;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorEstadosAleatorio;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorEstadosAleatorio.GeneradorObstaculo;
@@ -38,12 +39,11 @@ public class Mapa extends Observable implements Imprimible {
 
     private final Float PROBABILIDAD_OBSTACULO = 0.5F;
     private final Float PROBABILIDAD_SORPRESA = 0.5F;
-    private Celda meta;
+
 
     public Mapa(Integer ancho, Integer altura) throws MapaInvalido {
         this.ancho = ancho;
         this.altura = altura;
-        this.meta = null;
         this.posicionJugador = null;
         //ValorPorDefault
         this.generador = new GeneradorObstaculo();
@@ -53,7 +53,7 @@ public class Mapa extends Observable implements Imprimible {
         }
     }
 
-    public Mapa(Integer ancho, Integer altura, Coordenada posJugador, Coordenada posMeta, List<IEstadoCelda> estados) throws MapaInvalido {
+    public Mapa(Integer ancho, Integer altura, Coordenada posJugador, List<IEstadoCelda> estados) throws MapaInvalido {
         this.ancho = ancho;
         this.altura = altura;
         //ValorPorDefault
@@ -61,7 +61,6 @@ public class Mapa extends Observable implements Imprimible {
         generarMapa();
 
         this.posicionJugador = getCelda(posJugador);
-        this.meta = getCelda(posMeta);
         setEstadosMapa(estados);
 
         if (!this.esValido()) {
@@ -222,10 +221,10 @@ public class Mapa extends Observable implements Imprimible {
         return getCelda(new Coordenada(columna, fila));
     }
 
-    private Celda sortearMeta() {
+    private Integer sortearIndiceMeta() {
         Integer fila = (int) (this.altura * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         Integer columna = (int) (this.ancho * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
-        return getCelda(new Coordenada(columna, fila));
+        return fila * this.ancho + columna;
     }
 
     public Celda getCelda(Coordenada coordenada) {
@@ -253,6 +252,8 @@ public class Mapa extends Observable implements Imprimible {
             for (int j = 0; j < this.altura; j++) {
                 lista.add(sortearEstadoCelda());
             }
+
+        lista.set(sortearIndiceMeta(), new Meta());
         return lista;
     }
 
@@ -322,10 +323,6 @@ public class Mapa extends Observable implements Imprimible {
             resultado += this.posicionJugador.imprimir().split(Celda.DELIMITADOR)[1];
             resultado += DELIMITADOR_FILA;
         }
-        if (this.meta != null) {
-            resultado += this.meta.imprimir().split(Celda.DELIMITADOR)[1];
-            resultado += DELIMITADOR_FILA;
-        }
 
         while (!esFinRecorrido(coordenada)) {
             resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0];
@@ -345,12 +342,6 @@ public class Mapa extends Observable implements Imprimible {
         return resultado;
     }
 
-    public Celda getMeta() {
-        Celda meta = (this.meta == null) ? sortearMeta() : this.meta;
-        this.meta = meta;
-        return meta;
-    }
-
     public Celda getCeldaJugador() {
         Celda posicion = (this.posicionJugador == null) ? sortearCeldaJugador() : posicionJugador;
         this.posicionJugador = posicion;
@@ -362,7 +353,7 @@ public class Mapa extends Observable implements Imprimible {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mapa mapa = (Mapa) o;
-        return ancho.equals(mapa.ancho) && altura.equals(mapa.altura) && PROBABILIDAD_OBSTACULO.equals(mapa.PROBABILIDAD_OBSTACULO) && PROBABILIDAD_SORPRESA.equals(mapa.PROBABILIDAD_SORPRESA) && Objects.equals(meta, mapa.meta);
+        return ancho.equals(mapa.ancho) && altura.equals(mapa.altura) && PROBABILIDAD_OBSTACULO.equals(mapa.PROBABILIDAD_OBSTACULO) && PROBABILIDAD_SORPRESA.equals(mapa.PROBABILIDAD_SORPRESA);
     }
 
     public void setPosicionJugador(Coordenada posicionJugador) {

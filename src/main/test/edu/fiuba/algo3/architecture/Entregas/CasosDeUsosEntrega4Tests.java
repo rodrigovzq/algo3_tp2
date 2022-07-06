@@ -68,7 +68,7 @@ public class CasosDeUsosEntrega4Tests {
         estados.add( new Comun() );
         estados.add( new Comun() );
 
-        Mapa mapa = new Mapa( 3, 3, new Coordenada(2,2), new Coordenada(0,0), estados);
+        Mapa mapa = new Mapa( 3, 3, new Coordenada(2,2), estados);
         Celda posicionJugador = mapa.getCeldaJugador();
         Jugador jugador1 = new Jugador( "Grupo3", posicionJugador, new CuatroPorCuatro());
 
@@ -95,7 +95,7 @@ public class CasosDeUsosEntrega4Tests {
 
         String resultado = mapa.imprimir();
         //TODO: EL MAPA.TXT TIENE LA POSICION INICIAL DEL JUGADOR, NO LA ACTUAL !!!
-        String esperado = "3x3;\n(2,2);\n(0,0);\nCOMUN-COMUN-COMUN;\nCONTROL_POLICIAL-PIQUETE-POZO;\nCOMUN-COMUN-COMUN;\n";
+        String esperado = "3x3;\n(2,2);\nCOMUN-COMUN-COMUN;\nCONTROL_POLICIAL-PIQUETE-POZO;\nCOMUN-COMUN-COMUN;\n";
 
         assertEquals(esperado,resultado);
     }

@@ -42,24 +42,15 @@ public class ParserMapa implements Parser{
         if( matcher.find() ){
             anchoMapa = Integer.parseInt(matcher.group(1));
             altoMapa = Integer.parseInt(matcher.group(2));
-        }else{
-            throw new ArchivoMalformado();
-        }
-
+        }else throw new ArchivoMalformado();
 
         patron = Pattern.compile( PATRON_CELDA );
         matcher = patron.matcher(this.texto);
         if( matcher.find() ) {
             posicionJugadorX = Integer.parseInt(matcher.group(1));
             posicionJugadorY = Integer.parseInt(matcher.group(2));
+        }else throw new ArchivoMalformado();
 
-            if (matcher.find()) {
-                posicionMetaX = Integer.parseInt(matcher.group(1));
-                posicionMetaY = Integer.parseInt(matcher.group(2));
-            } else {
-                throw new ArchivoMalformado();
-            }
-        }
         patron = Pattern.compile( PATRON_FILA );
         matcher  = patron.matcher(this.texto);
         //Leer todas las filas y adjuntarlo a una Lista de EstadoCelda
@@ -80,8 +71,7 @@ public class ParserMapa implements Parser{
     @Override
     public Mapa getEntidadParseada() {
         Coordenada coordJugador = new Coordenada(posicionJugadorX,posicionJugadorY);
-        Coordenada coordMeta = new Coordenada(posicionMetaX,posicionMetaY);
-        Mapa mapa = new Mapa(anchoMapa, altoMapa, coordJugador, coordMeta, estadosMapa);
+        Mapa mapa = new Mapa(anchoMapa, altoMapa, coordJugador, estadosMapa);
         return mapa;
     }
 }

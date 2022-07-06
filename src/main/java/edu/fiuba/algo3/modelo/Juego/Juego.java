@@ -27,9 +27,6 @@ public class Juego implements Observador {
         this.mapa = mapa;
 
         this.jugador.setPosicion( this.mapa.getCeldaJugador() );
-        Celda meta = mapa.getMeta();
-        //Agregar observador al Juego
-        //meta.agregarObservador( this )
     }
 
     public Jugador getJugador() {
