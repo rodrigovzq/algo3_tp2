@@ -42,9 +42,9 @@ public class ContenedorConfiguracion {
     Button botonCancelar = new Button("Cancelar");
     Button botonJugar = new Button("Jugar");
     Button boton10X20 = new Button("10x20");
-    Button boton20X30 = new Button("20X30");
-    Button boton30X30 = new Button("30X30");
-    Button boton30X40 = new Button("30X40");
+    Button boton10x20 = new Button("20X30");
+    Button boton10x30 = new Button("30X30");
+    Button boton16X30 = new Button("16X30");
     HBox listaVehiculo;
 
 
@@ -85,9 +85,9 @@ public class ContenedorConfiguracion {
         listaVehiculo = emitirListaDeOpciones();
 
         inicializarAparienciaBotonesMapas(boton10X20);
-        inicializarAparienciaBotonesMapas(boton20X30);
-        inicializarAparienciaBotonesMapas(boton30X30);
-        inicializarAparienciaBotonesMapas(boton30X40);
+        inicializarAparienciaBotonesMapas(boton10x20);
+        inicializarAparienciaBotonesMapas(boton10x30);
+        inicializarAparienciaBotonesMapas(boton16X30);
 
         controlBotonesMapa(); //CUIDADO: falta ver la forma de solo escoger un solo boton del mapa
         iniciarTabulacionesDeLosBoxs();
@@ -115,29 +115,29 @@ public class ContenedorConfiguracion {
             }
         });
 
-        boton20X30.setOnMousePressed(new EventHandler<MouseEvent>() {
+        boton10x20.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                boton20X30.setOnAction(new SelectorMapa(mapaJuego, 20 ,30 ));
-                boton20X30.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
+                boton10x20.setOnAction(new SelectorMapa(mapaJuego, 10 ,20 ));
+                boton10x20.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
             }
         });
 
-        boton30X30.setOnMousePressed(new EventHandler<MouseEvent>() {
+        boton10x30.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                boton30X30.setOnAction(new SelectorMapa(mapaJuego, 30 ,30 ));
-                boton30X30.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
+                boton10X30.setOnAction(new SelectorMapa(mapaJuego, 10 ,30 ));
+                boton10X30.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
             }
         });
 
-        boton30X40.setOnMousePressed(new EventHandler<MouseEvent>() {
+        boton16X30.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                boton30X40.setOnAction(new SelectorMapa(mapaJuego, 30 ,40 ));
-                boton30X40.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
+                boton16X30.setOnAction(new SelectorMapa(mapaJuego, 16 ,30 ));
+                boton16X30.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
             }
         });
@@ -158,17 +158,17 @@ public class ContenedorConfiguracion {
         rootNombreJugador.setAlignment(Pos.CENTER);
         rootVehiculos.getChildren().add(listaVehiculo);
         rootVehiculos.setAlignment(Pos.CENTER);
-        rootBotonesDeVeinte.getChildren().addAll(boton10X20, boton20X30);
+        rootBotonesDeVeinte.getChildren().addAll(boton10X20, boton10x20);
         rootBotonesDeVeinte.setAlignment(Pos.CENTER);
-        rootBotonesDeTreinta.getChildren().addAll(boton30X30, boton30X40);
+        rootBotonesDeTreinta.getChildren().addAll(boton10x30, boton30X40);
         rootBotonesDeTreinta.setAlignment(Pos.CENTER);
         rootBotonesLaterales.getChildren().addAll(botonCancelar, botonJugar);
         rootVertical.getChildren().addAll(rootNombreJugador,rootVehiculos,mapa,rootBotonesDeVeinte,rootBotonesDeTreinta,rootBotonesLaterales);
         rootVertical.setAlignment(Pos.CENTER);
 
         HBox.setMargin(boton10X20,new Insets(10,10,10,10));
-        HBox.setMargin(boton20X30,new Insets(15,10,10,10));
-        HBox.setMargin(boton30X30,new Insets(15,10,10,10));
+        HBox.setMargin(boton10x20,new Insets(15,10,10,10));
+        HBox.setMargin(boton10x30,new Insets(15,10,10,10));
         HBox.setMargin(boton30X40,new Insets(15,10,10,10));
         HBox.setMargin(botonCancelar,new Insets(10,100,10,10));
         HBox.setMargin(botonJugar,new Insets(10,10,10,350));

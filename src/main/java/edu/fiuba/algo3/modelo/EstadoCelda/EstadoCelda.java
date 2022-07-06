@@ -25,15 +25,23 @@ public enum EstadoCelda {
             String estado = s.toUpperCase();
             return estado.equals(this.name());
         }
+    }, META{
+        @Override
+        public boolean identificar(String s){
+            String estado = s.toUpperCase();
+            return estado.equals(this.name());
+        }
     };
 
-    public static IEstadoCelda crearDesdeString(String s){
-        if(OBSTACULO.identificar(s)){
+    public static IEstadoCelda crearDesdeString(String s) {
+        if (OBSTACULO.identificar(s)) {
             return Obstaculo.crearObstaculoDesdeString(s);
-        }else if(SORPRESA.identificar(s) ){
+        } else if (SORPRESA.identificar(s)) {
             return Sorpresa.crearSorpresaDesdeString(s);
-        }else if( COMUN.identificar(s) ){
+        } else if (COMUN.identificar(s)) {
             return new Comun();
+        } else if (META.identificar(s)){
+            return new Meta();
         }else{
             throw new EstadoCeldaInvalido();
         }
