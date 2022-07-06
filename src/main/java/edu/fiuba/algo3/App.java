@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.vista.MapaVista;
 import edu.fiuba.algo3.controlador.Musica.ControladorMusica;
 import edu.fiuba.algo3.controlador.Musica.Musica;
@@ -26,14 +27,18 @@ public class App extends Application {
         * Cuando el codigo esté integrado junto con el mapa, la instancia de musica
         * tiene que pasarse por parametro.
         * */
-        String rutaMusica = "/src/main/java/edu/fiuba/algo3/Recursos/musicaa/";
-        Musica musica = new Musica();
-        musica.play(rutaMusica,"pantallasPrincipales.mp3");
+       // String rutaMusica = "/src/main/java/edu/fiuba/algo3/Recursos/musicaa/";
+       // Musica musica = new Musica();
+       // musica.play(rutaMusica,"pantallasPrincipales.mp3");
 
-
-
-
-        ContenedorMenu menu = new ContenedorMenu(stage);
+        stage.setTitle("Juego GPS Challenge");
+        //ContenedorMenu menu = new ContenedorMenu(stage);
+        Mapa m = new Mapa(15,15);
+        m.generarMapa();
+        MapaVista mapa = new MapaVista(m,stage);
+        stage.setResizable(false);
+        stage.setMaximized(true);
+        //ContenedorMenu menu = new ContenedorMenu(stage);
     }
 
     public static void main(String[] args) {
