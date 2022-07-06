@@ -371,24 +371,13 @@ class MapaTest {
         }
     }
 
-    //TODO: Adaptar test
-    @Disabled
-    public void LaCeldaMetaSiempreSeSorteaEnELPrimerCuartoDelMapa(){/*
-        Mapa mapa = new Mapa(20,20);
+    @Test
+    public void laCeldaMetaSiempreSeSorteaEnELPrimerCuartoDelMapa(){
+        Mapa mapa = new Mapa(6,6);
         mapa.generarMapa();
-        //Celda celda = mapa.getMeta();
+        Integer meta = mapa.sortearIndiceMeta();
 
-        Coordenada coordenada = new Coordenada( (int)(20 * ( 1 - 0.25F) - 1), (int)(20 * ( 1 - 0.25F)) - 1);
-        Celda celdaMax = new CeldaInterna( new Comun() ,coordenada);
-
-        Integer distanciaX = celdaMax.distanciaHorizontal(celda);
-        Integer distanciaY = celdaMax.distanciaVertical(celda);
-
-        boolean resultado = ( distanciaX > 0);
-        assertTrue(resultado);
-        resultado = ( distanciaY > 0);
-        assertTrue(resultado);
-        */
+        assertTrue( (20 < meta && meta < 24) ||(26 < meta && meta < 30) || ( 32 < meta && meta < 36));
     }
 
     @Test
@@ -437,15 +426,5 @@ class MapaTest {
         Celda jugador2 = mapa.getCeldaJugador();
 
         assertEquals(jugador1,jugador2);
-    }
-    @Test
-    public void laMetaSeSorteaUnaUnicaVez(){/*
-        Mapa mapa = new Mapa(3,3);
-        mapa.generarMapa();
-        Celda meta1 = mapa.getMeta();
-        Celda meta2 = mapa.getMeta();
-
-        assertEquals(meta1,meta2);
-        */
     }
 }

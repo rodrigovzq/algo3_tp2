@@ -21,4 +21,10 @@ public class Meta implements IEstadoCelda{
     public String imprimir() {
         return "META";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
+
 }

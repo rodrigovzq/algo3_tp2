@@ -41,6 +41,10 @@ class EstadoCeldaTest {
         estadoCelda = EstadoCelda.crearDesdeString(estado);
         assertEquals( new CambioVehiculo(), estadoCelda );
 
+        estado = "meta";
+        estadoCelda = EstadoCelda.crearDesdeString(estado);
+        assertEquals( new Meta(), estadoCelda );
+
         assertThrows( EstadoCeldaInvalido.class, ()->EstadoCelda.crearDesdeString("Controlpolicial"));
     }
 

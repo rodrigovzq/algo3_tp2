@@ -221,7 +221,7 @@ public class Mapa extends Observable implements Imprimible {
         return getCelda(new Coordenada(columna, fila));
     }
 
-    private Integer sortearIndiceMeta() {
+    public Integer sortearIndiceMeta() {
         Integer fila = (int) (this.altura * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         Integer columna = (int) (this.ancho * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         return fila * this.ancho + columna;
