@@ -79,7 +79,7 @@ public class MapaVista implements Observador {
         panelGlobal.prefHeightProperty().bind(stage.heightProperty());
         panelGlobal.prefWidthProperty().bind(stage.widthProperty());
         panelGlobal.setBackground(new Background(new BackgroundFill(Color.web("#24333e"), new CornerRadii(0), new Insets(0))));
-        //dibujar();
+        dibujar();
         stage.setScene(new Scene(panelGlobal, 435, 472));
         stage.show();
     }
@@ -105,7 +105,7 @@ public class MapaVista implements Observador {
 
     public void agregarVistaEnMapa(Image icono, Coordenada coordenada) {
         GraphicsContext contexto = figuras.getGraphicsContext2D();
-        contexto.drawImage(icono, 52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), 25, 25);
+        contexto.drawImage(icono, 52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), 23, 23);
     }
 
     public void limpiarRectangulo(Coordenada coordenada, double ancho, double alto) {
@@ -117,13 +117,13 @@ public class MapaVista implements Observador {
         puntaje.actualizar(movimientos);
     }
 
-    public void dibujar() {
+     private void dibujar() {
         GraphicsContext contexto = figuras.getGraphicsContext2D();
         for (int i = 0; i < mapa.getAncho(); i++) {
             for (int j = 0; j < mapa.getAltura(); j++) {
                 Celda celda = mapa.getCelda(new Coordenada(i, j));
-                if (celda.imprimir() != EstadoCelda.COMUN.name()) {
-                    Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.imprimir() + ".png");
+                if (celda.getEstadoCelda() != EstadoCelda.COMUN.name()) {
+                    Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.getEstadoCelda() + ".png");
                     contexto.drawImage(icono, 52.5 * (i + 1), 49 * (j + 1), 20, 20); // TODO: AJUSTAR ESTOS VALORES
                 }
             }
@@ -132,8 +132,8 @@ public class MapaVista implements Observador {
 
     public void redibujarEn(Coordenada coordenada) {
         Celda celda = mapa.getCelda(coordenada);
-        if (celda.imprimir() != EstadoCelda.COMUN.name()) {
-            Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.imprimir() + ".png");
+        if (celda.getEstadoCelda() != EstadoCelda.COMUN.name()) {
+            Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.getEstadoCelda() + ".png");
             GraphicsContext contexto = figuras.getGraphicsContext2D();
 
             contexto.drawImage(icono, 52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), 20, 20); // TODO: AJUSTAR ESTOS VALORESs

@@ -283,6 +283,7 @@ public class Mapa extends Observable implements Imprimible {
 
     public void setEstadosMapa() {
         setEstadosMapa(this.sortearEstadosMapa());
+        notificarATodos();
     }
 
     private boolean esCeldaInterna(Coordenada coordenada) {
@@ -355,7 +356,6 @@ public class Mapa extends Observable implements Imprimible {
         this.posicionJugador = posicion;
         return posicion;
     }
-
 
     @Override
     public boolean equals(Object o) {

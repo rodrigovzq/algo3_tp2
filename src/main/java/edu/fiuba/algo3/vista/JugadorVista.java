@@ -30,7 +30,7 @@ public class JugadorVista implements Observador {
     }
 
     public void moverJugador() {
-        mapa.limpiarRectangulo(posicion, 25, 25);
+        mapa.limpiarRectangulo(posicion, 27, 25);
         mapa.redibujarEn(posicion);
         dibujarVehiculo();
         posicion = jugador.getPosicion();

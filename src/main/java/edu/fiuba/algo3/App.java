@@ -41,7 +41,7 @@ public class App extends Application {
         //ContenedorMenu menu = new ContenedorMenu(stage);
         Mapa m = new Mapa(25,16);
         m.generarMapa();
-        m.
+        m.setEstadosMapa();
         Jugador j = new Jugador("Jugador 1", m.getCeldaJugador(), new Moto());
         PorcionMapaVista p = new PorcionMapaVista(m, j);
         MapaVista mapa = new MapaVista(m,p,stage);
