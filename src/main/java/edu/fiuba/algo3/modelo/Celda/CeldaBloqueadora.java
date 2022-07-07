@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 
 public class CeldaBloqueadora extends Celda {
+    //TODO: Ojo con los valores default.
     public CeldaBloqueadora() {
         super(new Comun() , new Coordenada( 100, 100 ));
     }

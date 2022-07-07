@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.vista.PantallasPrincipales;
 
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
-import edu.fiuba.algo3.controlador.Musica.Musica;
 import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;
-import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorAuto;
-import edu.fiuba.algo3.controlador.iniciarJuegoControlador;
+import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorVehiculo;
+import edu.fiuba.algo3.controlador.IniciarJuegoControlador;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
@@ -28,7 +27,6 @@ import java.util.List;
 import static javafx.scene.paint.Color.*;
 
 public class ContenedorConfiguracion {
-
     private final static Pair<String, String> EMPTY_PAIR = new Pair<>("", "");
     private final ComboBox<Pair<String, String>> account = new ComboBox<>();
     private Mapa mapaJuego;
@@ -43,24 +41,21 @@ public class ContenedorConfiguracion {
 
     Button botonCancelar = new Button("Cancelar");
     Button botonJugar = new Button("Jugar");
-    Button boton10X20 = new Button("10x20");
-    Button boton20X30 = new Button("20X30");
-    Button boton30X30 = new Button("30X30");
-    Button boton30X40 = new Button("30X40");
+    Button boton10x10 = new Button("10x10");
+    Button boton20x10 = new Button("20X10");
+    Button boton30x10 = new Button("30X10");
+    Button boton30x16 = new Button("30X16");
     HBox listaVehiculo;
 
 
 
     public ContenedorConfiguracion(Stage stage) {
-
-
-
         this.stage = stage;
         //Valor default de mapa.
-        this.mapaJuego = new Mapa(2,2);
+        this.mapaJuego = new Mapa(10,10);
         this.mapaJuego.generarMapa();
         //Valor default del jugador.
-        this.jugador = new Jugador("", mapaJuego.sortearCeldaJugador(), new Auto());
+        this.jugador = new Jugador("DefaultName", null , new Auto());
         this.iniciar();
 
         //TODO: ¿Que pasa si el usuario no elije nada y va directo a jugar?
@@ -72,10 +67,8 @@ public class ContenedorConfiguracion {
 
 
     private void iniciar(){
-
-
         //Se genera el mapa, le sortea una celda al jugador y DEBERIA cambiar la ventana a la del juego.
-        botonJugar.setOnAction( new iniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
+        botonJugar.setOnAction( new IniciarJuegoControlador( this.stage, this.jugador, this.mapaJuego ));
         botonCancelar.setOnAction( e -> new ContenedorMenu( this.stage )  );//cambio de vista.
 
         inicializarAparienciaLabelsPrincipal(nombre);
@@ -91,10 +84,10 @@ public class ContenedorConfiguracion {
 
         listaVehiculo = emitirListaDeOpciones();
 
-        inicializarAparienciaBotonesMapas(boton10X20);
-        inicializarAparienciaBotonesMapas(boton20X30);
-        inicializarAparienciaBotonesMapas(boton30X30);
-        inicializarAparienciaBotonesMapas(boton30X40);
+        inicializarAparienciaBotonesMapas(boton10x10);
+        inicializarAparienciaBotonesMapas(boton20x10);
+        inicializarAparienciaBotonesMapas(boton30x10);
+        inicializarAparienciaBotonesMapas(boton30x16);
 
         controlBotonesMapa(); //CUIDADO: falta ver la forma de solo escoger un solo boton del mapa
         iniciarTabulacionesDeLosBoxs();
@@ -113,38 +106,38 @@ public class ContenedorConfiguracion {
          * se genera recien cuando el usuario clickea "Jugar".
          * */
 
-        boton10X20.setOnMousePressed(new EventHandler<MouseEvent>() {
+        boton10x10.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                boton10X20.setOnAction(new SelectorMapa(mapaJuego, 10 ,20 ));
-                boton10X20.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
+                boton10x10.setOnAction(new SelectorMapa(mapaJuego, 10 ,10 ));
+                boton10x10.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
             }
         });
 
-        boton20X30.setOnMousePressed(new EventHandler<MouseEvent>() {
+        boton20x10.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                boton20X30.setOnAction(new SelectorMapa(mapaJuego, 20 ,30 ));
-                boton20X30.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
+                boton20x10.setOnAction(new SelectorMapa(mapaJuego, 20 ,10 ));
+                boton20x10.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
             }
         });
 
-        boton30X30.setOnMousePressed(new EventHandler<MouseEvent>() {
+        boton30x10.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                boton30X30.setOnAction(new SelectorMapa(mapaJuego, 30 ,30 ));
-                boton30X30.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
+                boton30x10.setOnAction(new SelectorMapa(mapaJuego, 10 ,30 ));
+                boton30x10.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
             }
         });
 
-        boton30X40.setOnMousePressed(new EventHandler<MouseEvent>() {
+        boton30x16.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                boton30X40.setOnAction(new SelectorMapa(mapaJuego, 30 ,40 ));
-                boton30X40.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
+                boton30x16.setOnAction(new SelectorMapa(mapaJuego, 30 ,16 ));
+                boton30x16.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
 
             }
         });
@@ -165,18 +158,18 @@ public class ContenedorConfiguracion {
         rootNombreJugador.setAlignment(Pos.CENTER);
         rootVehiculos.getChildren().add(listaVehiculo);
         rootVehiculos.setAlignment(Pos.CENTER);
-        rootBotonesDeVeinte.getChildren().addAll(boton10X20, boton20X30);
+        rootBotonesDeVeinte.getChildren().addAll(boton10x10, boton20x10);
         rootBotonesDeVeinte.setAlignment(Pos.CENTER);
-        rootBotonesDeTreinta.getChildren().addAll(boton30X30, boton30X40);
+        rootBotonesDeTreinta.getChildren().addAll(boton30x10, boton30x16);
         rootBotonesDeTreinta.setAlignment(Pos.CENTER);
         rootBotonesLaterales.getChildren().addAll(botonCancelar, botonJugar);
         rootVertical.getChildren().addAll(rootNombreJugador,rootVehiculos,mapa,rootBotonesDeVeinte,rootBotonesDeTreinta,rootBotonesLaterales);
         rootVertical.setAlignment(Pos.CENTER);
 
-        HBox.setMargin(boton10X20,new Insets(10,10,10,10));
-        HBox.setMargin(boton20X30,new Insets(15,10,10,10));
-        HBox.setMargin(boton30X30,new Insets(15,10,10,10));
-        HBox.setMargin(boton30X40,new Insets(15,10,10,10));
+        HBox.setMargin(boton10x10,new Insets(10,10,10,10));
+        HBox.setMargin(boton20x10,new Insets(15,10,10,10));
+        HBox.setMargin(boton30x10,new Insets(15,10,10,10));
+        HBox.setMargin(boton30x16,new Insets(15,10,10,10));
         HBox.setMargin(botonCancelar,new Insets(10,100,10,10));
         HBox.setMargin(botonJugar,new Insets(10,10,10,350));
 
@@ -207,7 +200,6 @@ public class ContenedorConfiguracion {
         label.setTextFill(WHITE);
     }
 
-    //CUIDADO: hay que verificar si la funcionalidad anterior (está en la linea 236) es coherente con este modelo
     private HBox emitirListaDeOpciones() {
 
         Menu fileMenu = new Menu("Vehiculo");
@@ -231,47 +223,22 @@ public class ContenedorConfiguracion {
                 System.out.println("No hay ningún elemento seleccionado");
             } else {
                 System.out.println("guardando " + account.getValue());
-                // Basicamente cada selector sabe como inicializar el vehiculo del jugador
-                // y modificar el texto de fileMenu.
-                new SelectorAuto( fileMenu, this.jugador);
+
+                String seleccionado = account.getValue().getValue();
+                EventHandler handler = new SelectorVehiculo( fileMenu, seleccionado , this.jugador);
+                handler.handle(evt);
             }
         });
 
         return hbox;
-
-        // Basicamente cada selector sabe como inicializar el vehiculo del jugador
-        // y modificar el texto de fileMenu.
-        /*SelectorVehiculo selectorItem1 = new SelectorAuto( fileMenu, this.jugador);
-        SelectorVehiculo selectorItem2 = new SelectorMoto( fileMenu, this.jugador);
-        SelectorVehiculo selectorItem3 = new SelectorCuatroPorCuatro( fileMenu, this.jugador);
-
-        MenuItem item1 = new MenuItem("Auto");
-        item1.setOnAction( selectorItem1 );
-
-        MenuItem item2 = new MenuItem("Moto");
-        item2.setOnAction( selectorItem2 );
-
-        MenuItem item3 = new MenuItem("4 X 4");
-        item3.setOnAction( selectorItem3 );
-
-        fileMenu.getItems().addAll(item1, item2, item3);
-        MenuBar menuBar = new MenuBar(fileMenu);
-
-        menuBar.setTranslateX(200);
-        menuBar.setTranslateY(20);
-
-        Group root = new Group(menuBar);
-        return root;*/
-
-
     }
     private void iniciarCombo() {
 
         List<Pair<String,String>> accounts = new ArrayList<>();
 
-        accounts.add( new Pair<>("Auto", "AUTO") );
-        accounts.add( new Pair<>("Moto", "MOTO") );
-        accounts.add( new Pair<>("4X4", "CXC") );
+        accounts.add( new Pair<>("Auto", "Auto") );
+        accounts.add( new Pair<>("Moto", "Moto") );
+        accounts.add( new Pair<>("4X4", "CuatroPorCuatro") );
 
         account.getItems().add( EMPTY_PAIR );
         account.getItems().addAll( accounts );

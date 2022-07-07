@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.Lector;
 
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,13 +15,12 @@ public class LectorScanner implements Lector{
     //TODO: Lector interface
     public LectorScanner(String pathFile) {
         this.file = new File( pathFile );
-        this.crearNuevoArchivo(); //Lo creo aunque ya exista.
         try {
             this.lectora = new Scanner(this.file);
         } catch (FileNotFoundException e) {
-            System.out.println("Lectura: problema al cargar el archivo.");
-
+            throw new ArchivoInexistente();
         }
+
     }
     @Override
     public String leerLinea() {
@@ -27,6 +29,17 @@ public class LectorScanner implements Lector{
        }else{
            return "";
        }
+    }
+
+    @Override
+    public String leerTodoElArchivo(){
+        String resultado = "";
+        String linea = leerLinea();
+        while( !linea.equals("") ){
+            resultado += linea + "\n";
+            linea = leerLinea();
+        }
+        return resultado;
     }
 
     private boolean crearNuevoArchivo(){

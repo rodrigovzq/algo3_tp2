@@ -2,17 +2,20 @@ package edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.Vehiculo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 
-public abstract class SelectorVehiculo implements EventHandler<ActionEvent> {
+public class SelectorVehiculo implements EventHandler<ActionEvent> {
     private final Menu lista;
     private final Jugador jugador;
+    private IVehiculo vehiculo;
 
-    public SelectorVehiculo(Menu lista, Jugador jugador ) {
+    public SelectorVehiculo(Menu lista, String vehiculoSeleccionado, Jugador jugador ) {
         this.lista = lista;
         this.jugador = jugador;
+        this.vehiculo = Vehiculo.crearVehiculoDesdeString(vehiculoSeleccionado);
     }
 
     public void actualizarMenu( IVehiculo v){
@@ -22,5 +25,10 @@ public abstract class SelectorVehiculo implements EventHandler<ActionEvent> {
     public void actualizarVehiculo( IVehiculo v){
         this.jugador.setVehiculo( v );
         this.actualizarMenu( v );
+    }
+
+    @Override
+    public void handle(ActionEvent actionEvent) {
+        this.actualizarVehiculo( this.vehiculo );
     }
 }

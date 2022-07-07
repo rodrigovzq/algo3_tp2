@@ -1,13 +1,14 @@
 package edu.fiuba.algo3.modelo.Sorpresa;
 
-import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.AumentoPorcentaje;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
-public class Desfavorable implements EstadoCelda {
+public class Desfavorable implements ISorpresa {
     private final float PORCENTAJE = 25.0F;
 
     @Override
@@ -18,4 +19,12 @@ public class Desfavorable implements EstadoCelda {
     public String imprimir() {
         return Sorpresa.DESFAVORABLE.name();
     }
+    @Override
+    public boolean equals(Object obj) {
+        return ( obj != null && ( this == obj || this.getClass() == obj.getClass() ));
+    }
+
+
+    @Override
+    public IEstadoCelda siguiente(){ return new Comun();}
 }

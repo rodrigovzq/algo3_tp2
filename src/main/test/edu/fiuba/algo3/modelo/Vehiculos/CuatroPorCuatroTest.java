@@ -1,4 +1,4 @@
-package UnitTest.Vehiculos;
+package edu.fiuba.algo3.modelo.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.NoCambiarPuntaje;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
-import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import org.junit.jupiter.api.Test;
@@ -80,15 +80,47 @@ class CuatroPorCuatroTest {
         assertEquals(esperado, resultado);
     }
     @Test
-    public void anteUnCambioDeVehiculoSecuencialElAutoSeConvierteEnCuatroPorCuatro(){
-        Auto auto = new Auto();
+    public void anteUnCambioDeVehiculoSecuencialElAutoSeConvierteEnMoto(){
+        CuatroPorCuatro cxc = new CuatroPorCuatro();
 
-        assertEquals( new CuatroPorCuatro(), auto.siguiente());
+        assertEquals( new Moto(), cxc.siguiente());
     }
 
     @Test
     public void esImprimible(){
         CuatroPorCuatro cxc = new CuatroPorCuatro();
-        assertEquals("4x4", cxc.imprimir());
+        assertEquals("CuatroPorCuatro", cxc.imprimir());
+    }
+
+    @Test
+    public void laProbabilidadDeSerDetenidoPorUnControlPolicialEsObtenible() {
+        CuatroPorCuatro cxc = new CuatroPorCuatro();
+
+        Float resultado = cxc.obtenerProbabilidadDeSerDetenido();
+        Float esperado = 0.3F;
+
+        assertEquals(esperado, resultado);
+    }
+
+    @Test
+    public void dosAutosSonIgualesConSerDeLaMismaClase() {
+        CuatroPorCuatro cxc1 = new CuatroPorCuatro();
+        CuatroPorCuatro cxc2 = new CuatroPorCuatro();
+
+        assertEquals(cxc1, cxc2);
+        assertEquals(cxc1, cxc1);
+
+        cxc2 = null;
+        assertNotEquals(cxc1, cxc2);
+    }
+
+    @Test
+    public void avanzarSobreUnControlPolicialSignificaSerDetenidoYPenalizaTresMovimientos() {
+        CuatroPorCuatro cxc = new CuatroPorCuatro();
+
+        Evento resultado = cxc.avanzarControlPolicial();
+        Evento esperado =  new Evento( new Penalizacion(3),new NoCambiarVehiculo(), new Avanzar());
+
+        assertEquals(esperado, resultado);
     }
 }

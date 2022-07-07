@@ -8,6 +8,8 @@ import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.EventoVehiculo;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
+import java.util.Objects;
+
 public class Evento {
     private EventoPuntaje eventoPuntaje;
     private EventoVehiculo eventoVehiculo;
@@ -39,4 +41,6 @@ public class Evento {
     public void setDireccion(Direccion direccion) {
         eventoPosicion.setDireccion(direccion);
     }
+
+
 }

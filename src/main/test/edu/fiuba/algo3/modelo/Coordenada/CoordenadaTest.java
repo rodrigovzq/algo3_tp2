@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.CoordenadaInvalida;
+import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Excepcion.PosicionInvalida;
 import org.junit.jupiter.api.Test;
 
@@ -68,8 +69,8 @@ class CoordenadaTest {
         esperado = new Coordenada(0,0);
         assertEquals(esperado, coord);
 
-        assertThrows( PosicionInvalida.class, () -> coord.mover(Direccion.NORTE));
-        assertThrows( PosicionInvalida.class, () -> coord.mover(Direccion.OESTE));
+        assertThrows( CoordenadaInvalida.class, () -> coord.mover(Direccion.NORTE));
+        assertThrows( CoordenadaInvalida.class, () -> coord.mover(Direccion.OESTE));
     }
     @Test
     public void creoUnaCoordenadaYEsCapazDeReconocerSiEsUnaEsquinaPasandoleElTamanioDelMapa(){
@@ -233,4 +234,52 @@ class CoordenadaTest {
             }
         }
     }
+
+    @Test
+    public void esCapazDeDeterminarQueEsquinaEsConPasarleElTamañoDelMapa(){
+        Coordenada coordenada = new Coordenada(0,0);
+
+        Direccion esquina = coordenada.determinarEsquina(3,3);
+        Direccion esperado = Direccion.NOROESTE;
+        assertEquals( esperado, esquina);
+
+        esquina = coordenada.determinarEsquina(30,30);
+        esperado = Direccion.NOROESTE;
+        assertEquals( esperado, esquina);
+
+        coordenada = new Coordenada(29,0);
+
+        esquina = coordenada.determinarEsquina(30,30);
+        esperado = Direccion.NORESTE;
+        assertEquals( esperado, esquina);
+
+        assertThrows( DireccionInvalida.class, () -> {
+            Coordenada coord = new Coordenada(29,0);
+            coord.determinarEsquina(31, 31);
+        });
+
+        coordenada = new Coordenada(0,29);
+
+        esquina = coordenada.determinarEsquina(30,30);
+        esperado = Direccion.SUDOESTE;
+        assertEquals( esperado, esquina);
+
+        assertThrows( DireccionInvalida.class, () -> {
+            Coordenada coord = new Coordenada(0,29);
+            coord.determinarEsquina(31, 31);
+        });
+
+        coordenada = new Coordenada(29,29);
+
+        esquina = coordenada.determinarEsquina(30,30);
+        esperado = Direccion.SUDESTE;
+        assertEquals( esperado, esquina);
+
+        assertThrows( DireccionInvalida.class, () -> {
+            Coordenada coord = new Coordenada(29,29);
+            coord.determinarEsquina(31, 31);
+        });
+
+    }
+
 }

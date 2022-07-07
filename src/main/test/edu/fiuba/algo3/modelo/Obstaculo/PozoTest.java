@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Obstaculo;
 
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import org.junit.jupiter.api.Test;
 
@@ -24,4 +25,11 @@ class PozoTest {
         verify(mockVehiculo).avanzarPozo();
     }
 
+    @Test
+    public void alPedirElSiguienteSeDevuelveAsiMismo(){
+        Piquete obstaculo = new Piquete();
+        IEstadoCelda estado = obstaculo.siguiente();
+
+        assertEquals( obstaculo, estado );
+    }
 }

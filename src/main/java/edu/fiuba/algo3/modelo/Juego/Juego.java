@@ -1,41 +1,40 @@
 package edu.fiuba.algo3.modelo.Juego;
 
+import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Impresora.Impresora;
 import edu.fiuba.algo3.modelo.Impresora.ImpresoraFile;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Lector.Lector;
-import edu.fiuba.algo3.modelo.Lector.LectorScanner;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
-import edu.fiuba.algo3.modelo.Observable;
 import edu.fiuba.algo3.modelo.Observador;
+import edu.fiuba.algo3.modelo.Ranking.Ranking;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO: Inutil
 public class Juego implements Observador {
-
-    private Lector lector;
+    public static final String PATH_MAPA_TXT = "saves/mapa.txt";
+    public static final String PATH_JUGADOR_TXT = "saves/jugador.txt";
+    public static final String PATH_RANKING_TXT = "saves/ranking.txt";
     private Impresora impresora;
     private final Jugador jugador;
     private final Ranking ranking;
+    private final Mapa mapa;
 
-    public Juego( Jugador jugador) {
+    public Juego( Jugador jugador, Mapa mapa, Ranking ranking) {
         this.jugador = jugador;
-        this.impresora = new ImpresoraFile("saves/ranking.txt");
-        this.lector = new LectorScanner("saves/ranking.txt");
-        List<String> lista = this.lecturaPuntaje();
-        this.ranking = new Ranking(lista);
+        this.ranking = ranking;
+        this.mapa = mapa;
+
+        this.jugador.setPosicion( this.mapa.getCeldaJugador() );
     }
 
-    private List<String> lecturaPuntaje() {
-        String puntaje;
-        List<String> lista = new ArrayList<String>();
-        do {
-            puntaje = this.lector.leerLinea();
-            lista.add(puntaje);
-        }while( puntaje != "" );
+    public Jugador getJugador() {
+        return jugador;
+    }
 
-        return lista;
+    public Mapa getMapa() {
+        return mapa;
     }
 
     //Al llegar a la meta, se le notifica que debe agregar al jugador.
@@ -46,22 +45,23 @@ public class Juego implements Observador {
     }
 
     private void guardarRanking() {
-        this.impresora = new ImpresoraFile("saves/ranking.txt");
+        this.impresora = new ImpresoraFile(PATH_RANKING_TXT);
         this.impresora.imprimir( ranking );
     }
 
-    public void guardarMapa(){
-        this.impresora = new ImpresoraFile("saves/mapa.txt");
-    }
-    public void guardarJugador(){
-        this.impresora = new ImpresoraFile("saves/jugador.txt");
-        this.impresora.imprimir( jugador );
-    }
-    //TODO: ¿O es más correcto que el juego tenga una instancia del Mapa?
-    public void guardarMapa( Mapa mapa ){
-        this.impresora = new ImpresoraFile("saves/jugador.txt");
+    private void guardarMapa(){
+        this.impresora = new ImpresoraFile(PATH_MAPA_TXT);
         this.impresora.imprimir( mapa );
     }
+    public void guardarJugador(){
+        this.impresora = new ImpresoraFile(PATH_JUGADOR_TXT);
+        this.impresora.imprimir( jugador );
+    }
 
+    public void guardarPartida(){
+        guardarJugador();
+        guardarMapa();
+        guardarRanking();
+    }
     //TODO: Guardar meta!!
 }

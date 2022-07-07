@@ -2,14 +2,15 @@ package edu.fiuba.algo3.modelo.Celda;
 
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
-import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
+import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
 import edu.fiuba.algo3.modelo.Obstaculo.Pozo;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.Vehiculo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class CeldaInternaTest {
     @Test
@@ -57,7 +58,7 @@ class CeldaInternaTest {
 
         assertEquals(celda, norte.getCelda( Direccion.SUR ) );
         assertEquals(celda, sur.getCelda( Direccion.NORTE ) );
-        assertEquals(celda, este .getCelda( Direccion.OESTE ) );
+        assertEquals(celda, este.getCelda( Direccion.OESTE ) );
         assertEquals(celda, oeste.getCelda( Direccion.ESTE ) );
     }
 
@@ -93,7 +94,7 @@ class CeldaInternaTest {
     @Test
     public void esImprimible(){
         Coordenada mockCoordenada = mock( Coordenada.class );
-        EstadoCelda mockEstadoCelda = mock( EstadoCelda.class );
+        IEstadoCelda mockEstadoCelda = mock( IEstadoCelda.class );
         Celda celda = new CeldaInterna( mockEstadoCelda, mockCoordenada );
 
         when(mockEstadoCelda.imprimir()).thenReturn("MOCK_ESTADO_CELDA");
@@ -103,5 +104,69 @@ class CeldaInternaTest {
 
         assertEquals(esperado, resultado);
     }
+
+
+    @Test
+    public void elCalculoDeLaDistanciaEntreCeldasEsDelegadoACoordenada(){
+        Coordenada mockCoordenada = mock( Coordenada.class );
+        IEstadoCelda mockEstadoCelda = mock( IEstadoCelda.class );
+        Celda celda1 = new CeldaInterna( mockEstadoCelda, mockCoordenada );
+        Celda celda2 = new CeldaInterna( mockEstadoCelda, mockCoordenada );
+
+        celda1.distanciaHorizontal(celda2);
+        celda1.distanciaVertical(celda2);
+
+        verify(mockCoordenada).distanciaHorizontal(mockCoordenada);
+        verify(mockCoordenada).distanciaVertical(mockCoordenada);
+
+    }
+    @Test
+    public void elEstadoEsExternamenteSeteable(){
+        Coordenada mockCoordenada = mock( Coordenada.class );
+        IEstadoCelda mockEstadoCelda1 = mock( IEstadoCelda.class );
+        Celda celda1 = new CeldaInterna( mockEstadoCelda1, mockCoordenada );
+
+        IEstadoCelda mockEstadoCelda2 = mock( IEstadoCelda.class );
+        celda1.setEstado(mockEstadoCelda2);
+
+        assertEquals( new CeldaInterna( mockEstadoCelda2, mockCoordenada), celda1);
+    }
+
+    @Test
+    public void paraAvanzarAUnaCeldaAdyacenteDelegaAlEstadoCelda(){
+            Coordenada mockCoordenada = mock( Coordenada.class );
+            IEstadoCelda mockEstadoCelda = mock( IEstadoCelda.class );
+            IVehiculo mockVehiculo = mock(IVehiculo.class);
+            Celda celda1 = new CeldaInterna( mockEstadoCelda, mockCoordenada );
+
+            celda1.avanzarEn( mockVehiculo );
+            verify(mockEstadoCelda).avanzarEn(mockVehiculo);
+    }
+
+    @Test
+    public void elEstadoCeldaEsObtenibleEnFormaDeString(){
+        IEstadoCelda mockEstado = mock( IEstadoCelda.class );
+        Coordenada mockCoordenada = mock( Coordenada.class );
+        when( mockEstado.imprimir() ).thenReturn( "EstadoCelda" );
+        Celda celda = new CeldaInterna( mockEstado, mockCoordenada );
+
+        String resultado = celda.getEstadoCelda();
+        String esperado = "EstadoCelda";
+
+        assertEquals(esperado, resultado);
+
+    }
+
+    @Test
+    public void laCoordenadaEsObtenible(){
+        IEstadoCelda mockEstado = mock( IEstadoCelda.class );
+        Coordenada mockCoordenada = mock( Coordenada.class );
+        Celda celda = new CeldaInterna( mockEstado, mockCoordenada );
+
+        Coordenada resultado = celda.getCoordenada();
+
+        assertEquals(mockCoordenada, resultado);
+    }
+
 
 }

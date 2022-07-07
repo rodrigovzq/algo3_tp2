@@ -7,7 +7,7 @@ import edu.fiuba.algo3.vista.Ventanas.VentanaPopUp;
 
 public class ContenedorInstrucciones {
     public static void mostrar(){
-        VentanaPopUp.mostrar("Intrucciones", "Para moverte usá las teclas mayúsculas: W,A,S,D");
+        VentanaPopUp.mostrar("Instrucciones", "Para moverte usá las teclas mayúsculas: W,A,S,D");
 
     }
 }

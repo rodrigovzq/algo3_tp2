@@ -13,8 +13,8 @@ public class Moto implements IVehiculo {
 
     private final Integer PENALIZACION_POZO = 3;
     private final Integer PENALIZACION_PIQUETE = 2;
-    private static final Float PROBABILIDAD_DE_SER_DEMORADO = 0.8f;
-    private static final Integer PENALIZACION_CONTROL_POLICIAL = 3;
+    private final Float PROBABILIDAD_DE_SER_DEMORADO = 0.8f;
+    private final Integer PENALIZACION_CONTROL_POLICIAL = 3;
     @Override
     public  Evento avanzarComun() {
         return new Evento( new SinPenalizar(),new NoCambiarVehiculo(), new Avanzar());
@@ -24,12 +24,10 @@ public class Moto implements IVehiculo {
     public  Evento avanzarPiquete() {
         return new Evento( new Penalizacion(PENALIZACION_PIQUETE),new NoCambiarVehiculo(), new Avanzar());
     }
-
     @Override
     public  Evento avanzarControlPolicial() {
         return new Evento(new Penalizacion(PENALIZACION_CONTROL_POLICIAL), new NoCambiarVehiculo(), new Avanzar());
     }
-
     @Override
     public IVehiculo siguiente() {
         return new Auto();
@@ -51,13 +49,9 @@ public class Moto implements IVehiculo {
     }
 
     public boolean equals(Object o){
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        return true;
+        if( o == null) return false;
+        if (this == o || getClass() == o.getClass()) return true;
+        return false;
     }
 
-    @Override
-    public String toString() {
-        return "Moto";
-    }
 }

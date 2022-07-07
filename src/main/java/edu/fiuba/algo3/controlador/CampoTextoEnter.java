@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Parser.ParserJugador;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -28,7 +29,6 @@ public class CampoTextoEnter implements EventHandler<KeyEvent> {
             }else {
                 jugador.setNombre( campoTexto.getText() );
                 campoTexto.setStyle("-fx-text-inner-color: #7d9707;");
-
             }
         }
     }

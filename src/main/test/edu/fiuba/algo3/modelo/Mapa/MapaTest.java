@@ -10,11 +10,14 @@ import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.*;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.Observador;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 class MapaTest {
     @Test
@@ -371,34 +374,12 @@ class MapaTest {
     }
 
     @Test
-    public void LaCeldaMetaSiempreSeSorteaEnELPrimerCuartoDelMapa(){
-        Mapa mapa = new Mapa(20,20);
+    public void laCeldaMetaSiempreSeSorteaEnELPrimerCuartoDelMapa(){
+        Mapa mapa = new Mapa(6,6);
         mapa.generarMapa();
-        Celda celda = mapa.sortearMeta();
+        Integer meta = mapa.sortearIndiceMeta();
 
-        Coordenada coordenada = new Coordenada( (int)(20 * ( 1 - 0.25F) - 1), (int)(20 * ( 1 - 0.25F)) - 1);
-        Celda celdaMax = new CeldaInterna( new Comun() ,coordenada);
-
-        Integer distanciaX = celdaMax.distanciaHorizontal(celda);
-        Integer distanciaY = celdaMax.distanciaVertical(celda);
-
-        boolean resultado = ( distanciaX > 0);
-        assertTrue(resultado);
-        resultado = ( distanciaY > 0);
-        assertTrue(resultado);
-
-        //Repito el test
-        for( int i = 0; i < 10; i++) {
-            celda = mapa.sortearMeta();
-            distanciaX = celdaMax.distanciaHorizontal(celda);
-            distanciaY = celdaMax.distanciaVertical(celda);
-
-            resultado = (distanciaX > 0);
-            assertTrue(resultado);
-            resultado = (distanciaY > 0);
-            assertTrue(resultado);
-        }
-
+        assertTrue( (20 < meta && meta < 24) ||(26 < meta && meta < 30) || ( 32 < meta && meta < 36));
     }
 
     @Test
@@ -409,7 +390,7 @@ class MapaTest {
         //TODO: ¿Como vamos a identificar en el archivo de texto donde tenemos la meta?
         //Una solución va a ser ponerlo como atributo del juego.
         String resultado = mapa.imprimir();
-        String esperado = "3,3;\n";
+        String esperado = "3x3;\n";
 
         for(int i = 0; i < 3; i++){
             esperado += "COMUN-COMUN-COMUN;\n";
@@ -418,9 +399,50 @@ class MapaTest {
         assertEquals(esperado, resultado);
 
         //Al sortear no podemos saber que se espera imprimir.
-        mapa.sortearEstadosMapa();
+        mapa.setEstadosMapa();
 
         resultado = mapa.imprimir();
         assertNotEquals(esperado, resultado);
     }
+
+    @Test
+    public void elAnchoEsSeteable(){
+        Mapa mapa = new Mapa(3,3);
+        mapa.setAncho(4);
+
+        assertEquals(new Mapa(4,3),mapa);
+    }
+    @Test
+    public void laAlturaEsSeteable(){
+        Mapa mapa = new Mapa(3,3);
+        mapa.setAltura(4);
+
+        assertEquals(new Mapa(3,4),mapa);
+    }
+
+    @Test
+    public void laCeldaDelJugadorSeSorteaUnaUnicaVez(){
+        Mapa mapa = new Mapa(3,3);
+        mapa.generarMapa();
+        Celda jugador1 = mapa.getCeldaJugador();
+        Celda jugador2 = mapa.getCeldaJugador();
+
+        assertEquals(jugador1,jugador2);
+    }
+
+    @Test
+    public void mapaEsObservable(){
+        Mapa mapa = new Mapa(2,2);
+        Observador mockObservador = mock( Observador.class );
+
+        mapa.agregarObservador(mockObservador);
+        mapa.agregarObservador(mockObservador);
+        mapa.agregarObservador(mockObservador);
+
+        mapa.notificarATodos();
+
+        verify( mockObservador, times(3)).actualizar();
+    }
+
+
 }

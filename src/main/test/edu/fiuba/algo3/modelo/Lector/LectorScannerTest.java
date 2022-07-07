@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Lector;
 
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -25,15 +26,7 @@ class LectorScannerTest {
     @Test
     public void leoUnaLineaDeUnArchivoQueNoExiste(){
         String pathTestFile = "saves/testLecturaNoExiste.txt";
-        LectorScanner lector = assertDoesNotThrow( () -> new LectorScanner(pathTestFile) );
-
-        String texto = lector.leerLinea();
-        String esperado = "";
-
-        assertEquals(esperado, texto);
-
-        File archivoABorrar = new File( pathTestFile );
-        archivoABorrar.delete();
+        assertThrows( ArchivoInexistente.class, () -> new LectorScanner(pathTestFile) );
     }
 
 

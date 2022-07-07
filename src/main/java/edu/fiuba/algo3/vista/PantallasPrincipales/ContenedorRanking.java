@@ -8,21 +8,25 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Pair;
+
+import java.util.List;
 
 import static javafx.scene.paint.Color.*;
 
 public class ContenedorRanking {
     private Stage stage;
+    private List<Pair<String,String>> ranking;
 
-    public ContenedorRanking(Stage stage) {
+    public ContenedorRanking(Stage stage, List<Pair<String,String>> ranking) {
         this.stage = stage;
+        this.ranking = ranking;
         this.iniciar();
     }
 
     private void iniciar(){
-
-
         Label participantes = new Label();
         Label movimientos = new Label();
         Separator lineaSeparador = new Separator();
@@ -46,8 +50,17 @@ public class ContenedorRanking {
          * guardé este espacio para ver la forma de mostrar
          * el texto ponderado de los jugadores
          * */
-        HBox cajaDeTextoInformativo = new HBox();
-
+        VBox cajaDeTextoInformativo = new VBox();
+        //TODO: Emprolijar.
+        for(Pair<String,String> info : this.ranking){
+            Text nombre = new Text( info.getKey() );
+            Text puntaje = new Text( info.getValue() );
+            HBox registro = new HBox();
+            registro.getChildren().addAll(nombre, puntaje);
+            registro.setSpacing(150);
+            registro.setAlignment(Pos.CENTER);
+            cajaDeTextoInformativo.getChildren().add(registro);
+        }
 
         HBox cajaNombresPrincipales = new HBox();
         cajaNombresPrincipales.getChildren().addAll(participantes, movimientos);
@@ -66,7 +79,7 @@ public class ContenedorRanking {
          *Cuando se rellene la cajaDeTextoInformativo se debe
          *cambiar el new Insets(0.0d, 10.0d, 10.0d, 10.0d) para mayor prolijidad.
          * */
-        VBox.setMargin( cajaDeTextoInformativo, new Insets(0.0d, 10.0d, 380.0d, 10.0d) );
+        VBox.setMargin( cajaDeTextoInformativo, new Insets(0.0d, 10.0d, 10.0d, 10.0d) );
         VBox.setVgrow( cajaDeTextoInformativo, Priority.ALWAYS );
 
         cajaGlobal.getChildren().addAll(cajaNombresPrincipales, lineaSeparador, cajaDeTextoInformativo, buttomControls);
@@ -87,13 +100,13 @@ public class ContenedorRanking {
     /*
         CODIGO ANTERIOR:
 
-            // Implementar contenido de la ventana del ranking
+            // Implementar contenido de la ventana del ranking.txt
             Button botonVolverMenu = new Button( "Volver al menu.");
             botonVolverMenu.setOnAction( e -> new ContenedorMenu(this.stage) );
             VBox layout = new VBox();
             layout.getChildren().addAll(botonVolverMenu);
             layout.setAlignment(Pos.CENTER);
-            // Va a tener la lista de ranking. como diferenciamos por tamaño del mapa??
+            // Va a tener la lista de ranking.txt. como diferenciamos por tamaño del mapa??
             Scene contenido = new Scene( layout );
             this.stage.setScene( contenido );
             this.stage.show();

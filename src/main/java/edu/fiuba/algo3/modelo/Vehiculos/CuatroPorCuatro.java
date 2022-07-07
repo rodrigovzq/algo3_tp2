@@ -59,7 +59,7 @@ public class CuatroPorCuatro implements IVehiculo {
 
     @Override
     public String imprimir() {
-        return "4x4";
+        return "CuatroPorCuatro";
     }
 
     @Override
@@ -89,8 +89,4 @@ public class CuatroPorCuatro implements IVehiculo {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "4 x 4";
-    }
 }
