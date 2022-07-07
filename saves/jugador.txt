@@ -1,1 +1,1 @@
-Fer;(2,0);Auto;0
+DefaultName;(18,15);Moto;61

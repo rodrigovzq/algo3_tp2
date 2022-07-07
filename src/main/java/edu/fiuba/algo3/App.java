@@ -25,7 +25,8 @@ public class App extends Application {
     public void start(Stage stage) {
 
         stage.setTitle("Juego GPS Challenge");
-
+        stage.setMaximized(true);
+        stage.setResizable(false);
         /*
         * Para que no se pisen las musicas a la hora de
         * cambiar las ventanas se me ocurrió ponerlo tempñoralmente

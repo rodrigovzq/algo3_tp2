@@ -33,6 +33,7 @@ public class CajaMapaVista extends HBox {
         setAlignment(Pos.TOP_CENTER);
         CajaMapaVista.setMargin(botonVolverMenu, new Insets(10, 10, 10, 10));
         CajaMapaVista.setMargin(botonInstrucciones, new Insets(10, 10, 10, 10));
+        CajaMapaVista.setMargin(botonGuardar, new Insets(10, 10, 10, 10));
         CajaMapaVista.setMargin(botonSalir, new Insets(10, 10, 10, 10));
         CajaMapaVista.setMargin(puntaje, new Insets(15, 10, 10, 10));
         prefWidthProperty().bind(stage.widthProperty());

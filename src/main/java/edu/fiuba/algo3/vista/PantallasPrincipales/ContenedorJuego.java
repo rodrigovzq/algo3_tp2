@@ -40,8 +40,6 @@ public class ContenedorJuego {
         JuegoVista juegoVista = new JuegoVista(cajaMapaVista, stage);
         juegoVista.setCenter(mapaVista);
         juegoVista.setOnKeyPressed(new TecladoControlador(j));
-        stage.setResizable(false);
-        stage.setMaximized(true);
 
         stage.setScene(new Scene(juegoVista, 435, 472));
         stage.show();

@@ -33,8 +33,6 @@ public class TecladoControlador implements EventHandler<KeyEvent> {
                 jugador.actualizar(resultado);
         }catch (DireccionInvalida e){
             System.out.println("Ha alcanzado uno de los bordes del mapa, no puede avanzar.");
-        }catch (Exception e){
-            System.out.println("Que?");
         }
 
     }
