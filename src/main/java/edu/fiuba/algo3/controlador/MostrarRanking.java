@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controlador;
 
+import edu.fiuba.algo3.modelo.Juego.Juego;
 import edu.fiuba.algo3.modelo.Parser.ParserRanking;
 import edu.fiuba.algo3.modelo.Ranking.Puntaje;
 import edu.fiuba.algo3.modelo.Ranking.Ranking;
@@ -21,7 +22,7 @@ public class MostrarRanking implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        ParserRanking parser = new ParserRanking("saves/ranking.txt");
+        ParserRanking parser = new ParserRanking(Juego.PATH_RANKING_TXT);
         parser.parsear();
         Ranking ranking = parser.getEntidadParseada();
         List<Puntaje> top10 = ranking.devolverListaDeLosPrimeros( 10 );

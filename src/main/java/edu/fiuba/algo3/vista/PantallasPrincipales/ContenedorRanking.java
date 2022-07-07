@@ -79,7 +79,7 @@ public class ContenedorRanking {
          *Cuando se rellene la cajaDeTextoInformativo se debe
          *cambiar el new Insets(0.0d, 10.0d, 10.0d, 10.0d) para mayor prolijidad.
          * */
-        VBox.setMargin( cajaDeTextoInformativo, new Insets(0.0d, 10.0d, 300.0d, 10.0d) );
+        VBox.setMargin( cajaDeTextoInformativo, new Insets(0.0d, 10.0d, 10.0d, 10.0d) );
         VBox.setVgrow( cajaDeTextoInformativo, Priority.ALWAYS );
 
         cajaGlobal.getChildren().addAll(cajaNombresPrincipales, lineaSeparador, cajaDeTextoInformativo, buttomControls);

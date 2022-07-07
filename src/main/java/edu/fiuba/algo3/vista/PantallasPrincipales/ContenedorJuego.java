@@ -36,7 +36,7 @@ public class ContenedorJuego {
         PorcionMapaVista porcionVista = new PorcionMapaVista(m, j);
         MapaVista mapaVista = new MapaVista(m,porcionVista,stage);
         JugadorVista jugadorVista = new JugadorVista(j, mapaVista);
-        CajaMapaVista cajaMapaVista = new CajaMapaVista(new PuntajeVista(j), stage);
+        CajaMapaVista cajaMapaVista = new CajaMapaVista(new PuntajeVista(j), stage, this.juego);
         JuegoVista juegoVista = new JuegoVista(cajaMapaVista, stage);
         juegoVista.setCenter(mapaVista);
         juegoVista.setOnKeyPressed(new TecladoControlador(j));

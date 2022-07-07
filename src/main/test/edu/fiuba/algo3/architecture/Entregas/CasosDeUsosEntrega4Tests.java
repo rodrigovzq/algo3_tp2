@@ -28,14 +28,14 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CasosDeUsosEntrega4Tests {
     @Test
-    public void seGeneraUnMapaAleatoriamenteMeMuevoEnDiagonalConLaMotoYTengoMasMovimientosQueAvances(){
+    public void seGeneraUnMapaAleatoriamenteMeMuevoEnDiagonalConUnaCuatroPorCuatroYTengoMasMovimientosQueAvances(){
         //TODO: Mockear. Para quitar lo estocástico.
         //TODO: Testear generadores aleatorios.
         Mapa mapa = new Mapa( 20, 20);
         mapa.generarMapa();
         Celda posicionJugador = mapa.sortearCeldaJugador();
-        Jugador jugador1 = new Jugador( "Grupo3", posicionJugador, new Moto());
-        Jugador jugador2 = new Jugador( "Grupo3", posicionJugador, new Moto());
+        Jugador jugador1 = new Jugador( "Grupo3", posicionJugador, new CuatroPorCuatro());
+        Jugador jugador2 = new Jugador( "Grupo3", posicionJugador, new CuatroPorCuatro());
 
         for(int i = 0; i < 10; i++) {
             Evento ev = jugador1.avanzarHaciaLaDireccion(Direccion.ESTE);

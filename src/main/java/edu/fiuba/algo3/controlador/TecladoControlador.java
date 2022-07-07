@@ -2,6 +2,7 @@ package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
+import edu.fiuba.algo3.modelo.Excepcion.DireccionInvalida;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -21,18 +22,20 @@ public class TecladoControlador implements EventHandler<KeyEvent> {
         try{
             if(keyEvent.getCode() == KeyCode.W ){
                 resultado = jugador.avanzarHaciaLaDireccion(Direccion.NORTE);
-            }
-            if(keyEvent.getCode() == KeyCode.A ){
+            }else if(keyEvent.getCode() == KeyCode.A ){
                 resultado = jugador.avanzarHaciaLaDireccion(Direccion.OESTE);
-            }
-            if(keyEvent.getCode() == KeyCode.S ){
+            }else if(keyEvent.getCode() == KeyCode.S ){
                 resultado = jugador.avanzarHaciaLaDireccion(Direccion.SUR);
-            }
-            if(keyEvent.getCode() == KeyCode.D ){
+            }else if(keyEvent.getCode() == KeyCode.D ){
                 resultado = jugador.avanzarHaciaLaDireccion(Direccion.ESTE);
             }
-        }catch (Exception e){}
-        jugador.actualizar(resultado);
+            if(resultado != null)
+                jugador.actualizar(resultado);
+        }catch (DireccionInvalida e){
+            System.out.println("Ha alcanzado uno de los bordes del mapa, no puede avanzar.");
+        }catch (Exception e){
+            System.out.println("Que?");
+        }
 
     }
 }

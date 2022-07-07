@@ -15,8 +15,8 @@ class JuegoTest {
         Mapa mockMapa = mock( Mapa.class);
         Jugador mockJugador = mock( Jugador.class);
         Ranking mockRanking = mock( Ranking.class);
+        when(mockRanking.imprimir()).thenReturn("Test1,10;\nTest2,11;\nTest3,12;\n");
         Juego juego = new Juego( mockJugador, mockMapa, mockRanking);
-
         juego.guardarPartida();
         verify(mockRanking).imprimir();
         verify(mockJugador).imprimir();
@@ -28,6 +28,7 @@ class JuegoTest {
         Mapa mockMapa = mock( Mapa.class);
         Jugador mockJugador = mock( Jugador.class);
         Ranking mockRanking = mock( Ranking.class);
+        when(mockRanking.imprimir()).thenReturn("Test1,10;\nTest2,11;\nTest3,12;\n");
         Juego juego = new Juego( mockJugador, mockMapa, mockRanking);
 
         juego.actualizar();
