@@ -29,6 +29,7 @@ public class MapaVista extends StackPane implements Observador {
     private Canvas figuras;
     private PorcionMapaVista niebla;
 
+    private Coordenada posicionMeta;
 
     public MapaVista(Mapa mapa, PorcionMapaVista porcion, Stage stage) {
         this.vista = new GridPane();
@@ -45,7 +46,6 @@ public class MapaVista extends StackPane implements Observador {
         this.vista.setPadding(new Insets(15, 15, 15, 15));
         this.vista.setAlignment(Pos.CENTER);
         this.niebla = porcion;
-
         figuras = new Canvas(55 * mapa.getAncho() + 5, 55 * mapa.getAltura() + 5);
 
         getChildren().addAll(vista, figuras, niebla);
@@ -75,7 +75,7 @@ public class MapaVista extends StackPane implements Observador {
             for (int j = 0; j < mapa.getAltura(); j++) {
                 Celda celda = mapa.getCelda(new Coordenada(i, j));
                 if (!Objects.equals(celda.getEstadoCelda(), EstadoCelda.COMUN.name())) {
-                    Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.getEstadoCelda() + ".png");
+                    Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/celdas/" + celda.getEstadoCelda() + ".png");
                     contexto.drawImage(icono, 52.5 * (i + 1), 49 * (j + 1), 19, 19); // TODO: AJUSTAR ESTOS VALORES
                 }
             }
@@ -85,13 +85,9 @@ public class MapaVista extends StackPane implements Observador {
     public void redibujarEn(Coordenada coordenada) {
         Celda celda = mapa.getCelda(coordenada);
         if (!Objects.equals(celda.getEstadoCelda(), EstadoCelda.COMUN.name())) {
-            Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/obstaculos/" + celda.getEstadoCelda() + ".png");
+            Image icono = new Image("file:src/main/java/edu/fiuba/algo3/vista/assets/celdas/" + celda.getEstadoCelda() + ".png");
             GraphicsContext contexto = figuras.getGraphicsContext2D();
             contexto.drawImage(icono, 52.5 * (coordenada.getPosX() + 1), 49 * (coordenada.getPosY() + 1), 19, 19); // TODO: AJUSTAR ESTOS VALORESs
         }
-    }
-
-    public void accion(Jugador j) {
-        panelGlobal.setOnKeyPressed(new TecladoControlador(j));
     }
 }
