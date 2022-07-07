@@ -39,6 +39,14 @@ public class Mapa extends Observable implements Imprimible {
     private final Float PROBABILIDAD_SORPRESA = 0.5F;
     private Coordenada coordenadaMeta;
 
+    public Mapa( Mapa mapa ){
+        this.ancho = mapa.ancho;
+        this.altura = mapa.altura;
+        this.generador = new GeneradorObstaculo();
+        generarMapa();
+        this.coordenadaMeta = getMeta();
+        this.posicionJugador = getCeldaJugador();
+    }
 
     public Mapa(Integer ancho, Integer altura) throws MapaInvalido {
         this.ancho = ancho;
@@ -49,8 +57,8 @@ public class Mapa extends Observable implements Imprimible {
 
         this.generador = new GeneradorObstaculo();
         generarMapa();
-        this.coordenadaMeta = null;
-        this.posicionJugador = null;
+        this.coordenadaMeta = getMeta();
+        this.posicionJugador = getCeldaJugador();
     }
 
     public Mapa(Integer ancho, Integer altura, Coordenada posJugador, List<IEstadoCelda> estados) throws MapaInvalido {
@@ -158,7 +166,6 @@ public class Mapa extends Observable implements Imprimible {
             } while (!esElBorde);
 
         } while (!esFinRecorrido(coord));
-        notificarATodos();
     }
 
     private Direccion direccionRecorridoFinal() {
@@ -230,7 +237,6 @@ public class Mapa extends Observable implements Imprimible {
     public Integer sortearIndiceMeta() {
         Integer fila = (int) (this.altura * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         Integer columna = (int) (this.ancho * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
-        coordenadaMeta = new Coordenada(columna, fila);
         return fila * this.ancho + columna;
     }
 
@@ -319,7 +325,10 @@ public class Mapa extends Observable implements Imprimible {
 
     private Coordenada numeroElementoACoordenada(int indice) {
         Integer fila = indice / this.ancho;
-        Integer columna = indice - fila * this.ancho; 
+        Integer columna = indice - fila * this.ancho;
+        if( (fila % 2) != 0 ) {
+            columna = (this.ancho-1) - indice%this.ancho;
+        }
         return new Coordenada( columna, fila );
     }
 
@@ -353,6 +362,7 @@ public class Mapa extends Observable implements Imprimible {
         return estado;
     }
 
+    //Guarda en zigzag, de la misma manera que construye.
     public String imprimir() {
         Coordenada coordenada = new Coordenada(0, 0);
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
