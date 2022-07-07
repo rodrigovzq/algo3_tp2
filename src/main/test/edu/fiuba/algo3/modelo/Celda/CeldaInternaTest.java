@@ -143,5 +143,30 @@ class CeldaInternaTest {
             verify(mockEstadoCelda).avanzarEn(mockVehiculo);
     }
 
+    @Test
+    public void elEstadoCeldaEsObtenibleEnFormaDeString(){
+        IEstadoCelda mockEstado = mock( IEstadoCelda.class );
+        Coordenada mockCoordenada = mock( Coordenada.class );
+        when( mockEstado.imprimir() ).thenReturn( "EstadoCelda" );
+        Celda celda = new CeldaInterna( mockEstado, mockCoordenada );
+
+        String resultado = celda.getEstadoCelda();
+        String esperado = "EstadoCelda";
+
+        assertEquals(esperado, resultado);
+
+    }
+
+    @Test
+    public void laCoordenadaEsObtenible(){
+        IEstadoCelda mockEstado = mock( IEstadoCelda.class );
+        Coordenada mockCoordenada = mock( Coordenada.class );
+        Celda celda = new CeldaInterna( mockEstado, mockCoordenada );
+
+        Coordenada resultado = celda.getCoordenada();
+
+        assertEquals(mockCoordenada, resultado);
+    }
+
 
 }

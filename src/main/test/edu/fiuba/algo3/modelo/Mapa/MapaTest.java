@@ -10,12 +10,14 @@ import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Excepcion.*;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
+import edu.fiuba.algo3.modelo.Observador;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 class MapaTest {
     @Test
@@ -427,4 +429,20 @@ class MapaTest {
 
         assertEquals(jugador1,jugador2);
     }
+
+    @Test
+    public void mapaEsObservable(){
+        Mapa mapa = new Mapa(2,2);
+        Observador mockObservador = mock( Observador.class );
+
+        mapa.agregarObservador(mockObservador);
+        mapa.agregarObservador(mockObservador);
+        mapa.agregarObservador(mockObservador);
+
+        mapa.notificarATodos();
+
+        verify( mockObservador, times(3)).actualizar();
+    }
+
+
 }

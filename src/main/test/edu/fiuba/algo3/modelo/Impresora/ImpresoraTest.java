@@ -29,7 +29,7 @@ class ImpresoraTest {
     }
     @Test
     public void escriboUnaLineaDeUnArchivoQueNoExiste(){
-        String pathTestFile = "saves/testEscriturNoExiste.txt";
+        String pathTestFile = "saves/testEscrituraNoExiste.txt";
         ImpresoraFile impresora = assertDoesNotThrow( () -> new ImpresoraFile(pathTestFile) );
 
         impresora.escribirNuevaLinea("Hola mundo1!");
@@ -42,5 +42,7 @@ class ImpresoraTest {
         File archivoABorrar = new File( pathTestFile );
         archivoABorrar.delete();
     }
+
+
 
 }
