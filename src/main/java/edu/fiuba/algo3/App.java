@@ -7,9 +7,9 @@ import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import edu.fiuba.algo3.vista.*;
 import edu.fiuba.algo3.controlador.Musica.ControladorMusica;
+
 import edu.fiuba.algo3.controlador.Musica.Musica;
-import edu.fiuba.algo3.controlador.Musica.ReproductorMusica;
-import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorMenu;
+import edu.fiuba.algo3.vista.GanadorVista;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
