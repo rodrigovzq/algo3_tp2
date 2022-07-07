@@ -38,6 +38,7 @@ public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
 
     private void cargarConfiguracion() {
         System.out.println("Generando mapa...");
+        this.mapa = new Mapa( mapa );
     }
 
     private void cargarPartidaRenaudada() {
