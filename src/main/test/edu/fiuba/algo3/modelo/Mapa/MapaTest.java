@@ -118,7 +118,6 @@ class MapaTest {
     @Test
     public void generoUnMapa3x3YPuedoMovermeALoLargoDeTodoElMapa(){
         Mapa mapa = new Mapa( 3, 3);
-        mapa.generarMapa();
         Celda esquinaNO = mapa.getEsquinaSuperiorIzquierda();
 
         assertThrows(DireccionInvalida.class, () -> esquinaNO.getCelda(Direccion.OESTE));
@@ -184,7 +183,6 @@ class MapaTest {
     @Test
     public void generoUnMapa3x4YPuedoMovermeALoLargoDeTodoElMapa(){
         Mapa mapa = new Mapa( 3, 4);
-        mapa.generarMapa();
         Celda esquinaNO = mapa.getEsquinaSuperiorIzquierda();
 
         assertThrows(DireccionInvalida.class, () -> esquinaNO.getCelda(Direccion.OESTE));
@@ -269,7 +267,6 @@ class MapaTest {
     @Test
     public void generoUnMapa3x3YVerificoQueCorrespondanLasCoordenadas(){
         Mapa mapa = new Mapa( 3, 3);
-        mapa.generarMapa();
         Celda esquinaNO = mapa.getEsquinaSuperiorIzquierda();
         Coordenada coord = new Coordenada(0,0);
 
@@ -328,10 +325,6 @@ class MapaTest {
 
 
     }
-    //SUPUESTO: El mapa no puede ser menor a 2x2.
-    //SUPUESTO: Las coordenadas no pueden ser negativas
-    //SUPUESTO: El jugador se inicializa en el cuarto cuarto del mapa.
-    //SUPUESTO: La Meta se inicializa en el segundos cuarto del mapa. (agujas de reloj)
     @Test
     public void creoDistintasCombinacionesDeMapas(){
         assertDoesNotThrow( () -> new Mapa(10,10) );
@@ -346,8 +339,7 @@ class MapaTest {
     @Test
     public void LaCeldaJugadorSiempreSeSorteaEnELCuartoCuartoDeMapa(){
         Mapa mapa = new Mapa(20,20);
-        mapa.generarMapa();
-        Celda celda = mapa.sortearCeldaJugador();
+        Celda celda = mapa.getCeldaJugador();
 
         Coordenada coordenada = new Coordenada( (int)(20 * 0.25F + 1), (int)(20 * 0.25F + 1));
         Celda celdaMax = new CeldaInterna( new Comun() ,coordenada);
@@ -362,7 +354,8 @@ class MapaTest {
 
         //Repito el test
         for( int i = 0; i < 10; i++) {
-            celda = mapa.sortearCeldaJugador();
+            mapa = new Mapa(20,20);
+            celda = mapa.getCeldaJugador();
             distanciaX = celda.distanciaHorizontal(celdaMax);
             distanciaY = celda.distanciaVertical(celdaMax);
 
@@ -376,7 +369,6 @@ class MapaTest {
     @Test
     public void laCeldaMetaSiempreSeSorteaEnELPrimerCuartoDelMapa(){
         Mapa mapa = new Mapa(6,6);
-        mapa.generarMapa();
         Integer meta = mapa.sortearIndiceMeta();
 
         assertTrue( (20 < meta && meta < 24) ||(26 < meta && meta < 30) || ( 32 < meta && meta < 36));
@@ -385,24 +377,16 @@ class MapaTest {
     @Test
     public void esImprimible(){
         Mapa mapa = new Mapa(3,3);
-        mapa.generarMapa();
 
-        //TODO: ¿Como vamos a identificar en el archivo de texto donde tenemos la meta?
-        //Una solución va a ser ponerlo como atributo del juego.
         String resultado = mapa.imprimir();
         String esperado = "3x3;\n";
 
         for(int i = 0; i < 3; i++){
             esperado += "COMUN-COMUN-COMUN;\n";
         }
-
-        assertEquals(esperado, resultado);
-
-        //Al sortear no podemos saber que se espera imprimir.
-        mapa.setEstadosMapa();
-
-        resultado = mapa.imprimir();
+        //Al generarse aleatoriamente no tengo forma de saber como va a ser.
         assertNotEquals(esperado, resultado);
+        assertNotEquals("", resultado);
     }
 
     @Test
@@ -423,7 +407,6 @@ class MapaTest {
     @Test
     public void laCeldaDelJugadorSeSorteaUnaUnicaVez(){
         Mapa mapa = new Mapa(3,3);
-        mapa.generarMapa();
         Celda jugador1 = mapa.getCeldaJugador();
         Celda jugador2 = mapa.getCeldaJugador();
 
