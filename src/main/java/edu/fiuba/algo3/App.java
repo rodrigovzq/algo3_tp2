@@ -1,18 +1,6 @@
 package edu.fiuba.algo3;
 
-<<<<<<< HEAD
-=======
-import edu.fiuba.algo3.controlador.TecladoControlador;
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Mapa.Mapa;
-import edu.fiuba.algo3.modelo.Vehiculos.Auto;
-import edu.fiuba.algo3.modelo.Vehiculos.Moto;
-import edu.fiuba.algo3.vista.*;
-import edu.fiuba.algo3.controlador.Musica.ControladorMusica;
-
->>>>>>> c0501769a288ec2e2c904d5c686863e5ea24aa32
 import edu.fiuba.algo3.controlador.Musica.Musica;
-import edu.fiuba.algo3.vista.GanadorVista;
 import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorMenu;
 import javafx.application.Application;
 
