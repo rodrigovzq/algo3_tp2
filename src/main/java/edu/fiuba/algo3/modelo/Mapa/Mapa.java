@@ -19,9 +19,7 @@ import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Observable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 // Clase con la responsabilidad de generar el escenario.
 public class Mapa extends Observable implements Imprimible {
@@ -39,6 +37,7 @@ public class Mapa extends Observable implements Imprimible {
 
     private final Float PROBABILIDAD_OBSTACULO = 0.5F;
     private final Float PROBABILIDAD_SORPRESA = 0.5F;
+    private Coordenada coordenadaMeta;
 
 
     public Mapa(Integer ancho, Integer altura) throws MapaInvalido {
@@ -224,6 +223,7 @@ public class Mapa extends Observable implements Imprimible {
     public Integer sortearIndiceMeta() {
         Integer fila = (int) (this.altura * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         Integer columna = (int) (this.ancho * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
+        coordenadaMeta = new Coordenada(columna, fila);
         return fila * this.ancho + columna;
     }
 
@@ -245,6 +245,24 @@ public class Mapa extends Observable implements Imprimible {
 
         return celdaSeleccionada;
     }
+
+    public Coordenada getMeta() {
+        if (coordenadaMeta != null) {
+            return coordenadaMeta;
+        } else {
+            for (int i = 0; i < ancho; i++) {
+                for (int j = 0; i < altura; j++) {
+                    String estadoCelda = getCelda(new Coordenada(i, j)).getEstadoCelda();
+                    if (Objects.equals(estadoCelda, new Meta())) {
+                        return new Coordenada(i, j);
+                    }
+                }
+            }
+        }
+        throw new RuntimeException("No existe meta");
+    }
+
+    ;
 
     private List<IEstadoCelda> sortearEstadosMapa() {
         List<IEstadoCelda> lista = new ArrayList<>();
@@ -283,7 +301,11 @@ public class Mapa extends Observable implements Imprimible {
     }
 
     public void setEstadosMapa() {
-        setEstadosMapa(this.sortearEstadosMapa());
+        List<IEstadoCelda> estadosMapa = this.sortearEstadosMapa();
+        if (Collections.frequency(estadosMapa, new Meta()) != 1) {
+            throw new RuntimeException("mas de una meta en el mapa");
+        }
+        setEstadosMapa(estadosMapa);
         notificarATodos();
     }
 

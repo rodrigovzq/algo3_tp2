@@ -29,17 +29,7 @@ public class PorcionMapaVista extends Canvas implements Observador {
     }
 
     private Coordenada getPosicionMeta(Mapa mapa) {
-        for (int i = 0; i < mapa.getAncho(); i++) {
-            for( int j = 0; j < mapa.getAltura(); j++) {
-                Celda celda = mapa.getCelda(new Coordenada(i, j));
-                if (Objects.equals(celda.getEstadoCelda(), EstadoCelda.META.name())) {
-                    Coordenada posicionMeta = celda.getCoordenada();
-                    System.out.println("Meta: " + posicionMeta.imprimir());
-                    return posicionMeta;
-                }
-            }
-        }
-        throw new RuntimeException("No se encontro la meta");
+        return mapa.getMeta();
     }
     @Override
     public void actualizar() {
