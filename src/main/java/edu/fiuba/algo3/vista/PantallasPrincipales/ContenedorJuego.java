@@ -18,8 +18,6 @@ import javafx.stage.Stage;
 
 public class ContenedorJuego {
     private Stage stage;
-    private MapaVista mapaVista;
-    private JugadorVista jugadorVista;
     private Juego juego;
     public ContenedorJuego(Stage stage, Juego juego) {
         this.stage = stage;
@@ -43,14 +41,5 @@ public class ContenedorJuego {
 
         stage.setScene(new Scene(juegoVista, 435, 472));
         stage.show();
-        //Opciones
-        //Salir -> Preguntar si quiere guardar la partida. NO: deja el archivo que estaba. SI: sobreescribe mapa.txt y jugador.txt.
-        //Instrucciones -> Lo mismo que en el menu.
-        //Ranking -> Lo mismo que en el menu. ¿Debería mostrarse su puntuación actual a comparacion del top mostrado?
-        //Guardar -> Sobreescribir archivos mapa.txt y jugador.txt.
-
-        //Cosas que pueden pasar:
-        //Llegar a un borde -> Mostrar visualmente con algo que no puede pasar.
-        //Ganar -> Mostrar menu de victoria. (Se guarda el ranking y ¿se borran los txt?)
     }
 }
