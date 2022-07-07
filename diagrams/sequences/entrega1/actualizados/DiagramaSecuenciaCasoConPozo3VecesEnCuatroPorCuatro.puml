@@ -43,8 +43,6 @@ deactivate Pozo
 
 "celdaEste : Celda" --> "posicion : Celda": evento
 deactivate "celdaEste : Celda"
-
-<<<<<<< HEAD
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
 "posicion : Celda" --> Jugador--: evento
@@ -60,7 +58,7 @@ Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
 Jugador <-- "evento : Evento"--: celdaEste
 =======
 
-"posicion : Celda" -> "event : Evento"++: setDireccion( ESTE )
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "event : Evento"
 "posicion : Celda" --> Jugador--: event
 deactivate Jugador
@@ -79,5 +77,5 @@ Jugador -> "event : Evento"++: actualizarPosicion( posicion )
 activate Jugador
 Jugador <-- "event : Evento"--: celdaEste
 deactivate Jugador
->>>>>>> 2ecd710c0ba5a129db266f8ffac3fedd1d359222
+
 @enduml

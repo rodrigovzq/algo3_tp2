@@ -1,6 +1,7 @@
 @startuml
 title Diagrama Secuencia Vehiculo Atraviesa La Ciudad Y Encuentra Sorpresa Favorable
 
+
 autonumber
 
 actor Jugador
