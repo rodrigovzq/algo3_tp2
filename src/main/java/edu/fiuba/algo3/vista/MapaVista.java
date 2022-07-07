@@ -29,8 +29,6 @@ public class MapaVista extends StackPane implements Observador {
     private Canvas figuras;
     private PorcionMapaVista niebla;
 
-    private Coordenada posicionMeta;
-
     public MapaVista(Mapa mapa, PorcionMapaVista porcion, Stage stage) {
         this.vista = new GridPane();
         this.mapa = mapa;
