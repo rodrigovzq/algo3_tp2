@@ -16,8 +16,8 @@ class JuegoTest {
         Jugador mockJugador = mock( Jugador.class);
         Ranking mockRanking = mock( Ranking.class);
         when(mockRanking.imprimir()).thenReturn("Test1,10;\nTest2,11;\nTest3,12;\n");
-        when(mockMapa.imprimir()).thenReturn("5x5;\n(2,2);" +
-                "\nCOMUN-COMUN-COMUN-COMUN-COMUN;\n" +
+        when(mockMapa.imprimir()).thenReturn("5x5;\n(2,2);\n" +
+                "COMUN-COMUN-COMUN-COMUN-COMUN;\n" +
                 "COMUN-COMUN-COMUN-COMUN-COMUN;\n" +
                 "COMUN-POZO-POZO-POZO-POZO;\n" +
                 "COMUN-POZO-PIQUETE-PIQUETE-PIQUETE;\n" +
