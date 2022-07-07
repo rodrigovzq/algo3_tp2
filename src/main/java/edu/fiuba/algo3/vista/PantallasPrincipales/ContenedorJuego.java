@@ -31,7 +31,7 @@ public class ContenedorJuego {
         Mapa m = juego.getMapa();
         Jugador j = juego.getJugador();
 
-        PorcionMapaVista porcionVista = new PorcionMapaVista(m, j);
+        PorcionMapaVista porcionVista = new PorcionMapaVista(m, j, this.stage);
         MapaVista mapaVista = new MapaVista(m,porcionVista,stage);
         JugadorVista jugadorVista = new JugadorVista(j, mapaVista);
         CajaMapaVista cajaMapaVista = new CajaMapaVista(new PuntajeVista(j), stage, this.juego);

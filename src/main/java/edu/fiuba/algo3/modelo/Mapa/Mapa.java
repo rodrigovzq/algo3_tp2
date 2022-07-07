@@ -43,34 +43,31 @@ public class Mapa extends Observable implements Imprimible {
     public Mapa(Integer ancho, Integer altura) throws MapaInvalido {
         this.ancho = ancho;
         this.altura = altura;
-        this.posicionJugador = null;
-        //ValorPorDefault
-        this.generador = new GeneradorObstaculo();
-
         if (!this.esValido()) {
             throw new MapaInvalido();
         }
+
+        this.generador = new GeneradorObstaculo();
+        generarMapa();
+        this.coordenadaMeta = null;
+        this.posicionJugador = null;
     }
 
     public Mapa(Integer ancho, Integer altura, Coordenada posJugador, List<IEstadoCelda> estados) throws MapaInvalido {
         this.ancho = ancho;
         this.altura = altura;
-        //ValorPorDefault
-        this.generador = new GeneradorObstaculo();
-        generarMapa();
-
-        this.posicionJugador = getCelda(posJugador);
-        setEstadosMapa(estados);
-
         if (!this.esValido()) {
             throw new MapaInvalido();
         }
+
+        this.generador = new GeneradorObstaculo();
+        this.coordenadaMeta = buscarMetaEnListaEstados(estados);
+        generarMapa(estados);
+        this.posicionJugador = getCelda(posJugador);
     }
 
     private boolean esValido() {
-        if (this.altura < 2 || this.ancho < 2)
-            return false;
-        return true;
+        return this.altura >= 2 && this.ancho >= 2;
     }
 
     public Celda getEsquinaSuperiorIzquierda() {
@@ -78,7 +75,17 @@ public class Mapa extends Observable implements Imprimible {
     }
 
     //La implementacion del metodo generarMapa está acoplada con la entidad Coordenada
-    public void generarMapa() {
+
+    private void generarMapa(List<IEstadoCelda> estados){
+        generarMapaVacio();
+        setEstadosMapa(estados);
+    }
+
+    private void generarMapa(){
+        generarMapaVacio();
+        setEstadosMapa();
+    }
+    private void generarMapaVacio() {
         Coordenada coord = new Coordenada(0, 0);
         Celda anteriorCelda = this.generarEsquinaMapa(coord);
         esquinaSuperiorIzquierda = anteriorCelda;
@@ -214,7 +221,7 @@ public class Mapa extends Observable implements Imprimible {
         return this.altura;
     }
 
-    public Celda sortearCeldaJugador() {
+    private Celda sortearCeldaJugador() {
         Integer fila = (int) (this.generador.sortearNumero() * this.altura * PROPORCION_MAPA_APARICION);
         Integer columna = (int) (this.generador.sortearNumero() * this.ancho * PROPORCION_MAPA_APARICION);
         return getCelda(new Coordenada(columna, fila));
@@ -247,22 +254,8 @@ public class Mapa extends Observable implements Imprimible {
     }
 
     public Coordenada getMeta() {
-        if (coordenadaMeta != null) {
-            return coordenadaMeta;
-        } else {
-            for (int i = 0; i < ancho; i++) {
-                for (int j = 0; i < altura; j++) {
-                    String estadoCelda = getCelda(new Coordenada(i, j)).getEstadoCelda();
-                    if (Objects.equals(estadoCelda, new Meta())) {
-                        return new Coordenada(i, j);
-                    }
-                }
-            }
-        }
-        throw new RuntimeException("No existe meta");
+        return coordenadaMeta;
     }
-
-    ;
 
     private List<IEstadoCelda> sortearEstadosMapa() {
         List<IEstadoCelda> lista = new ArrayList<>();
@@ -275,12 +268,36 @@ public class Mapa extends Observable implements Imprimible {
         return lista;
     }
 
+    private Coordenada buscarMetaEnListaEstados( List<IEstadoCelda> estadosCelda ){
+        Coordenada meta = null;
+        int metas = 0;
+        int indice = 0;
+
+        for( IEstadoCelda estado : estadosCelda ){
+            boolean encontrado = estado.equals( new Meta() );
+            if( encontrado ){
+                metas += 1;
+                meta = numeroElementoACoordenada(indice);
+            }
+            indice += 1;
+        }
+
+        if( metas != 1)
+            throw new MapaInvalido();
+
+        return meta;
+    }
+
     private void setEstadosMapa(List<IEstadoCelda> estados) {
         Coordenada coordenada = new Coordenada(0, 0);
         Celda celdaSeleccionada = esquinaSuperiorIzquierda;
         Direccion dirX = Direccion.ESTE;
         Direccion dirY = Direccion.SUR;
-
+        
+        if( coordenadaMeta == null){
+            coordenadaMeta = buscarMetaEnListaEstados(estados);
+        }
+        
         IEstadoCelda estado;
 
         while (!esFinRecorrido(coordenada)) {
@@ -300,11 +317,14 @@ public class Mapa extends Observable implements Imprimible {
         }
     }
 
-    public void setEstadosMapa() {
+    private Coordenada numeroElementoACoordenada(int indice) {
+        Integer fila = indice / this.ancho;
+        Integer columna = indice - fila * this.ancho; 
+        return new Coordenada( columna, fila );
+    }
+
+    private void setEstadosMapa() {
         List<IEstadoCelda> estadosMapa = this.sortearEstadosMapa();
-        if (Collections.frequency(estadosMapa, new Meta()) != 1) {
-            throw new RuntimeException("mas de una meta en el mapa");
-        }
         setEstadosMapa(estadosMapa);
         notificarATodos();
     }
@@ -351,16 +371,16 @@ public class Mapa extends Observable implements Imprimible {
             if (esCeldaInterna(coordenada) || !(coordenada.determinarBorde(this.ancho, this.altura) == dirX)) {
                 celdaSeleccionada = celdaSeleccionada.getCelda(dirX);
                 coordenada.mover(dirX);
-                resultado += this.DELIMITADOR_COLUMNA;
+                resultado += DELIMITADOR_COLUMNA;
             } else {
                 dirX = dirX.opuesto();
                 coordenada.mover(dirY);
                 celdaSeleccionada = celdaSeleccionada.getCelda(dirY);
-                resultado += this.DELIMITADOR_FILA;
+                resultado += DELIMITADOR_FILA;
             }
 
         }
-        resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0] + this.DELIMITADOR_FILA;
+        resultado += celdaSeleccionada.imprimir().split(Celda.DELIMITADOR)[0] + DELIMITADOR_FILA;
         return resultado;
     }
 

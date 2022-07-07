@@ -53,9 +53,8 @@ public class ContenedorConfiguracion {
         this.stage = stage;
         //Valor default de mapa.
         this.mapaJuego = new Mapa(10,10);
-        this.mapaJuego.generarMapa();
         //Valor default del jugador.
-        this.jugador = new Jugador("DefaultName", null , new Auto());
+        this.jugador = new Jugador("DefaultName", mapaJuego.getCeldaJugador() , new Auto());
         this.iniciar();
 
         //TODO: ¿Que pasa si el usuario no elije nada y va directo a jugar?
