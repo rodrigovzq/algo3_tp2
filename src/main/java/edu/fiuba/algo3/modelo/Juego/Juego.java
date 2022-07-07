@@ -9,10 +9,11 @@ import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Observador;
 import edu.fiuba.algo3.modelo.Ranking.Ranking;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 //TODO: Inutil
-public class Juego implements Observador {
+public class Juego {
     public static final String PATH_MAPA_TXT = "saves/mapa.txt";
     public static final String PATH_JUGADOR_TXT = "saves/jugador.txt";
     public static final String PATH_RANKING_TXT = "saves/ranking.txt";
@@ -38,8 +39,8 @@ public class Juego implements Observador {
     }
 
     //Al llegar a la meta, se le notifica que debe agregar al jugador.
-    @Override
-    public void actualizar() {
+
+    public void actualizarRanking() {
         this.ranking.agregar(jugador);
         this.guardarRanking();
     }
@@ -63,5 +64,13 @@ public class Juego implements Observador {
         guardarMapa();
         guardarRanking();
     }
-    //TODO: Guardar meta!!
+
+    public boolean elJugadorLlegoAMeta() {
+        return ( jugador.getPosicion().equals( mapa.getMeta()) );
+    }
+
+    public void borrarPartida() {
+        new File(PATH_JUGADOR_TXT).delete();
+        new File(PATH_MAPA_TXT).delete();
+    }
 }
