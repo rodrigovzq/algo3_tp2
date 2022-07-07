@@ -23,8 +23,4 @@ public class DescuentoPorcentaje implements EventoPuntaje {
         return porcentaje.equals( that.porcentaje );
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(porcentaje);
-    }
 }

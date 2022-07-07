@@ -160,4 +160,23 @@ class RankingTest {
         String resultado = rank.imprimir();
         assertEquals(esperado, resultado);
     }
+
+
+    @Test
+    public void esPosibleCrearUnRankingAPartirDeunaListadePuntajes(){
+        Ranking rank1 = new Ranking();
+
+        Puntaje mockPuntaje = mock( Puntaje.class );
+
+        List<Puntaje> puntajes = new ArrayList<>();
+        for(int i = 0; i<10; i++){
+            rank1.agregar(mockPuntaje);
+            puntajes.add(mockPuntaje);
+        }
+
+        Ranking rank2 = new Ranking( puntajes );
+
+        assertEquals(rank1, rank2);
+
+    }
 }

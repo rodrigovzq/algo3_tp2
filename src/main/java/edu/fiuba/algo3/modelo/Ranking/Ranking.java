@@ -59,15 +59,14 @@ public class Ranking implements Imprimible {
         Ranking that = (Ranking) o;
         boolean resultado = (ranking.size() == that.ranking.size());
         if( resultado ){
-            for (int i = 0; i < ranking.size(); i++)
-                resultado &= this.ranking.get(i).equals(that.ranking.get(i));
+            int i = 0;
+            for(Puntaje puntaje : this.ranking) {
+                resultado &= puntaje.equals(that.ranking.get(i));
+                i += 1;
+            }
         }
         return resultado;
 
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(ranking);
-    }
 }

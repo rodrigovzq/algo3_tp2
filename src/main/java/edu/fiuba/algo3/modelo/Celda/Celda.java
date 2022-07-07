@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Observable;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
-public abstract class Celda extends Observable implements Imprimible {
+public abstract class Celda implements Imprimible {
     public static final String DELIMITADOR = "-";
     private IEstadoCelda estado;
     private Coordenada coordenada;
