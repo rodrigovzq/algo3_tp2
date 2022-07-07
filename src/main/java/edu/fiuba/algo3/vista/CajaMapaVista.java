@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vista;
 import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoBoton;
 import edu.fiuba.algo3.controlador.Cerrar.CerrarJuegoVentana;
 import edu.fiuba.algo3.controlador.GuardarPartida;
+import edu.fiuba.algo3.controlador.GuardarYMenu;
 import edu.fiuba.algo3.controlador.GuardarYSalir;
 import edu.fiuba.algo3.modelo.Juego.Juego;
 import edu.fiuba.algo3.vista.PantallasPrincipales.ContenedorInstrucciones;
@@ -38,14 +39,16 @@ public class CajaMapaVista extends HBox {
     }
 
     private void configurarBotones() {
-        GuardarPartida guardarPartida = new GuardarPartida(this.juego);
-        GuardarYSalir guardarYSalir = new GuardarYSalir(this.juego, this.stage);
+        GuardarYMenu guardarYMenu = new GuardarYMenu(this.juego, this.stage);
+        botonVolverMenu.setOnAction( guardarYMenu );
         botonInstrucciones.setOnAction(e -> new ContenedorInstrucciones().mostrar());
+        GuardarPartida guardarPartida = new GuardarPartida(this.juego);
         botonGuardar.setOnAction( guardarPartida );
         CerrarJuegoVentana cerrarVentana = new CerrarJuegoVentana(botonSalir);
         stage.setOnCloseRequest(cerrarVentana);
+        GuardarYSalir guardarYSalir = new GuardarYSalir(this.juego, this.stage);
         botonSalir.setOnAction(guardarYSalir);
 
-        getChildren().addAll(botonVolverMenu, botonInstrucciones, botonSalir, puntaje);
+        getChildren().addAll(botonVolverMenu, botonGuardar, botonInstrucciones, botonSalir, puntaje);
     }
 }
