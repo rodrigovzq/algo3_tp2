@@ -48,6 +48,7 @@ activate Jugador
 Jugador <-- "evento : Evento"--: cuatroPorCuatro
 deactivate Jugador
 
+
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
 activate Jugador
 Jugador <-- "evento : Evento"--: celdaEste

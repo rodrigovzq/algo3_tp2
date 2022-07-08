@@ -13,6 +13,7 @@ create "eventoPuntaje : AumentoPorcentaje"
 "sorpresa : Desfavorable"-> "eventoPuntaje : AumentoPorcentaje": AumentoPorcentaje( 25 )
 
 
+
 create "eventoVehiculo : NoCambiarVehiculo"
 "sorpresa : Desfavorable" -> "eventoVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
 

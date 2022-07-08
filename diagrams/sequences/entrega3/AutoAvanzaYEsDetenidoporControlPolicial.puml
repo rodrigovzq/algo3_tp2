@@ -1,0 +1,37 @@
+@startuml
+title Un Auto Avanza Y Es Detenido Por Un Control Policial
+
+autonumber
+
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, auto )
+
+activate Jugador
+"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
+
+
+"celdaEste : Celda" -> "sorpresa : ControlPolicial"++: avanzarEn( auto )
+alt#Gold
+create "eventoPuntaje : Penalizacion"
+"sorpresa : ControlPolicial"-> "eventoPuntaje : Penalizacion": Penalizacion(3)
+
+create "eventoVehiculo : SiguienteVehiculo"
+"sorpresa : ControlPolicial" -> "eventoVehiculo : SiguienteVehiculo": NoCambiarVehiculo()
+
+create "eventoPosicion : Avanzar"
+"sorpresa : ControlPolicial"  -> "eventoPosicion : Avanzar": Avanzar()
+
+create "evento : Evento"
+"sorpresa : ControlPolicial"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
+end
+"sorpresa : ControlPolicial" --> "celdaEste : Celda"--: evento
+
+"celdaEste : Celda" --> "posicion : Celda": evento
+deactivate "celdaEste : Celda"
+"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
+
+"posicion : Celda" --> Jugador--: evento
+deactivate Jugador
+
+
+@enduml
