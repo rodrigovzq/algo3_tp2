@@ -3,9 +3,11 @@ title Diagrama Secuencia Vehiculo Atraviesa La Ciudad Y Encuentra Sorpresa Desfa
 autonumber
 actor Jugador
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, v )
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( v )
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+Jugador -> "celdaEste : Celda"++: avanzarEn( v )
 "celdaEste : Celda" -> "sorpresa : Desfavorable"++: avanzarEn( v )
 
 
@@ -26,14 +28,17 @@ create "evento : Evento"
 "sorpresa : Desfavorable"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
 
-"sorpresa : Desfavorable" --> "celdaEste : Celda"--: evento
-"celdaEste : Celda" --> "posicion : Celda": evento
+"sorpresa : Desfavorable" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> "sorpresa : Favorable": siguiente()
+create "comun : Comun"
+"sorpresa : Favorable" -> "comun : Comun": Comun()
+"sorpresa : Favorable" --> "celdaEste : Celda"--: estado = comun
+"celdaEste : Celda" --> Jugador: evento
 deactivate "celdaEste : Celda"
 
 
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
-"posicion : Celda" --> Jugador--: evento
 deactivate Jugador
 
 
