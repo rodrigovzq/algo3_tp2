@@ -1,0 +1,15 @@
+@startuml
+title Loop principal del juego
+[*] -> InicializarJuego
+InicializarJuego: Crear mapa
+InicializarJuego: Crear jugador
+
+InicializarJuego -> Juego : Comenzar
+
+EventoCelda -> [*] : Se alcanzo la meta
+EventoCelda -> Juego : No se alcanzo la meta
+Juego ----> EventoCelda : Avanzar a otra celda
+
+
+
+@enduml

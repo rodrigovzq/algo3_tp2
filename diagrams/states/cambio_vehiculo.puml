@@ -1,0 +1,17 @@
+@startuml
+title Cambio de vehiculo
+
+[*] --> ArchivoMapa
+state Mapa {
+    state Dimension
+    state PosicionJugador
+    state Celdas
+}
+state existe <<choice>>
+ArchivoMapa --> existe : leer archivo
+existe -l-> Dimension : [Archivo Valido] leer dimension
+existe --> [*] : Archivo Invalido
+Dimension --> PosicionJugador : leer posicion jugador
+PosicionJugador -> Celdas : leer celdas
+Celdas -r-> [*]
+@enduml
