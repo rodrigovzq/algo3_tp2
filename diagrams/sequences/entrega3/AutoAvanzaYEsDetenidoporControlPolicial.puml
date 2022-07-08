@@ -3,35 +3,32 @@ title Un Auto Avanza Y Es Detenido Por Un Control Policial
 
 autonumber
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, auto )
+Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion(ESTE)
 
 activate Jugador
 "posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
 
 
-"celdaEste : Celda" -> "sorpresa : ControlPolicial"++: avanzarEn( auto )
-alt#Gold
-create "eventoPuntaje : Penalizacion"
-"sorpresa : ControlPolicial"-> "eventoPuntaje : Penalizacion": Penalizacion(3)
+"celdaEste : Celda" -> " : ControlPolicial"++: avanzarEn( auto )
 
-create "eventoVehiculo : SiguienteVehiculo"
-"sorpresa : ControlPolicial" -> "eventoVehiculo : SiguienteVehiculo": NoCambiarVehiculo()
+" : ControlPolicial" -> "auto : Vehiculo": avanzarControlPolicial()
 
-create "eventoPosicion : Avanzar"
-"sorpresa : ControlPolicial"  -> "eventoPosicion : Avanzar": Avanzar()
+create "penalizacion : Penalizacion"
+"auto : Vehiculo"-> "penalizacion : Penalizacion": Penalizacion(3)
+
+create "cambioVehiculo : NoCambiarVehiculo"
+"auto : Vehiculo"-> "cambioVehiculo : NoCambiarVehiculo": NoCambiarVehiculo()
+
+create "avanzar : Avanzar"
+"auto : Vehiculo"-> "avanzar : Avanzar": Avanzar()
 
 create "evento : Evento"
-"sorpresa : ControlPolicial"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
-end
-"sorpresa : ControlPolicial" --> "celdaEste : Celda"--: evento
+"auto : Vehiculo" -> "evento : Evento": Evento(penalizacion), cambioVehiculo, avanzar)
 
+"auto : Vehiculo" --> " : ControlPolicial": evento
+" : ControlPolicial" --> "celdaEste : Celda": evento
 "celdaEste : Celda" --> "posicion : Celda": evento
-deactivate "celdaEste : Celda"
 "posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
-deactivate "evento : Evento"
-
-"posicion : Celda" --> Jugador--: evento
-deactivate Jugador
-
+"posicion : Celda" --> Jugador : evento
 
 @enduml
