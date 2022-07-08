@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Ranking.Ranking;
 
 import java.io.File;
+import java.io.IOException;
 
 //TODO: Inutil
 public class Juego {
@@ -22,21 +23,29 @@ public class Juego {
     private final Mapa mapa;
 
     public Juego( Jugador jugador, Mapa mapa, Ranking ranking) {
-        this.jugador = jugador;
-        this.ranking = ranking;
-        this.mapa = mapa;
-        try {
-            this.impresora = new ImpresoraFile(PATH_JUGADOR_TXT);
-            this.impresora = new ImpresoraFile(PATH_RANKING_TXT);
-            this.impresora = new ImpresoraFile(PATH_MAPA_TXT);
-        }catch (ArchivoInexistente e){
-            throw new JuegoInvalido("Los archivos de persistencia no existen.");
-        }
+        if( jugador != null && mapa != null  && ranking != null) {
+            this.jugador = jugador;
+            this.ranking = ranking;
+            this.mapa = mapa;
+        }else throw new JuegoInvalido("Inicialización del Jugador insegura.");
+        crearArchivosDePersistencia();
         this.jugador.setPosicion( this.mapa.getCeldaJugador() );
     }
 
 
-
+    private void crearArchivosDePersistencia() {
+        File archivo = null;
+        try{
+            archivo = new File(PATH_JUGADOR_TXT);
+            if (!archivo.exists()) archivo.createNewFile();
+            archivo = new File(PATH_RANKING_TXT);
+            if (!archivo.exists()) archivo.createNewFile();
+            archivo = new File(PATH_MAPA_TXT);
+            if (!archivo.exists()) archivo.createNewFile();
+        }catch( IOException e){
+            System.out.println("Error al crear el archivo" + archivo.getName());
+        }
+    }
     public Jugador getJugador() {
         return jugador;
     }
@@ -47,38 +56,26 @@ public class Juego {
 
     //Al llegar a la meta, se le notifica que debe agregar al jugador.
 
-    public void actualizarRanking() {
+    public void actualizarRanking() throws ArchivoInexistente {
         this.ranking.agregar(jugador);
         this.guardarRanking();
     }
 
-    private void guardarRanking() {
-        try {
-            this.impresora = new ImpresoraFile(PATH_RANKING_TXT);
-            this.impresora.imprimir( ranking );
-        }catch (ArchivoInexistente e){
-            System.out.println(e.getMessage());
-        }
+    private void guardarRanking() throws ArchivoInexistente {
+         this.impresora = new ImpresoraFile(PATH_RANKING_TXT);
+         this.impresora.imprimir( ranking );
     }
 
-    private void guardarMapa(){
-        try {
-            this.impresora = new ImpresoraFile(PATH_MAPA_TXT);
-            this.impresora.imprimir( mapa );
-        }catch (ArchivoInexistente e){
-            System.out.println(e.getMessage());
-        }
+    private void guardarMapa() throws ArchivoInexistente {
+        this.impresora = new ImpresoraFile(PATH_MAPA_TXT);
+        this.impresora.imprimir( mapa );
     }
-    public void guardarJugador(){
-        try{
-            this.impresora = new ImpresoraFile(PATH_JUGADOR_TXT);
-            this.impresora.imprimir( jugador );
-        }catch (ArchivoInexistente e){
-            System.out.println(e.getMessage());
-        }
+    public void guardarJugador() throws ArchivoInexistente {
+        this.impresora = new ImpresoraFile(PATH_JUGADOR_TXT);
+        this.impresora.imprimir( jugador );
     }
 
-    public void guardarPartida(){
+    public void guardarPartida() throws ArchivoInexistente {
         guardarJugador();
         guardarMapa();
         guardarRanking();

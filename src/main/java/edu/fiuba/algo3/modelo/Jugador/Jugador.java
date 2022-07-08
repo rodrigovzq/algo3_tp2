@@ -23,20 +23,24 @@ public class Jugador extends Observable implements Imprimible {
     private Movimiento puntaje;
 
     public Jugador(String nombre, Celda posicion, IVehiculo vehiculo) {
-        this.nombre = nombre;
-        this.posicion = posicion;
-        this.vehiculo = vehiculo;
+        if( nombre != null && posicion != null && vehiculo != null){
+            this.nombre = nombre;
+            this.posicion = posicion;
+            this.vehiculo = vehiculo;
+        }else throw new JugadorInvalido("Inicializacion Jugador invalida.");
         this.puntaje = new Movimiento(MOVIMIENTOS_INICIALES);
     }
     public Jugador(String nombre, Celda posicion, IVehiculo vehiculo, Integer movimientos) {
-        this.nombre = nombre;
-        this.posicion = posicion;
-        this.vehiculo = vehiculo;
-        try{
-            this.puntaje = new Movimiento(movimientos);
-        }catch( MovimientoInvalido e ){
-            throw new JugadorInvalido("Jugador.puntaje :" + e.getMessage());
-        }
+        if( nombre != null && posicion != null && vehiculo != null && movimientos != null){
+            this.nombre = nombre;
+            this.posicion = posicion;
+            this.vehiculo = vehiculo;
+            try{
+                this.puntaje = new Movimiento(movimientos);
+            }catch( MovimientoInvalido e ){
+                throw new JugadorInvalido("Jugador.puntaje :" + e.getMessage());
+            }
+        }else throw new JugadorInvalido("Inicializacion Jugador invalida.");
     }
     @Override
     public String imprimir() {

@@ -45,6 +45,12 @@ class ImpresoraTest {
         archivoABorrar.delete();
     }
 
+    @Test
+    public void creoDosImpresorasAlMismoArchivoNoOcurreUnError() throws ArchivoInexistente {
+        Impresora impresora1 = new ImpresoraFile("saves/test/fail/archivo.txt");
+        Impresora impresora2 = assertDoesNotThrow( () -> new ImpresoraFile("saves/test/fail/archivo.txt") );
+
+    }
 
 
 }
