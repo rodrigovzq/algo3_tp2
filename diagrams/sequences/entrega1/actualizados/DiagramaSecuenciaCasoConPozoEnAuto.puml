@@ -1,18 +1,20 @@
 @startuml
-title Diagrama Secuencia Auto Avanza Se Encuentra Con Pozo  Y Se Penaliza 3 movimientos
+title Diagrama Secuencia Auto Avanza Se Encuentra Con " : Pozo"  Y Se Penaliza 3 movimientos
 
 autonumber
 
 actor Jugador
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, auto )
-
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+ Jugador -> "celdaEste : Celda"++: avanzarEn( auto )
 
 
-"celdaEste : Celda" -> Pozo++: avanzarEn( auto )
-Pozo -> "auto : Auto"++: avanzarPozo()
+
+"celdaEste : Celda" -> " : Pozo"++: avanzarEn( auto )
+" : Pozo" -> "auto : Auto"++: avanzarPozo()
 
 create "eventoPuntaje :Penalizacion"
 "auto : Auto"-> "eventoPuntaje :Penalizacion": Penalizacion(3)
@@ -27,19 +29,19 @@ create "evento : Evento"
 "auto : Auto"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
 
-"auto : Auto" --> Pozo: evento
+"auto : Auto" --> " : Pozo": evento
 deactivate "auto : Auto"
 
-Pozo --> "celdaEste : Celda": evento
-deactivate Pozo
+" : Pozo" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> " : Pozo": siguiente()
+" : Pozo" --> "celdaEste : Celda": estado
+deactivate " : Pozo"
 
-
-"celdaEste : Celda" --> "posicion : Celda": evento
+"celdaEste : Celda" --> Jugador: evento
 deactivate "celdaEste : Celda"
 
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
-"posicion : Celda" --> Jugador--: evento
 deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )

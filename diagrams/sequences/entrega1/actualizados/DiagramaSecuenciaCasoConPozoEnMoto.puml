@@ -5,14 +5,14 @@ autonumber
 
 actor Jugador
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, moto )
-
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( moto )
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
 
-
-"celdaEste : Celda" -> Pozo++: avanzarEn( moto )
-Pozo -> "moto : Moto"++: avanzarPozo()
+Jugador -> "celdaEste : Celda"++: avanzarEn(moto)
+"celdaEste : Celda" -> " : Pozo"++: avanzarEn( moto )
+" : Pozo" -> "moto : Moto"++: avanzarPozo()
 
 create "eventoPuntaje :Penalizacion"
 "moto : Moto"-> "eventoPuntaje :Penalizacion": Penalizacion(3)
@@ -27,19 +27,21 @@ create "evento : Evento"
 "moto : Moto"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
 
-"moto : Moto" --> Pozo: evento
+"moto : Moto" --> " : Pozo": evento
 deactivate "moto : Moto"
 
-Pozo --> "celdaEste : Celda": evento
-deactivate Pozo
+" : Pozo" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> " : Pozo": siguiente()
+" : Pozo" --> "celdaEste : Celda": estado
+deactivate " : Pozo"
 
 
-"celdaEste : Celda" --> "posicion : Celda": evento
+"celdaEste : Celda" --> Jugador: evento
 deactivate "celdaEste : Celda"
 
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
-"posicion : Celda" --> Jugador--: evento
+
 deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
