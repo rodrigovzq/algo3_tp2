@@ -38,7 +38,7 @@ class JuegoTest {
         when(mockRanking.imprimir()).thenReturn("Test1,10;\nTest2,11;\nTest3,12;\n");
         Juego juego = new Juego( mockJugador, mockMapa, mockRanking);
 
-        juego.actualizar();
+        juego.actualizarRanking();
 
         verify(mockRanking).agregar(mockJugador);
         verify(mockRanking).imprimir();

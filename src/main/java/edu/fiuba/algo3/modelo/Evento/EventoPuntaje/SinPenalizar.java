@@ -11,8 +11,6 @@ public class SinPenalizar implements EventoPuntaje {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        return true;
+        return ( o != null && ( this == o || this.getClass() == o.getClass() ));
     }
 }

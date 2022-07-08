@@ -18,12 +18,13 @@ import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class CasosDeUsosEntrega1Tests {
-    @Test
+    @Disabled
     public void UnaMotoAvanzaYSeEncuentraConUnPozoSePenalizaEnTresMovimientos (){
         Moto moto = new Moto();
 
@@ -44,7 +45,7 @@ public class CasosDeUsosEntrega1Tests {
         assertEquals(esperado, resultado);
     }
 
-    @Test
+    @Disabled
     public void UnAutoAvanzaYSeEncuentraConUnPozoSePenalizaEnTresMovimientos (){
         Auto auto = new Auto();
         Coordenada coordenada = new Coordenada(0,0);
@@ -64,7 +65,7 @@ public class CasosDeUsosEntrega1Tests {
         assertEquals(esperado, resultado);
     }
 
-    @Test
+    @Disabled
     public void UnaCuatroPorCuatroAvanzaYSeEncuentraConUnPozoYNoSePenaliza () {
         CuatroPorCuatro cxc = new CuatroPorCuatro();
         Coordenada coordenada = new Coordenada(0,0);
@@ -85,7 +86,7 @@ public class CasosDeUsosEntrega1Tests {
         assertEquals(esperado, resultado);
     }
 
-    @Test
+    @Disabled
     public void UnaCuatroPorCuatroAvanzaYSeEncuentraConTresPozosSePenalizaEnDosMovimientos (){
         CuatroPorCuatro cxc = new CuatroPorCuatro();
         Coordenada coordenada = new Coordenada(0,0);
@@ -108,7 +109,7 @@ public class CasosDeUsosEntrega1Tests {
         assertEquals(esperado, resultado);
     }
 
-    @Test
+    @Disabled
     public void UnAutoAvanzaYSeEncuentraConUnPiqueteYNoPuedePasar () {
         Auto auto = new Auto();
         Coordenada coordenada = new Coordenada(0,0);

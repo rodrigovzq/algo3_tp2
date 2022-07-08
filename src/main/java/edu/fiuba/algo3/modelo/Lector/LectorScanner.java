@@ -12,7 +12,6 @@ public class LectorScanner implements Lector{
     File file;
     Scanner lectora;
 
-    //TODO: Lector interface
     public LectorScanner(String pathFile) {
         this.file = new File( pathFile );
         try {
@@ -42,12 +41,4 @@ public class LectorScanner implements Lector{
         return resultado;
     }
 
-    private boolean crearNuevoArchivo(){
-        try {
-            return file.createNewFile();
-        } catch (IOException e) {
-            System.out.println("Ya existe el archivo " + file.getPath());
-        }
-        return false;
-    }
 }

@@ -2,7 +2,10 @@ package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
+import edu.fiuba.algo3.modelo.Direccion.Direccion;
+import edu.fiuba.algo3.modelo.Evento.Evento;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
+import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import edu.fiuba.algo3.modelo.Observador;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import org.junit.jupiter.api.Test;
@@ -76,5 +79,49 @@ class JugadorTest {
         jugador.notificarATodos();
 
         verify( mockObservador, times(3)).actualizar();
+    }
+
+    @Test
+    public void alActualizarConUnEventoSeActualizaElPuntajeLaPosicionYElVehiculo(){
+        Celda mockCelda = mock( Celda.class );
+        IVehiculo mockVehiculo = mock( IVehiculo.class );
+        Jugador jugador = new Jugador("Grupo3", mockCelda, mockVehiculo );
+
+        Evento mockEvento = mock(Evento.class);
+        jugador.actualizar(mockEvento);
+
+        verify( mockEvento ).actualizarPuntaje( new Movimiento(0));
+        verify( mockEvento ).actualizarVehiculo( mockVehiculo );
+        verify( mockEvento ).actualizarPosicion( mockCelda );
+    }
+
+    @Test
+    public void alPedirleLaPosicionMeDevuelveLasCoordenadas(){
+        Celda mockCelda = mock( Celda.class );
+        IVehiculo mockVehiculo = mock( IVehiculo.class );
+        Jugador jugador = new Jugador("Grupo3", mockCelda, mockVehiculo );
+        jugador.getPosicion();
+
+        verify( mockCelda ).getCoordenada();
+    }
+
+    @Test
+    public void alAvanzarParaLasDireccionesAdyacentesDelegaALaCeldaYDevuelveUnEvento(){
+        Celda mockCelda = mock( Celda.class );
+        Celda mockCeldaAdyacente = mock( Celda.class );
+
+        IVehiculo mockVehiculo = mock( IVehiculo.class );
+        Jugador jugador = new Jugador("Grupo3", mockCelda, mockVehiculo );
+
+        Direccion mockDireccion = mock( Direccion.class );
+        when( mockCelda.getCelda( mockDireccion ) ).thenReturn(mockCeldaAdyacente);
+
+        Evento mockEvento = mock( Evento.class );
+        when( mockCeldaAdyacente.avanzarEn(mockVehiculo) ).thenReturn(mockEvento);
+
+        jugador.avanzarHaciaLaDireccion( mockDireccion );
+
+        verify( mockCeldaAdyacente ).avanzarEn( mockVehiculo );
+        verify( mockEvento ).setDireccion( mockDireccion );
     }
 }

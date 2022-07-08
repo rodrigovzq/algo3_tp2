@@ -11,10 +11,8 @@ public class NoCambiarPosicion implements EventoPosicion{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        return true;
+    public boolean equals(Object o){
+        return ( o != null && ( this == o || this.getClass() == o.getClass() ));
     }
     @Override
     public Celda actualizarPosicion(Celda celdaActual) {
