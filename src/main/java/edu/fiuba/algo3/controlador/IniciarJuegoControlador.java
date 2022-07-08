@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.Celda.Celda;
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
 import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
 import edu.fiuba.algo3.modelo.Excepcion.JuegoInvalido;
 import edu.fiuba.algo3.modelo.Impresora.ImpresoraFile;
@@ -78,7 +79,7 @@ public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
             System.out.println( e.getMessage());
             ranking = new Ranking();
         }
-
+        Juego juego = null;
         try {
             if (config) {
                 cargarConfiguracion();
@@ -86,7 +87,7 @@ public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
                 cargarPartidaRenaudada();
             }
 
-            Juego juego = new Juego(this.jugador, this.mapa, ranking);
+            juego = new Juego(this.jugador, this.mapa, ranking);
 
             System.out.println("Guardando partida...");
             juego.guardarPartida();
@@ -95,8 +96,11 @@ public class IniciarJuegoControlador implements EventHandler<ActionEvent> {
         }catch(JuegoInvalido e){
             System.out.println(e.getMessage());
             new ContenedorConfiguracion(this.stage);
+        }catch(ArchivoInexistente e){
+            System.out.println("No es posible persisitir el juego." + e.getMessage());
+            new ContenedorJuego(this.stage, juego);
         }
     }
-
-
 }
+
+

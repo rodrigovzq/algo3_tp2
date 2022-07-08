@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
+import edu.fiuba.algo3.modelo.Excepcion.JugadorInvalido;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import edu.fiuba.algo3.modelo.Observador;
@@ -123,5 +124,27 @@ class JugadorTest {
 
         verify( mockCeldaAdyacente ).avanzarEn( mockVehiculo );
         verify( mockEvento ).setDireccion( mockDireccion );
+    }
+
+    @Test
+    public void noEsPosibleCrearUnJugadorConPuntajeNegativo(){
+        Celda mockCelda = mock( Celda.class );
+        IVehiculo mockVehiculo = mock( IVehiculo.class );
+        assertDoesNotThrow( () -> new Jugador("Grupo3", mockCelda, mockVehiculo, 4 ) );
+        assertDoesNotThrow( () -> new Jugador("Grupo3", mockCelda, mockVehiculo, 0 ) );
+        assertThrows( JugadorInvalido.class,  () -> new Jugador("Grupo3", mockCelda, mockVehiculo, -1 ) );
+        assertThrows( JugadorInvalido.class,  () -> new Jugador("Grupo3", mockCelda, mockVehiculo, -4 ) );
+    }
+
+
+    @Test
+    public void noEsPosibleCrearUnJugadorConValoresNull(){
+        Celda mockCelda = mock( Celda.class );
+        IVehiculo mockVehiculo = mock( IVehiculo.class );
+        assertDoesNotThrow( () -> new Jugador("Grupo3", mockCelda, mockVehiculo, 4 ) );
+        assertThrows( JugadorInvalido.class,  () -> new Jugador("Grupo3", mockCelda, mockVehiculo, null ) );
+        assertThrows( JugadorInvalido.class,  () -> new Jugador("Grupo3", mockCelda, null ) );
+        assertThrows( JugadorInvalido.class,  () -> new Jugador("Grupo3", null, mockVehiculo ) );
+        assertThrows( JugadorInvalido.class,  () -> new Jugador(null, mockCelda, mockVehiculo ) );
     }
 }

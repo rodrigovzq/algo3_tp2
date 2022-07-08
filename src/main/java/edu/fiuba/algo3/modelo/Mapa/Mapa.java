@@ -75,7 +75,7 @@ public class Mapa extends Observable implements Imprimible {
     }
 
     private boolean esValido() {
-        return this.altura >= 2 && this.ancho >= 2;
+        return (this.altura != null && this.ancho != null ) && (this.altura >= 2 && this.ancho >= 2);
     }
 
     public Celda getEsquinaSuperiorIzquierda() {

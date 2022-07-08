@@ -416,5 +416,12 @@ class MapaTest {
         verify( mockObservador, times(3)).actualizar();
     }
 
+    @Test
+    public void mapaNopuedeInicializarseConValoresNull(){
+        assertDoesNotThrow( () -> new Mapa(2,2));
+        assertThrows( MapaInvalido.class, () -> new Mapa(null,2));
+        assertThrows( MapaInvalido.class, () -> new Mapa(2,null));
+    }
+
 
 }

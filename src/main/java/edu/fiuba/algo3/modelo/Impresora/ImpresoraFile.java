@@ -11,22 +11,11 @@ public class ImpresoraFile implements Impresora {
 
     public ImpresoraFile(String pathTestFile) throws ArchivoInexistente{
         this.file = new File(pathTestFile);
-        this.crearNuevoArchivo();
         try {
             this.impresora = new PrintWriter(file);
         } catch (FileNotFoundException e) {
             throw new ArchivoInexistente(pathTestFile);
         }
-
-    }
-
-    private boolean crearNuevoArchivo() {
-        try {
-            return file.createNewFile();
-        } catch (IOException e) {
-            System.out.println("Error al crear un nuevo archivo.");
-        }
-        return false;
     }
 
     @Override
