@@ -21,7 +21,7 @@ public class FabricaCeldaEsquina implements FabricaCelda{
         }else if( dir == Direccion.SUDOESTE){
             celda = new CeldaEsquina(  new Comun(), coordenada, Direccion.NORTE, Direccion.ESTE );
         }else{
-            throw new DireccionInvalida("creaCelda :");
+            throw new DireccionInvalida("FabricaCeldaEsquina.creaCelda :");
         }
 
         return celda;

@@ -30,7 +30,7 @@ public class CeldaEsquina extends Celda {
         } else if (direccion == direccionVertical) {
             celdaAdyacente = celdaVertical;
         } else{
-            throw new DireccionInvalida("getCelda :");
+            throw new DireccionInvalida("CeldaEsquina.getCelda :");
         }
 
         return celdaAdyacente;
@@ -43,7 +43,7 @@ public class CeldaEsquina extends Celda {
         } else if (direccion == direccionVertical  ) {
             this.celdaVertical = nuevaCelda;
         } else {
-            throw new DireccionInvalida("setCelda :");
+            throw new DireccionInvalida("CeldaEsquina.setCelda :");
         }
 
         this.setCeldaOpuesta( nuevaCelda, direccion);

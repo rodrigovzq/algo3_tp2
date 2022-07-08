@@ -4,7 +4,9 @@ import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.EstadoCelda.Comun;
 import edu.fiuba.algo3.modelo.EstadoCelda.EstadoCelda;
 import edu.fiuba.algo3.modelo.EstadoCelda.IEstadoCelda;
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
 import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
+import edu.fiuba.algo3.modelo.Excepcion.EstadoCeldaInvalido;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Lector.LectorScanner;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
@@ -29,27 +31,27 @@ public class ParserMapa implements Parser{
     private Integer posicionMetaX;
     private Integer posicionMetaY;
 
-    public ParserMapa(String pathFile ) {
+    public ParserMapa(String pathFile ) throws ArchivoInexistente {
         this.texto = new LectorScanner( pathFile ).leerTodoElArchivo();
         estadosMapa = new ArrayList<>();
     }
 
     @Override
-    public void parsear() {
+    public void parsear()  throws ArchivoMalformado {
         Pattern patron = Pattern.compile( PATRON_TAMANIO );
         Matcher matcher = patron.matcher(this.texto);
 
         if( matcher.find() ){
             anchoMapa = Integer.parseInt(matcher.group(1));
             altoMapa = Integer.parseInt(matcher.group(2));
-        }else throw new ArchivoMalformado();
+        }else throw new ArchivoMalformado("Tamaño del mapa");
 
         patron = Pattern.compile( PATRON_CELDA );
         matcher = patron.matcher(this.texto);
         if( matcher.find() ) {
             posicionJugadorX = Integer.parseInt(matcher.group(1));
             posicionJugadorY = Integer.parseInt(matcher.group(2));
-        }else throw new ArchivoMalformado();
+        }else throw new ArchivoMalformado("Posicion del Jugador");
 
         patron = Pattern.compile( PATRON_FILA );
         matcher  = patron.matcher(this.texto);
@@ -57,11 +59,15 @@ public class ParserMapa implements Parser{
         for(int i = 0; i < altoMapa; i++){
             for( int j = 1; j <= anchoMapa; j++ ){
                 if(matcher.find()) {
-                    String s = matcher.group(1);
-                    IEstadoCelda estado = EstadoCelda.crearDesdeString(s);
-                    estadosMapa.add(estado);
+                    try {
+                        String s = matcher.group(1);
+                        IEstadoCelda estado = EstadoCelda.crearDesdeString(s);
+                        estadosMapa.add(estado);
+                    }catch(EstadoCeldaInvalido e){
+                        throw new ArchivoMalformado("IEstadoCelda inexistente");
+                    }
                 }else{
-                    throw new ArchivoMalformado();
+                    throw new ArchivoMalformado("Mapa sin celdas");
                 }
             }
         }
@@ -69,9 +75,13 @@ public class ParserMapa implements Parser{
     }
 
     @Override
-    public Mapa getEntidadParseada() {
-        Coordenada coordJugador = new Coordenada(posicionJugadorX,posicionJugadorY);
-        Mapa mapa = new Mapa(anchoMapa, altoMapa, coordJugador, estadosMapa);
-        return mapa;
+    public Mapa getEntidadParseada() throws ArchivoMalformado {
+        try {
+            Coordenada coordJugador = new Coordenada(posicionJugadorX, posicionJugadorY);
+            Mapa mapa = new Mapa(anchoMapa, altoMapa, coordJugador, estadosMapa);
+            return mapa;
+        }catch( RuntimeException e){
+            throw new ArchivoMalformado(e.getMessage() + "\nLos valores leídos no son válidos");
+        }
     }
 }

@@ -21,7 +21,7 @@ public enum Obstaculo {
         try {
             return valueOf(s.toUpperCase()).crear();
         }catch(IllegalArgumentException e){
-            throw new ObstaculoInvalido();
+            throw new ObstaculoInvalido("No existe el Obstaculo a crear");
         }
     }
 

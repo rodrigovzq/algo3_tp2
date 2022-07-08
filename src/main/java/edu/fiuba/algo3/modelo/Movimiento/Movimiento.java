@@ -12,7 +12,7 @@ public class Movimiento implements Imprimible {
         if( cantidad >= 0 )
             this.cantidad = cantidad;
         else
-            throw new MovimientoInvalido();
+            throw new MovimientoInvalido("El movimiento no puede ser menor a 0");
     }
 
     public Movimiento sumarMovimiento(Movimiento m) {

@@ -43,7 +43,7 @@ public enum EstadoCelda {
         } else if (META.identificar(s)){
             return new Meta();
         }else{
-            throw new EstadoCeldaInvalido();
+            throw new EstadoCeldaInvalido("Ningun EstadoCelda pudo identificarse");
         }
     }
     public abstract boolean identificar( String s );

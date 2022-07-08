@@ -15,6 +15,7 @@ public class SelectorVehiculo implements EventHandler<ActionEvent> {
     public SelectorVehiculo(Menu lista, String vehiculoSeleccionado, Jugador jugador ) {
         this.lista = lista;
         this.jugador = jugador;
+        //Esta bajo control debido a que nosotros ponemos que Vehiculos puede seleccionar.
         this.vehiculo = Vehiculo.crearVehiculoDesdeString(vehiculoSeleccionado);
     }
 
