@@ -6,10 +6,12 @@ autonumber
 
 actor Jugador
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, v )
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( v )
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+Jugador -> "celdaEste : Celda"++: avanzarEn( auto )
 
 
 "celdaEste : Celda" -> "sorpresa : Favorable"++: avanzarEn( v )
@@ -26,13 +28,17 @@ create "eventoPosicion : Avanzar"
 create "evento : Evento"
 "sorpresa : Favorable"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
-"sorpresa : Favorable" --> "celdaEste : Celda"--: evento
+"sorpresa : Favorable" --> "celdaEste : Celda": evento
 
-"celdaEste : Celda" --> "posicion : Celda": evento
+"celdaEste : Celda" -> "sorpresa : Favorable": siguiente()
+create "comun : Comun"
+"sorpresa : Favorable" -> "comun : Comun": Comun()
+"sorpresa : Favorable" --> "celdaEste : Celda"--: estado = comun
+
+"celdaEste : Celda" --> Jugador: evento
 deactivate "celdaEste : Celda"
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
-"posicion : Celda" --> Jugador--: evento
 deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )

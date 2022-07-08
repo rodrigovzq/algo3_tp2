@@ -2,16 +2,17 @@
 title Un Auto Avanza Y Es Detenido Por Un Control Policial
 
 autonumber
+actor Jugador
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion(ESTE)
-
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
-
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+ Jugador -> "celdaEste : Celda"++: avanzarEn( auto )
 
 "celdaEste : Celda" -> " : ControlPolicial"++: avanzarEn( auto )
 
-" : ControlPolicial" -> "auto : Vehiculo": avanzarControlPolicial()
+" : ControlPolicial" -> "auto : Vehiculo"++: avanzarControlPolicial()
 
 create "penalizacion : Penalizacion"
 "auto : Vehiculo"-> "penalizacion : Penalizacion": Penalizacion(3)
@@ -26,9 +27,36 @@ create "evento : Evento"
 "auto : Vehiculo" -> "evento : Evento": Evento(penalizacion), cambioVehiculo, avanzar)
 
 "auto : Vehiculo" --> " : ControlPolicial": evento
-" : ControlPolicial" --> "celdaEste : Celda": evento
-"celdaEste : Celda" --> "posicion : Celda": evento
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
-"posicion : Celda" --> Jugador : evento
+deactivate "auto : Vehiculo"
 
+" : ControlPolicial" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> " : ControlPolicial": siguiente()
+" : ControlPolicial" --> "celdaEste : Celda": estado
+deactivate " : ControlPolicial"
+
+"celdaEste : Celda" --> Jugador: evento
+deactivate "celdaEste : Celda"
+
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
+deactivate "evento : Evento"
+
+
+ deactivate "posicion : Celda"
+
+deactivate Jugador
+Jugador -> "evento : Evento"++: actualizarPuntaje(puntaje )
+activate Jugador
+
+Jugador <-- "evento : Evento"--: movimientoTotales
+deactivate Jugador
+
+Jugador -> "evento : Evento"++: actualizarVehiculo(auto)
+activate Jugador
+Jugador <-- "evento : Evento"--: auto
+deactivate Jugador
+
+Jugador -> "evento : Evento"++: actualizarPosicion(posicion)
+activate Jugador
+Jugador <-- "evento : Evento"--: celdaEste
+deactivate Jugador
 @enduml

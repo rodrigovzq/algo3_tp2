@@ -6,14 +6,17 @@ autonumber
 
 actor Jugador
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, cxc )
+actor Jugador
 
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( cxc )
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+ Jugador -> "celdaEste : Celda"++: avanzarEn( cxc )
 
 
-"celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
-Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
+"celdaEste : Celda" -> " : Pozo"++: avanzarEn( cxc )
+" : Pozo" -> "cxc : CuatroPorCuatro"++: avanzarPozo()
 
 
 
@@ -34,21 +37,22 @@ alt#Gold   false
     deactivate "cxc : CuatroPorCuatro"
 end
 
-"cxc : CuatroPorCuatro" --> Pozo: evento
+"cxc : CuatroPorCuatro" --> " : Pozo": evento
 
 
 deactivate "cxc : CuatroPorCuatro"
 
-Pozo --> "celdaEste : Celda": evento
-deactivate Pozo
+" : Pozo" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> " : Pozo": siguiente()
+" : Pozo" --> "celdaEste : Celda": estado
+deactivate " : Pozo"
 
 
-"celdaEste : Celda" --> "posicion : Celda": evento
+"celdaEste : Celda" --> Jugador: evento
 deactivate "celdaEste : Celda"
 
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
-"posicion : Celda" --> Jugador--: evento
 deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )

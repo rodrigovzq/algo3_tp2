@@ -3,15 +3,14 @@ title Diagrama Secuencia Auto Avanza Sin Obstaculos Y Sin Sorpresas
 autonumber
 actor Jugador
 
-group "X unMovimiento"
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 activate Jugador
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+ Jugador -> "celdaEste : Celda"++: avanzarEn( auto )
 
-Jugador -> "posicion : Celda"++: avanzarHacia( ESTE, auto )
-
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
-
-"celdaEste : Celda" -> Comun++: avanzarEn( auto )
-Comun -> "auto : Auto"++: avanzarComun()
+"celdaEste : Celda" -> " : Comun"++: avanzarEn( auto )
+" : Comun" -> "auto : Auto"++: avanzarComun()
 
 create "eventoPuntaje : SinPenalizar"
 "auto : Auto" -> "eventoPuntaje : SinPenalizar": SinPenalizar()
@@ -25,17 +24,19 @@ create "eventoPosicion : Avanzar"
 create "evento : Evento"
 "auto : Auto"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
-"auto : Auto" --> Comun: evento
+"auto : Auto" --> " : Comun": evento
 deactivate "auto : Auto"
 
-Comun --> "celdaEste : Celda": evento
-deactivate Comun
-"celdaEste : Celda" --> "posicion : Celda": evento
+" : Comun" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> " : Comun": siguiente()
+" : Comun" --> "celdaEste : Celda": estado
+deactivate " : Comun"
+"celdaEste : Celda" --> Jugador: evento
 deactivate "celdaEste : Celda"
 
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
-"posicion : Celda" --> Jugador--: evento
+
 deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
@@ -52,6 +53,6 @@ Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
 activate Jugador
 Jugador <-- "evento : Evento"--: celdaEste
 deactivate Jugador
-end
+
 
 @enduml

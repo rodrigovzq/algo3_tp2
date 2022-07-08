@@ -6,14 +6,16 @@ autonumber
 
 actor Jugador
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, cxc )
-
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( cxc )
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+ Jugador -> "celdaEste : Celda"++: avanzarEn( auto )
 
 
-"celdaEste : Celda" -> Pozo++: avanzarEn( cxc )
-Pozo -> "cxc : CuatroPorCuatro"++: avanzarPozo()
+
+"celdaEste : Celda" -> " : Pozo"++: avanzarEn( cxc )
+" : Pozo" -> "cxc : CuatroPorCuatro"++: avanzarPozo()
 
 "cxc : CuatroPorCuatro" -> "cxc : CuatroPorCuatro"++: limitePozosExcedido()
 
@@ -35,18 +37,17 @@ alt#Gold   true
     deactivate "cxc : CuatroPorCuatro"
 
 end
-    "cxc : CuatroPorCuatro" --> Pozo--: evento
+    "cxc : CuatroPorCuatro" --> " : Pozo"--: evento
 
-Pozo --> "celdaEste : Celda": evento
-deactivate Pozo
+" : Pozo" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> " : Pozo": siguiente()
+" : Pozo" --> "celdaEste : Celda": estado
+deactivate " : Pozo"
 
-
-"celdaEste : Celda" --> "posicion : Celda": evento
+"celdaEste : Celda" --> Jugador: evento
 deactivate "celdaEste : Celda"
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
-"posicion : Celda" --> Jugador--: evento
-
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )
 Jugador <-- "evento : Evento"--: movimientoTotales
@@ -56,26 +57,5 @@ Jugador <-- "evento : Evento"--: cxc
 
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
 Jugador <-- "evento : Evento"--: celdaEste
-=======
-
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
-deactivate "event : Evento"
-"posicion : Celda" --> Jugador--: event
-deactivate Jugador
-
-Jugador -> "event : Evento"++: actualizarPuntaje( puntaje )
-activate Jugador
-Jugador <-- "event : Evento"--: movimientoTotales
-deactivate Jugador
-
-Jugador -> "event : Evento"++: actualizarVehiculo( cxc )
-activate Jugador
-Jugador <-- "event : Evento"--: cxc
-deactivate Jugador
-
-Jugador -> "event : Evento"++: actualizarPosicion( posicion )
-activate Jugador
-Jugador <-- "event : Evento"--: celdaEste
-deactivate Jugador
 
 @enduml

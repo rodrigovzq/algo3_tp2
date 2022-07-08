@@ -5,10 +5,12 @@ autonumber
 
 actor Jugador
 
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion( ESTE, auto )
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+Jugador -> "celdaEste : Celda"++: avanzarEn( auto )
 
 
 "celdaEste : Celda" -> "sorpresa : CambioVehiculo"++: avanzarEn( auto )
@@ -25,14 +27,15 @@ create "eventoPosicion : Avanzar"
 create "evento : Evento"
 "sorpresa : CambioVehiculo"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
-"sorpresa : CambioVehiculo" --> "celdaEste : Celda"--: evento
+"sorpresa : CambioVehiculo" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> "sorpresa : CambioVehiculo": siguiente()
+"sorpresa : CambioVehiculo" --> "celdaEste : Celda"--: estado
 
-"celdaEste : Celda" --> "posicion : Celda": evento
+"celdaEste : Celda" --> Jugador: evento
 deactivate "celdaEste : Celda"
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 deactivate "evento : Evento"
 
-"posicion : Celda" --> Jugador--: evento
 deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPuntaje( puntaje )

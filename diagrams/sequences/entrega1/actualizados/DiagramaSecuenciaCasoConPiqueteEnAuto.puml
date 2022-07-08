@@ -3,16 +3,14 @@ title Diagrama Secuencia Auto Avanza Se Encuentra Con Piquete Y No Avanza
 
 autonumber
 
-actor Jugador
-
-Jugador -> "posicion : Celda"++: avanzarHaciaLaDireccion(ESTE)
-
+Jugador -> "posicion : Celda"++: getCelda(ESTE )
 activate Jugador
-"posicion : Celda" -> "celdaEste : Celda"++: avanzarEn( auto )
+"posicion : Celda" --> Jugador: celdaEste
+deactivate "posicion : Celda"
+ Jugador -> "celdaEste : Celda"++: avanzarEn( auto )
 
-
-"celdaEste : Celda" -> Piquete++: avanzarEn( auto )
-Piquete -> "auto : Auto"++: avanzarPiquete()
+"celdaEste : Celda" -> " : Piquete"++: avanzarEn( auto )
+" : Piquete" -> "auto : Auto"++: avanzarPiquete()
 
 create "eventoPuntaje : NoCambiarPuntaje"
 "auto : Auto" -> "eventoPuntaje : NoCambiarPuntaje": NoCambiarPuntaje()
@@ -26,21 +24,20 @@ create "eventoPosicion : NoCambiarPosicion"
 create "evento : Evento"
 "auto : Auto"  -> "evento : Evento": Evento( eventoPuntaje, eventoVehiculo, eventoPosicion)
 
-"auto : Auto" --> Piquete: evento
+"auto : Auto" --> " : Piquete": evento
 deactivate "auto : Auto"
 
-Piquete --> "celdaEste : Celda": evento
-
-deactivate Piquete
-"celdaEste : Celda" --> "posicion : Celda": evento
+" : Piquete" --> "celdaEste : Celda": evento
+"celdaEste : Celda" -> " : Piquete": siguiente()
+" : Piquete" --> "celdaEste : Celda": estado
+"celdaEste : Celda" --> Jugador: evento
+deactivate " : Piquete"
 deactivate "celdaEste : Celda"
 
-
-
-"posicion : Celda" -> "evento : Evento"++: setDireccion( ESTE )
+Jugador -> "evento : Evento"++: setDireccion( ESTE )
 =======
 deactivate "evento : Evento"
-"posicion : Celda" --> Jugador--: evento
+
 deactivate Jugador
 
 
@@ -55,7 +52,6 @@ Jugador <-- "evento : Evento"--: auto
 deactivate Jugador
 
 Jugador -> "evento : Evento"++: actualizarPosicion( posicion )
-Jugador <-- "evento : Evento"--: posicion
 
 activate Jugador
 Jugador <-- "evento : Evento"--: celdaEste
