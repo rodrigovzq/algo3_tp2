@@ -352,26 +352,15 @@ class MapaTest {
         resultado = ( distanciaY > 0);
         assertTrue(resultado);
 
-        //Repito el test
-        for( int i = 0; i < 10; i++) {
-            mapa = new Mapa(20,20);
-            celda = mapa.getCeldaJugador();
-            distanciaX = celda.distanciaHorizontal(celdaMax);
-            distanciaY = celda.distanciaVertical(celdaMax);
-
-            resultado = (distanciaX > 0);
-            assertTrue(resultado);
-            resultado = (distanciaY > 0);
-            assertTrue(resultado);
-        }
     }
 
     @Test
     public void laCeldaMetaSiempreSeSorteaEnELPrimerCuartoDelMapa(){
-        Mapa mapa = new Mapa(6,6);
-        Integer meta = mapa.sortearIndiceMeta();
-
-        assertTrue( (20 < meta && meta < 24) ||(26 < meta && meta < 30) || ( 32 < meta && meta < 36));
+        Mapa mapa = new Mapa(20,20);
+        Coordenada meta = mapa.getMeta();
+        Coordenada coordenada = new Coordenada( 9, 9);
+        assertTrue( coordenada.distanciaVertical(meta) > 0);
+        assertTrue( coordenada.distanciaHorizontal(meta)  > 0);
     }
 
     @Test

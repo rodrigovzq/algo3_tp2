@@ -10,7 +10,7 @@ import static org.mockito.Mockito.mock;
 
 class LectorScannerTest {
     @Test
-    public void leoLineasDeUnArchivo(){
+    public void leoLineasDeUnArchivo() throws ArchivoInexistente {
         String pathTestFile = "saves/test.txt";
         LectorScanner lector = new LectorScanner(pathTestFile);
 

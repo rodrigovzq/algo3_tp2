@@ -9,11 +9,13 @@ import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParserJugadorTest {
     @Test
-    public void leeDeUnArchivoYDevuelveElJugador(){
+    public void leeDeUnArchivoYDevuelveElJugador() throws IOException {
         String pathFileTest = "saves/test/jugador_test.txt";
         ParserJugador parser = new ParserJugador( pathFileTest );
         parser.parsear();
