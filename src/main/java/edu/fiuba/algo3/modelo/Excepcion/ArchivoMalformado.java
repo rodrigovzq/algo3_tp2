@@ -1,4 +1,9 @@
 package edu.fiuba.algo3.modelo.Excepcion;
 
-public class ArchivoMalformado extends RuntimeException {
+import java.io.IOException;
+
+public class ArchivoMalformado extends IOException {
+    public ArchivoMalformado(String causa) {
+        super(causa + ": Provoca que el archivo esté corrupto y no puede leerse correctamente.");
+    }
 }

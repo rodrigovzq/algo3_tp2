@@ -1,114 +1,97 @@
 package edu.fiuba.algo3.vista.PantallasPrincipales;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Pair;
 
 import java.util.List;
 
-import static javafx.scene.paint.Color.*;
+import static javafx.scene.paint.Color.web;
 
 public class ContenedorRanking {
     private Stage stage;
-    private List<Pair<String,String>> ranking;
+    private ObservableList<Pair<String, String>> ranking;
+    private VBox panel;
 
-    public ContenedorRanking(Stage stage, List<Pair<String,String>> ranking) {
+    public ContenedorRanking(Stage stage, List<Pair<String, String>> ranking) {
         this.stage = stage;
-        this.ranking = ranking;
+        this.panel = new VBox();
+        this.ranking = FXCollections.observableArrayList();
+        for (Pair<String, String> par : ranking) {
+            this.ranking.add(par);
+        }
         this.iniciar();
     }
 
-    private void iniciar(){
-        Label participantes = new Label();
-        Label movimientos = new Label();
-        Separator lineaSeparador = new Separator();
-        VBox cajaGlobal = new VBox();
+    private void iniciar() {
 
-        participantes.setText("Nombre");
-        participantes.setFont(new Font(14));
-        participantes.setAlignment(Pos.TOP_CENTER);
-        participantes.setBackground(new Background(new BackgroundFill(TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        participantes.setTextFill(WHITE);
-        participantes.setPadding(new Insets(5));
+        Label titulo = new Label("RANKING");
+        titulo.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
+        titulo.setAlignment(Pos.TOP_CENTER);
+        titulo.setTextFill(Color.WHITE);
+        titulo.setPadding(new Insets(10,10,10,10));
+        titulo.setFont(new Font(35));
 
-        movimientos.setText("Total Movimiento Usados");
-        movimientos.setFont(new Font(14));
-        movimientos.setAlignment(Pos.TOP_CENTER);
-        movimientos.setBackground(new Background(new BackgroundFill(TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        movimientos.setTextFill(WHITE);
-        movimientos.setPadding(new Insets(5));
+        TableColumn<Pair<String, String>, String> columnaNombre = new TableColumn<>("Nombre");
+        columnaNombre.setMinWidth(100);
+        columnaNombre.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getKey()));
+        columnaNombre.setSortable(false);
 
-        /*
-         * guardé este espacio para ver la forma de mostrar
-         * el texto ponderado de los jugadores
-         * */
-        VBox cajaDeTextoInformativo = new VBox();
-        //TODO: Emprolijar.
-        for(Pair<String,String> info : this.ranking){
-            Text nombre = new Text( info.getKey() );
-            Text puntaje = new Text( info.getValue() );
-            HBox registro = new HBox();
-            registro.getChildren().addAll(nombre, puntaje);
-            registro.setSpacing(150);
-            registro.setAlignment(Pos.CENTER);
-            cajaDeTextoInformativo.getChildren().add(registro);
-        }
+        TableColumn<Pair<String, String>, String> columnaPuntaje = new TableColumn<>("Puntaje");
+        columnaPuntaje.setMinWidth(100);
+        columnaPuntaje.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getValue()));
+        columnaPuntaje.setSortable(false);
 
-        HBox cajaNombresPrincipales = new HBox();
-        cajaNombresPrincipales.getChildren().addAll(participantes, movimientos);
-        cajaNombresPrincipales.setSpacing(150);
-        cajaNombresPrincipales.setAlignment(Pos.CENTER);
 
-        Button btnVolver = new Button("Volver al Menu");
+        TableView<Pair<String, String>> tabla = new TableView<>();
+        tabla.setItems(ranking);
 
-        HBox buttomControls = new HBox();
-        VBox.setMargin( buttomControls, new Insets(10.0d) );
-        buttomControls.setAlignment( Pos.BOTTOM_CENTER );
-        btnVolver.setOnAction( e -> new ContenedorMenu(this.stage) );
-        buttomControls.getChildren().add( btnVolver);
+        tabla.prefHeightProperty().bind(stage.heightProperty().divide(3.62));
+        tabla.prefWidthProperty().bind(stage.widthProperty().divide(4));
 
-        /*
-         *Cuando se rellene la cajaDeTextoInformativo se debe
-         *cambiar el new Insets(0.0d, 10.0d, 10.0d, 10.0d) para mayor prolijidad.
-         * */
-        VBox.setMargin( cajaDeTextoInformativo, new Insets(0.0d, 10.0d, 10.0d, 10.0d) );
-        VBox.setVgrow( cajaDeTextoInformativo, Priority.ALWAYS );
+        tabla.minHeightProperty().bind(tabla.prefHeightProperty());
+        tabla.maxHeightProperty().bind(tabla.prefHeightProperty());
 
-        cajaGlobal.getChildren().addAll(cajaNombresPrincipales, lineaSeparador, cajaDeTextoInformativo, buttomControls);
-        cajaGlobal.setPadding(new Insets(10));
+        tabla.getColumns().addAll(columnaNombre, columnaPuntaje);
 
-        GridPane panel = new GridPane();
-        panel.getChildren().add(cajaGlobal);
-        panel.setAlignment(Pos.TOP_CENTER);
+        columnaNombre.prefWidthProperty().bind(tabla.widthProperty().divide(2)); // w * 1/4
+        columnaPuntaje.prefWidthProperty().bind(tabla.widthProperty().divide(2)); // w * 1/2
 
+        columnaNombre.setResizable(false);
+        columnaPuntaje.setResizable(false);
+        columnaNombre.setReorderable(false);
+        columnaPuntaje.setReorderable(false);
+
+        Button botonVolver = new Button("Volver al Menu");
+
+        HBox cajaBoton = new HBox();
+        VBox.setMargin(cajaBoton, new Insets(10.0d));
+        cajaBoton.setAlignment(Pos.CENTER);
+        botonVolver.setOnAction(e -> new ContenedorMenu(this.stage));
+        cajaBoton.getChildren().add(botonVolver);
+
+        panel.setAlignment(Pos.CENTER);
+        panel.getChildren().addAll(titulo, tabla, cajaBoton);
+        VBox.setMargin(tabla, new Insets(50,400,50,400));
         panel.setBackground(new Background(new BackgroundFill(web("#3e4e5a"), new CornerRadii(0), new Insets(0))));
-
-        Scene confg = new Scene(panel, 640,480);
-        this.stage.setScene(confg);
+        Scene config = new Scene(panel, 640, 480);
+        this.stage.setScene(config);
         this.stage.show();
 
     }
 
-    /*
-        CODIGO ANTERIOR:
-
-            // Implementar contenido de la ventana del ranking.txt
-            Button botonVolverMenu = new Button( "Volver al menu.");
-            botonVolverMenu.setOnAction( e -> new ContenedorMenu(this.stage) );
-            VBox layout = new VBox();
-            layout.getChildren().addAll(botonVolverMenu);
-            layout.setAlignment(Pos.CENTER);
-            // Va a tener la lista de ranking.txt. como diferenciamos por tamaño del mapa??
-            Scene contenido = new Scene( layout );
-            this.stage.setScene( contenido );
-            this.stage.show();
-     */
 }

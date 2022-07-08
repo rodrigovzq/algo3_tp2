@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
+import edu.fiuba.algo3.modelo.Excepcion.VehiculoInvalido;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

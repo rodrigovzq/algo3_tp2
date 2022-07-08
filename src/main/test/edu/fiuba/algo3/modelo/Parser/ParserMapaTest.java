@@ -5,11 +5,13 @@ import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParserMapaTest {
     @Test
-    public void leerDeUnArchivoYSeGeneraElMapa(){
+    public void leerDeUnArchivoYSeGeneraElMapa() throws IOException {
         String pathFile = "saves/test/mapa_test.txt";
         Parser parser = new ParserMapa( pathFile );
         parser.parsear();

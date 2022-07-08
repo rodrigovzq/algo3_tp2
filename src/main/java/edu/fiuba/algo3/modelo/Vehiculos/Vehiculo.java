@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
+import edu.fiuba.algo3.modelo.Excepcion.VehiculoInvalido;
+
 public enum Vehiculo {
     AUTO{
         @Override
@@ -19,7 +21,7 @@ public enum Vehiculo {
             return valueOf( s.toUpperCase() ).crear();
         }catch (IllegalArgumentException e){
             //TODO: Caso posible: Puede que esté malformado el archivo y entrar aca.
-            throw new VehiculoInvalido();
+            throw new VehiculoInvalido("No existe el Vehiculo que se desea crear");
         }
     }
 }

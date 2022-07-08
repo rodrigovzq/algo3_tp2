@@ -12,12 +12,12 @@ public class LectorScanner implements Lector{
     File file;
     Scanner lectora;
 
-    public LectorScanner(String pathFile) {
+    public LectorScanner(String pathFile) throws ArchivoInexistente{
         this.file = new File( pathFile );
         try {
             this.lectora = new Scanner(this.file);
         } catch (FileNotFoundException e) {
-            throw new ArchivoInexistente();
+            throw new ArchivoInexistente(pathFile);
         }
 
     }

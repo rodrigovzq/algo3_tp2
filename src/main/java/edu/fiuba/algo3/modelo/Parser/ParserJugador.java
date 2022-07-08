@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Parser;
 import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Celda.FabricaCelda.FabricaCeldaInterna;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
 import edu.fiuba.algo3.modelo.Excepcion.ArchivoMalformado;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Lector.LectorScanner;
@@ -24,7 +25,7 @@ public class ParserJugador implements Parser {
     private String posX;
     private String posY;
     private String movimientos;
-    public ParserJugador(String pathFile) {
+    public ParserJugador(String pathFile) throws ArchivoInexistente {
         this.texto = new LectorScanner(pathFile).leerTodoElArchivo();
         nombre="";
         vehiculo="";
@@ -33,7 +34,7 @@ public class ParserJugador implements Parser {
         movimientos="-1";
     }
 
-    public void parsear() {
+    public void parsear() throws ArchivoMalformado{
         String patron_grupo =  PATRON_NOMBRE + Jugador.DELIMITADOR +  PATRON_UBICACION + Jugador.DELIMITADOR +  PATRON_VEHICULO  + Jugador.DELIMITADOR  + PATRON_PUNTAJE ;
         Pattern patron = Pattern.compile( patron_grupo );
         Matcher matcher = patron.matcher(this.texto);
@@ -45,26 +46,32 @@ public class ParserJugador implements Parser {
             vehiculo = matcher.group(4);
             movimientos = matcher.group(5);
         }else{
-            throw new ArchivoMalformado();
+            throw new ArchivoMalformado("Jugador sin los atributos necesarios");
         }
 
     }
 
-    public Jugador getEntidadParseada(){
-        String nombreJugador = nombre;
-        IVehiculo vehiculoJugador = Vehiculo.crearVehiculoDesdeString(vehiculo);
-        Celda posicionJugador;
+    public Jugador getEntidadParseada() throws ArchivoMalformado {
+        IVehiculo vehiculoJugador = null;
+        Coordenada coord = null;
         Integer puntajeJugador;
+        try{
+            puntajeJugador = Integer.parseInt( movimientos );
+            Integer x = Integer.parseInt(posX);
+            Integer y = Integer.parseInt( posY);
+            coord = new Coordenada(x,y);
+            vehiculoJugador = Vehiculo.crearVehiculoDesdeString(vehiculo);
+        }catch( RuntimeException e){
+            throw new ArchivoMalformado(e.getMessage() + "\nLos valores leídos no son válidos");
+        }
+        String nombreJugador = nombre;
 
-        Integer x = Integer.parseInt(posX);
-        Integer y = Integer.parseInt( posY);
-        Coordenada coord = new Coordenada(x,y);
+        //TODO: No me gusta esto.
 
-        //TODO: Como leer la ubicacion y dar la celda del mapa.
+        Celda posicionJugador;
         FabricaCeldaInterna fabrica = new FabricaCeldaInterna();
         posicionJugador = fabrica.crearCelda(coord);
 
-        puntajeJugador = Integer.parseInt( movimientos );
         return new Jugador(nombreJugador, posicionJugador, vehiculoJugador, puntajeJugador);
     }
 }

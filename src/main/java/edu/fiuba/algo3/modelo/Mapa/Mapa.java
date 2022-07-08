@@ -52,7 +52,7 @@ public class Mapa extends Observable implements Imprimible {
         this.ancho = ancho;
         this.altura = altura;
         if (!this.esValido()) {
-            throw new MapaInvalido();
+            throw new MapaInvalido("Crear un mapa ingresando tamaño");
         }
 
         this.generador = new GeneradorObstaculo();
@@ -65,7 +65,7 @@ public class Mapa extends Observable implements Imprimible {
         this.ancho = ancho;
         this.altura = altura;
         if (!this.esValido()) {
-            throw new MapaInvalido();
+            throw new MapaInvalido("Al cargar un mapa");
         }
 
         this.generador = new GeneradorObstaculo();
@@ -211,13 +211,15 @@ public class Mapa extends Observable implements Imprimible {
         }
         return celda;
     }
-
+    //TODO: Refactor. Crear TamañoMapa
     public void setAncho(Integer ancho) {
         this.ancho = ancho;
+        if( !esValido() ) throw new MapaInvalido("Al ingresar el ancho");
     }
 
     public void setAltura(Integer altura) {
         this.altura = altura;
+        if( !esValido() ) throw new MapaInvalido("Al ingresar la altura");
     }
 
     public int getAncho() {
@@ -237,7 +239,14 @@ public class Mapa extends Observable implements Imprimible {
     public Integer sortearIndiceMeta() {
         Integer fila = (int) (this.altura * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
         Integer columna = (int) (this.ancho * (1 - this.generador.sortearNumero() * PROPORCION_MAPA_APARICION));
-        return fila * this.ancho + columna;
+        Integer indice = fila * this.ancho + columna;
+        if(fila % 2 == 0){
+            return indice;
+        }else{
+            return fila * this.ancho + ( (this.ancho - 1 ) - indice % this.ancho );
+        }
+
+
     }
 
     public Celda getCelda(Coordenada coordenada) {
@@ -289,7 +298,7 @@ public class Mapa extends Observable implements Imprimible {
         }
 
         if( metas != 1)
-            throw new MapaInvalido();
+            throw new MapaInvalido("La cantidad de metas supera el límite.");
 
         return meta;
     }
@@ -410,5 +419,9 @@ public class Mapa extends Observable implements Imprimible {
 
     public void setPosicionJugador(Coordenada posicionJugador) {
         this.posicionJugador = getCelda(posicionJugador);
+    }
+
+    public boolean elJugadorLlegoAMeta() {
+        return posicionJugador.equals(getCelda(coordenadaMeta));
     }
 }

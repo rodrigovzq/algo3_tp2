@@ -17,7 +17,7 @@ public class GeneradorSorpresa implements GeneradorEstadosAleatorio {
         if( probabilidad > 0 )
             return this.sortearNumero() <= probabilidad;
         else
-            throw new ProbabilidadInvalida();
+            throw new ProbabilidadInvalida("La probabilidad no puede ser negativa");
     }
 
     @Override

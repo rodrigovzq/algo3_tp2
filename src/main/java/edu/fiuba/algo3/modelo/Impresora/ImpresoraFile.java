@@ -9,13 +9,13 @@ public class ImpresoraFile implements Impresora {
     private PrintWriter impresora;
     private final File file;
 
-    public ImpresoraFile(String pathTestFile) {
+    public ImpresoraFile(String pathTestFile) throws ArchivoInexistente{
         this.file = new File(pathTestFile);
         this.crearNuevoArchivo();
         try {
             this.impresora = new PrintWriter(file);
         } catch (FileNotFoundException e) {
-            throw new ArchivoInexistente();
+            throw new ArchivoInexistente(pathTestFile);
         }
 
     }

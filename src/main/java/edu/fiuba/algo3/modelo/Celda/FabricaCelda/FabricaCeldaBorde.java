@@ -20,7 +20,7 @@ public class FabricaCeldaBorde implements FabricaCelda{
         }else if( dir == Direccion.OESTE){
             celda = new CeldaBorde( new Comun(), coordenada , Direccion.NORTE, Direccion.SUR, Direccion.ESTE );
         }else{
-            throw new DireccionInvalida("creaCelda :");
+            throw new DireccionInvalida("FabricaCeldaBorde.creaCelda :");
         }
 
         return celda;

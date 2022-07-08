@@ -6,13 +6,15 @@ import edu.fiuba.algo3.modelo.Ranking.Ranking;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class ParserRankingTest {
     @Test
-    public void leeDeUnArchivoYDevuelveUnRanking(){
+    public void leeDeUnArchivoYDevuelveUnRanking() throws IOException {
         String pathFileTest = "saves/test/ranking_test.txt";
         ParserRanking parser = new ParserRanking( pathFileTest );
         parser.parsear();

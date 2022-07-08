@@ -19,7 +19,7 @@ public class Coordenada implements Imprimible {
     public Coordenada(Integer posX, Integer posY) throws CoordenadaInvalida {
         this.posX = posX;
         this.posY = posY;
-        if( !this.esValida() ){ throw new CoordenadaInvalida(); }
+        if( !this.esValida() ){ throw new CoordenadaInvalida("Al crear una coordenada"); }
     }
 
     public Coordenada(Coordenada coord) {
@@ -34,7 +34,7 @@ public class Coordenada implements Imprimible {
         return false;
     }
 
-    public void mover(Direccion direccion)  throws PosicionInvalida {
+    public void mover(Direccion direccion){
         if( direccion == Direccion.NORTE){
             this.posY -= 1;
         }else if( direccion == Direccion.SUR){
@@ -46,7 +46,7 @@ public class Coordenada implements Imprimible {
         }
 
         if( posX < 0 || posY < 0)
-            throw new CoordenadaInvalida();
+            throw new CoordenadaInvalida("Al mover una coordenada");
 
     }
 
@@ -69,7 +69,7 @@ public class Coordenada implements Imprimible {
 
     public boolean esEsquina(Integer ancho, Integer altura)  throws PosicionInvalida {
         if( ((posX - ancho) >= 0) || ((posX - ancho) >= 0)){
-            throw new PosicionInvalida();
+            throw new PosicionInvalida("La coordenada se encuentra fuera del mapa");
         }
         if( (posX == 0) || (posX == ancho - 1) ){
             if((this.posY == 0)  || (this.posY == (altura - 1))){
@@ -90,7 +90,7 @@ public class Coordenada implements Imprimible {
         }else if( this.posY == altura-1 && this.posX == ancho-1){
             return Direccion.SUDESTE;
         }else {
-            throw new DireccionInvalida( "determinarEsquina :");
+            throw new DireccionInvalida( "Coordenada.determinarEsquina :");
         }
     }
 
@@ -106,7 +106,7 @@ public class Coordenada implements Imprimible {
         }else if(this.posY == altura-1){
             return Direccion.SUR;
         }else{
-            throw new DireccionInvalida("determinarBorde :");
+            throw new DireccionInvalida("Coordenada.determinarBorde :");
         }
     }
 

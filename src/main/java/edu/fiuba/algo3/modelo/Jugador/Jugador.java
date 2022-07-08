@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.Celda.Celda;
 import edu.fiuba.algo3.modelo.Coordenada.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion.Direccion;
 import edu.fiuba.algo3.modelo.Evento.Evento;
+import edu.fiuba.algo3.modelo.Excepcion.JugadorInvalido;
+import edu.fiuba.algo3.modelo.Excepcion.MovimientoInvalido;
 import edu.fiuba.algo3.modelo.Impresora.Imprimible;
 import edu.fiuba.algo3.modelo.Movimiento.Movimiento;
 import edu.fiuba.algo3.modelo.Observable;
@@ -30,7 +32,11 @@ public class Jugador extends Observable implements Imprimible {
         this.nombre = nombre;
         this.posicion = posicion;
         this.vehiculo = vehiculo;
-        this.puntaje = new Movimiento(movimientos);
+        try{
+            this.puntaje = new Movimiento(movimientos);
+        }catch( MovimientoInvalido e ){
+            throw new JugadorInvalido("Jugador.puntaje :" + e.getMessage());
+        }
     }
     @Override
     public String imprimir() {

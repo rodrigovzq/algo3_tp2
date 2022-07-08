@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,16 @@ public class MostrarRanking implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        ParserRanking parser = new ParserRanking(Juego.PATH_RANKING_TXT);
-        parser.parsear();
-        Ranking ranking = parser.getEntidadParseada();
+        Ranking ranking = null;
+        try {
+            ParserRanking parser = new ParserRanking(Juego.PATH_RANKING_TXT);
+            parser.parsear();
+            ranking = parser.getEntidadParseada();
+        }catch( IOException e){
+            System.out.println( e.getMessage() );
+            ranking = new Ranking();
+        }
+
         List<Puntaje> top10 = ranking.devolverListaDeLosPrimeros( 10 );
         List< Pair<String,String> > listado = new ArrayList();
 

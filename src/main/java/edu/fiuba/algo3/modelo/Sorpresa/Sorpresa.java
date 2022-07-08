@@ -21,7 +21,7 @@ public enum Sorpresa {
         try {
             return valueOf(s.toUpperCase()).crear();
         }catch(IllegalArgumentException e){
-            throw new SorpresaInvalida();
+            throw new SorpresaInvalida("No existe la Sorpresa que se desea crear.");
         }
     }
 

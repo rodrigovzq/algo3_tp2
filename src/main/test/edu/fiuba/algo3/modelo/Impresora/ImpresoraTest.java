@@ -1,16 +1,18 @@
 package edu.fiuba.algo3.modelo.Impresora;
 
+import edu.fiuba.algo3.modelo.Excepcion.ArchivoInexistente;
 import edu.fiuba.algo3.modelo.Lector.Lector;
 import edu.fiuba.algo3.modelo.Lector.LectorScanner;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ImpresoraTest {
     @Test
-    public void escriboLineasEnUnArchivoExistente(){
+    public void escriboLineasEnUnArchivoExistente() throws IOException {
         String pathTestFile = "saves/test.txt";
         Impresora impresora = new ImpresoraFile(pathTestFile);
         impresora.escribirNuevaLinea("Hola mundo1!\n");
@@ -28,7 +30,7 @@ class ImpresoraTest {
 
     }
     @Test
-    public void escriboUnaLineaDeUnArchivoQueNoExiste(){
+    public void escriboUnaLineaDeUnArchivoQueNoExiste() throws ArchivoInexistente {
         String pathTestFile = "saves/testEscrituraNoExiste.txt";
         ImpresoraFile impresora = assertDoesNotThrow( () -> new ImpresoraFile(pathTestFile) );
 

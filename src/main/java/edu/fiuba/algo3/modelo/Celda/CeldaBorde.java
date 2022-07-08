@@ -26,7 +26,7 @@ public class CeldaBorde extends Celda {
     }
 
     @Override
-    public Celda getCelda(Direccion direccion) throws DireccionInvalida{
+    public Celda getCelda(Direccion direccion) {
         Celda celdaAdyacente = null;
 
         if (direccion == direccion1) {
@@ -36,7 +36,7 @@ public class CeldaBorde extends Celda {
         } else if (direccion == direccion3) {
             celdaAdyacente = celda3;
         } else {
-            throw new DireccionInvalida("getCelda :");
+            throw new DireccionInvalida("CeldaBorde.getCelda :");
         }
         return celdaAdyacente;
     }
@@ -50,7 +50,7 @@ public class CeldaBorde extends Celda {
         } else if (direccion == direccion3  ) {
             this.celda3 = nuevaCelda;
         } else {
-            throw new DireccionInvalida("setCelda :");
+            throw new DireccionInvalida("CeldaBorde.setCelda :");
         }
 
         this.setCeldaOpuesta( nuevaCelda, direccion);
