@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.PantallasPrincipales;
 
+import edu.fiuba.algo3.controlador.CampoTextoBoton;
 import edu.fiuba.algo3.controlador.CampoTextoEnter;
 import edu.fiuba.algo3.controlador.Selectores.SelectorMapa;
 import edu.fiuba.algo3.controlador.Selectores.SelectorVehiculo.SelectorVehiculo;
@@ -46,7 +47,7 @@ public class ContenedorConfiguracion {
     Button boton30x10 = new Button("30X10");
     Button boton30x16 = new Button("30X16");
     HBox listaVehiculo;
-
+    private Label validacionNombre;
 
 
     public ContenedorConfiguracion(Stage stage) {
@@ -75,8 +76,8 @@ public class ContenedorConfiguracion {
 
         //CampoTextoEnter detecta el ENTER y "valida" si es valido el nombre
         //TODO: Validaciones nombres en CampoTextoEnter.
-        CampoTextoEnter enterNombre = new CampoTextoEnter(campoNombre, this.jugador);
-        enterNombre.setMensajeIncorrecto("Ingresá un nombre válido.");
+        this.validacionNombre = new Label("No vacío y menor a 25 caracteres.");
+        CampoTextoEnter enterNombre = new CampoTextoEnter(campoNombre, this.jugador, validacionNombre);
         campoNombre.setOnKeyPressed( enterNombre );
         campoNombre.setMinWidth(200);
         campoNombre.setPromptText("Ingrese un nombre");
@@ -88,7 +89,7 @@ public class ContenedorConfiguracion {
         inicializarAparienciaBotonesMapas(boton30x10);
         inicializarAparienciaBotonesMapas(boton30x16);
 
-        controlBotonesMapa(); //CUIDADO: falta ver la forma de solo escoger un solo boton del mapa
+        controlBotonesMapa();
         iniciarTabulacionesDeLosBoxs();
 
         panel.setAlignment(Pos.CENTER);
@@ -110,7 +111,9 @@ public class ContenedorConfiguracion {
             public void handle(MouseEvent me) {
                 boton10x10.setOnAction(new SelectorMapa(mapaJuego, 10 ,10 ));
                 boton10x10.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
-
+                inicializarAparienciaBotonesMapas(boton30x16);
+                inicializarAparienciaBotonesMapas(boton30x10);
+                inicializarAparienciaBotonesMapas(boton20x10);
             }
         });
 
@@ -119,6 +122,9 @@ public class ContenedorConfiguracion {
             public void handle(MouseEvent me) {
                 boton20x10.setOnAction(new SelectorMapa(mapaJuego, 20 ,10 ));
                 boton20x10.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
+                inicializarAparienciaBotonesMapas(boton10x10);
+                inicializarAparienciaBotonesMapas(boton30x10);
+                inicializarAparienciaBotonesMapas(boton30x16);
 
             }
         });
@@ -128,7 +134,9 @@ public class ContenedorConfiguracion {
             public void handle(MouseEvent me) {
                 boton30x10.setOnAction(new SelectorMapa(mapaJuego, 10 ,30 ));
                 boton30x10.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
-
+                inicializarAparienciaBotonesMapas(boton10x10);
+                inicializarAparienciaBotonesMapas(boton30x16);
+                inicializarAparienciaBotonesMapas(boton20x10);
             }
         });
 
@@ -137,7 +145,9 @@ public class ContenedorConfiguracion {
             public void handle(MouseEvent me) {
                 boton30x16.setOnAction(new SelectorMapa(mapaJuego, 30 ,16 ));
                 boton30x16.setBackground(new Background(new BackgroundFill(Color.web("#4c5c67"), new CornerRadii(0), new Insets(0))));
-
+                inicializarAparienciaBotonesMapas(boton10x10);
+                inicializarAparienciaBotonesMapas(boton30x10);
+                inicializarAparienciaBotonesMapas(boton20x10);
             }
         });
 
@@ -148,13 +158,19 @@ public class ContenedorConfiguracion {
 
         VBox rootVertical = new VBox();
         HBox rootNombreJugador = new HBox();
+        VBox rootNombreValidacion = new VBox();
         HBox rootVehiculos = new HBox();
         HBox rootBotonesDeVeinte = new HBox();
         HBox rootBotonesDeTreinta = new HBox();
         HBox rootBotonesLaterales = new HBox();
 
-        rootNombreJugador.getChildren().addAll(nombre, campoNombre);
+        Button saveButton = new Button("Guardar");
+        CampoTextoBoton guardarNombre  = new CampoTextoBoton(campoNombre, this.jugador, validacionNombre);
+        saveButton.setOnAction( guardarNombre );
+        rootNombreJugador.getChildren().addAll(nombre, campoNombre, saveButton);
         rootNombreJugador.setAlignment(Pos.CENTER);
+        rootNombreValidacion.getChildren().addAll(rootNombreJugador, this.validacionNombre );
+        rootNombreValidacion.setAlignment(Pos.CENTER);
         rootVehiculos.getChildren().add(listaVehiculo);
         rootVehiculos.setAlignment(Pos.CENTER);
         rootBotonesDeVeinte.getChildren().addAll(boton10x10, boton20x10);
