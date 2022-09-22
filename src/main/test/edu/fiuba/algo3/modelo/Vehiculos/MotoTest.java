@@ -5,12 +5,14 @@ import edu.fiuba.algo3.modelo.Evento.EventoPosicion.Avanzar;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class MotoTest {
     @Test
@@ -46,8 +48,8 @@ class MotoTest {
     @Test
     public void anteUnCambioDeVehiculoSecuencialLaMotoSeConvierteEnAuto(){
         Moto moto = new Moto();
-
-        assertEquals( new Auto(), moto.siguiente());
+        var generador = mock(GeneradorAleatorio.class);
+        assertEquals( new ReliantRobin(generador), moto.siguiente());
     }
 
     @Test

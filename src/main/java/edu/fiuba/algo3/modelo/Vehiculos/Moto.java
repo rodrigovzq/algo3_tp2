@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Evento.EventoPosicion.NoCambiarPosicion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.Penalizacion;
 import edu.fiuba.algo3.modelo.Evento.EventoPuntaje.SinPenalizar;
 import edu.fiuba.algo3.modelo.Evento.EventoVehiculo.NoCambiarVehiculo;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorDemora;
 
 import java.util.Random;
 
@@ -30,7 +31,7 @@ public class Moto implements IVehiculo {
     }
     @Override
     public IVehiculo siguiente() {
-        return new Auto();
+        return new ReliantRobin(new GeneradorDemora());
     }
 
     @Override

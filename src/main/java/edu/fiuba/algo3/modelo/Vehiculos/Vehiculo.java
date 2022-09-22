@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Excepcion.VehiculoInvalido;
+import edu.fiuba.algo3.modelo.GeneradorAleatorio.GeneradorDemora;
 
 public enum Vehiculo {
     AUTO{
@@ -14,6 +15,10 @@ public enum Vehiculo {
     CUATROPORCUATRO{
         @Override
         public IVehiculo crear(){ return new CuatroPorCuatro();}
+    },
+
+    RELIANT_ROBIN {
+        public IVehiculo crear(){ return new ReliantRobin(new GeneradorDemora());}
     };
     public abstract IVehiculo crear();
     public static IVehiculo crearVehiculoDesdeString(String s){
